@@ -42,12 +42,13 @@ openssl req -new -x509 -key key.pem -out cert.pem -days 1095 -config openssl.cnf
 
 echo "Setting up the stunnel keys and setting up a redis-server conf."
 
-sudo sh -c 'cat key.pem cert.pem > /etc/stunnel/stunnel.pem'
-sudo sh -c 'touch /etc/stunnel/redis-server.conf'
-sudo sh -c 'cat conf/redis-server.conf > /etc/stunnel/redis-server.conf'
-sudo sh -c 'chmod 640 /etc/stunnel/stunnel.pem'
-sudo sh -c 'cat conf/stunnel4 > /etc/default/stunnel4'
-sudo sh -c 'cp conf/phpliteadmin.conf /etc/apache2/sites-available/'
+sudo sh -c 'cat key.pem cert.pem > /etc/stunnel/stunnel.pem;
+touch /etc/stunnel/redis-server.conf;
+cat conf/redis-server.conf > /etc/stunnel/redis-server.conf;
+chmod 640 /etc/stunnel/stunnel.pem;
+cat conf/stunnel4 > /etc/default/stunnel4;
+cp conf/phpliteadmin.conf /etc/apache2/sites-available/;
+cp conf/001-cloud9.conf /etc/apache2/sites-available/;'
 
 echo "Starting Redis."
 
@@ -120,12 +121,14 @@ echo "Starting up MySQL"
 mysql-ctl install
 mysql-ctl start
 
-echo "Installing phpmyadmin"
+echo "Installing phpmyadmin.  This will not work from a bash script, but it is a placeholder for you to see"
 
 phpmyadmin-ctl install
 
 sudo service apache2 start
 
 mkdir /home/ubuntu/workspace/tmp
+
+sudo a2ensite phpliteadmin
 
 echo "All Done!"
