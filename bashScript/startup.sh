@@ -53,11 +53,12 @@ echo "Starting Redis."
 sudo service redis-server start
 #sudo service redis-server restart
 
-echo "Installing Grunt cli and Bower.  Node comes pre-installed."
+echo "You can install Grunt cli and Bower with the following commands.  Node comes pre-installed."
+echo "For this course, you do not have to do this, as everything is already pre-packaged."
 
-npm install -g grunt-cli --save-dev
+#npm install -g grunt-cli --save-dev
 
-npm install -g bower --save-dev
+#npm install -g bower --save-dev
 
 echo "Installing Composer."
 
@@ -75,7 +76,7 @@ echo "Installing composer dependencies"
 
 composer install
 
-composer -g require "phing/phing:2.*"
+composer global require "phing/phing:2.*"
 
 echo "Bower dependencies are not necessary, but can be installed"
 
