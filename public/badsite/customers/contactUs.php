@@ -5,8 +5,7 @@ require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.p
 use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
-use \Monolog\Logger;
-use \Monolog\Handler\StreamHandler;
+use \security\Models\SiteLogger\FullLog;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
 use \security\Models\PDOSingleton;
@@ -25,7 +24,7 @@ $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
 $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
-$logger = new Monolog\Logger('Customer Create Form');
+$logger = new FullLog('Customer Create Form');
 $pdo = new PDOSingleton();
 $mysqli = new MySQLISingleton();
 
@@ -48,20 +47,18 @@ if (isset($_POST['submit'])) {
     
     if ($email && $subject && $message && $name) {
         $to = ini_get('sendmail_from') ? ini_get('sendmail_from') : "admin@example.com";
-        // $to = ['admin@example.com' => 'Main Admin'];
-        // $transport = Swift_MailTransport::newInstance();
-        // $mailer = Swift_Mailer::newInstance($transport);
-        // $message = Swift_Message::newInstance()
-        //     ->setSubject($subject)
-        //     ->setFrom(array($email => $name))
-        //     ->setTo($to)
-        //     ->setBody($message)
-        //     ->setReturnPath($fromEmail);
         $headers = "From: $email";
+        $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+        if (strlen($sanitizedEmail) !== strlen($email)) {
+            $errors[] = "Email appears suspicious.";
+        }
+        
         $send = mail($to, $subject, $message, $headers);
         
+        
+        
         if (!$send) {
-            $errors[] = "Unable to send message because: $send";
+            $errors[] = "Unable to send message.";
         }
     } 
     

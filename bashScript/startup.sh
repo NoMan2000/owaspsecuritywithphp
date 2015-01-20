@@ -128,6 +128,8 @@ echo "Installing phpmyadmin.  This will not work from a bash script, but it is a
 sudo service apache2 start
 
 mkdir /home/ubuntu/workspace/tmp
+mkdir -p /home/ubuntu/workspace/errors/phing
+mkdir /home/ubuntu/workspace/logs
 
 sudo a2ensite phpliteadmin
 
