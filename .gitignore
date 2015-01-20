@@ -2,3 +2,4 @@
 vendor/
 composer.phar
 bower_components/
+.sass-cache/

@@ -32,7 +32,7 @@ sudo apt-get install -y php5-redis php5-mcrypt stunnel4 php5-curl
 
 echo "Also generating a SSL certificate for Redis."
 
-sudo touch /etc/stunnel/stunnel.pem
+sudo mkdir -p /etc/stunnel;sudo touch /etc/stunnel/stunnel.pem
 
 echo "The following keys do not have a passphrase attached to avoid the problem of constantly typing in a password."
 
@@ -77,18 +77,18 @@ composer install
 
 composer -g require "phing/phing:2.*"
 
-echo "Installing bower dependencies"
+echo "Bower dependencies are not necessary, but can be installed"
 
-bower install
+#bower install
 
 echo "Installing scss-lint"
 
 gem update --system
 gem install scss-lint
 
-echo "Running Grunt."
+#echo "Running Grunt."
 
-grunt
+#grunt
 
 echo "Installing mailcatcher gem."
 
