@@ -114,8 +114,6 @@ sudo groupadd apache
 sudo useradd -d /home/ubuntu/workspace/ -g apache -s /bin/bash apache                                                     
 sudo usermod -a -G apache ubuntu
 
-sudo service apache2 start
-
 echo "Starting up MySQL"
 
 mysql-ctl install
@@ -124,5 +122,7 @@ mysql-ctl start
 echo "Installing phpmyadmin"
 
 phpmyadmin-ctl install
+
+sudo service apache2 start
 
 echo "All Done!"
