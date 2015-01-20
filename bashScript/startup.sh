@@ -20,6 +20,12 @@ sudo apt-get -y update
 
 sudo apt-get -y upgrade
 
+sudo apt-get autoclean
+sudo apt-get autoremove
+sudo apt-get clean
+
+sudo apt-get install php5-dev
+
 echo "It begins by installing php5-redis and mcrypt extensions.  Mcrypt should already be on the system, but let's be sure.  Also installing Stunnel."
 
 sudo apt-get install -y php5-redis php5-mcrypt stunnel4 php5-curl
