@@ -123,7 +123,7 @@ confirm */
                     localStorage.setItem('potentialAbuse', potentialAbuse);
                 }
             }
-            if (potentialAbuse < 10) {
+            if (potentialAbuse > 10) {
                 throw new Error("You have hit this submit form too many times.");
             }
         },

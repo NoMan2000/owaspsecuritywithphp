@@ -10,14 +10,16 @@ use \InvalidArgumentException;
 
 class PasswordVulnerable 
 {
-    private $textFile = 'badpasswordlist/passwords.txt';
-    private $arrayFile = 'badpasswordlist/passwords.php';
+    private $textFile;
+    private $arrayFile;
     private $passwords;
     private $password;
 
     public function __construct($password, $update = false) 
     {
         $this->password = $password;
+        $this->textFile = __DIR__  . '/badpasswordlist/passwords.txt';
+        $this->arrayFile = __DIR__ . '/badpasswordlist/passwords.php';
         if (!file_exists($this->arrayFile) || $update) {
             touch($this->arrayFile);
             $arrayFull = '<?php 

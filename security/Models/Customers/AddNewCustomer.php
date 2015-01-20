@@ -10,7 +10,7 @@ use \security\Models\Login\EmailConfirmAccount;
 use \security\Exceptions\FolderException;
 use \security\Interfaces\Seconds;
 use \security\Interfaces\FullLogInterface;
-use \security\Models\BlackLister;
+use \security\Models\Authenticator\BlackLister;
 use \Redis;
 use \Rhumsaa\Uuid\Uuid;
 use \Rhumsaa\Uuid\Exception\UnsatisfiedDependencyException;

@@ -14,6 +14,7 @@ use \security\Models\Authenticator\CheckAuth;
 use \security\Models\SiteLogger\FullLog;
 use \security\Interfaces\FullLogInterface;
 use \security\Models\Customers\AddNewCustomer;
+use \security\Models\Login\PasswordVulnerable;
 use \JsonSerializable;
 use \StdClass;
 use \SplObjectStorage;

@@ -2,7 +2,7 @@ echo "Installing common software components needed."
 
 sudo apt-get install -y build-essential software-properties-common \
                         vim curl wget tmux python-software-properties \
-                        htop
+                        htop mutt
 
 echo "Installing the php 5.6 repository, should also use it for MySQL and Apache"
 
@@ -47,6 +47,7 @@ sudo sh -c 'touch /etc/stunnel/redis-server.conf'
 sudo sh -c 'cat conf/redis-server.conf > /etc/stunnel/redis-server.conf'
 sudo sh -c 'chmod 640 /etc/stunnel/stunnel.pem'
 sudo sh -c 'cat conf/stunnel4 > /etc/default/stunnel4'
+sudo sh -c 'cp conf/phpliteadmin.conf /etc/apache2/sites-available/'
 
 echo "Starting Redis."
 

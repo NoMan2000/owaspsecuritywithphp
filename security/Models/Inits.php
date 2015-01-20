@@ -97,22 +97,22 @@ class Inits
                 touch($errorPath);
             }
             $fromEmail = ini_get('sendmail_from') ? ini_get('sendmail_from') : "admin@example.com";
-            $fromName = "Example Webmaster";
-            $to = $this->getEmailAddressForAdmins();
+            $fromName = "From: Example Webmaster";
+            $to = "webmaster@example.com";
             $subject = "[{$_SERVER['SERVER_NAME']}] Fatal error in {$error['file']} on line {$error['line']}";
             $message = var_export($error, true) . PHP_EOL;
             $message .= var_export($_SERVER, true) . PHP_EOL;
             $logger->addWarning($message);
             
-            $transport = Swift_MailTransport::newInstance();
-            $mailer = Swift_Mailer::newInstance($transport);
-            $message = Swift_Message::newInstance()
-                ->setSubject($subject)
-                ->setFrom(array($fromEmail => $fromName))
-                ->setTo($to)
-                ->setBody($message)
-                ->setReturnPath($fromEmail);
-            if (!$mailer->send($message)) {
+            // $transport = Swift_MailTransport::newInstance();
+            // $mailer = Swift_Mailer::newInstance($transport);
+            // $message = Swift_Message::newInstance()
+            //     ->setSubject($subject)
+            //     ->setFrom(array($fromEmail => $fromName))
+            //     ->setTo($to)
+            //     ->setBody($message);
+                //->setReturnPath($fromEmail);
+            if (!mail($to, $subject, $message, $fromName)) {
                 $this->errors[] = "Unable to send message";
                 $this->errorRunner->runErrors($this->errors);
             }

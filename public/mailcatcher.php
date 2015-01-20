@@ -4,7 +4,8 @@
 
 require_once('partials/header.php');
 
-class mailCatcher {
+class mailCatcher 
+{
     private $mailcatcher;
 
     public function __construct()
@@ -52,14 +53,15 @@ class mailCatcher {
     }
 }
 $messages = [];
+$validMail = true;
 try {
     $mailcatcher = new Mailcatcher();
     $mailcatcher->getJSONONLY();
     $messages = $mailcatcher->getMessages();
 } catch (Exception $e) {
-    $notFound = true;  
+    $validMail = false;  
 }
-if (!isset($notFound) && !empty($messages)) {
+if ($validMail && !empty($messages)) {
     echo "<pre>";
      foreach ($messages as $message){
         $body = $mailcatcher->getHTMLMessage($message->id);
@@ -69,12 +71,12 @@ if (!isset($notFound) && !empty($messages)) {
 }
 $mail = file_get_contents('/var/mail/ubuntu');
 ?>
-<div style='width:90%;margin:0 auto;margin-top:-21px;'>
-    <code><pre>
+<div style='width:90%;margin:0 auto;'>
+    <pre>
         <?= $mail;?>
-    </pre></code>
+    </pre>
 </div>
 
 
 <?php
-require_once('partials/footer.php');
+// require_once('partials/footer.php');
