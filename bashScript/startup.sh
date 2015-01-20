@@ -86,22 +86,22 @@ echo "Bower dependencies are not necessary, but can be installed"
 
 echo "Installing scss-lint"
 
-gem update --system
-gem install scss-lint
+#gem update --system
+#gem install scss-lint
 
 #echo "Running Grunt."
 
 #grunt
 
-echo "Installing mailcatcher gem."
+#echo "Installing mailcatcher gem."
 
-gem install mailcatcher
+#gem install mailcatcher
 
-echo "Configuring PHP for mailcatcher."
+#echo "Configuring PHP for mailcatcher."
 
-echo "sendmail_path = /usr/bin/env $(which catchmail) -f test@local.dev" | sudo tee /etc/php5/mods-available/mailcatcher.ini
+#echo "sendmail_path = /usr/bin/env $(which catchmail) -f test@local.dev" | sudo tee /etc/php5/mods-available/mailcatcher.ini
 
-sudo php5enmod mailcatcher
+#sudo php5enmod mailcatcher
 sudo a2enmod headers
 
 sudo pecl install igbinary
@@ -123,7 +123,7 @@ mysql-ctl start
 
 echo "Installing phpmyadmin.  This will not work from a bash script, but it is a placeholder for you to see"
 
-phpmyadmin-ctl install
+#phpmyadmin-ctl install
 
 sudo service apache2 start
 
