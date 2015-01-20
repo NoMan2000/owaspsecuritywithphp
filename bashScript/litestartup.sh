@@ -123,4 +123,6 @@ phpmyadmin-ctl install
 
 sudo service apache2 start
 
+mkdir /home/ubuntu/workspace/tmp
+
 echo "All Done!"
