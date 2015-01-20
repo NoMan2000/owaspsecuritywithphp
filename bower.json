@@ -1,0 +1,37 @@
+{
+  "name": "security owasp",
+  "version": "0",
+  "authors": [
+    "Michael Ryan Soileau <msoileau@itt-tech.edu>"
+  ],
+  "description": "OWASP and Security",
+  "main": "index.php",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "PHP",
+    "Bootstrap",
+    "JQuery",
+    "Grunt"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.brwebdesign.net",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.1",
+    "bootstrap-sweetalert": "~0.4.3",
+    "spinner": "https://github.com/fgnass/spin.js.git"
+  },
+  "dev-dependencies": {
+    "jasmine": "https://github.com/pivotal/jasmine.git"
+  }
+}

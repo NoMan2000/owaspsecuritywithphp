@@ -1,0 +1,133 @@
+[18-Jan-2015 14:17:13 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[18-Jan-2015 14:18:49 America/Chicago] PHP Warning:  realpath(): open_basedir restriction in effect. File(/home/ubuntu/.composer/vendor/phing/phing) is not within the allowed path(s): (/home/ubuntu/workspace:/usr/share/phpmyadmin:/tmp) in /home/ubuntu/.composer/vendor/phing/phing/bin/phing on line 18
+[18-Jan-2015 14:18:49 America/Chicago] PHP Warning:  require_once(): open_basedir restriction in effect. File(/home/ubuntu/.composer/vendor/phing/phing/bin/phing.php) is not within the allowed path(s): (/home/ubuntu/workspace:/usr/share/phpmyadmin:/tmp) in /home/ubuntu/.composer/vendor/phing/phing/bin/phing on line 20
+[18-Jan-2015 14:18:49 America/Chicago] PHP Warning:  require_once(/home/ubuntu/.composer/vendor/phing/phing/bin/phing.php): failed to open stream: Operation not permitted in /home/ubuntu/.composer/vendor/phing/phing/bin/phing on line 20
+[18-Jan-2015 14:18:49 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '/home/ubuntu/.composer/vendor/phing/phing/bin/phing.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/.composer/vendor/phing/phing/bin/phing on line 20
+[18-Jan-2015 14:20:18 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\WarningException' with message 'Division by zero' in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php:52
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 64
+[18-Jan-2015 14:26:38 America/Chicago] PHP Notice:  Array to string conversion in /home/ubuntu/workspace/security/DataBase/faker/12-fakeGroupsToCompaniesToUsers.php on line 65
+[18-Jan-2015 14:27:58 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined index: groupid' in /home/ubuntu/workspace/public/goodsite/corporate/viewCorporate.php:30
+Stack trace:
+#0 /home/ubuntu/workspace/public/goodsite/corporate/viewCorporate.php(30): security\Models\Inits->errorHandler(8, 'Undefined index...', '/home/ubuntu/wo...', 30, Array)
+#1 {main}
+  thrown in /home/ubuntu/workspace/public/goodsite/corporate/viewCorporate.php on line 30
+[18-Jan-2015 15:50:11 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[18-Jan-2015 15:52:36 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[18-Jan-2015 16:05:21 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[18-Jan-2015 16:05:25 America/Chicago] PHP Notice:  Undefined offset: 0 in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 2969
+[18-Jan-2015 16:09:35 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[18-Jan-2015 16:15:52 America/Chicago] PHP Warning:  file_put_contents(/home/ubuntu/workspace/security/DataBase/deltas/seeds/mysql/9-companyGroupSeeds.sql): failed to open stream: Permission denied in /home/ubuntu/workspace/security/DataBase/faker/9-fakeGroups.php on line 47
+[18-Jan-2015 16:15:52 America/Chicago] PHP Warning:  file_put_contents(/home/ubuntu/workspace/security/DataBase/deltas/seeds/sqlite/8-companyGroupSeeds.sql): failed to open stream: Permission denied in /home/ubuntu/workspace/security/DataBase/faker/9-fakeGroups.php on line 64
+[18-Jan-2015 16:27:48 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[18-Jan-2015 16:45:13 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[18-Jan-2015 17:52:26 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[18-Jan-2015 20:38:39 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home/ubuntu/workspace/public/badsite/customers/contactUs.php on line 61
+[18-Jan-2015 20:55:10 America/Chicago] PHP Warning:  igbinary_unserialize_header: unsupported version: 1129465153, should be 1 or 2 in /home/ubuntu/workspace/security/Models/SessionInitializers.php on line 30
+[18-Jan-2015 20:55:10 America/Chicago] PHP Warning:  session_start(): Failed to decode session object. Session has been destroyed in /home/ubuntu/workspace/security/Models/SessionInitializers.php on line 30
+[18-Jan-2015 20:55:10 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: error' in /home/ubuntu/workspace/public/badsite/customers/contactUs.php:91
+Stack trace:
+#0 /home/ubuntu/workspace/public/badsite/customers/contactUs.php(91): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 91, Array)
+#1 {main}
+  thrown in /home/ubuntu/workspace/public/badsite/customers/contactUs.php on line 91
+[18-Jan-2015 21:05:26 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(12): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:06:11 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(12): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:08:57 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(12): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:09:25 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(12): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:10:27 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(12): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:14:27 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(12): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:15:05 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(12): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:17:45 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(19): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:23:09 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(19): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:29:44 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(19): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:29:44 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(19): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 21:39:10 America/Chicago] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to send email.' in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php:33
+Stack trace:
+#0 /home/ubuntu/workspace/public/mail.php(20): security\Models\Login\EmailConfirmAccount->__construct('foo@example.com', Object(Rhumsaa\Uuid\Uuid))
+#1 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/EmailConfirmAccount.php on line 33
+[18-Jan-2015 22:03:47 America/Chicago] PHP Fatal error:  Uncaught exception 'Guzzle\Http\Exception\CurlException' with message '[curl] 7: Failed to connect to 127.0.0.1 port 1080: Connection refused [url] http://127.0.0.1:1080/messages' in /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php:359
+Stack trace:
+#0 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php(292): Guzzle\Http\Curl\CurlMulti->isCurlException(Object(Guzzle\Http\Message\Request), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#1 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php(257): Guzzle\Http\Curl\CurlMulti->processResponse(Object(Guzzle\Http\Message\Request), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#2 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php(240): Guzzle\Http\Curl\CurlMulti->processMessages()
+#3 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php(224): Guzzle\Http\Curl\CurlMulti->executeHandles()
+#4 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/G in /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php on line 359
+[18-Jan-2015 22:05:08 America/Chicago] PHP Warning:  file_get_contents(): open_basedir restriction in effect. File(/var/mail/ubuntu) is not within the allowed path(s): (/home/ubuntu/workspace:/usr/share/phpmyadmin:/tmp:/home/ubuntu/.composer:/usr/share:/usr/local/:/usr/) in /home/ubuntu/workspace/public/mailcatcher.php on line 64
+[18-Jan-2015 22:05:08 America/Chicago] PHP Warning:  file_get_contents(/var/mail/ubuntu): failed to open stream: Operation not permitted in /home/ubuntu/workspace/public/mailcatcher.php on line 64
+[18-Jan-2015 22:08:38 America/Chicago] PHP Fatal error:  Uncaught exception 'Guzzle\Http\Exception\CurlException' with message '[curl] 7: Failed to connect to 127.0.0.1 port 1080: Connection refused [url] http://127.0.0.1:1080/messages' in /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php:359
+Stack trace:
+#0 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php(292): Guzzle\Http\Curl\CurlMulti->isCurlException(Object(Guzzle\Http\Message\Request), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#1 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php(257): Guzzle\Http\Curl\CurlMulti->processResponse(Object(Guzzle\Http\Message\Request), Object(Guzzle\Http\Curl\CurlHandle), Array)
+#2 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php(240): Guzzle\Http\Curl\CurlMulti->processMessages()
+#3 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php(224): Guzzle\Http\Curl\CurlMulti->executeHandles()
+#4 /home/ubuntu/workspace/vendor/guzzle/guzzle/src/G in /home/ubuntu/workspace/vendor/guzzle/guzzle/src/Guzzle/Http/Curl/CurlMulti.php on line 359
+[18-Jan-2015 22:11:29 America/Chicago] PHP Parse error:  syntax error, unexpected '{' in /home/ubuntu/workspace/public/mailcatcher.php on line 62
+[18-Jan-2015 22:26:56 America/Chicago] PHP Fatal error:  Uncaught exception 'Swift_RfcComplianceException' with message 'Address in mailbox given [Bcc: badperson@example.org, people@example.org, tester@example.org] does not comply with RFC 2822, 3.6.2.' in /home/ubuntu/workspace/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php:348
+Stack trace:
+#0 /home/ubuntu/workspace/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(263): Swift_Mime_Headers_MailboxHeader->_assertValidAddress('Bcc: badperson@...')
+#1 /home/ubuntu/workspace/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(106): Swift_Mime_Headers_MailboxHeader->normalizeMailboxes(Array)
+#2 /home/ubuntu/workspace/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php(63): Swift_Mime_Headers_MailboxHeader->setNameAddresses(Array)
+#3 /home/ubuntu/workspace/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMimeEntity.php(602): Swift_Mime_Headers_MailboxHeader->setFieldBodyModel(Array)
+#4 /home/ in /home/ubuntu/workspace/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php on line 348

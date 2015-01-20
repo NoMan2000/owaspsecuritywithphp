@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+ 
+<project name="migrations" default="build">
+	<property file='build.properties' />
+    <property name='build.dns' 
+        value='${db.engine}:unix_socket=${db.socket};dbname=${db.name};host=${db.host}' />
+    <includepath classpath="${phingdir}" />
+    <!-- Sets the DSTAMP, TSTAMP and TODAY properties -->
+    <tstamp/>
+
+    <target name="build.cleanup">
+        <echo msg="Trying to clean up checkout dir" />
+        <delete includeemptydirs="false">
+          <fileset dir="${build.dir}/deltas/seeds/mysql" defaultexcludes='false'>
+            <include name="**/**"/>
+          </fileset>  
+        </delete>
+        <delete includeemptydirs="false">
+          <fileset dir="${build.dir}/deltas/seeds/sqlite" defaultexcludes='false'>
+            <include name="**/**"/>
+          </fileset>  
+        </delete>
+        <delete includeemptydirs="false">
+          <fileset dir="${build.dir}/deploy/mysql/" defaultexcludes='false'>
+            <include name="**/**"/>
+          </fileset>  
+        </delete>
+        <delete includeemptydirs="false">
+          <fileset dir="${build.dir}/deploy/sqlite/" defaultexcludes='false'>
+            <include name="**/**"/>
+          </fileset>  
+        </delete>
+        <delete includeemptydirs="false">
+          <fileset dir="${build.dir}/undo/mysql/" defaultexcludes='false'>
+            <include name="**/**"/>
+          </fileset>  
+        </delete>
+        <delete includeemptydirs="false">
+          <fileset dir="${build.dir}/undo/sqlite/" defaultexcludes='false'>
+            <include name="**/**"/>
+          </fileset>  
+        </delete>
+        <delete includeemptydirs="false">
+          <fileset dir="${errorlog}/phing/" defaultexcludes='false'>
+            <include name="**/**"/>
+          </fileset>  
+        </delete>
+    </target> 
+    <target name="build.generateCleanupSQL">
+        <echo message="executing php commands at ${faker}" />
+        <exec dir="${faker}" command="php 99-phingClean.php"  escape="false" />
+        <echo message="Generated cleanup SQL." />
+        <echo message="Executing cleanup." />
+        <exec
+            command="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; revertMySQL.sql"
+            dir="${faker}/reversion"
+            passthru="true"
+            checkreturn="false" 
+        />
+        
+        <exec
+            command="sqlite3 widgets.sqlite &lt; revertSQLite.sql"
+            dir="${faker}/reversion"
+            passthru="true"
+            checkreturn="false"
+        />
+        
+    </target>
+
+
+	<target name="build.migrate" description="Database Migrations">
+	    <tstamp/>  
+        <echo message="${build.dns} is the fully qualified URL." />
+        <!-- load the dbdeploy task -->
+        <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
+
+        <echo message="${build.dir} is the build directory" /> 
+        <!-- these files will contain the generated SQL to do the deploy and roll it back-->
+        <property name="build.dbdeploy.sqlite.deployfile" value="${build.dir}/deploy/sqlite/deploy-${DSTAMP}${TSTAMP}.sql" />
+        <property name="build.dbdeploy.sqlite.undofile" value="${build.dir}/undo/sqlite/undo-${DSTAMP}${TSTAMP}.sql" />
+        <property name="build.dbdeploy.mysql.deployfile" value="${build.dir}/deploy/mysql/deploy-${DSTAMP}${TSTAMP}.sql" />
+        <property name="build.dbdeploy.mysql.undofile" value="${build.dir}/undo/mysql/undo-${DSTAMP}${TSTAMP}.sql" />
+
+        <!-- generate the deployment scripts -->
+        <dbdeploy 
+            url="${build.dns}"
+            userid="${db.user}" 
+            password="${db.pass}" 
+            dir="${build.dir}/deltas/mysql" 
+            outputfile="${build.dbdeploy.mysql.deployfile}" 
+            undooutputfile="${build.dbdeploy.mysql.undofile}" />
+
+        <dbdeploy
+              url="sqlite:${build.dir}/sqlite/widgets.sqlite"
+              dir="${build.dir}/deltas/sqlite"
+              outputfile="${build.dbdeploy.sqlite.deployfile}"
+              undooutputfile="${build.dbdeploy.sqlite.undofile}" 
+        />
+        <echo message="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; ${build.dbdeploy.mysql.deployfile}" />
+
+        <!-- Execute the SQL to push it into the MySQL Database. -->
+        <exec
+            command="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; ${build.dbdeploy.mysql.deployfile}"
+            dir="${build.dir}"
+            passthru="true"
+            checkreturn="true" 
+            error="${errorlog}/phing/mysql-deploy-error-${DSTAMP}${TSTAMP}.log"
+        />
+        
+        <echo message="sqlite:${build.dir}/sqlite/widgets.sqlite 
+        executes command sqlite3 widgets.sqlite &lt; ${build.dbdeploy.sqlite.deployfile}" />
+        
+        <!-- Execute the SQL to push into the SQLite Database. -->
+        <exec
+            command="sqlite3 widgets.sqlite &lt; ${build.dbdeploy.sqlite.deployfile}"
+            dir="${build.dir}/sqlite"
+            passthru="true" 
+            checkreturn="true"
+            error="${errorlog}/phing/sqlite-deploy-error-${DSTAMP}${TSTAMP}.log"
+        />
+    </target>
+    <!-- build.generateSeedsOne requires no SQL database to work. -->
+    <target name="build.generateSeedsOne">
+        <echo message="executing php commands at ${faker}" />
+        <exec dir="${faker}" command="php 7-fakeCompanies.php"  escape="false" />
+        <echo message="Built fake companies." />
+        <exec dir="${faker}" command="php 8-fakeUsers.php" escape="false" />
+        <echo message="Built fake users." />
+    </target>
+    <!--build.seedsFromDatabaseOne requires that build.generateSeedsOne has run. -->
+    
+    <target name='build.seedsFromDatabaseOne'>
+        <phingcall target="build.seed" />
+        <echo message="This requires that the database seeds have already been run" />
+        <exec dir="${faker}" command="php 9-fakeGroups.php" escape="false" />
+        <echo message="Built fake groups." />
+    </target>
+    <!-- build.generateSeedsTwo requires no database -->
+    <target name='build.generateSeedsTwo'>
+        <exec dir="${faker}" command="php 10-fakeCustomers.php" escape="false" />
+        <echo message="Built fake Customers." />
+    </target>
+    
+    <target name="build.seedsFromDatabaseTwo">
+        <phingcall target="build.seed" />
+        <exec dir="${faker}" command="php 11-fakeOrders.php" escape="false" /> 
+        <echo message="Built fake Orders." />
+        <echo message="This requires that the database seeds have already been run" />
+        <exec dir="${faker}" command="php 12-fakeUserPermissions.php" escape="false" />
+    </target>
+
+    <target name="build.seed" description="Database Seed Migrations">  
+        <tstamp/>
+        <echo message="${build.dns} is the fully qualified URL." />
+        <!-- load the dbdeploy task -->
+        <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
+
+        <echo message="${build.dir} is the build directory" /> 
+        <!-- these files will contain the generated SQL to do the deploy and roll it back-->
+        <property name="build.dbdeploy.sqlite.deployfile" value="${build.dir}/deploy/sqlite/seedDeploy-${DSTAMP}${TSTAMP}.sql" />
+        <property name="build.dbdeploy.sqlite.undofile" value="${build.dir}/undo/sqlite/seedUndo-${DSTAMP}${TSTAMP}.sql" />
+        <property name="build.dbdeploy.mysql.deployfile" value="${build.dir}/deploy/mysql/seedDeploy-${DSTAMP}${TSTAMP}.sql" />
+        <property name="build.dbdeploy.mysql.undofile" value="${build.dir}/undo/mysql/seedUndo-${DSTAMP}${TSTAMP}.sql" />
+
+        <!-- generate the deployment scripts -->
+        <dbdeploy 
+            url="${build.dns}"
+            userid="${db.user}" 
+            password="${db.pass}" 
+            dir="${build.dir}/deltas/seeds/mysql" 
+            outputfile="${build.dbdeploy.mysql.deployfile}" 
+            undooutputfile="${build.dbdeploy.mysql.undofile}" />
+
+        <dbdeploy
+              url="sqlite:${build.dir}/sqlite/widgets.sqlite"
+              dir="${build.dir}/deltas/seeds/sqlite"
+              outputfile="${build.dbdeploy.sqlite.deployfile}"
+              undooutputfile="${build.dbdeploy.sqlite.undofile}" 
+        />
+        <echo message="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; ${build.dbdeploy.mysql.deployfile}" />
+
+        <!-- Execute the SQL to push it into the MySQL Database. -->
+        <exec
+            command="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; ${build.dbdeploy.mysql.deployfile}"
+            dir="${build.dir}"
+            passthru="true"
+            checkreturn="true" 
+            error="${errorlog}/phing/mysqlSeed-deploy-error-${DSTAMP}${TSTAMP}.log"
+        />
+        
+        <echo message="sqlite:${build.dir}/sqlite/widgets.sqlite 
+        executes command sqlite3 widgets.sqlite &lt; ${build.dbdeploy.sqlite.deployfile}" />
+        
+        <!-- Execute the SQL to push into the SQLite Database. -->
+        <exec
+            command="sqlite3 widgets.sqlite &lt; ${build.dbdeploy.sqlite.deployfile}"
+            dir="${build.dir}/sqlite"
+            passthru="true" 
+            checkreturn="true"
+            error="${errorlog}/phing/sqlite-deploy-error-${DSTAMP}${TSTAMP}.log"
+        />
+    </target>
+
+    <target name='demo'>
+        <echo message="Hey there" />
+    </target>
+
+    <target name="build" depends="build.migrate" />
+        <!-- This shows the order of execution, which is admittedly painful to look at. -->
+    <target name="buildAll" depends="build.cleanup,
+                                     build.migrate, 
+                                     build.generateSeedsOne, 
+                                     build.seedsFromDatabaseOne, 
+                                     build.generateSeedsTwo, 
+                                     build.seedsFromDatabaseTwo,
+                                     build.seed" />
+</project>

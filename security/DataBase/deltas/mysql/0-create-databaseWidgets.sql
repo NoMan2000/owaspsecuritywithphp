@@ -1,0 +1,7 @@
+CREATE DATABASE IF NOT EXISTS widgets COLLATE utf8mb4_bin;
+
+--//@UNDO
+
+DROP DATABASE widgets;
+
+--//
