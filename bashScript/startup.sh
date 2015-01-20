@@ -24,7 +24,7 @@ sudo apt-get autoclean
 sudo apt-get autoremove
 sudo apt-get clean
 
-sudo apt-get install php5-dev
+sudo apt-get install -y php5-dev
 
 echo "It begins by installing php5-redis and mcrypt extensions.  Mcrypt should already be on the system, but let's be sure.  Also installing Stunnel."
 
@@ -32,7 +32,7 @@ sudo apt-get install -y php5-redis php5-mcrypt stunnel4 php5-curl
 
 echo "Also generating a SSL certificate for Redis."
 
-sudo mkdir -p /etc/stunnel;sudo touch /etc/stunnel/stunnel.pem
+sudo mkdir -p /etc/stunnel;sudo touch /etc/stunnel/stunnel.pem;sudo touch /etc/stunnel/private.pem
 
 echo "The following keys do not have a passphrase attached to avoid the problem of constantly typing in a password."
 
@@ -45,7 +45,7 @@ echo "Setting up the stunnel keys and setting up a redis-server conf."
 sudo sh -c 'cat key.pem cert.pem > /etc/stunnel/stunnel.pem'
 sudo sh -c 'touch /etc/stunnel/redis-server.conf'
 sudo sh -c 'cat conf/redis-server.conf > /etc/stunnel/redis-server.conf'
-sudo sh -c 'chmod 640 /etc/stunnel/private.pem'
+sudo sh -c 'chmod 640 /etc/stunnel/stunnel.pem'
 sudo sh -c 'cat conf/stunnel4 > /etc/default/stunnel4'
 
 echo "Starting Redis."
@@ -113,6 +113,15 @@ sudo groupadd apache
 sudo useradd -d /home/ubuntu/workspace/ -g apache -s /bin/bash apache                                                     
 sudo usermod -a -G apache ubuntu
 
-sudo service apache2 reload
+sudo service apache2 start
+
+echo "Starting up MySQL"
+
+mysql-ctl install
+mysql-ctl start
+
+echo "Installing phpmyadmin"
+
+phpmyadmin-ctl install
 
 echo "All Done!"
