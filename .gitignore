@@ -3,3 +3,4 @@ vendor/
 composer.phar
 bower_components/
 .sass-cache/
+node_modules/
