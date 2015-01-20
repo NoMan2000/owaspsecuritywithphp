@@ -69,7 +69,7 @@ echo "Moving up one directory and installing all the files in the package.json"
 
 cd ..
 
-npm install
+#npm install
 
 echo "Installing composer dependencies"
 
