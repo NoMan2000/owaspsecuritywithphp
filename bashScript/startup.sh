@@ -24,7 +24,7 @@ sudo apt-get autoclean
 sudo apt-get autoremove
 sudo apt-get clean
 
-sudo apt-get install -y php5-dev
+sudo apt-get install -y php5-dev php5-sqlite sqlite3 libsqlite3-dev
 
 echo "It begins by installing php5-redis and mcrypt extensions.  Mcrypt should already be on the system, but let's be sure.  Also installing Stunnel."
 

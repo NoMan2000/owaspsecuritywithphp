@@ -1,0 +1,2 @@
+[19-Jan-2015 22:28:55 America/Chicago] PHP Notice:  Undefined variable: name in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 1138
+[19-Jan-2015 22:29:15 America/Chicago] PHP Notice:  session_start(): ps_files_cleanup_dir: opendir(/var/lib/php5) failed: Permission denied (13) in /home/ubuntu/workspace/phpliteadmin/phpliteadmin.php on line 426
