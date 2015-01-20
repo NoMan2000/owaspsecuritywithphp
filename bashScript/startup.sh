@@ -95,6 +95,10 @@ echo "sendmail_path = /usr/bin/env $(which catchmail) -f test@local.dev" | sudo 
 sudo php5enmod mailcatcher
 sudo a2enmod headers
 
+sudo pecl install igbinary
+sudo cp /home/ubuntu/workspace/bashScript/conf/igbinary.ini /etc/php5/mods-available/igbinary.ini
+sudo php5enmod igbinary
+
 echo "Creating a special Apache user and group"
 echo "In a production environment, you would need to edit the /etc/apache2/envvars file to change the user and the group.  I do not \
 recommend this when using c9 as the ACE editor has problems with this and you will go through some serious pain to get it all working again."
