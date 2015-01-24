@@ -6,8 +6,12 @@ require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor/autoload.
 // Encrypted cookie functions
 // requires mcrypt: http://php.net/manual/en/book.mcrypt.php
 
+// There is a full library to make encryption easier called phplibsec.  
+// https://github.com/phpseclib/phpseclib
+
 class CookieEncrypt
 {
+    // Obviously, use a different encryption key than this, as once this is publically known, it is useless.
     const ENCRYPTION = 'abc234098979asjaa234232355';
 
     public function __construct()

@@ -112,6 +112,9 @@ recommend this when using c9 as the ACE editor has problems with this and you wi
 sudo groupadd apache                                           
 sudo useradd -d /home/ubuntu/workspace/ -g apache -s /bin/bash apache                                                     
 sudo usermod -a -G apache ubuntu
+mkdir /home/ubuntu/workspace/tmp
+mkdir -p /home/ubuntu/workspace/errors/phing
+mkdir /home/ubuntu/workspace/logs
 
 echo "Starting up MySQL"
 
@@ -122,10 +125,6 @@ echo "Installing phpmyadmin.  This will not work from a bash script, but it is a
 #phpmyadmin-ctl install
 
 sudo service apache2 start
-
-mkdir /home/ubuntu/workspace/tmp
-mkdir -p /home/ubuntu/workspace/errors/phing
-mkdir /home/ubuntu/workspace/logs
 
 sudo a2ensite phpliteadmin
 

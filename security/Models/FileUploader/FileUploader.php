@@ -9,6 +9,8 @@ require_once(dirname(dirname(dirname(__DIR__))). DIRECTORY_SEPARATOR . 'vendor/a
 use \Exception;
 use \security\Exceptions\FolderException;
 use \LengthException;
+use \RecursiveArrayIterator;
+use \RecursiveIteratorIterator;
 use \finfo;
 
 class FileUploader
@@ -30,6 +32,7 @@ class FileUploader
 	protected $tempUploadPath;
 	protected $newName;
 	protected $files;
+	protected $sentManually = false;
 	protected $typeCheckingOn = true;
 	// This is a blacklisted approach, but this is a really dangerous approach since many more file types 
 	// are executable and can be run on the server.
@@ -50,6 +53,7 @@ class FileUploader
 		
 		if (!is_null($files) && is_array($files)) {
 			$this->files = $files;
+			$this->sentManually = true;
 		} elseif (isset($_FILES) && !empty($_FILES['image'])) {
 			$this->files = $_FILES;
 		} elseif (isset($_FILES) && !empty($_FILES['filename'])) {
@@ -117,6 +121,7 @@ class FileUploader
 	public function upload($renameDuplicates = true)
 	{
 		$this->renameDuplicates = $renameDuplicates;
+		
 		$uploaded = current($this->files);
 		if (is_array($uploaded['name'])) {
 			foreach ($uploaded['name'] as $key => $value) {
@@ -130,11 +135,24 @@ class FileUploader
 				}
 			}
 		} 
-		if (!is_array($uploaded['name'])) {
+		if (is_array($this->files) && $this->sentManually) {
+			$files = $this->files;
+			foreach (array_keys($files) as $keys) {
+				foreach ($files[$keys] as $innerKey => $innerValue) {
+					$currentFile[$innerKey] = $innerValue;
+				}
+				if ($this->checkFile($currentFile)) {
+					$this->moveFile($currentFile);
+            	}
+            }
+		}
+		
+		if (isset($uploaded['name']) && !is_array($uploaded['name']) && !$this->sentManually) {
 			if ($this->checkFile($uploaded)) {
 				$this->moveFile($uploaded);
 			}
 		}
+		
 	}
 	
 	public function getMessages()
@@ -206,7 +224,7 @@ class FileUploader
 		if (in_array($file['type'], $this->permittedTypes) && in_array($mime_type, $this->permittedTypes)) {
 		    return true;
 		} 
-		$this->messages[] = $file['name'] . $file['type'] . $databaseFileCheck . ' is not permitted type of file.';
+		$this->messages[] = $file['name'] . $file['type'] . ' is not permitted type of file.';
 		return false;
 	}
 	

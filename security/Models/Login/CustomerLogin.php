@@ -10,6 +10,7 @@ use \PDO;
 use \Redis;
 use \security\Interfaces\CustomerType;
 use \security\Traits\IsDevelopment;
+use \security\Models\Authenticator\PasswordCheck;
 
 class CustomerLogin implements CustomerType
 {
@@ -42,7 +43,23 @@ class CustomerLogin implements CustomerType
         if ($row) {
             $resultPassword = $row['password'];
             $isCorrectPassword = password_verify($password, $resultPassword);
+            if (!$isCorrectPassword) {
+                // for older systems.
+                $isCorrectPassword = md5($password) == $resultPassword;
+                // functionally equivalent.  Password verify has the algorithm and cost in the beginning, this is for md5.
+                $isCorrectPassword = password_verify('$1$'.$password, $resultPassword);
+            }
+            
             if ($isCorrectPassword) {
+                $passwordHasher = new PasswordCheck($password);
+                if (!$passwordHasher->verifyHash()) {
+                    $password = $passwordHasher->makeHash();
+                    $query = "UPDATE users SET password = $password WHERE username = :username";
+                    $update = $pdo->prepare($query);
+                    $update->bindParam(':username', $username, PDO::PARAM_STR);
+                    $update->execute();
+                }
+                
                 $blackList->removeBlackList();
                 $blackList->removeSleeper("$username:{$row['username']}");
                 // Careful when using session_regenerate_id true.  This calls session_destroy.

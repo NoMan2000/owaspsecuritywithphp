@@ -18,7 +18,7 @@ class RedisSessionHandler implements SessionHandlerInterface, Seconds
     // Encrypting the data like this is most likely unnecessary, but it gives me a chance to show
     // a practical use for the CookieEncyrpt class.
     
-    public function __construct(Redis $redis, $prefix = 'PHPREDIS_SESSION:', $encryptor = null)
+    public function __construct(Redis $redis, $prefix = 'PHPSESSID:', $encryptor = null)
     {
         ini_set('session.hash_function', 'sha512');
         ini_set('session.hash_bits_per_character', 6);

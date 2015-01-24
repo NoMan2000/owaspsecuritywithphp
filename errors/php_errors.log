@@ -1,0 +1,10 @@
+[24-Jan-2015 12:03:31 America/Chicago] PHP Warning:  openssl_get_publickey() expects exactly 1 parameter, 2 given in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 39
+[24-Jan-2015 12:03:31 America/Chicago] PHP Warning:  openssl_seal(): not a public key (1th member of pubkeys) in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 45
+[24-Jan-2015 12:03:31 America/Chicago] PHP Notice:  Undefined property: security\Models\SSLEncryptor::$private_key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 55
+[24-Jan-2015 12:03:31 America/Chicago] PHP Warning:  openssl_open(): unable to coerce parameter 4 into a private key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 55
+[24-Jan-2015 12:03:41 America/Chicago] PHP Warning:  openssl_get_publickey() expects exactly 1 parameter, 2 given in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 39
+[24-Jan-2015 12:03:41 America/Chicago] PHP Warning:  openssl_seal(): not a public key (1th member of pubkeys) in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 45
+[24-Jan-2015 12:03:41 America/Chicago] PHP Notice:  Undefined property: security\Models\SSLEncryptor::$private_key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 55
+[24-Jan-2015 12:03:41 America/Chicago] PHP Warning:  openssl_open(): unable to coerce parameter 4 into a private key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 55
+[24-Jan-2015 12:05:50 America/Chicago] PHP Notice:  Undefined property: security\Models\SSLEncryptor::$private_key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 56
+[24-Jan-2015 12:05:50 America/Chicago] PHP Warning:  openssl_open(): unable to coerce parameter 4 into a private key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 56

@@ -4,8 +4,7 @@ require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.p
 use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
-use \Monolog\Logger;
-use \Monolog\Handler\StreamHandler;
+use \security\Models\SiteLogger\FullLog;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
 use \security\Models\PDOSingleton;
@@ -16,13 +15,18 @@ $rootPath = $router->rootPath;
 
 $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
-$pdo = new PDOSingleton();
-$logger = new Monolog\Logger('Customer Login Page');
+$pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
+$logger = new FullLog('Corporate View Page');
 $checkAuth = new CheckAuth($logger);
-$isCustomer = $checkAuth->isCustomer();
-if (!$isCustomer) {
+$isCorporate = $checkAuth->isCorporate();
+$router = new Router(__DIR__);
+$rootPath = $router->rootPath;
+
+if (!$isCorporate) {
+    $logger->serverData();
+    $logger->addWarning("User attempted to access unauthorized location.");
     $error = rawurlencode('Not an authenticated corporate user.');
-    header("Location:{$rootPath}public/badsite/corporate/corporatelogin.php?errors=$error");
+    header("Location:{$rootPath}public/goodsite/corporate/corporatelogin.php?errors=$error");
 }
 
 $query = "SELECT id, fulfilled, unfulfilled FROM `orders` WHERE 

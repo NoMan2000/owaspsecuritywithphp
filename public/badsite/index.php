@@ -6,7 +6,10 @@ require_once("../partials/header.php");
 // Never accept raw user input.
 $userName = isset($_POST['inputUserName']) ? $_POST['inputUserName'] : null;
 $password = isset($_POST['password']) ? $_POST['password'] : null;
-$errors[] = isset($_GET['errors']) ? htmlentities($_GET['errors']) : null;
+$errors = [] = 
+if (isset($_GET['errors'])) { 
+    $errors[] = $_GET['errors'];
+}
 
 use \Redis;
 use \security\Models\MySQLISingleton;
@@ -20,7 +23,7 @@ if (isset($_POST['submit'])) {
     $result = $mysqli->query($sql) 
         or $errors[] = $mysqli->error . ' on ' . __LINE__ . ' in ' . __FILE__;
     $isObj = is_object($result);
-    while ($isObj && $result->fetch_assoc()) {
+    while ($isObj && $row = $result->fetch_assoc()) {
         $_SESSION['customerid'] = $row['id'];
         $_SESSION['isauthenticated'] = true;
         $_SESSION['customerType'] = CustomerType::CUSTOMER;
