@@ -282,7 +282,7 @@ class FileUploader
 				$name = $this->newName;
 			}
 			// Demo only, remove this or rewrite this for a real server.
-			$convertDestination = str_replace('/home/ubuntu/workspace', $_SERVER['SERVER_NAME'], $this->destination); 
+			$convertDestination = str_replace('/home/ubuntu/workspace/public', $_SERVER['SERVER_NAME'], $this->destination); 
 			$result .= " and sent to <a href='//{$convertDestination}{$name}'>{$convertDestination}{$name}</a>.";
 			$this->messages[] = $result;
 		} 
