@@ -8,3 +8,4 @@
 [24-Jan-2015 12:03:41 America/Chicago] PHP Warning:  openssl_open(): unable to coerce parameter 4 into a private key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 55
 [24-Jan-2015 12:05:50 America/Chicago] PHP Notice:  Undefined property: security\Models\SSLEncryptor::$private_key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 56
 [24-Jan-2015 12:05:50 America/Chicago] PHP Warning:  openssl_open(): unable to coerce parameter 4 into a private key in /home/ubuntu/workspace/security/Models/SSLEncrypt.php on line 56
+[24-Jan-2015 15:51:28 America/Chicago] PHP Parse error:  syntax error, unexpected '=' in /home/ubuntu/workspace/public/badsite/index.php on line 9

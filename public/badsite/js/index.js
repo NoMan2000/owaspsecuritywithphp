@@ -18,7 +18,7 @@
         }).done(function (data, textStatus, jqXHR){
             var testJSON = isValidJSON(data);
             if (testJSON) {
-                window.location.href= CookieFunctions.rootPath + "public/badsite/customers/vieworders.php";
+                window.location.href= CookieFunctions.rootPath + "badsite/customers/vieworders.php";
             }
             setSuccessMessage("You have successfully logged in!");
             

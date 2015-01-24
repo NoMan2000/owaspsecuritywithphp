@@ -174,7 +174,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                         }
                     });
                     setTimeout(function() {
-                        window.location.href = CookieFunctions.rootPath + 'public/goodsite/index.php';
+                        window.location.href = CookieFunctions.rootPath + 'goodsite/index.php';
                     }, 1500);
                 }
                 console.log(data);

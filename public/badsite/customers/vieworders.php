@@ -21,7 +21,7 @@ $checkAuth = new CheckAuth($logger);
 $isCustomer = $checkAuth->isCustomer();
 if (!$isCustomer) {
     $error = rawurlencode('Not an authenticated consumer.');
-    header("Location:{$rootPath}public/badsite/index.php?errors=$error");
+    header("Location:{$rootPath}badsite/index.php?errors=$error");
 }
 $pdo = new PDOSingleton();
 

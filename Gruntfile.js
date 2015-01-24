@@ -149,7 +149,7 @@ module.exports = function(grunt) {
         clean: ["tmp"]
     });
     // Grunt default is what grunt will do if you just use grunt from the command-line.
-    grunt.registerTask('sassify', ['scsslint','copy', 'sass', 'cssmin', 'concat_css', 'clean']);
+    grunt.registerTask('sassify', ['copy', 'sass', 'cssmin', 'concat_css', 'clean']);
     grunt.registerTask('jsminify', ['jshint', "concat", "uglify"]);
     grunt.registerTask('build', ['sassify', 'jsminify']);
     grunt.registerTask("default", ["build"]);

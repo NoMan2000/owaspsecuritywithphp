@@ -21,7 +21,7 @@ $logger = new Monolog\Logger('Customer Edit Form');
 $checkAuth = new CheckAuth($logger);
 $isCustomer = $checkAuth->isCustomer();
 if (!$isCustomer) {
-    header("Location:{$rootPath}public/badsite/index.php?errors=Not an authenticated consumer.`");
+    header("Location:{$rootPath}badsite/index.php?errors=Not an authenticated consumer.`");
 }
 $pdo = new PDOSingleton();
 $customer = new InitCustomerController($pdo);

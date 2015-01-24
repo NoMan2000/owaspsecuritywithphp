@@ -26,7 +26,7 @@ if (!$isCorporate) {
     $logger->serverData();
     $logger->addWarning("User attempted to access unauthorized location.");
     $error = rawurlencode('Not an authenticated corporate user.');
-    die(header("Location:{$rootPath}public/goodsite/corporate/corporatelogin.php?errors=$error"));
+    die(header("Location:{$rootPath}goodsite/corporate/corporatelogin.php?errors=$error"));
 }
 
 $query = "SELECT id, fulfilled, unfulfilled FROM orders WHERE 

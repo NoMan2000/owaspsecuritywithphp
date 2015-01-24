@@ -26,7 +26,7 @@
         }).done(function (data, textStatus, jqXHR){
             var testJSON = isValidJSON(data);
             if (testJSON) {
-                window.location.href= CookieFunctions.rootPath + "public/goodsite/customers/vieworders.php";
+                window.location.href= CookieFunctions.rootPath + "goodsite/customers/vieworders.php";
             }
             setSuccessMessage("You have successfully logged in!");
             

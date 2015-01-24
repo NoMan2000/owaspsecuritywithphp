@@ -51,7 +51,7 @@ confirm */
                 JSON.parse(data, function jsonFunc(k,v) {
                            
                 });
-                window.location.href = CookieFunctions.rootPath + "public/goodsite/corporate/viewCorporate.php";
+                window.location.href = CookieFunctions.rootPath + "goodsite/corporate/viewCorporate.php";
             }
         }).fail(function (jqXHR, textStatus, errorThrown){
             var errorMessage = $.trim(jqXHR.responseText);

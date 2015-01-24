@@ -4,7 +4,7 @@ require_once(dirname(__DIR__) . '/init.php');
 use \security\Models\Router\Router;
 
 $router = new Router(__DIR__);
-$jsPath = $router->rootPath . 'public/js/';
+$jsPath = $router->rootPath . 'js/';
 ?>
 <div id="ajaxContentHolder">
   <div id='centerSpinner'>

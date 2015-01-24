@@ -20,7 +20,7 @@ $logger = new FullLog('Customer Edit Form');
 $checkAuth = new CheckAuth($logger);
 $isCustomer = $checkAuth->isCustomer();
 if (!$isCustomer) {
-    header("Location:{$rootPath}public/goodsite/index.php?errors=Not an authenticated consumer.`");
+    header("Location:{$rootPath}goodsite/index.php?errors=Not an authenticated consumer.`");
 }
 $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
 $customer = new InitCustomerController($pdo);

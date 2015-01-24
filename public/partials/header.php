@@ -4,7 +4,7 @@ require_once(dirname(__DIR__) . '/init.php');
 use \security\Models\Router\Router;
 
 $router = new Router(__DIR__);
-$cssPath = $router->rootPath . 'public/css/';
+$cssPath = $router->rootPath . 'css/';
 ?>
 <!DOCTYPE html>
 <html lang="en">

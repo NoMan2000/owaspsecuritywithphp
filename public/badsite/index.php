@@ -6,7 +6,7 @@ require_once("../partials/header.php");
 // Never accept raw user input.
 $userName = isset($_POST['inputUserName']) ? $_POST['inputUserName'] : null;
 $password = isset($_POST['password']) ? $_POST['password'] : null;
-$errors = [] = 
+$errors = [];
 if (isset($_GET['errors'])) { 
     $errors[] = $_GET['errors'];
 }

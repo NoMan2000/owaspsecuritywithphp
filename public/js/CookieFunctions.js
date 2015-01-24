@@ -215,6 +215,6 @@ white: false
             return cookieEnabled;
         };
     objHolder.rootPath = window.location.origin + '/';
-    objHolder.reroutePath = objHolder.rootPath + 'public/jsHelper/reroute.php';
+    objHolder.reroutePath = objHolder.rootPath + 'jsHelper/reroute.php';
     setCookieProperties(objHolder);
 }());
