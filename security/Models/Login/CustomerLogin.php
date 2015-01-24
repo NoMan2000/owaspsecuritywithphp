@@ -52,9 +52,9 @@ class CustomerLogin implements CustomerType
             
             if ($isCorrectPassword) {
                 $passwordHasher = new PasswordCheck($password);
-                if (!$passwordHasher->verifyHash()) {
+                if ($passwordHasher->needsNewHash()) {
                     $password = $passwordHasher->makeHash();
-                    $query = "UPDATE users SET password = $password WHERE username = :username";
+                    $query = "UPDATE customers SET password='$password' WHERE username = :username";
                     $update = $pdo->prepare($query);
                     $update->bindParam(':username', $username, PDO::PARAM_STR);
                     $update->execute();

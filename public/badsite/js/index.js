@@ -1,3 +1,33 @@
+/*jslint
+browser: true,
+couch: false,
+devel: false,
+node: false,
+rhino: false,
+passfail: false,
+ass: false,
+bitwise: false,
+closure: true,
+continue: false,
+debug: true,
+eqeq: false,
+evil: false,
+forin: false,
+newcap: false,
+nomen: false,
+plusplus: false,
+regexp: false,
+unparam: false,
+sloppy: false,
+stupid: false,
+sub: false,
+todo: true,
+vars: true,
+white: false
+*/
+/*global $, jQuery, alert, Spinner, swal, CookieFunctions, isValidJSON, 
+setErrorMessage, setSuccessMessage, hideErrorMessage, hideSuccessMessage
+confirm */
 (function indexCallBack(global, $) {
     $("#indexForm").on('submit', function(e){
         e.preventDefault();

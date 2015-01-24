@@ -10,12 +10,12 @@ class PasswordCheck
     {
         $this->password = $password;
     }
-    public function verifyHash()
+    public function needsNewHash()
     {
         if (password_needs_rehash($this->password, PASSWORD_DEFAULT)) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     public function makeHash()
     {
