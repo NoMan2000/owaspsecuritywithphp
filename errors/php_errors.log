@@ -33,3 +33,9 @@ Stack trace:
 #1 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(76): security\Models\Login\CustomerLogin->checkUser(Object(security\Models\PDOSingleton), Object(security\Models\ErrorRunner), Object(security\Models\RedisSingleton), Object(security\Models\Authenticator\BlackLister), 'Gerhold.Brady', 'c,uRD4tYZB@oO-9...')
 #2 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(32): security\Controllers\Login\CustomerLoginController->executeAction()
 #3 /home/ubuntu/workspace/security/Controllers/Log in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 60
+[25-Jan-2015 10:03:48 America/Chicago] PHP Catchable fatal error:  Object of class security\Models\PasswordGenerator could not be converted to string in /home/ubuntu/workspace/security/Models/PasswordGenerator.php on line 17
+[25-Jan-2015 10:15:56 America/Chicago] PHP Notice:  Undefined variable: testlength in /home/ubuntu/workspace/security/Models/PasswordGenerator.php on line 22
+[25-Jan-2015 10:16:35 America/Chicago] PHP Notice:  Undefined variable: testlength in /home/ubuntu/workspace/security/Models/PasswordGenerator.php on line 24
+[25-Jan-2015 10:16:59 America/Chicago] PHP Notice:  Undefined variable: testlength in /home/ubuntu/workspace/security/Models/PasswordGenerator.php on line 24
+[25-Jan-2015 10:48:04 America/Chicago] PHP Notice:  Undefined variable: newPassword in /home/ubuntu/workspace/security/Models/PasswordGenerator.php on line 28
+[25-Jan-2015 10:49:15 America/Chicago] PHP Notice:  Undefined variable: remainer in /home/ubuntu/workspace/security/Models/PasswordGenerator.php on line 20

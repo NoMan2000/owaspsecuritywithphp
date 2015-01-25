@@ -11,12 +11,14 @@ use \security\Exceptions\FolderException;
 use \security\Interfaces\Seconds;
 use \security\Interfaces\FullLogInterface;
 use \security\Models\Authenticator\BlackLister;
+use \security\Traits\IsDevelopment;
 use \Redis;
 use \Rhumsaa\Uuid\Uuid;
 use \Rhumsaa\Uuid\Exception\UnsatisfiedDependencyException;
 
 class AddNewCustomer implements Seconds
 {
+    use IsDevelopment;
     private $errors = [];
     private $orderID;
     private $customerID;

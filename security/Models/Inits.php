@@ -67,7 +67,7 @@ class Inits
         $defaultSrc = "'self' https:";
         // $frameSrc is marked as deprecated.
         // $frameSrc = "'self' *.qbaka.net *.googleapis.com *.gstatic.com";
-        $reportUri = "report-uri /public/logger/report.php";
+        $reportUri = "report-uri /logger/report.php";
         
         header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
         header("Access-Control-Allow-Origin: *.{$_SERVER['SERVER_NAME']}");
