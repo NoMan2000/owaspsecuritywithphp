@@ -15,9 +15,7 @@ class PasswordGenerator
             $enc = 30;
         }
         $loops = floor($length / self::MAXLENGTH);
-        echo $loops . PHP_EOL;
         $remainder = $length % self::MAXLENGTH;
-        echo $remainder . PHP_EOL;
         $newPassword = '';
         for ($i = 0; $i <= $loops; $i++) {
             if ($i < $loops) {
