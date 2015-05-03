@@ -116,6 +116,8 @@ sudo groupadd apache
 sudo useradd -d /home/ubuntu/workspace/ -g apache -s /bin/bash apache                                                     
 sudo usermod -a -G apache ubuntu
 
+#sudo chmod -R g+s apache /home/ubuntu/workspace
+
 echo "Starting up MySQL"
 
 mysql-ctl install
