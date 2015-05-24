@@ -1,21 +1,17 @@
 CREATE TABLE IF NOT EXISTS `widgets`.`orders` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `fulfilled` INT NULL DEFAULT 0,
-  `unfulfilled` VARCHAR(45) NULL,
-  `groups_id` INT NOT NULL,
-  `groups_users_companies_id` INT NOT NULL,
-  `customers_id` INT NULL,
-  PRIMARY KEY (`id`, `groups_id`, `groups_users_companies_id`),
-  INDEX `fk_orders_groups1_idx` (`groups_id` ASC, `groups_users_companies_id` ASC),
-  CONSTRAINT `fk_orders_groups1`
-    FOREIGN KEY (`groups_id`)
-    REFERENCES `widgets`.`groups` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB COLLATE utf8mb4_bin;
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `fulfilled` INT UNSIGNED NULL DEFAULT 0,
+  `unfulfilled` INT UNSIGNED NULL,
+  `is_shipped` TINYINT(1) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+COLLATE = utf8mb4_bin;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.orders TO 'widgetCorporate'@'%' IDENTIFIED BY 'somepassword';
+GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.orders TO 'widgetCustomer'@'%' IDENTIFIED BY 'somepassword';
 
 --//@UNDO
-SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE `widgets`.`orders`;
-SET FOREIGN_KEY_CHECKS = 1;
+REVOKE SELECT, INSERT, UPDATE, DELETE ON widgets.orders TO 'widgetCorporate'@'%';
+REVOKE SELECT, INSERT, UPDATE, DELETE ON widgets.orders TO 'widgetCustomer'@'%';
+DROP TABLE IF EXISTS `widgets`.`orders`;
 --//

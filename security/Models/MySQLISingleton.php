@@ -24,8 +24,17 @@ class MySQLISingleton extends mysqli
         $this->pass = 'abc123';    
         $this->charset = "utf8mb4";
         $this->port = ini_get("mysqli.default_port");
-        $this->socket = '/home/ubuntu/lib/mysql/socket/mysql.sock';
+        $this->socket = ini_get("mysql.default_socket");
         
+        if (PHP_OS === "DARWIN") {
+        	$this->socket = "/tmp/mysql.sock";
+        }
+        if (PHP_OS === "LINUX") {
+        	$this->socket = '/home/ubuntu/lib/mysql/socket/mysql.sock';
+        }
+        if (PHP_OS === "WINNT") {
+        	// Override here if needed
+        }
         parent::__construct(
             $this->host,
             $this->user,

@@ -11,14 +11,13 @@
         "swiftmailer/swiftmailer": "dev-master",
         "monolog/monolog": "dev-master",
         "guzzle/guzzle": "dev-master",
-        "rhumsaa/uuid": "dev-master",
-        "moontoast/math": "dev-master"
+        "ramsey/uuid": "dev-master",
+        "moontoast/math": "dev-master",
+        "ircmaxell/random-lib": "dev-master"
     },
     "require-dev": {
-        "robmorgan/phinx": "dev-master",
         "phing/phing": "dev-master",
         "fzaninotto/faker": "dev-master",
-        "symfony/translation": "dev-master",
-        "videlalvaro/php-amqplib": "dev-master"
-    } 
+        "symfony/translation": "dev-master"
+    }
 }

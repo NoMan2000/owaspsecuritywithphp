@@ -1,5 +1,5 @@
-CREATE TABLE 'changelog' (
-    `change_number` bigint(20) NOT NULL AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS 'changelog' (
+    `change_number` UNSIGNED bigint(20) NOT NULL,
     'delta_set' TEXT NOT NULL, 
     `start_dt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     'applied_by' TEXT NOT NULL,
@@ -10,6 +10,6 @@ CREATE TABLE 'changelog' (
 
 --//@UNDO
 
-DROP TABLE `changelog`;
+DROP TABLE IF EXISTS `changelog`;
 
 --//

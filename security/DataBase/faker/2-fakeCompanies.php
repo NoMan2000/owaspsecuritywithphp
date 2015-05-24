@@ -54,7 +54,7 @@ $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL .
 TRUNCATE companies; 
 SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL . "--//";
 
-$seedsFile = dirname(__DIR__) . "/deltas/seeds/mysql/7-companySeeds.sql";
+$seedsFile = dirname(__DIR__) . "/deltas/seeds/mysql/11-companySeeds.sql";
 if (!file_exists($seedsFile)) {
     touch($seedsFile);
 }
@@ -68,7 +68,7 @@ $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "PRAGMA foreign_keys=OFF;
 delete from companies;
 PRAGMA foreign_keys=ON;" . PHP_EOL . "--//";
 
-$seedsFile = dirname(__DIR__) . "/deltas/seeds/sqlite/6-companySeeds.sql";
+$seedsFile = dirname(__DIR__) . "/deltas/seeds/sqlite/11-companySeeds.sql";
 if (!file_exists($seedsFile)) {
     touch($seedsFile);
 }

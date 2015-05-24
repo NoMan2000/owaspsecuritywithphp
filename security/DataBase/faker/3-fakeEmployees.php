@@ -94,7 +94,7 @@ $valueString .= ";";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "SET FOREIGN_KEY_CHECKS = 0; 
 TRUNCATE users; 
 SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL . "--//";
-$seedsFile = dirname(__DIR__) . "/deltas/seeds/mysql/8-companyUserSeeds.sql";
+$seedsFile = dirname(__DIR__) . "/deltas/seeds/mysql/12-companyUserSeeds.sql";
 if (!file_exists($seedsFile)) {
     touch($seedsFile);
 }
@@ -110,7 +110,7 @@ $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "PRAGMA foreign_keys=OFF;
 delete from users;
 PRAGMA foreign_keys=ON; 
 " . PHP_EOL . "--//";
-$seedsFile = dirname(__DIR__) . "/deltas/seeds/sqlite/7-companyUserSeeds.sql";
+$seedsFile = dirname(__DIR__) . "/deltas/seeds/sqlite/12-companyUserSeeds.sql";
 if (!file_exists($seedsFile)) {
     touch($seedsFile);
 }

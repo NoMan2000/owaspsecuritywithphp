@@ -1,14 +1,13 @@
 CREATE TABLE IF NOT EXISTS `widgets`.`groups` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `companies_id` INT NOT NULL,
-  `users_id` TEXT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_groups_companies1_idx` (`companies_id` ASC)
-)ENGINE = InnoDB COLLATE utf8mb4_bin;
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+COLLATE = utf8mb4_bin;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.groups TO 'widgetCorporate'@'%' IDENTIFIED BY 'somepassword'; 
 
 --//@UNDO
-SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE `widgets`.`groups`;
-SET FOREIGN_KEY_CHECKS = 1;
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'widgetCorporate'@'%';
+DROP TABLE IF EXISTS `widgets`.`groups`;
 --//
