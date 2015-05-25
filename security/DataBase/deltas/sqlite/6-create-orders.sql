@@ -1,10 +1,9 @@
 PRAGMA foreign_keys=OFF;
 CREATE TABLE IF NOT EXISTS `orders` (
-  `id` UNSIGNED INT NOT NULL,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `fulfilled` UNSIGNED INT NULL DEFAULT 0,
   `unfulfilled` UNSIGNED INT NULL,
-  `is_shipped` UNSIGNED TINYINT(1) NULL,
-  PRIMARY KEY (`id`)
+  `is_shipped` UNSIGNED TINYINT(1) NULL
 );
 PRAGMA foreign_keys=ON;
 

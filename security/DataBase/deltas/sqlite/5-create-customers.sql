@@ -1,7 +1,7 @@
 PRAGMA foreign_keys=OFF;
 
 CREATE TABLE IF NOT EXISTS `customers` (
-  `id` UNSIGNED INT NOT NULL,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `plainpassword` VARCHAR(255) NOT NULL,
@@ -9,8 +9,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `address` VARCHAR(255) NOT NULL,
   `instructions` TEXT NULL DEFAULT NULL,
   `phone` VARCHAR(45) NOT NULL,
-  `verified` UNSIGNED TINYINT(1) NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `verified` UNSIGNED TINYINT(1) NULL DEFAULT 0
 );
 
 

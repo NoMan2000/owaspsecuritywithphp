@@ -1,11 +1,11 @@
 PRAGMA foreign_keys=OFF;
 CREATE TABLE IF NOT EXISTS `employeesToGroups` (
-  `groups_id` UNSIGNED INT NOT NULL,
-  `employees_id` UNSIGNED INT NOT NULL,
+  `groups_id` INT,
+  `employees_id` INT,
     FOREIGN KEY (`groups_id`)
-    REFERENCES `groups` (`id`),
+    REFERENCES `groups` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`employees_id`)
-    REFERENCES `employees` (`id`)
+    REFERENCES `employees` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
     
 CREATE INDEX `fk_employeesToGroups_groups1_idx` ON `employeesToGroups` (`groups_id` ASC);

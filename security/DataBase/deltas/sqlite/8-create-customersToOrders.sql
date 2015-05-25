@@ -1,11 +1,11 @@
 PRAGMA foreign_keys=OFF;
 CREATE TABLE IF NOT EXISTS `customersToOrders` (
-  `orders_id` UNSIGNED INT NOT NULL,
-  `customers_id` UNSIGNED INT NOT NULL,
+  `orders_id`  INT,
+  `customers_id` INT,
    FOREIGN KEY (`orders_id`)
-    REFERENCES `orders` (`id`),
+    REFERENCES `orders` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
    FOREIGN KEY (`customers_id`)
-    REFERENCES `customers` (`id`)
+    REFERENCES `customers` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE INDEX IF NOT EXISTS `fk_customersToOrders_orders1_idx` ON `customersToOrders` (`orders_id` ASC);

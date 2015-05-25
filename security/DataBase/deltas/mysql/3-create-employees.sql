@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS `widgets`.`employees` (
   `email` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(45) NOT NULL,
   `company_id` INT UNSIGNED NULL DEFAULT NULL,
-  `is_admin` BINARY NULL DEFAULT 0,
-  `is_locked` BINARY NULL DEFAULT 0,
+  `is_admin` BOOLEAN NULL DEFAULT 0,
+  `is_locked` BOOLEAN NULL DEFAULT 0,
   `attempts` TINYINT(1) UNSIGNED NULL DEFAULT 0,
   `password` VARCHAR(255) NOT NULL,
   `plainpassword` VARCHAR(255) NOT NULL,
@@ -21,12 +21,15 @@ CREATE TABLE IF NOT EXISTS `widgets`.`employees` (
   CONSTRAINT `fk_users_companies`
     FOREIGN KEY (`company_id`)
     REFERENCES `widgets`.`companies` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 COLLATE = utf8mb4_bin;
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.employees TO 'widgetCorporate'@'%' IDENTIFIED BY 'somepassword';
+GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.employees TO 'widgetCorporate'@'localhost' IDENTIFIED BY 'somepassword';
+GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.employees TO 'widgetCorporate'@'127.0.0.1' IDENTIFIED BY 'somepassword';
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -38,7 +41,10 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'widgetCorporate'@'%';
+REVOKE SELECT, INSERT, UPDATE, DELETE ON widgets.employees TO 'widgetCorporate'@'%';
+REVOKE SELECT, INSERT, UPDATE, DELETE ON widgets.employees TO 'widgetCorporate'@'localhost';
+REVOKE SELECT, INSERT, UPDATE, DELETE ON widgets.employees TO 'widgetCorporate'@'127.0.0.1';
+
 
 DROP TABLE IF EXISTS `widgets`.`employees`;
 

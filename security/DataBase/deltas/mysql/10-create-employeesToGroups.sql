@@ -11,13 +11,13 @@ CREATE TABLE IF NOT EXISTS `widgets`.`employeesToGroups` (
   CONSTRAINT `fk_employeesToGroups_groups1`
     FOREIGN KEY (`groups_id`)
     REFERENCES `widgets`.`groups` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_employeesToGroups_employees1`
     FOREIGN KEY (`employees_id`)
     REFERENCES `widgets`.`employees` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 COLLATE = utf8mb4_bin;
 

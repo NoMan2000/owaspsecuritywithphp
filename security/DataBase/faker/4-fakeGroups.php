@@ -35,7 +35,7 @@ $valueString .= ";";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "SET FOREIGN_KEY_CHECKS = 0; 
 TRUNCATE groups; 
 SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL . "--//";
-$seedsFile = dirname(__DIR__) . "/deltas/seeds/mysql/14-companyGroupSeeds.sql";
+$seedsFile = dirname(__DIR__) . "/deltas/seeds/mysql/14-groupSeeds.sql";
 if (!file_exists($seedsFile)) {
     touch($seedsFile);
 }
@@ -52,7 +52,7 @@ PRAGMA foreign_keys=OFF;
 delete from groups;
 PRAGMA foreign_keys=ON;
 " . PHP_EOL . "--//";
-$seedsFile = dirname(__DIR__) . "/deltas/seeds/sqlite/14-companyGroupSeeds.sql";
+$seedsFile = dirname(__DIR__) . "/deltas/seeds/sqlite/14-groupSeeds.sql";
 if (!file_exists($seedsFile)) {
     touch($seedsFile);
 }

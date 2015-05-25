@@ -39,14 +39,13 @@ for ($i = 1; $i <= $fakeUsers; $i++) {
     $mysqlEmail = $mysqli->real_escape_string($email);
     $sqliteEmail = SQLite3::escapeString($email);
     
-    $phone = str_shuffle($faker->numerify('##########'));
+    $phone = $faker->numerify('##########');
     $is_admin = 0;
     if ($rand->returnRandomNumber(0, 100) <= $chance) {
         $is_admin = 1; 
     }
     $is_locked = 0;
     $attempts = 0;
-    $group_id = $faker->numberBetween(1, 40);
     
     $plainpassword = $faker->password;
     $mysqlPlainpassword = $mysqli->real_escape_string($plainpassword);
@@ -57,7 +56,7 @@ for ($i = 1; $i <= $fakeUsers; $i++) {
     
     $company_id = mt_rand(1, 10); 
     
-    if ($i < 10) {
+    if ($i <= 10) {
         $mysqlUsername = $sqliteUsername = "mike{$i}";  
         
         $email = $faker->safeEmail;
@@ -73,15 +72,15 @@ for ($i = 1; $i <= $fakeUsers; $i++) {
         $mysqlPassword = $sqlitePassword = password_hash($plainpassword, PASSWORD_DEFAULT);
         $company_id = $i; 
     }
-    $mysqlQuery = "INSERT INTO users (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
-             `attempts`,`password`, `plainpassword`, `group_id`) VALUES 
+    $mysqlQuery = "INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
+             `attempts`,`password`, `plainpassword`) VALUES 
               ('$mysqlUsername', '$mysqlEmail', '$phone', $company_id, $is_admin, 
-              $is_locked, $attempts, '$mysqlPassword', '$mysqlPlainpassword', '$group_id')";    
+              $is_locked, $attempts, '$mysqlPassword', '$mysqlPlainpassword')";    
 
-    $sqliteQuery = "INSERT INTO users (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
-             `attempts`,`password`, `plainpassword`, `group_id`) VALUES 
+    $sqliteQuery = "INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
+             `attempts`,`password`, `plainpassword`) VALUES 
               ('$sqliteUsername', '$sqliteEmail', '$phone', $company_id, $is_admin, 
-              $is_locked, $attempts, '$sqlitePassword', '$sqlitePlainpassword', '$group_id')";    
+              $is_locked, $attempts, '$sqlitePassword', '$sqlitePlainpassword')";    
     
     $mysqlValues[] = $mysqlQuery;
     $sqliteValues[] = $sqliteQuery;
@@ -92,9 +91,9 @@ for ($i = 1; $i <= $fakeUsers; $i++) {
 $valueString = implode(";".PHP_EOL,$mysqlValues);
 $valueString .= ";";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "SET FOREIGN_KEY_CHECKS = 0; 
-TRUNCATE users; 
+TRUNCATE employees; 
 SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL . "--//";
-$seedsFile = dirname(__DIR__) . "/deltas/seeds/mysql/12-companyUserSeeds.sql";
+$seedsFile = dirname(__DIR__) . "/deltas/seeds/mysql/13-employeesSeeds.sql";
 if (!file_exists($seedsFile)) {
     touch($seedsFile);
 }
@@ -107,10 +106,10 @@ file_put_contents($seedsFile, $valueString);
 $valueString = implode(";".PHP_EOL,$sqliteValues);
 $valueString .= ";";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "PRAGMA foreign_keys=OFF;
-delete from users;
+delete from employees;
 PRAGMA foreign_keys=ON; 
 " . PHP_EOL . "--//";
-$seedsFile = dirname(__DIR__) . "/deltas/seeds/sqlite/12-companyUserSeeds.sql";
+$seedsFile = dirname(__DIR__) . "/deltas/seeds/sqlite/13-employeeSeeds.sql";
 if (!file_exists($seedsFile)) {
     touch($seedsFile);
 }

@@ -2,7 +2,7 @@
 
 namespace security\Models;
 
-include_once(dirname(dirname(__DIR__)) . '/vendor/autoload.php');
+require_once(dirname(dirname(__DIR__)) . '/vendor/autoload.php');
 
 use \mysqli;
 
@@ -20,22 +20,18 @@ class MySQLISingleton extends mysqli
     { 
         $this->host = 'localhost'; 
         $this->database = 'widgets'; 
-        $this->user = 'widgetMain'; 
-        $this->pass = 'abc123';    
+        $this->user = 'root'; 
+        $this->pass = '';    
         $this->charset = "utf8mb4";
         $this->port = ini_get("mysqli.default_port");
         $this->socket = ini_get("mysql.default_socket");
         
-        if (PHP_OS === "DARWIN") {
-        	$this->socket = "/tmp/mysql.sock";
-        }
+        
         if (PHP_OS === "LINUX") {
         	$this->socket = '/home/ubuntu/lib/mysql/socket/mysql.sock';
         }
-        if (PHP_OS === "WINNT") {
-        	// Override here if needed
-        }
-        parent::__construct(
+        
+        $this->connect(
             $this->host,
             $this->user,
             $this->pass,
@@ -43,11 +39,10 @@ class MySQLISingleton extends mysqli
             $this->port,
             $this->socket
         );
-        parent::set_charset($this->charset);
+        $this->set_charset($this->charset);
         
-        if (mysqli_connect_error()) {
-            die('Connect Error (' . mysqli_connect_errno() . ') '
-                    . mysqli_connect_error());
+        if ($this->connect_error) {
+            die("Connect Error ({$this->connect_error}) of type: {$this->connect_errno})");
         }
     }
 }
