@@ -2,11 +2,11 @@
 
 namespace security\Models\Authenticator;
 
-include_once(dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php');
+require_once dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php';
 
 // Note this is an unsophisticated library for validation and sanitation.  More sophisticated libraries will be discussed.
 
-class Authenticate 
+class Authenticate
 {
     public function vEmail($email)
     {
@@ -21,7 +21,7 @@ class Authenticate
     {
         return (trim(filter_var($string, FILTER_SANITIZE_STRING)));
     }
-    
+
     public function vPhone($phone, $isInternational = false)
     {
         $phone = $this->filledAndSet(@$phone) ? $this->cInt($phone) : null;
@@ -34,7 +34,7 @@ class Authenticate
         }
         return $phone;
     }
-    
+
     public function cInt($value)
     {
         $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
@@ -43,13 +43,13 @@ class Authenticate
         }
         return $value;
     }
-    
+
     public function filledAndSet($v)
     {
         if (is_array($v)) {
             $this->isArrayAllFilled($v);
         }
-        
+
         if (!isset($v) || is_null($v)) {
             return false;
         }
@@ -66,17 +66,17 @@ class Authenticate
         }
         return false;
     }
-    
-    // Do not rely on this alone.  In an Ajax-based framework where a php file is loaded in dynamically, the 
+
+    // Do not rely on this alone.  In an Ajax-based framework where a php file is loaded in dynamically, the
     // request will be considered ajax even if it is being statically generated.
     public function isAjax()
     {
         $isAjax = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) and
-                  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') ?
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') ?
         true : false;
         return $isAjax;
     }
-    
+
     public function isArrayAllFilled(array $v)
     {
         if (empty($v) || !isset($v)) {
@@ -89,6 +89,6 @@ class Authenticate
             }
         }
         return true;
-         /* If the array is set and no values are empty, return true. */
+        /* If the array is set and no values are empty, return true. */
     }
 }

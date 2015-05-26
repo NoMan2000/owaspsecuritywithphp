@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <project name="migrations" default="build">
-	<property file='build.properties' />
+    <property file='build.properties' />
     <property name='build.dns'
         value='${db.engine}:unix_socket=${db.socket};dbname=${db.name};host=${db.host}' />
     <includepath classpath="${phingdir}" />
@@ -14,33 +14,21 @@
           <fileset dir="${build.dir}/deltas/seeds/mysql" defaultexcludes='false'>
             <include name="**/**"/>
           </fileset>
-        </delete>
-        <delete includeemptydirs="false">
           <fileset dir="${build.dir}/deltas/seeds/sqlite" defaultexcludes='false'>
             <include name="**/**"/>
           </fileset>
-        </delete>
-        <delete includeemptydirs="false">
           <fileset dir="${build.dir}/deploy/mysql/" defaultexcludes='false'>
             <include name="**/**"/>
           </fileset>
-        </delete>
-        <delete includeemptydirs="false">
           <fileset dir="${build.dir}/deploy/sqlite/" defaultexcludes='false'>
             <include name="**/**"/>
           </fileset>
-        </delete>
-        <delete includeemptydirs="false">
           <fileset dir="${build.dir}/undo/mysql/" defaultexcludes='false'>
             <include name="**/**"/>
           </fileset>
-        </delete>
-        <delete includeemptydirs="false">
           <fileset dir="${build.dir}/undo/sqlite/" defaultexcludes='false'>
             <include name="**/**"/>
           </fileset>
-        </delete>
-        <delete includeemptydirs="false">
           <fileset dir="${errorlog}/phing/" defaultexcludes='false'>
             <include name="**/**"/>
           </fileset>
@@ -68,8 +56,8 @@
     </target>
 
 
-	<target name="build.migrate" description="Database Migrations">
-	    <tstamp/>
+    <target name="build.migrate" description="Database Migrations">
+        <tstamp/>
         <echo message="${build.dns} is the fully qualified URL." />
         <!-- load the dbdeploy task -->
         <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>

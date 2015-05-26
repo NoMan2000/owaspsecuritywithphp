@@ -15,7 +15,9 @@ $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
 $logger = new FullLog();
 $sessHandler = new RedisSessionHandler($redis);
-
 session_set_save_handler($sessHandler);
-(new SessionInitializers);
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+(new SessionInitializers());
 (new Inits($errorRunner, $logger));

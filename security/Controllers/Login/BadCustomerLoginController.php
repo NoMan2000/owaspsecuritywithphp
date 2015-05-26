@@ -2,7 +2,7 @@
 
 namespace security\Controllers\Login;
 
-include_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php');
+require_once(dirname(dirname(dirname(__DIR__))). DIRECTORY_SEPARATOR . 'public/init.php');
 
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\ErrorRunner;
@@ -23,26 +23,14 @@ class CustomerLoginController extends BaseLoginController implements JsonSeriali
     private $userName;
     private $password;
     private $jsonObject = [];
-    
+
     public function __construct(SplObjectStorage $storage)
     {
         parent::__construct($storage);
         $this->switchObject($storage);
         $this->executeAction();
     }
-    protected function storageInitializers($object, $objectName)
-    {
-        parent::storageInitializers($object, $objectName);
-        switch($objectName) {
-            case 'customerLoginData':
-                $this->setUserName($object->userName)
-                     ->setPassword($object->password)
-                     ->setAction($object->action);
-                 break;
-            default:
-                break;
-        }
-    }
+
     public function setUserName($userName)
     {
         $this->userName = $userName;
@@ -58,19 +46,19 @@ class CustomerLoginController extends BaseLoginController implements JsonSeriali
         $this->password = $password;
         return $this;
     }
-    
+
     public function executeAction()
     {
         $action = $this->action;
         switch($action) {
             case 'verifyLogin':
-                $customerLogin = new CustomerLogin(); 
+                $customerLogin = new CustomerLogin();
                 $return = $customerLogin->checkUser(
                     $this->pdo,
                     $this->errorRunner,
                     $this->redis,
                     $this->blackList,
-                    $this->userName, 
+                    $this->userName,
                     $this->password
                 );
                 if (isset($return['errors']) && !empty($return['errors'])) {
@@ -91,7 +79,7 @@ class CustomerLoginController extends BaseLoginController implements JsonSeriali
     }
 }
 
-$errors = array();
+$errors = [];
 
 $auth = new Authenticate();
 $errorRunner = new ErrorRunner();
@@ -100,41 +88,33 @@ $blackList = new BlackLister($redis);
 $isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 $pdo = new PDOSingleton();
 
-if ($isAjax) {
-    $userName = $auth->filledAndSet(@$_POST['userName']) ? $_POST['userName'] : null;
-    $password = $auth->filledAndSet(@$_POST['password']) ? $_POST['password'] : null;
-    $action = $auth->filledAndSet(@$_POST['action']) ? $_POST['action'] : null;
-    
-    if (is_null($userName) || is_null($password) || is_null($action)) {
-        $userName || $errors[] = "No email was sent over.";
-        $password || $errors[] = "No password was sent over.";
-        $action = $action || $errors[] = "No action to perform was sent over.";
-        $errors[] = "A required field was missing.";
-    }
-    if (empty($errors)) {
-        $modelObjects = new StdClass();
-        $modelObjects->pdo = $pdo;
-        $modelObjects->redis = $redis;
-        $modelObjects->errorRunner = $errorRunner;
-        $modelObjects->blackList = $blackList;
-        
-        $customerLoginData = new StdClass();
-        $customerLoginData->userName = $userName;
-        $customerLoginData->password = $password;
-        $customerLoginData->action = $action;
+$userName = !empty($_POST['userName']) ? $_POST['userName'] : null;
+$password = !empty($_POST['password']) ? $_POST['password'] : null;
+$action = !empty($_POST['action']) ? $_POST['action'] : null;
 
-        $storage = new SplObjectStorage();
-        $storage->attach($modelObjects, 'modelObjects');
-        $storage->attach($customerLoginData, 'customerLoginData');
-        // Rewind will make sure the object is back at position 0, 
-        // like rewinding an array after a foreach loop.
-        $storage->rewind();
-        
-        $controller = new CustomerLoginController($storage);
-        $controller->setUserName($userName)
-            ->setPassword($password)
-            ->setAction($action)
-            ->executeAction();
+$userName || $errors[] = "No email was sent over.";
+$password || $errors[] = "No password was sent over.";
+$action = $action || $errors[] = "No action to perform was sent over.";
+$errors[] = "A required field was missing.";
+
+if (empty($errors)) {
+    $modelObjects = new StdClass();
+    $modelObjects->pdo = $pdo;
+    $modelObjects->redis = $redis;
+    $modelObjects->errorRunner = $errorRunner;
+    $modelObjects->blackList = $blackList;
+
+    $customerLoginData = new StdClass();
+    $customerLoginData->userName = $userName;
+    $customerLoginData->password = $password;
+    $customerLoginData->action = $action;
+
+    $controller = new CustomerLoginController($storage);
+    $controller->setUserName($userName)
+        ->setPassword($password)
+        ->setAction($action)
+        ->executeAction();
+    if ($isAjax) {
         echo json_encode($controller);
     }
 }

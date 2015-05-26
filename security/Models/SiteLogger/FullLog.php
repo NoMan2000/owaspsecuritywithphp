@@ -10,14 +10,18 @@ use \security\Interfaces\FullLogInterface;
 // Extract to an interface.
 class FullLog implements FullLogInterface
 {
-    private $path = "/home/ubuntu/workspace/logs/session.log";
+    private $path;
     public $logger;
-    
+
     public function __construct($name = null, $path = null, $logger = null, $default = false)
     {
+        $path = dirname(dirname(dirname(__DIR__))). DIRECTORY_SEPARATOR . "logs/session.log";
         $this->path = isset($path) && !is_null($path) ? $path : $this->path;
         if (!file_exists($this->path)) {
             touch($this->path);
+        }
+        if (!ini_get("date.timezone")) {
+            ini_set("date.timezone", "America/Chicago");
         }
         $date = new DateTime();
         $date = $date->format(DateTime::RFC850);
@@ -28,13 +32,13 @@ class FullLog implements FullLogInterface
         if (!is_null($path)) {
             $this->path = $path;
         }
-        $this->logger = isset($logger) && is_object($logger) && $logger instanceof FullLogInterface ? 
+        $this->logger = isset($logger) && is_object($logger) && $logger instanceof FullLogInterface ?
             $this->setLogger($logger) : $this->setDefaultLogger();
         if ($default) {
             $this->serverData();
         }
     }
-    public function setLogger(FullLogInterface $logger) 
+    public function setLogger(FullLogInterface $logger)
     {
         return $logger;
     }
@@ -52,8 +56,8 @@ class FullLog implements FullLogInterface
     {
         $logger = $this->logger;
         $request = '';
-        
-        foreach(getallheaders() as $key => $value) {
+
+        foreach (getallheaders() as $key => $value) {
             $request .= "[$key:$value], " . PHP_EOL;
         }
         $request .= "[{$_SERVER['SCRIPT_FILENAME']}], " . PHP_EOL;
@@ -66,7 +70,7 @@ class FullLog implements FullLogInterface
     {
         $this->logger->addDebug($data);
     }
-    public function addInfo($data) 
+    public function addInfo($data)
     {
         $this->logger->addInfo($data);
     }
@@ -95,4 +99,3 @@ class FullLog implements FullLogInterface
         $this->logger->addEmergency($data);
     }
 }
-   

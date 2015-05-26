@@ -7,7 +7,7 @@ use \security\Models\ErrorRunner;
 use \security\Interfaces\FullLogInterface;
 use \security\Traits\IsDevelopment;
 
-class AddNewOrder 
+class AddNewOrder
 {
     use IsDevelopment;
     private $errors = [];
@@ -15,24 +15,20 @@ class AddNewOrder
     private $pdo;
     private $errorRunner;
     private $data;
-    
-    public function __construct($customerID, $totalOrdered, PDO $pdo, ErrorRunner $errorRunner, FullLogInterface $logger)
+
+    public function __construct(PDO $pdo, ErrorRunner $errorRunner, FullLogInterface $logger)
     {
-        $this->customerID = $customerID;
-        $this->totalOrdered = $totalOrdered;
         $this->pdo = $pdo;
         $this->errorRunner = $errorRunner;
         $this->logger = $logger;
     }
-    public function addOrder()
+    public function addOrder($customerID, $totalOrdered)
     {
         $errors = $this->errors;
         $pdo = $this->pdo;
-        $customerID = $this->customerID;
-        $totalOrdered = $this->totalOrdered;
-        $query = "INSERT INTO orders 
+        $query = "INSERT INTO orders
                   SET unfulfilled = :totalOrdered,
-                  groups_id = 1, 
+                  groups_id = 1,
                   groups_users_companies_id = 9,
                   customers_id = :customerid";
         $stmt = $pdo->prepare($query);
@@ -45,9 +41,9 @@ class AddNewOrder
         $errorInfo = $stmt->errorInfo();
         if (isset($errorInfo[2]) && $this->isDev()) {
             $errors[] = $errorInfo[2];
-            $this->logger->addCritical("Unable to update because $errorInfo[2]");
+            $this->logger->addCritical("Unable to update because {$errorInfo[2]}");
         }
-        
+
         if (!$success) {
             $errors[] = "Unable to add orders.";
         }

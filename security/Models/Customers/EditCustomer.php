@@ -3,12 +3,11 @@
 namespace security\Models\Customers;
 
 use \PDO;
-use \StdClass;
 use \security\Models\ErrorRunner;
 use \security\Models\Interfaces\FullLogInterface;
 use \security\Traits\IsDevelopment;
 
-class EditCustomer 
+class EditCustomer
 {
     use IsDevelopment;
     private $errors = [];
@@ -17,29 +16,29 @@ class EditCustomer
     private $pdo;
     private $errorRunner;
     private $data;
-    
-    public function __construct(array $customerData, PDO $pdo, ErrorRunner $errorRunner, FullLogInterface $logger)
+
+    public function __construct(PDO $pdo, ErrorRunner $errorRunner, FullLogInterface $logger)
     {
-        $this->customerData = $customerData;
         $this->pdo = $pdo;
         $this->errorRunner = $errorRunner;
         $this->logger = $logger;
     }
-    public function updateCustomer()
+    public function updateCustomer(array $customerData)
     {
+        $this->customerData = $customerData;
         $errors = $this->errors;
         $pdo = $this->pdo;
-        $session = $this->customerData['session']; 
+        $session = $this->customerData['session'];
         $username = $this->customerData['username'];
-        $password =  $this->customerData['password'];
+        $password = $this->customerData['password'];
         $newpasswordUnmodified = $newpassword = $this->customerData['newpassword'];
         $email = $this->customerData['email'];
         $address = $this->customerData['address'];
         $phone = $this->customerData['phone'];
         $instructions = $this->customerData['instructions'];
-        
+
         $customerID = $session['customerid'];
-        
+
         $sql = 'SELECT id, username, password FROM customers WHERE id = :customerID';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
@@ -51,7 +50,7 @@ class EditCustomer
                 $errors[] = $errorInfo[2];
                 $this->logger->addWarning("Unable to update account for $username");
             }
-        } 
+        }
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
@@ -59,9 +58,9 @@ class EditCustomer
             $isCorrectPassword = password_verify($password, $resultPassword);
             if ($isCorrectPassword) {
                 $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
-                $sql = "UPDATE customers SET 
+                $sql = "UPDATE customers SET
                         username = :username,
-                        plainpassword = :plainpassword, 
+                        plainpassword = :plainpassword,
                         password = :newpassword,
                         email = :email,
                         address = :address,
@@ -69,7 +68,7 @@ class EditCustomer
                         instructions = :instructions
                         WHERE id = :customerID";
                 $stmt = $pdo->prepare($sql);
-                // The only downside to this sort of execution is that all parameters are bound as 
+                // The only downside to this sort of execution is that all parameters are bound as
                 // as string parameters.
                 $bindings = [
                     ":username" => $username,
@@ -79,14 +78,14 @@ class EditCustomer
                     ":address" => $address,
                     ":phone" => $phone,
                     ":instructions" => $instructions,
-                    ":customerID" => $customerID
+                    ":customerID" => $customerID,
                 ];
-                $result = $stmt->execute($bindings);    
+                $result = $stmt->execute($bindings);
                 if ($result) {
                     $this->data = [
-                        "success"=>"Successfully updated the customer."
+                        "success" => "Successfully updated the customer.",
                     ];
-                return $this->data;
+                    return $this->data;
                 }
                 if (!$result) {
                     $errorInfo = $stmt->errorInfo();
@@ -102,7 +101,7 @@ class EditCustomer
             $this->logger->addWarning("Unable to find account info for $username");
             $errors[] = "Unable to update the customer.  Contact support.";
         }
-        
+
         if (!empty($errors)) {
             $this->errorRunner->runErrors($errors);
         }

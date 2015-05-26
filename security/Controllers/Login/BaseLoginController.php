@@ -2,21 +2,18 @@
 
 namespace security\Controllers\Login;
 
-include_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php');
+include_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
-use \security\Models\Authenticator\Authenticate;
+use \JsonSerializable;
+use \PDO;
+use \Redis;
+use \stdClass;
+use \security\Interfaces\FullLogInterface;
+use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
 use \security\Models\PDOSingleton;
-use \security\Models\Login\CustomerLogin;
 use \security\Models\RedisSingleton;
-use \security\Models\Authenticator\BlackLister;
-use \PDO;
-use \JsonSerializable;
-use \Redis;
-use \SplObjectStorage;
-use \StdClass;
 use \security\Models\SiteLogger\FullLog;
-use \security\Interfaces\FullLogInterface;
 
 abstract class BaseLoginController implements JsonSerializable
 {
@@ -26,42 +23,18 @@ abstract class BaseLoginController implements JsonSerializable
     protected $errorRunner;
     protected $logger;
 
-    public function __construct(SplObjectStorage $storage)
+    public function __construct(stdClass $models)
     {
-        $this->switchObject($storage);
+        $this->setObjects($models);
     }
-    public function switchObject(SplObjectStorage $storage)
+    protected function setObjects($models)
     {
-        $storage->rewind();
-        while($storage->valid()) {
-            $object = $storage->current(); 
-            $data = $storage->getInfo();
-            $this->storageInitializers($object, $data);
-            $storage->next();
-        }
+        isset()
+        isset($models->redis) && $models->redis instanceof Redis ?
+            $models->setRedis($models->redis) :
+            $this->setDefaultRedis();
     }
-    protected function storageInitializers($object, $objectName)
-    {
-        switch($objectName) {
-            case 'modelObjects':
-                $pdo = (isset($object->pdo) && is_object($object->pdo) && $object->pdo instanceof PDO) ? 
-                    $object->pdo : $this->setDefaultPDO();
-                $errorRunner = (isset($object->errorRunner) && is_object($object->errorRunner) && $object->errorRunner instanceof ErrorRunner) ?
-                    $object->errorRunner : $this->setDefaultErrorRunner();
-                $redis = (isset($object->redis) && is_object($object->redis) && $object->redis instanceof Redis) ? 
-                    $object->redis : $this->setDefaultRedis();
-                $blackList = (isset($object->blackList) && is_object($object->blackList) && $object->blackList instanceof BlackLister) ? 
-                    $object->blackList : $this->setDefaultBlackLister();
-                $logger = (isset($object->logger) && is_object($object->logger) && $object->logger instanceof FullLogInterface) ? 
-                    $object->logger : $this->setDefaultLogger();
-                $this->setPDO($pdo)
-                     ->setErrorRunner($errorRunner)
-                     ->setRedis($redis)
-                     ->setBlackLister($blackList)
-                     ->setLogger($logger);
-                break;
-        }
-    }
+
     protected function setDefaultPDO()
     {
         return (new PDOSingleton());
@@ -107,7 +80,7 @@ abstract class BaseLoginController implements JsonSerializable
         $this->logger = $logger;
         return $this;
     }
-    
+
     public function setAction($action)
     {
         $this->action = $action;
@@ -118,7 +91,7 @@ abstract class BaseLoginController implements JsonSerializable
      * It also cannot contain a body for implementation.
      */
     abstract public function executeAction();
-    
+
     public function jsonSerialize()
     {
         return $this->jsonObject;

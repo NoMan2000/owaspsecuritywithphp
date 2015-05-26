@@ -11,7 +11,7 @@ class SessionInitializers implements Seconds
 {
     use SessionState;
     protected $RESTART_TIMER = Seconds::HOUR;
-    
+
     public function __construct()
     {
         $this->params = session_get_cookie_params();
@@ -91,16 +91,9 @@ class SessionInitializers implements Seconds
             $_SESSION['regenerateID'] = 0;
         }
     }
-    
+
     protected function setCSRFToken()
     {
-        if (version_compare(PHP_VERSION, '5.5.0', '>=')) {
-                $token = password_hash(str_shuffle(base64_encode(time() . bindec(openssl_random_pseudo_bytes(32)))), PASSWORD_BCRYPT);
-                $_SESSION['csrf_token'] = $token;
-        } elseif (version_compare(PHP_VERSION, '5.1.2', '>=')) {
-            $_SESSION['csrf_token'] = hash('whirlpool', str_shuffle(base64_encode(time() . bindec(openssl_random_pseudo_bytes(32)))));
-        } else {
-            $_SESSION['csrf_token'] = str_shuffle(base64_encode(time() . bindec(openssl_random_pseudo_bytes(32))));
-        }
+        $token = password_hash(base64_encode(openssl_random_pseudo_bytes(32)), PASSWORD_BCRYPT);
     }
 }
