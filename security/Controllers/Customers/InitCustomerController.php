@@ -31,7 +31,7 @@ class InitCustomerController extends BaseCustomerController
 $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
 $auth = new Authenticate();
 $errorRunner = new ErrorRunner();
-$logger = new FullLog('Customer Edit Form Initializers');
+$logger = new FullLog('Customer Initializers');
 $logger->serverData();
 $checkAuth = new CheckAuth($logger);
 $models = new stdClass();

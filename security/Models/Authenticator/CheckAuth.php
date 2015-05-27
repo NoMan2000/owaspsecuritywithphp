@@ -2,14 +2,13 @@
 
 namespace security\Models\Authenticator;
 
-require_once(dirname(dirname(dirname(__DIR__))). DIRECTORY_SEPARATOR . 'public/init.php');
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
+use \security\Interfaces\CustomerType;
+use \security\Interfaces\FullLogInterface;
 use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
 use \security\Models\SiteLogger\FullLog;
-use \security\Interfaces\FullLogInterface;
-use \Redis;
-use \security\Interfaces\CustomerType;
 
 class CheckAuth implements CustomerType
 {
@@ -20,7 +19,7 @@ class CheckAuth implements CustomerType
             $logger : $this->setDefaultLogger();
         $blacklist = isset($blacklist) && is_object($blacklist) && $blacklist instanceof BlackLister ?
             $blacklist : $this->setDefaultBlackList();
-        $errorRunner = isset($errorRunner) && is_object($errorRunner) && $errorRunner instanceof ErrorRunner ? 
+        $errorRunner = isset($errorRunner) && is_object($errorRunner) && $errorRunner instanceof ErrorRunner ?
             $errorRunner : $this->setDefaultErrorRunner();
         $this->setBlackList($blacklist);
         $this->setErrorRunner($errorRunner);
@@ -50,7 +49,7 @@ class CheckAuth implements CustomerType
     {
         $this->errorRunner = $errorRunner;
     }
-    
+
     public function isAuth()
     {
         if (!isset($_SESSION['isauthenticated']) or !$_SESSION['isauthenticated']) {

@@ -2,9 +2,11 @@
 
 namespace security\Models\Authenticator;
 
-require_once dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/public/init.php';
 
-// Note this is an unsophisticated library for validation and sanitation.  More sophisticated libraries will be discussed.
+// Note this is an unsophisticated library for validation and sanitation.
+// More sophisticated libraries will be discussed and are in the composer.json
+// file.
 
 class Authenticate
 {

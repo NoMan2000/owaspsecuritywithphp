@@ -17,47 +17,45 @@ use \SplObjectStorage;
 use \StdClass;
 use \security\Controllers\Login\BaseLogin;
 
-class CustomerLoginController extends BaseLoginController implements JsonSerializable
+class CustomerLoginController extends BaseLoginController
 {
     private $errors = [];
     private $userName;
     private $password;
     private $jsonObject = [];
 
-    public function __construct(SplObjectStorage $storage)
+    public function __construct(stdClass $models, stdClass $customerLoginData)
     {
-        parent::__construct($storage);
-        $this->switchObject($storage);
-        $this->executeAction();
+        parent::__construct($models);
+        $this->customerLoginData = $customerLoginData;
+        $this->setObjects();
+        $this->customerLoginModel = new CustomerLogin($models);
     }
-
+    protected function setObjects()
+    {
+        parent::setObjects();
+        $this->setUserName($this->customerLoginData->userName);
+        $this->setPassword($this->customerLoginData->password);
+        $this->setAction($this->customerLoginData->action);
+    }
     public function setUserName($userName)
     {
         $this->userName = $userName;
-        return $this;
     }
     public function setAction($action)
     {
         $this->action = $action;
-        return $this;
     }
     public function setPassword($password)
     {
         $this->password = $password;
-        return $this;
     }
-
     public function executeAction()
     {
         $action = $this->action;
         switch($action) {
             case 'verifyLogin':
-                $customerLogin = new CustomerLogin();
                 $return = $customerLogin->checkUser(
-                    $this->pdo,
-                    $this->errorRunner,
-                    $this->redis,
-                    $this->blackList,
                     $this->userName,
                     $this->password
                 );
@@ -109,11 +107,8 @@ if (empty($errors)) {
     $customerLoginData->password = $password;
     $customerLoginData->action = $action;
 
-    $controller = new CustomerLoginController($storage);
-    $controller->setUserName($userName)
-        ->setPassword($password)
-        ->setAction($action)
-        ->executeAction();
+    $controller = new CustomerLoginController($models, $customerLoginData);
+    $controller->executeAction();
     if ($isAjax) {
         echo json_encode($controller);
     }

@@ -85,4 +85,3 @@ abstract class BaseCustomerController implements JsonSerializable
         return $this->data;
     }
 }
-

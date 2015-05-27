@@ -10,6 +10,4 @@ interface DBPrivileges
     const ADMINUSER = 2;
     const CORPORATEUSER = 3;
     const CUSTOMERUSER = 4;
-} 
-
-
+}

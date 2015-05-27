@@ -1,12 +1,12 @@
 <?php
 namespace security\Models;
 
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor/autoload.php');
+require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'public/init.php');
 
 // Encrypted cookie functions
 // requires mcrypt: http://php.net/manual/en/book.mcrypt.php
 
-// There is a full library to make encryption easier called phplibsec.  
+// There is a full library to make encryption easier called phplibsec.
 // https://github.com/phpseclib/phpseclib
 
 class CookieEncrypt
@@ -21,7 +21,7 @@ class CookieEncrypt
         $this->cipher_mode = MCRYPT_MODE_CBC;
         $this->iv_size = mcrypt_get_iv_size($this->cipher_type, $this->cipher_mode);
     }
-    
+
     protected function encryptRawString($string)
     {
         // Configuration (must match decryption)
@@ -52,9 +52,3 @@ class CookieEncrypt
         return $this->decryptRawString(base64_decode($string));
     }
 }
-// Uncomment to show usage.
-// $encryptor = new CookieEncrypt();
-// $encryptedShell = $encryptor->encString("This is supposed to be encrypted.");
-// echo $encryptedShell . "<br/>";
-// $decryptedShell = $encryptor->decryptString($encryptedShell);
-// echo $decryptedShell;

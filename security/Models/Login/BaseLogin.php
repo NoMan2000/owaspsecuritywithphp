@@ -2,9 +2,8 @@
 
 namespace security\Controllers\Login;
 
-include_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \JsonSerializable;
 use \PDO;
 use \Redis;
 use \stdClass;
@@ -15,7 +14,7 @@ use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\SiteLogger\FullLog;
 
-abstract class BaseLoginController implements JsonSerializable
+abstract class BaseLogin
 {
     protected $redis;
     protected $pdo;
@@ -25,11 +24,10 @@ abstract class BaseLoginController implements JsonSerializable
 
     public function __construct(stdClass $models)
     {
-        $this->models = $models;
+        $this->setObjects($models);
     }
-    protected function setObjects()
+    protected function setObjects($models)
     {
-        $models = $this->models;
         isset($models->pdo) && $models->pdo instanceof PDO ?
             $this->setPDO($models->pdo) :
             $this->setDefaultPDO();
@@ -91,14 +89,5 @@ abstract class BaseLoginController implements JsonSerializable
     {
         $this->logger = $logger;
         return $this;
-    }
-
-    public function setAction($action)
-    {
-        $this->action = $action;
-    }
-    public function jsonSerialize()
-    {
-        return $this->jsonObject;
     }
 }

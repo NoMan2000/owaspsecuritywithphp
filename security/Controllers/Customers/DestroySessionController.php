@@ -92,7 +92,7 @@ if (empty($errors)) {
     $modelObjects = new StdClass;
     $modelObjects->init = $init;
 
-    $controller = new DestroySessionController($modelObjects,$customerData);
+    $controller = new DestroySessionController($modelObjects, $customerData);
     if ($isAjax) {
         echo json_encode($controller);
     }

@@ -5,7 +5,7 @@ namespace security\Models\SiteLogger;
 // Modified from Source code nelmio:
 // https://github.com/nelmio/NelmioSecurityBundle/blob/master/Controller/ContentSecurityPolicyController.php
 
-require_once(dirname(dirname(dirname(__DIR__))). DIRECTORY_SEPARATOR . 'vendor/autoload.php');
+require_once(dirname(dirname(dirname(__DIR__))). DIRECTORY_SEPARATOR . 'public/init.php');
 
 use \security\Models\Interfaces\FullLogInterface;
 use \security\Models\SiteLogger\FullLog;
@@ -13,11 +13,12 @@ use \security\Models\SiteLogger\FullLog;
 class CSPLogger
 {
     protected $logger;
-    private $path = "/home/ubuntu/workspace/logs/csp.log";
+    private $path;
     private $data = [];
     public function __construct($json, $logger = null, $path = null)
     {
-        if (!is_null($path)) {
+        $this->path = dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . "logs/csp.log";
+        if ($path) {
             $this->path = $path;
         }
         if (!file_exists($this->path)) {
@@ -58,5 +59,5 @@ class CSPLogger
             'statusCode'=>204,
             'message'=>'Violation Successfully logged.'
         ];
-    }        
+    }
 }

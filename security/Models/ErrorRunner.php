@@ -2,7 +2,9 @@
 
 namespace security\Models;
 
-class ErrorRunner 
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'public/init.php';
+
+class ErrorRunner
 {
     public function runErrors(array $errors)
     {
@@ -13,6 +15,6 @@ class ErrorRunner
                 echo $error . "<br/>";
             }
             die();
-        } // End if !empty errors
+        }
     }
 }

@@ -3,11 +3,11 @@
 namespace security\Models\Customers;
 
 use \PDO;
-use \security\Models\ErrorRunner;
 use \security\Interfaces\FullLogInterface;
+use \security\Models\ErrorRunner;
 use \security\Traits\IsDevelopment;
 
-class RemoveOrder 
+class RemoveOrder
 {
     use IsDevelopment;
     private $errors = [];
@@ -16,7 +16,7 @@ class RemoveOrder
     private $pdo;
     private $errorRunner;
     private $data;
-    
+
     public function __construct($customerID, $orderID, PDO $pdo, ErrorRunner $errorRunner, FullLogInterface $logger)
     {
         $this->customerID = $customerID;
@@ -44,7 +44,7 @@ class RemoveOrder
         if (isset($errorInfo[2]) && $this->isDev()) {
             $errors[] = $errorInfo[2];
         }
-        
+
         if (!$success) {
             $errors[] = "Unable to delete this record.";
         }
@@ -55,10 +55,10 @@ class RemoveOrder
             }
             if ($deletedNumber) {
                 $this->data = [
-                    "id"=>$orderID,
-                    "numberRemoved"=>"Removed the following number of orders: $deletedNumber"
+                    "id" => $orderID,
+                    "numberRemoved" => "Removed the following number of orders: $deletedNumber",
                 ];
-                
+
                 return $this->data;
             }
         }

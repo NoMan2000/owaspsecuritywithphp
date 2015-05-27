@@ -2,15 +2,15 @@
 
 namespace security\Models\Login;
 
-require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \security\Models\Authenticator\BlackLister;
-use \security\Models\ErrorRunner;
 use \PDO;
 use \Redis;
 use \security\Interfaces\CustomerType;
-use \security\Traits\IsDevelopment;
+use \security\Models\Authenticator\BlackLister;
 use \security\Models\Authenticator\PasswordCheck;
+use \security\Models\ErrorRunner;
+use \security\Traits\IsDevelopment;
 
 class CustomerLogin implements CustomerType
 {
@@ -47,9 +47,9 @@ class CustomerLogin implements CustomerType
                 // for older systems.
                 $isCorrectPassword = md5($password) == $resultPassword;
                 // functionally equivalent.  Password verify has the algorithm and cost in the beginning, this is for md5.
-                $isCorrectPassword = password_verify('$1$'.$password, $resultPassword);
+                $isCorrectPassword = password_verify('$1$' . $password, $resultPassword);
             }
-            
+
             if ($isCorrectPassword) {
                 $passwordHasher = new PasswordCheck($password);
                 if ($passwordHasher->needsNewHash()) {
@@ -59,7 +59,7 @@ class CustomerLogin implements CustomerType
                     $update->bindParam(':username', $username, PDO::PARAM_STR);
                     $update->execute();
                 }
-                
+
                 $blackList->removeBlackList();
                 $blackList->removeSleeper("$username:{$row['username']}");
                 // Careful when using session_regenerate_id true.  This calls session_destroy.
@@ -87,5 +87,4 @@ class CustomerLogin implements CustomerType
             $this->errorRunner->runErrors($this->errors);
         }
     }
-    
 }

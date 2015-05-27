@@ -2,10 +2,10 @@
 
 namespace security\Models\Authenticator;
 
-require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php');
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
-use \security\Interfaces\Seconds;
 use \Redis;
+use \security\Interfaces\Seconds;
 use \security\Models\RedisSingleton;
 use \security\Traits\IsDevelopment;
 
@@ -19,7 +19,7 @@ class BlackLister implements Seconds
     public function __construct($redisInstance = null)
     {
         $redis = isset($redisInstance) && is_object($redisInstance) && $redisInstance instanceof Redis ?
-            $redisInstance : $this->setDefaultRedis();
+        $redisInstance : $this->setDefaultRedis();
         $this->setRedis($redis);
     }
     protected function setDefaultRedis()
@@ -33,9 +33,9 @@ class BlackLister implements Seconds
     public function getIpAddress()
     {
         // $ipOne is easy to spoof.
-        $ipOne   = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : null;
+        $ipOne = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : null;
         // $ipTwo is also spoofable.
-        $ipTwo   = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
+        $ipTwo = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
         // $ipThree is also spoofable in theory, but not easy to do.
         $ipThree = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
         if (!is_null($ipOne) && $ipOne !== $ipThree) {
@@ -54,7 +54,7 @@ class BlackLister implements Seconds
         $redis = $this->redis;
         $this->getIpAddress();
         $ipNumber = 0;
-        foreach($this->IP as $ipBan) {
+        foreach ($this->IP as $ipBan) {
             $redis->incrBy("BANIP:{$ipBan}", 1);
             $redis->expire("BANIP:{$ipBan}", Seconds::DAY);
             $ipNumber = $ipNumber > $redis->get("BANIP:{$ipBan}") ? $ipNumber : $redis->get("BANIP:{$ipBan}");
@@ -91,18 +91,18 @@ class BlackLister implements Seconds
     {
         $redis = $this->redis;
         $this->getIpAddress();
-        foreach($this->IP as $ipBan) {
+        foreach ($this->IP as $ipBan) {
             $redis->set("BANIP:{$ipBan}", 0);
         }
         return $this;
     }
     public function isBlackListed()
     {
-        // This is not the best way to deal with the problem.  Hackers use Botnets or change Tor Exit Nodes 
+        // This is not the best way to deal with the problem.  Hackers use Botnets or change Tor Exit Nodes
         // to mask their activity.  Banning an IP only works on the most basic of attacks.
         $this->getIpAddress();
         $redis = $this->redis;
-        foreach($this->IP as $ip) {
+        foreach ($this->IP as $ip) {
             $ban = $redis->get("BANIP:{$ip}");
             if ($ban > $this->banCount) {
                 return true;

@@ -88,7 +88,7 @@ if (empty($errors)) {
     $modelObjects->errorRunner = $errorRunner;
     $modelObjects->logger = $logger;
 
-    $controller = new removeOrderController($customerData, $modelObjects);
+    $controller = new RemoveOrderController($customerData, $modelObjects);
     $controller->setObjects();
     if ($isAjax) {
         echo json_encode($controller);
