@@ -4,9 +4,7 @@ namespace security\Controllers\Customers;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-
 use \PDO;
-use \security\Interfaces\FullLogInterface;
 use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
@@ -24,34 +22,18 @@ class AddNewOrderController extends BaseCustomerController
 
     public function __construct(stdClass $models, stdClass $orderData)
     {
-        parent::__construct($models);
         $this->orderData = $orderData;
-        $this->constructObjects();
-        $this->orderModel = new AddNewOrder(
-            $this->pdo,
-            $this->errorRunner,
-            $this->logger
-        );
-        $this->switchAction();
+        $this->setObjects();
+        $this->orderModel = new AddNewOrder($models);
     }
-    protected function constructObjects()
+    protected function setObjects()
     {
-        parent::constructObjects();
-        $this->setCustomerID($this->orderData->customerID);
-        $this->setAction($this->orderData->action);
-        $this->setTotalOrdered($this->orderData->totalOrdered);
-        unset($this->orderData);
-        unset($this->models);
+        $this->customerID = $this->orderData->customerID;
+        $this->totalOrdered = $this->orderData->totalOrdered;
     }
-    protected function switchAction()
+    public function addOrder()
     {
-        $action = $this->action;
-        switch ($action) {
-            case 'addOrder':
-                $add = $this->orderModel;
-                $this->data = $add->addOrder($this->customerID, $this->totalOrdered);
-                break;
-        }
+        $this->data = $this->orderModel->addOrder($this->customerID, $this->totalOrdered);
     }
     public function jsonSerialize()
     {
@@ -97,6 +79,7 @@ if (empty($errors)) {
     $orderData->customerID = $customerID;
 
     $controller = new AddNewOrderController($models, $orderData);
+    $controller->addOrder();
     if ($isAjax) {
         echo json_encode($controller);
     }

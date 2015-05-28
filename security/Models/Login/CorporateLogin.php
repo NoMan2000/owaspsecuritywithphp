@@ -2,18 +2,16 @@
 
 namespace security\Models\Login;
 
-require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \security\Models\Authenticator\BlackLister;
-use \security\Models\ErrorRunner;
 use \PDO;
-use \Redis;
 use \security\Interfaces\CustomerType;
-use \security\Models\SiteLogger\FullLog;
-use \security\Interfaces\FullLogInterface;
+use \security\Models\ErrorRunner;
+use \security\Models\Login\BaseLogin;
 use \security\Traits\IsDevelopment;
+use \stdClass;
 
-class CorporateLogin implements CustomerType
+class CorporateLogin extends BaseLogin implements CustomerType
 {
     use IsDevelopment;
     private $username;
@@ -22,11 +20,16 @@ class CorporateLogin implements CustomerType
     private $pdo;
     private $errors = [];
     private $data = [];
+    public function __construct(stdClass $models)
+    {
+        parent::__construct($models);
+        parent::setObjects();
+    }
 
-    public function checkUser(PDO $pdo, ErrorRunner $errorRunner, Redis $redis, BlackLister $blackList, FullLogInterface $logger, $username, $password)
+    public function checkUser($username, $password)
     {
         $this->errorRunner = $errorRunner;
-        $sql = 'SELECT id, company_id, group_id, username, is_admin, is_locked, attempts, 
+        $sql = 'SELECT id, company_id, group_id, username, is_admin, is_locked, attempts,
                 password FROM users WHERE username = :username';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -42,7 +45,7 @@ class CorporateLogin implements CustomerType
             $blackList->blackList();
             if ($this->isDev()) {
                 $this->errors[] = $sql;
-            }            
+            }
             $this->errors[] = "Invalid Attempt.";
         }
         if ($row && !$row['is_locked']) {
@@ -68,7 +71,7 @@ class CorporateLogin implements CustomerType
                 if ($this->isDev()) {
                     $errors[] = "Sleeping for $sleep";
                 }
-                $query = "UPDATE users SET attempts = $attempts, is_locked=$is_locked 
+                $query = "UPDATE users SET attempts = $attempts, is_locked=$is_locked
                           WHERE username = :username";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -84,5 +87,4 @@ class CorporateLogin implements CustomerType
             $this->errorRunner->runErrors($this->errors);
         }
     }
-    
 }

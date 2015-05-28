@@ -2,20 +2,17 @@
 
 namespace security\Controllers\Customers;
 
-require_once(dirname(dirname(dirname(__DIR__))). DIRECTORY_SEPARATOR . 'public/init.php');
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \security\Models\PDOSingleton;
 use \PDO;
-use \security\Models\Authenticator\Authenticate;
-use \security\Models\ErrorRunner;
-use \security\Models\Authenticator\CheckAuth;
-use \security\Models\SiteLogger\FullLog;
-use \security\Interfaces\FullLogInterface;
-use \SplObjectStorage;
-use \StdClass;
-use \JsonSerializable;
 use \security\Controllers\Customers\BaseCustomerController;
+use \security\Models\Authenticator\Authenticate;
+use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Customers\RemoveOrder;
+use \security\Models\ErrorRunner;
+use \security\Models\PDOSingleton;
+use \security\Models\SiteLogger\FullLog;
+use \StdClass;
 
 class RemoveOrderController extends BaseCustomerController
 {
@@ -26,29 +23,19 @@ class RemoveOrderController extends BaseCustomerController
 
     public function __construct(stdClass $models, stdClass $orderData)
     {
-        parent::__construct($models);
         $this->orderData = $orderData;
-        $this->order = new RemoveOrder(
-            $this->pdo,
-            $this->errorRunner,
-            $this->logger
+        $this->order = new RemoveOrder($models);
+    }
+    public function removeOrder()
+    {
+        $this->data = $this->order->removeOrder(
+            $this->orderData->customerID,
+            $this->orderData->orderID
         );
     }
-    protected function constructObjects()
+    public function jsonSerialize()
     {
-        parent::constructObjects();
-    }
-    protected function switchAction()
-    {
-        $action = $this->action;
-        switch($action){
-            case 'removeOrder':
-                $this->data = $this->order->removeOrder(
-                    $this->orderData->customerID,
-                    $this->orderData->orderID
-                );
-                break;
-        }
+        return $this->data;
     }
 }
 
@@ -61,11 +48,11 @@ $checkAuth = new CheckAuth($logger);
 $errors = [];
 
 $action = !empty($_POST['action']) ?
-    $_POST['action'] : null;
+$_POST['action'] : null;
 $orderID = !empty($_POST['id']) ? $auth->cInt($_POST['id']) : null;
 $isCustomer = $checkAuth->isCustomer();
 $customerID = !empty($_SESSION['customerid']) ?
-    $auth->cInt($_SESSION['customerid']) : null;
+$auth->cInt($_SESSION['customerid']) : null;
 
 $action || $errors[] = "No action was specified on this request.";
 $orderID || $errors[] = "No orderid was specified on this request.";
@@ -89,7 +76,7 @@ if (empty($errors)) {
     $modelObjects->logger = $logger;
 
     $controller = new RemoveOrderController($customerData, $modelObjects);
-    $controller->setObjects();
+    $controller->removeOrder();
     if ($isAjax) {
         echo json_encode($controller);
     }

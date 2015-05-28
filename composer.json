@@ -5,6 +5,7 @@
         }
     },
     "require": {
+        "php": "~5.5.0|~5.6.0",
         "symfony/validator": "dev-master",
         "egulias/email-validator": "dev-master",
         "psr/log": "dev-master",
@@ -13,11 +14,19 @@
         "guzzle/guzzle": "dev-master",
         "ramsey/uuid": "dev-master",
         "moontoast/math": "dev-master",
-        "ircmaxell/random-lib": "dev-master"
+        "ircmaxell/random-lib": "dev-master",
+        "ext-spl": "*",
+        "ext-mcrypt": "*",
+        "ext-hash": "*",
+        "ext-curl": "*",
+        "ext-redis": "*"
     },
     "require-dev": {
         "phing/phing": "dev-master",
         "fzaninotto/faker": "dev-master",
-        "symfony/translation": "dev-master"
-    }
+        "symfony/translation": "dev-master",
+        "friendsofphp/pickle": "*"
+    },
+    "minimum-stability": "alpha",
+    "prefer-stable": true
 }

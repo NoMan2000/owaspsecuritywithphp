@@ -5,24 +5,23 @@ namespace security\Controllers\Customers;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
+use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Customers\InitCustomer;
 use \security\Models\ErrorRunner;
 use \security\Models\PDOSingleton;
-use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\SiteLogger\FullLog;
 
 class InitCustomerController extends BaseCustomerController
 {
-    private $customerData;
-    public function __construct(stdClass $models)
+    private $models;
+    private $session;
+    public function __construct(stdClass $models, array $session)
     {
-        parent::__construct($models);
-        parent::constructObjects();
-        $this->initModel = new InitCustomer($models->pdo, $_SESSION);
+        $this->initModel = new InitCustomer($models, $session);
     }
-    public function getArrayValues()
+    public function getCustomerValues()
     {
         return $this->initModel->getCustomerValues();
     }
@@ -41,5 +40,5 @@ $models->errorRunner = $errorRunner;
 $models->auth = $auth;
 $models->pdo = $pdo;
 $models->checkAuth = $checkAuth;
-
+$session = $_SESSION;
 $errors = [];

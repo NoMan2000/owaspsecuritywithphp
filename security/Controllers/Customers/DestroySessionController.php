@@ -6,15 +6,13 @@ namespace security\Controllers\Customers;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \JsonSerializable;
+use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Customers\DestroySession;
 use \security\Models\ErrorRunner;
 use \security\Models\SessionInitializers;
 use \security\Models\SiteLogger\FullLog;
-use \security\Controllers\Customers\BaseCustomerController;
-use \SplObjectStorage;
 use \StdClass;
 
 class DestroySessionController extends BaseCustomerController
@@ -25,16 +23,14 @@ class DestroySessionController extends BaseCustomerController
     public function __construct(stdClass $models, stdClass $customerData)
     {
         parent::__construct($models);
-        $this->customerData;
+        $this->customerData = $customerData;
         $this->setObjects();
-        $this->switchAction();
+        $this->destroy = new DestroySession($this->init);
     }
-    protected function constructObjects()
+    protected function setObjects()
     {
-
-        $this->action = $this->customerData->action;
         isset($this->models->init) && $this->models->init instanceof SessionInitializers ?
-            $this->setInit($this->models->init) : $this->setDefaultInit();
+        $this->setInit($this->models->init) : $this->setDefaultInit();
     }
     public function setInit(SessionInitializers $init)
     {
@@ -44,21 +40,10 @@ class DestroySessionController extends BaseCustomerController
     {
         $this->init = new SessionInitializers();
     }
-    public function setAction($action)
+    protected function destroySession()
     {
-        $this->action = $action;
-        return $this;
-    }
-    protected function switchAction()
-    {
-        $action = $this->action;
-        switch ($action) {
-            case 'destroySession':
-                $destroy = new DestroySession($this->init);
-                $destroy->sessionDestroy();
-                $this->data['loggedout'] = $destroy;
-                break;
-        }
+        $this->data['loggedout'] = $this->destroy->destroySession();
+
     }
     public function jsonSerialize()
     {
@@ -93,6 +78,7 @@ if (empty($errors)) {
     $modelObjects->init = $init;
 
     $controller = new DestroySessionController($modelObjects, $customerData);
+    $controller->destroySession();
     if ($isAjax) {
         echo json_encode($controller);
     }

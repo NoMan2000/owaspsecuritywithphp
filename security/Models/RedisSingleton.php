@@ -2,9 +2,12 @@
 
 namespace security\Models;
 
-require_once(dirname(dirname(__DIR__)) . '/vendor/autoload.php');
+require_once dirname(dirname(__DIR__)) . '/public/init.php';
 
-class RedisSingleton extends \Redis 
+use \Redis;
+use \RedisException;
+
+class RedisSingleton extends Redis
 {
     private $host = '127.0.0.1';
     private $timeout = 2.5;
@@ -12,13 +15,13 @@ class RedisSingleton extends \Redis
     private $port = 6379;
 
     public function __construct()
-    { 
+    {
         try {
             parent::__construct();
             parent::pconnect($this->host, $this->port, $this->timeout);
             parent::auth($this->auth);
-        } catch (\RedisException $e) {
-            echo "Unable to connect: " . $e->getMessage() ."<p>";
+        } catch (RedisException $e) {
+            echo "Unable to connect: " . $e->getMessage() . "<p>";
         }
-    } 
+    }
 }

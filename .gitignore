@@ -4,5 +4,35 @@ composer.phar
 bower_components/
 .sass-cache/
 node_modules/
-dump.rdb
+*.rdb
 logs/
+
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+*.log
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

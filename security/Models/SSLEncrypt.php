@@ -2,14 +2,15 @@
 
 namespace security\Models;
 
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor/autoload.php');
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use \security\Exceptions\FolderException;
 
 // See:  https://github.com/CodeReaper/unsealed-secrets/blob/master/php/encode.php
 // Code modified from:  http://codereaper.com/blog/2014/asymmetric-encryption-in-php/
 
-// This code really only works in a database system as you have to store the items in a database and return them all when decrypting it.
+// This code really only works in a database system as you have to store
+// the items in a database and return them all when decrypting it.
 
 class SSLEncryptor
 {
@@ -22,7 +23,7 @@ class SSLEncryptor
     {
         $this->folder = $folder ? $folder : __DIR__ . '/confKeys';
         if (!is_dir($this->folder)) {
-            mkdir($this->folder);
+            mkdir($this->folder, 0775);
         }
         if (!is_dir($this->folder)) {
             throw new FolderException("Cannot make or find a valid folder directory.");
@@ -39,7 +40,7 @@ class SSLEncryptor
         $this->privateKey = openssl_pkey_get_private(file_get_contents("{$this->folder}/private.key"), $passphrase);
         $this->publicKey = openssl_pkey_get_public(file_get_contents("{$this->folder}/public.pem"));
     }
-    
+
     public function encryptMessage($message)
     {
         $cipher = $e = null; // These are passed by reference, so they are changed after the seal
@@ -67,5 +68,5 @@ class SSLEncryptor
 // $message = $enc->encryptMessage("This is an encrypted message.");
 // echo $message;
 // $enc->decryptMessage();
-// $decrypt = $enc->getDecrypt(); 
+// $decrypt = $enc->getDecrypt();
 // echo $decrypt;

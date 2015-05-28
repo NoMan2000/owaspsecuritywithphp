@@ -1,13 +1,13 @@
 <?php
 namespace security\Models;
 
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor/autoload.php');
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \Redis;
-use \SessionHandlerInterface;
 use \security\Interfaces\Seconds;
-use \security\Traits\SessionState;
 use \security\Models\CookieEncrypt;
+use \security\Traits\SessionState;
+use \SessionHandlerInterface;
 
 class RedisSessionHandler implements SessionHandlerInterface, Seconds
 {
@@ -17,7 +17,7 @@ class RedisSessionHandler implements SessionHandlerInterface, Seconds
     private $restartTimer = SECONDS::HOUR;
     // Encrypting the data like this is most likely unnecessary, but it gives me a chance to show
     // a practical use for the CookieEncyrpt class.
-    
+
     public function __construct(Redis $redis, $prefix = 'PHPSESSID:', $encryptor = null)
     {
         ini_set('session.hash_function', 'sha512');
@@ -27,8 +27,8 @@ class RedisSessionHandler implements SessionHandlerInterface, Seconds
         ini_set('session.entropy_length', 128);
         $this->db = $redis;
         $this->prefix = $prefix;
-        $encryptor = (isset($encryptor) && is_object($encryptor) && $encryptor instanceof CookieEncrypt) ? 
-            $encryptor : $this->setDefaultCookieEncryptor();
+        $encryptor = (isset($encryptor) && $encryptor instanceof CookieEncrypt) ?
+        $encryptor : $this->setDefaultCookieEncryptor();
         $this->maxlifetime = $this->restartTimer;
         $this->setCookieEncrypt($encryptor);
     }

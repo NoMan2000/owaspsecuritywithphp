@@ -2,12 +2,15 @@
 
 namespace security\Models\Customers;
 
+require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
+
 use \PDO;
 use \security\Models\ErrorRunner;
 use \security\Interfaces\FullLogInterface;
 use \security\Traits\IsDevelopment;
+use \security\Models\Customers\BaseCustomer;
 
-class AddNewOrder
+class AddNewOrder extends BaseCustomer
 {
     use IsDevelopment;
     private $errors = [];
@@ -16,11 +19,9 @@ class AddNewOrder
     private $errorRunner;
     private $data;
 
-    public function __construct(PDO $pdo, ErrorRunner $errorRunner, FullLogInterface $logger)
+    public function __construct(stdClass $models)
     {
-        $this->pdo = $pdo;
-        $this->errorRunner = $errorRunner;
-        $this->logger = $logger;
+        parent::__construct($models);
     }
     public function addOrder($customerID, $totalOrdered)
     {

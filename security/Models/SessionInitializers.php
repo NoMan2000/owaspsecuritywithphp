@@ -1,10 +1,9 @@
 <?php
 namespace security\Models;
 
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'public/init.php');
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \security\Interfaces\Seconds;
-
 use \security\Traits\SessionState;
 
 class SessionInitializers implements Seconds
@@ -26,9 +25,6 @@ class SessionInitializers implements Seconds
             $this->params["secure"],
             $this->params["httponly"]
         );
-        if (!$this->sessionHasStarted()) {
-            session_start();
-        }
         $this->constructDefaults($this->RESTART_TIMER);
         $this->sessionRegenerator();
         if (!isset($_SESSION['csrf_token'])) {
@@ -49,7 +45,7 @@ class SessionInitializers implements Seconds
             setcookie(
                 session_name(),
                 session_id(),
-                intval(time()+$RESTART_TIMER),
+                intval(time() + $RESTART_TIMER),
                 $params["path"],
                 $params["domain"],
                 $params["secure"],
@@ -59,9 +55,6 @@ class SessionInitializers implements Seconds
     }
     public function destroySession()
     {
-        if (!$this->sessionHasStarted()) {
-            session_start();
-        }
         $params = $this->params;
         session_destroy();
         $_SESSION = array();
@@ -94,6 +87,6 @@ class SessionInitializers implements Seconds
 
     protected function setCSRFToken()
     {
-        $token = password_hash(base64_encode(openssl_random_pseudo_bytes(32)), PASSWORD_BCRYPT);
+        $_SESSION['csrf_token'] = password_hash(base64_encode(openssl_random_pseudo_bytes(32)), PASSWORD_BCRYPT);
     }
 }

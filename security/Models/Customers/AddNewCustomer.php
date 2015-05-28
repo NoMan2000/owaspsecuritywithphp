@@ -2,6 +2,8 @@
 
 namespace security\Models\Customers;
 
+require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
+
 use \PDO;
 use \Redis;
 use \Rhumsaa\Uuid\Exception\UnsatisfiedDependencyException;
@@ -14,6 +16,8 @@ use \security\Models\ErrorRunner;
 use \security\Models\FileUploader\FileUploader;
 use \security\Models\Login\EmailConfirmAccount;
 use \security\Traits\IsDevelopment;
+use \secuirty\Models\Customers\BaseCustomer;
+use \stdClass;
 
 class AddNewCustomer implements Seconds
 {
@@ -25,13 +29,9 @@ class AddNewCustomer implements Seconds
     private $errorRunner;
     private $data;
 
-    public function __construct(PDO $pdo, Redis $redis, ErrorRunner $errorRunner, BlackLister $blacklist, FullLogInterface $logger)
+    public function __construct(stdClass $models)
     {
-        $this->pdo = $pdo;
-        $this->redis = $redis;
-        $this->errorRunner = $errorRunner;
-        $this->blacklist = $blacklist;
-        $this->logger = $logger;
+        parent::__construct($models);
     }
     public function addNewCustomer(array $customerData)
     {
@@ -69,7 +69,7 @@ class AddNewCustomer implements Seconds
             $row['email'] === $email ? $logInfo[] = "This email is already in use." : null;
             $row['address'] === $address ? $logInfo[] = "This address is already in use." : null;
             $row['phone'] === $phone ? $logInfo[] = "This phone number is already in use." : null;
-            $logString = implode($logInfo);
+            $logString = implode(',', $logInfo);
             $this->logger->addWarning("The following were attempted at accessing: $logString");
             if ($this->isDev()) {
                 $errors[] = "Sleeping for $sleep";

@@ -2,12 +2,16 @@
 
 namespace security\Models\Customers;
 
+require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
+
 use \PDO;
+use \stdClass;
 use \security\Interfaces\FullLogInterface;
 use \security\Models\ErrorRunner;
 use \security\Traits\IsDevelopment;
+use \security\Models\Customers\BaseCustomer;
 
-class RemoveOrder
+class RemoveOrder extends BaseCustomer
 {
     use IsDevelopment;
     private $errors = [];
@@ -17,20 +21,14 @@ class RemoveOrder
     private $errorRunner;
     private $data;
 
-    public function __construct($customerID, $orderID, PDO $pdo, ErrorRunner $errorRunner, FullLogInterface $logger)
+    public function __construct(stdClass $models)
     {
-        $this->customerID = $customerID;
-        $this->orderID = $orderID;
-        $this->pdo = $pdo;
-        $this->errorRunner = $errorRunner;
-        $this->logger = $logger;
+        parent::__construct($models);
     }
-    public function removeOrder()
+    public function removeOrder($customerID, $orderID)
     {
         $errors = $this->errors;
         $pdo = $this->pdo;
-        $customerID = $this->customerID;
-        $orderID = $this->orderID;
         $query = "DELETE FROM orders WHERE customers_id = :customerid AND id = :orderid";
         $stmt = $pdo->prepare($query);
         if (!$stmt) {

@@ -2,7 +2,7 @@
 
 namespace security\Models;
 
-class PasswordGenerator 
+class PasswordGenerator
 {
     const MAXLENGTH = 128;
     // Max length for the whirlpool protocol.

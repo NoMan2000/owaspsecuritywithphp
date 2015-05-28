@@ -5,12 +5,11 @@ namespace security\Models\Login;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
-use \Redis;
 use \security\Interfaces\CustomerType;
-use \security\Models\Authenticator\BlackLister;
 use \security\Models\Authenticator\PasswordCheck;
 use \security\Models\ErrorRunner;
 use \security\Traits\IsDevelopment;
+use \stdClass;
 
 class CustomerLogin implements CustomerType
 {
@@ -21,7 +20,12 @@ class CustomerLogin implements CustomerType
     private $pdo;
     private $data = [];
 
-    public function checkUser(PDO $pdo, ErrorRunner $errorRunner, Redis $redis, BlackLister $blackList, $username, $password)
+    public function __construct(stdClass $models)
+    {
+        parent::__construct($models);
+        parent::setObjects();
+    }
+    public function checkUser($username, $password)
     {
         $dev = $this->isDev();
         $this->errorRunner = $errorRunner;
@@ -46,7 +50,8 @@ class CustomerLogin implements CustomerType
             if (!$isCorrectPassword) {
                 // for older systems.
                 $isCorrectPassword = md5($password) == $resultPassword;
-                // functionally equivalent.  Password verify has the algorithm and cost in the beginning, this is for md5.
+                // functionally equivalent.  Password verify has the algorithm and cost in the beginning,
+                // this is for md5.
                 $isCorrectPassword = password_verify('$1$' . $password, $resultPassword);
             }
 

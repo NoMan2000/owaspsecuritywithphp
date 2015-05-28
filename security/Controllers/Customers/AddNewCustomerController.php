@@ -4,15 +4,12 @@ namespace security\Controllers\Customers;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \JsonSerializable;
 use \PDO;
 use \Redis;
-use \security\Interfaces\FullLogInterface;
+use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\Authenticator\Authenticate;
-use \security\Models\Authenticator\BlackLister;
 use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Customers\AddNewCustomer;
-use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\ErrorRunner;
 use \security\Models\Login\PasswordVulnerable;
 use \security\Models\PDOSingleton;
@@ -25,46 +22,18 @@ class AddNewCustomerController extends BaseCustomerController
     private $customerData = [];
     private $errors = [];
 
-    public function __construct(stdClass $models, stdClass $customerData)
+    public function __construct(stdClass $models, array $customerData)
     {
-        parent::__construct($models);
         $this->customerData = $customerData;
-        $this->constructObjects();
-        $this->newCustomer = new AddNewCustomer(
-            $this->pdo,
-            $this->redis,
-            $this->errorRunner,
-            $this->blackList,
-            $this->logger
-        );
-        $this->switchAction;
+        $this->newCustomer = new AddNewCustomer($models);
     }
-
-    protected function constructObjects()
+    public function addNewCustomer()
     {
-        parent::constructObjects();
-        $this->customer['username'] = $this->customerData->username;
-        $this->customer['password'] = $this->customerData->password;
-        $this->customer['email'] = $this->customerData->email;
-        $this->customer['address'] = $this->customerData->address;
-        $this->customer['phone'] = $this->customerData->phone;
-        $this->customer['instructions'] = $this->customerData->instructions;
-        $this->customer['files'] = $this->customerData->files;
-        $this->customer['MAX_FILE_SIZE'] = $this->customerData->MAX_FILE_SIZE;
-        $this->customer['upload'] = $this->customerData->upload;
-        $this->action = $this->customerData->action;
-        unset($this->customerData);
-        unset($this->models);
+        $this->data = $this->newCustomer->addNewCustomer($this->customer);
     }
-
-    public function switchAction()
+    public function jsonSerialize()
     {
-        $action = $this->action;
-        switch ($action) {
-            case 'addNewCustomer':
-                $this->data = $this->newCustomer->addNewCustomer($this->customer);
-                break;
-        }
+        return $this->data;
     }
 }
 
@@ -86,18 +55,18 @@ if (isset($_POST['upload']) && $_POST['upload'] === 'true') {
 }
 
 $username = !empty($_POST['username']) ?
-    $auth->cleanString($_POST['username']) : null;
+$auth->cleanString($_POST['username']) : null;
 $password = !empty($_POST['password']) ?
-    $_POST['password'] : null;
+$_POST['password'] : null;
 $email = !empty($_POST['email']) ?
-    $auth->vEmail($_POST['email']) : null;
+$auth->vEmail($_POST['email']) : null;
 $address = !empty($_POST['address']) ?
-    $auth->cleanString($_POST['address']) : null;
+$auth->cleanString($_POST['address']) : null;
 $phone = !empty($_POST['phone']) ?
-    $auth->vPhone($_POST['phone']) : null;
+$auth->vPhone($_POST['phone']) : null;
 $stop = !empty($_POST['stop']) ? true : false;
 $potentialAbuse = isset($_POST['potentialAbuse']) ?
-    $auth->cInt($_POST['potentialAbuse']) : null;
+$auth->cInt($_POST['potentialAbuse']) : null;
 if ($stop) {
     return false;
 }
@@ -105,9 +74,9 @@ if ($phone) {
     $phone = $auth->cInt($_POST['phone']);
 }
 $instructions = !empty(trim($_POST['instructions'])) ?
-    $auth->cleanString($_POST['instructions']) : null;
+$auth->cleanString($_POST['instructions']) : null;
 $action = !empty($_POST['action']) ?
-    $auth->cleanString($_POST['action']) : null;
+$auth->cleanString($_POST['action']) : null;
 
 $username || $errors[] = "No username was sent over.";
 $email || $errors[] = "No email was sent over.";
@@ -141,17 +110,17 @@ if (empty($errors)) {
     $models->errorRunner = $errorRunner;
     $models->logger = $logger;
 
-    $customerData = new stdClass();
-    $customerData->username = $username;
-    $customerData->password = $password;
-    $customerData->email = $email;
-    $customerData->address = $address;
-    $customerData->phone = $phone;
-    $customerData->instructions = $instructions;
-    $customerData->action = $action;
-    $customerData->files = $files;
-    $customerData->MAX_FILE_SIZE = $MAX_FILE_SIZE;
-    $customerData->upload = $upload;
+    $customerData = [];
+    $customerData['username'] = $username;
+    $customerData['password'] = $password;
+    $customerData['email'] = $email;
+    $customerData['address'] = $address;
+    $customerData['phone'] = $phone;
+    $customerData['instructions'] = $instructions;
+    $customerData['action'] = $action;
+    $customerData['files'] = $files;
+    $customerData['MAX_FILE_SIZE'] = $MAX_FILE_SIZE;
+    $customerData['upload'] = $upload;
     if ($potentialAbuse > 1) {
         // Set a sleep timer to delay execution if potential abuse.
         $sleepTime = pow(2, $potentialAbuse);
@@ -159,7 +128,7 @@ if (empty($errors)) {
     }
 
     $addNewCustomer = new AddNewCustomerController($models, $customerData);
-    $addNewCustomer->switchAction();
+    $addNewCustomer->addNewCustomer();
     if ($isAjax) {
         echo json_encode($addNewCustomer);
     }

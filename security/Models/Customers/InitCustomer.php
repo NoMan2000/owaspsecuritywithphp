@@ -2,6 +2,8 @@
 
 namespace security\Models\Customers;
 
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
+
 use \PDO;
 
 class InitCustomer
@@ -9,7 +11,7 @@ class InitCustomer
     private $pdo;
     private $session;
     private $data = [];
-    public function __construct(PDO $pdo, $session)
+    public function __construct(PDO $pdo, array $session)
     {
         $this->pdo = $pdo;
         $this->session = $session;

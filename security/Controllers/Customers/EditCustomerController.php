@@ -5,22 +5,18 @@ namespace security\Controllers\Customers;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \InvalidArgumentException;
-use \JsonSerializable;
 use \PDO;
 use \Redis;
+use \security\Controllers\Customers\BaseCustomerController;
 use \security\Exceptions\KnownVulnerablePasswordException;
 use \security\Exceptions\WeakPasswordException;
-use \security\Interfaces\FullLogInterface;
 use \security\Models\Authenticator\Authenticate;
-use \security\Models\Authenticator\BlackLister;
 use \security\Models\Authenticator\CheckAuth;
-use \security\Models\Customers\EditCustomer;
 use \security\Models\ErrorRunner;
 use \security\Models\Login\PasswordVulnerable;
 use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\SiteLogger\FullLog;
-use \security\Controllers\Customers\BaseCustomerController;
 use \stdClass;
 
 class EditCustomerController extends BaseCustomerController
@@ -28,38 +24,14 @@ class EditCustomerController extends BaseCustomerController
     private $editData = [];
     private $errors = [];
 
-    public function __construct(stdClass $models, stdClass $customerData)
+    public function __construct(stdClass $models, array $customerData)
     {
-        parent::__construct($models);
         $this->customerData = $customerData;
-        $this->constructObjects();
+        $this->customer = new UpdateCustomer($models);
     }
-    protected function constructObjects()
+    public function updateCustomer()
     {
-        parent::constructObjects();
-        $this->editData['username'] = $this->customerData->username;
-        $this->editData['password'] = $this->customerData->password;
-        $this->editData['newpassword'] = $this->customerData->newpassword;
-        $this->editData['email'] = $this->customerData->email;
-        $this->editData['address'] = $this->customerData->address;
-        $this->editData['phone'] = $this->customerData->phone;
-        $this->editData['instructions'] = $this->customerData->instructions;
-        $this->editData['session'] = $this->customerData->session;
-        $this->action = $object->action;
-    }
-    public function switchAction()
-    {
-        $action = $this->action;
-        switch ($action) {
-            case 'UpdateCustomer':
-                $update = new EditCustomer(
-                    $this->pdo,
-                    $this->errorRunner,
-                    $this->logger
-                );
-                $this->data = $update->updateCustomer($this->editCustomer);
-                break;
-        }
+        $this->data = $this->customer->updateCustomer($this->editData);
     }
     public function jsonSerialize()
     {
@@ -76,28 +48,28 @@ $checkAuth = new CheckAuth($logger);
 $redis = new RedisSingleton();
 $errors = [];
 $username = !empty($_POST['username']) ?
-    $auth->cleanString($_POST['username']) : null;
+$auth->cleanString($_POST['username']) : null;
 $password = !empty($_POST['password']) ?
-    $_POST['password'] : null;
+$_POST['password'] : null;
 $newpassword = !empty($_POST['newpassword']) ?
-    $_POST['newpassword'] : null;
+$_POST['newpassword'] : null;
 $newpasswordConfirm = !empty($_POST['newpasswordConfirm']) ?
-    $_POST['newpasswordConfirm'] : null;
+$_POST['newpasswordConfirm'] : null;
 $email = !empty($_POST['email']) ?
-    $auth->vEmail($_POST['email']) : null;
+$auth->vEmail($_POST['email']) : null;
 $address = !empty($_POST['address']) ?
-    $auth->cleanString($_POST['address']) : null;
+$auth->cleanString($_POST['address']) : null;
 $phone = !empty($_POST['phone']) ?
-    $auth->vPhone($_POST['phone']) : null;
+$auth->vPhone($_POST['phone']) : null;
 $csrf = !empty($_POST['csrf']) ? $csrf : null;
 
 if ($phone) {
     $phone = $auth->cInt($_POST['phone']);
 }
 $instructions = !empty(trim($_POST['instructions'])) ?
-    $auth->cleanString($_POST['instructions']) : null;
+$auth->cleanString($_POST['instructions']) : null;
 $action = !empty($_POST['action']) ?
-    $auth->cleanString($_POST['action']) : null;
+$auth->cleanString($_POST['action']) : null;
 $isCustomer = $checkAuth->isCustomer();
 
 $username || $errors[] = "No username was sent over.";
@@ -142,19 +114,19 @@ if (empty($errors)) {
     $models->errorRunner = $errorRunner;
     $models->logger = $logger;
 
-    $customerData = new stdClass();
-    $customerData->username = $username;
-    $customerData->password = $password;
-    $customerData->newpassword = $newpassword;
-    $customerData->email = $email;
-    $customerData->address = $address;
-    $customerData->phone = $phone;
-    $customerData->instructions = $instructions;
-    $customerData->session = $_SESSION;
-    $customerData->action = $action;
+    $customerData = [];
+    $customerData['username'] = $username;
+    $customerData['password'] = $password;
+    $customerData['newpassword'] = $newpassword;
+    $customerData['email'] = $email;
+    $customerData['address'] = $address;
+    $customerData['phone'] = $phone;
+    $customerData['instructions'] = $instructions;
+    $customerData['session'] = $_SESSION;
+    $customerData['action'] = $action;
 
     $editCustomer = new EditCustomerController($models, $customerData);
-    $editCustomer->switchAction();
+    $editCustomer->updateCustomer();
     if ($isAjax) {
         echo json_encode($editCustomer);
     }

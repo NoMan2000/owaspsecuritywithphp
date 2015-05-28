@@ -2,18 +2,15 @@
 
 namespace security\Models\Login;
 
-require_once(dirname(dirname(dirname(__DIR__))). '/vendor/autoload.php');
+require_once dirname(dirname(dirname(__DIR__))) . '/public/init.php';
 
-use \Swift_MailTransport;
-use \Swift_Mailer;
-use \Swift_Message;
-use \security\Traits\AbsolutePaths;
 use \Exception;
+use \security\Traits\AbsolutePaths;
 
 class EmailConfirmAccount
 {
     use AbsolutePaths;
-    public function __construct($email, $uniqueID) 
+    public function __construct($email, $uniqueID)
     {
         $subject = "Your new account.";
         $this->fullPath();
@@ -21,17 +18,17 @@ class EmailConfirmAccount
         // $transport = Swift_MailTransport::newInstance();
         // $mailer = Swift_Mailer::newInstance($transport);
         $body = "Your new account has been activated at:<a href='$website'>$website</a>
-            Please click the link to follow through the activation process.  It will only be valid for 
+            Please click the link to follow through the activation process.  It will only be valid for
             24 hours.";
-        $headers = "From: test@example.com";    
+        $headers = "From: test@example.com";
         // $message = Swift_Message::newInstance()
         //     ->setSubject($subject)
         //     ->setFrom(["test@example.com"=> "Security Admin"])
         //     ->setTo($email)
         //     ->setBody($body);
-            //->setReturnPath('test@example.com');
+        //->setReturnPath('test@example.com');
         if (!mail($email, $subject, $body, $headers)) {
             throw new Exception("Unable to send email.");
         }
-    }   
+    }
 }

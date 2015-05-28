@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         jsonDate = 'The tasks have all started at: ' + now;
     timer.init(grunt);
     grunt.log.writeln(jsonDate);
-    
+
     grunt.config.init({
         pkg: grunt.file.readJSON("package.json"),
         "watch": {
@@ -26,10 +26,11 @@ module.exports = function(grunt) {
                 tasks: ["jsminify"]
             },
             cssStyles: {
-                files: ["public/css/**/*.css"] 
+                files: ["public/css/**/*.css"]
                 // Currently this is handled in sass and we don't want to spawn multiple processes.
             }
-        }, /* end watch */
+        },
+        /* end watch */
         copy: {
             fonts: {
                 nonull: true,
@@ -50,7 +51,6 @@ module.exports = function(grunt) {
                 src: 'bower_components/bootstrap-sweetalert/lib/sweet-alert.css',
                 dest: 'tmp/css/sweet-alert.css'
             },
-            
             javaScript: {
                 src: "bower_components/jquery/dist/jquery.min.map",
                 dest: "public/js/jquery.min.map"
@@ -71,13 +71,13 @@ module.exports = function(grunt) {
         },
         scsslint: {
             allFiles: [
-              'public/sass/**/*.scss',
+                'public/sass/**/*.scss',
             ]
         },
         svgmin: {
             dist: {
                 files: {
-                    'svg/widgetCompressed.svg': 'svg/widget.svg' 
+                    'svg/widgetCompressed.svg': 'svg/widget.svg'
                 }
             }
         },
@@ -122,13 +122,13 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: [{
-                        "public/js/fullAssets.js": [
-                            "bower_components/jquery/dist/jquery.js",
-                            "bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js",
-                            "bower_components/bootstrap-sweetalert/lib/sweet-alert.js",
-                            "bower_components/spinner/spin.js"
-                        ]
-                    }] // end files
+                    "public/js/fullAssets.js": [
+                        "bower_components/jquery/dist/jquery.js",
+                        "bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js",
+                        "bower_components/bootstrap-sweetalert/lib/sweet-alert.js",
+                        "bower_components/spinner/spin.js"
+                    ]
+                }] // end files
             } // end dist
         },
         /* End concat */

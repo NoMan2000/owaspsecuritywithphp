@@ -2,11 +2,10 @@
 
 namespace security\Models;
 
-include_once(dirname(dirname(__DIR__)) . '/vendor/autoload.php');
+include_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
-use \Exception;
-use \PDOException;
 use \PDO;
+use \PDOException;
 use \security\Interfaces\DBPrivileges;
 use \security\Traits\IsDevelopment;
 
@@ -44,12 +43,12 @@ class PDOSingleton extends PDO implements DBPrivileges
                 $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
         } catch (PDOException $e) {
-            echo "Unable to connect: " . $e->getMessage() ."<p>";
+            echo "Unable to connect: " . $e->getMessage() . "<p>";
         }
     }
     protected function switchPrivileges()
     {
-        switch($this->privileges) {
+        switch ($this->privileges) {
             case DBPrivileges::GLOBALUSER:
                 $this->user = 'widgetMain';
                 $this->pass = 'abc123';

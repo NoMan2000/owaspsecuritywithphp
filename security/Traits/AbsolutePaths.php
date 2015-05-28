@@ -8,7 +8,7 @@ trait AbsolutePaths
 
     public function isServerSecure()
     {
-        $https =  getservbyname('https', 'tcp');
+        $https = getservbyname('https', 'tcp');
         if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == $https) {
             return true;
         }
@@ -27,7 +27,7 @@ trait AbsolutePaths
         } else {
             $this->longCreationFromServer();
         }
-        
+
     }
     protected function setRootPath($path)
     {
@@ -44,5 +44,5 @@ trait AbsolutePaths
         // In that case, use $_SERVER['HTTP_X_FORWARDED_HOST']
         $this->setRootPath($httpFull);
     }
-    
+
 }
