@@ -71,7 +71,7 @@
 
         <!-- generate the deployment scripts -->
         <dbdeploy
-            url="${build.dns}"
+            url="mysql:host=localhost;dbname=widgets"
             userid="${db.user}"
             password="${db.pass}"
             dir="${build.dir}/deltas/mysql"

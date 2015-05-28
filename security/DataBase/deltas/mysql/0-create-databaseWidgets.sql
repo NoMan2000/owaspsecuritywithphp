@@ -21,6 +21,10 @@ GRANT USAGE ON widgets.* TO 'widgetCustomer'@'%' IDENTIFIED BY 'somepassword';
 GRANT USAGE ON widgets.* TO 'widgetCustomer'@'localhost' IDENTIFIED BY 'somepassword';
 GRANT USAGE ON widgets.* TO 'widgetCustomer'@'127.0.0.1' IDENTIFIED BY 'somepassword';
 
+GRANT ALL ON *.* TO 'widgetMain'@'%' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'widgetMain'@'localhost' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'widgetMain'@'127.0.0.1' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
+
 GRANT ALL ON widgets.* TO 'widgetMain'@'%' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
 GRANT ALL ON widgets.* TO 'widgetMain'@'localhost' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
 GRANT ALL ON widgets.* TO 'widgetMain'@'127.0.0.1' IDENTIFIED BY 'abc123' WITH GRANT OPTION;

@@ -73,9 +73,9 @@ cd ..
 
 echo "Installing composer dependencies"
 
-composer install
+sudo composer install
 
-composer global require "phing/phing:2.*"
+sudo composer global require "phing/phing:2.*"
 
 echo "Bower dependencies are not necessary, but can be installed"
 
@@ -118,8 +118,8 @@ mkdir /home/ubuntu/workspace/logs
 
 echo "Starting up MySQL"
 
-mysql-ctl install
-mysql-ctl start
+sudo mysql-ctl install
+sudo mysql-ctl start
 
 echo "Installing phpmyadmin.  This will not work from a bash script, but it is a placeholder for you to see"
 #phpmyadmin-ctl install
@@ -129,3 +129,5 @@ sudo service apache2 start
 sudo a2ensite phpliteadmin
 
 echo "All Done!"
+
+echo "If mysql will not start, try sudo service mysql start"
