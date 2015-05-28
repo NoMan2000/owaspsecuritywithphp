@@ -1,33 +1,33 @@
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Bergnaum LLC', 'Wilderman.org', '1737 Kuphal Divide
-Haagview, MO 96679', 'South Edythbury', 'Virginia', '8814709882');
+                  (null,'Bartell-Kirlin', 'kessler.com', '4550 Demetris Crossing
+North Magdalenashire, KY 35252', 'East Margarete', 'Illinois', '0604350762');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Cartwright-Hessel', 'Schuppe.info', '58952 Schowalter Path Apt. 480
-Hildegardfort, CO 30929', 'Prudenceburgh', 'Georgia', '3958561080');
+                  (null,'Lindgren Inc', 'bins.biz', '07880 Zane Course Suite 254
+Lake Emorytown, IA 15396', 'East Verniceshire', 'District of Columbia', '3340817488');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Buckridge-Wilkinson', 'Altenwerth.com', '25692 Stroman Ways Suite 618
-North Easter, NH 66370-9403', 'Greenholthaven', 'Rhode Island', '6982203278');
+                  (null,'Ankunding and Sons', 'parker.com', '276 Upton Flats Apt. 669
+Lake Nelle, MI 62500-4138', 'Lake Trentonview', 'Michigan', '0573494031');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Maggio Ltd', 'Kirlin.com', '852 Schimmel Mountain
-Glennamouth, PA 89086', 'Port Stevieville', 'Ohio', '6531739887');
+                  (null,'Greenholt-Bartoletti', 'robel.biz', '20712 Kayden Mountains
+Zoefurt, KS 62042-3910', 'Darionbury', 'South Carolina', '2763204022');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Collins-Towne', 'Schulist.com', '4669 Julio Manor
-Yostland, CO 58601-7915', 'West Eulabury', 'Maryland', '9981956084');
+                  (null,'Emard Inc', 'mayer.com', '91811 Schroeder Mill Apt. 129
+North Simoneview, MA 02434-7896', 'South Vicentaport', 'Idaho', '4938397449');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Carroll Group', 'Kemmer.com', '708 Clemmie Forge
-South Nathen, AR 02049', 'Swaniawskihaven', 'Wyoming', '7128000652');
+                  (null,'Gutmann, Kutch and Wilkinson', 'muller.com', '72665 Anastasia Ports
+West Megane, AK 06888-0625', 'Lake Edenchester', 'Michigan', '2544131565');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Bahringer and Sons', 'Quitzon.net', '3557 Robel Walk Apt. 312
-East Eleanore, NE 36152', 'North Colby', 'Maine', '1930282865');
+                  (null,'Smitham and Sons', 'hilpert.info', '40068 Howell Trace
+New Eryn, CO 23277', 'North Edwinbury', 'Oklahoma', '1534885041');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Nienow PLC', 'Jacobi.info', '4283 Wehner Hills
-Schroederbury, AK 07967-9756', 'Orionton', 'Vermont', '9225713099');
+                  (null,'Jones Ltd', 'russel.biz', '22095 Hintz Gateway
+Port Rhiannonview, IA 28766-5983', 'Connellyberg', 'Mississippi', '8146964878');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Tromp PLC', 'Waters.org', '05949 Hammes Mount Apt. 949
-Casperborough, CA 80769', 'Leuschkeshire', 'Utah', '3388919101');
+                  (null,'Pagac-Cronin', 'corwin.com', '784 Agustin Walk
+North Tad, MI 89404-7042', 'Blickburgh', 'Georgia', '6013832454');
 INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES 
-                  (null,'Kemmer PLC', 'Morissette.com', '333 Sigmund Squares Suite 133
-Ortizmouth, WY 35425-6751', 'Port Websterchester', 'Kansas', '1104704399');
+                  (null,'Rodriguez-Beahan', 'adams.com', '822 Micah Valleys Suite 672
+Windlerburgh, KY 89186', 'Port Alejandra', 'Wyoming', '3244938637');
 --//@UNDO
 PRAGMA foreign_keys=OFF;
 delete from companies;

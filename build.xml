@@ -147,7 +147,7 @@
 
         <!-- generate the deployment scripts -->
         <dbdeploy
-            url="${build.dns}"
+            url="mysql:host=localhost;dbname=widgets"
             userid="${db.user}"
             password="${db.pass}"
             dir="${build.dir}/deltas/seeds/mysql"
@@ -184,9 +184,7 @@
         />
     </target>
 
-    <target name="build" depends="build.migrate" />
-
-    <target name="buildAll" depends="build.cleanup,
+    <target name="build" depends="build.cleanup,
                                      build.migrate,
                                      build.generateSeeds,
                                      build.seed" />

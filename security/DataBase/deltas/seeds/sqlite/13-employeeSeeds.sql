@@ -1,603 +1,603 @@
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike1', 'Sanford.Nicolette@example.com', '9819013093', 1, 1, 
-              0, 0, '$2y$10$5.kULhu4Np93DHQE7YdcFOibvtXVm2wSG2Qc15FE7oqEcoqMIJSZe', 'password1234');
+              ('mike1', 'christian59@example.org', '5781167911', 1, 1, 
+              0, 0, '$2y$10$gBZ40AyCPb3DJmB5A3/e3eHd/jPyNQ1sLhz0hzvtv7BK3AJmgm1b6', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike2', 'Euna12@example.org', '5174150279', 2, 1, 
-              0, 0, '$2y$10$NDBrr616l3W40wRGei1Wkehnh7MiqV5W6hENLes2xPPgku63y5J3O', 'password1234');
+              ('mike2', 'annamae63@example.org', '1330284134', 2, 1, 
+              0, 0, '$2y$10$00Esy3Utx7fwvbJwNMRO2.eZH2JjwUZ6EMV91DWOeTL4Ys2GPDLB.', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike3', 'Evans96@example.org', '1324979392', 3, 1, 
-              0, 0, '$2y$10$8psYkkdYIQs6Jlmxmps1cOvwqWVz7JJ.f2EFME7hHRhz04Gv.1eh6', 'password1234');
+              ('mike3', 'orin.rogahn@example.net', '7854800666', 3, 1, 
+              0, 0, '$2y$10$WcgmW1yHOUjAPX50ITm1VeZslcPk3spv70rJI51yL.Vbj0QXTo/y2', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike4', 'Dianna.Goyette@example.com', '0057154424', 4, 1, 
-              0, 0, '$2y$10$dwLf8jUsYyTUm.YzN5/thuDe/Lm4TSSusbHXz0BI.X5DQFSzBTG5W', 'password1234');
+              ('mike4', 'jesse58@example.com', '7767394924', 4, 1, 
+              0, 0, '$2y$10$rBEHVN/cMUdBhk1GynPLE.DHBJMJEb.lGm0SBQELructJgvAY6EbG', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike5', 'dAdams@example.net', '6557722018', 5, 1, 
-              0, 0, '$2y$10$CbCb5PFpq7tkENC0V/EE9eFHwehYqm06d5Bg/cTe6THrfv8JAHzAG', 'password1234');
+              ('mike5', 'prosacco.buster@example.com', '0044941531', 5, 1, 
+              0, 0, '$2y$10$edRmTrJtqDcvKjUKY9RonerDv/1HQtXYXsb5x5.PwVwasPPfvdLQa', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike6', 'hOReilly@example.net', '9335522457', 6, 1, 
-              0, 0, '$2y$10$zpcotuBPq4V9jm15/ueLVuGJEkt.dB.4EtxRmVPeu74nq6kyyGMZe', 'password1234');
+              ('mike6', 'angelica.walter@example.com', '3186300759', 6, 1, 
+              0, 0, '$2y$10$1XwUMU5TuR3aJFvnxcXsu.X4GKBBCo.O8sfBBKLcdoIOe9JLieeMW', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike7', 'kSchmidt@example.org', '0051845204', 7, 1, 
-              0, 0, '$2y$10$2TJccHknwERehVjBAyleKuT.ecgOSbJBD5/pVaCux2B2JVwknnC26', 'password1234');
+              ('mike7', 'mcclure.winfield@example.com', '5543179328', 7, 1, 
+              0, 0, '$2y$10$figQpsCc.ucZE1UeX4TFxOtAS790gyMYVO/2ZBq5KsdVyQI.uBtta', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike8', 'Kaci.Donnelly@example.net', '6758524868', 8, 1, 
-              0, 0, '$2y$10$Ax/KGJoEzFr0SHTwy/PGO.Vr8GJhmtuYfjssHvl7g/b1CmvhiolRm', 'password1234');
+              ('mike8', 'donna09@example.net', '5509387023', 8, 1, 
+              0, 0, '$2y$10$b.WKZ5hneJuagbRFVItPju.r05vP7OFkooCC8izLj6srZR1wsB9YS', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike9', 'Chadrick.Hodkiewicz@example.net', '0776856447', 9, 1, 
-              0, 0, '$2y$10$ieLrvElDTLlNdVJX1qCcPeA/gYHpEOaxr/pGesRbUp.wqB9gLGVAm', 'password1234');
+              ('mike9', 'ometz@example.org', '4378520384', 9, 1, 
+              0, 0, '$2y$10$JKwzSk17zlO2XNlr1nAsB.yDogPHM5JuumK8KQvQIJxKhbjUCdiay', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mike10', 'yGutmann@example.net', '7269380110', 10, 1, 
-              0, 0, '$2y$10$7.PrVNp8rppX3codZNr2WebkPfbcnzN5jyUjG.v/KmwLDUWOrghwq', 'password1234');
+              ('mike10', 'lockman.earline@example.net', '3001643345', 10, 1, 
+              0, 0, '$2y$10$KfJXSk4IY9lFd7v1wObSnOpWkPHlVmk1XbWx6GyvYWdxbkzae7udC', 'password1234');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('yWilderman', 'zJakubowski@example.org', '0434900180', 8, 0, 
-              0, 0, '$2y$10$rU5obOLqPlLVUz9BW89n.uARt5Ohy0LO48UeXy0LSkJz0gUgzIfte', '|//^Q"<Kk:');
+              ('adela.roob', 'orolfson@example.net', '8787812577', 3, 0, 
+              0, 0, '$2y$10$8tU0b.Qiaj8lL7yAbevPFuVQHhTgQWN5g6OMq//FC9qS18jE/rJSi', '/{,~l*QUm`N8Etx0Escc');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Patience.DuBuque', 'rLeannon@example.net', '5526358589', 6, 0, 
-              0, 0, '$2y$10$N3/AzoSiKew9vJjABErvXusCMouI.gAnGhf7866vm5eumv1gWxTf.', 'p"q,bEQMkA)_^');
+              ('zora.durgan', 'swift.rachael@example.com', '1539838234', 9, 0, 
+              0, 0, '$2y$10$tpGREhxaXJL./H4fCMAGBO2kIz3BAFcDmzaVgvtEuRmn1rxWe6Cxa', 'pS<(3|"@x4:*ZOH;KrZQ');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Spencer39', 'Marge.Fritsch@example.net', '4054725267', 2, 0, 
-              0, 0, '$2y$10$3FO7dKnk4Qspd7Vo6a.IXOzAkMiemot736TTad5JJ8PdYBzxjSk06', '>/%a2ex9S8oNdR4#,');
+              ('heaney.cora', 'osteuber@example.org', '9628262330', 2, 0, 
+              0, 0, '$2y$10$pRfS5HeAKzEF3xwjNvfl/.NMHliXW/0NwGxPeIhntNzgzS6qPbDSS', '7,pYB&:');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kuphal.Wava', 'Crooks.Godfrey@example.org', '5507433123', 5, 0, 
-              0, 0, '$2y$10$kVF53zIAMY6K9aF.Ei7XFuCx0CyZiQbSeIAxHHnRfYyzsT9U/HGau', '5(3a|3RO(0}hQwr|');
+              ('alexandro10', 'isac.okeefe@example.net', '3981216013', 5, 0, 
+              0, 0, '$2y$10$PxiXx01W9WWvIOY.adoy.uHvUA3ME2QkhgNRoy13zm0FZ.BR/wUX.', '(8!F@)+ML');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Garrison.OKeefe', 'kGrant@example.net', '4049943668', 8, 0, 
-              0, 0, '$2y$10$EX.QZDRKPLzm0DQSDjsIP.V9kBLvMRilvmzqG3JSYWrtazx0jIKxC', '>qE`V[S');
+              ('kaylie79', 'alexys.quigley@example.net', '4073985936', 1, 0, 
+              0, 0, '$2y$10$BvGoqJ0Sh77/Pzk/j9x2vemmYbV16Y06l/0eqJo0dh/vYNzMGFtla', ',<Dvo]');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('cLemke', 'Jamaal.West@example.com', '2484883735', 1, 0, 
-              0, 0, '$2y$10$MTu2EUzYqgL2Iz4TButape2O8OBlnLq3wbDgv7E8oDfmAbQp.mvWu', '6k<}''crIXRmA');
+              ('amira70', 'maureen.schuster@example.org', '2101224041', 2, 0, 
+              0, 0, '$2y$10$d6EOW5XF/aHwXibjtSIa/.yj7dNkkWeKWNYpvcHk4DGke3HrqAdPe', '$#<KZ~U,}wQ');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('pDoyle', 'Krystina05@example.net', '2682028552', 1, 0, 
-              0, 0, '$2y$10$eU4UuIyfGBFSdXWdgzU/uu26cqQbmQJ02THkqtZfdxs6SQ7i8pbna', 'D;45;^K');
+              ('ortiz.kristy', 'amely26@example.org', '0767705053', 7, 0, 
+              0, 0, '$2y$10$KDHktHoogdV3VJ3kBvPf3ejc6BXWqo1udCK8t44sazpw5/N0hlI9m', '7}c[+C}^wMjG8O)$');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Bernie.Kuhlman', 'cWilderman@example.com', '1085587678', 5, 0, 
-              0, 0, '$2y$10$UhDU7GxhGeK2PLGmy877d.k/LqBSmw50145YGA6FEf3cFoxOP/9oa', '2b7WgwbrnC>');
+              ('plegros', 'zbechtelar@example.net', '0318562947', 10, 0, 
+              0, 0, '$2y$10$.egwBr1k0vBKpLxM0qmoq.VKm7Qj/lW7.yVbb.1/mcbX7vgztoqjK', 'TI((T-#Y-i');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Will.Oleta', 'Stracke.Cary@example.net', '7459567402', 1, 0, 
-              0, 0, '$2y$10$k7AL8zw2LHz7PlBsMRmbq.AXBvwdyYr2TTfgkb6beV25qLv/.CIGK', 'D!WbzSAJ|(');
+              ('davion36', 'heaney.emily@example.net', '8020774166', 10, 0, 
+              0, 0, '$2y$10$d9XcGC2FivZj2OS8O8XbpOhLgXIbM/2MY/yOyLlXkiD5ovTMl5fq2', '\(+%RC=lU\');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Emilia34', 'Golda.Purdy@example.com', '3348977329', 7, 0, 
-              0, 0, '$2y$10$WG5Uy/A5M3V1l/mA74dZ4eMP9SwSxlL0ic5/6XV4rqIGYFGrBJei2', 'l-vN-gOb,?P5?W7g');
+              ('cale.rodriguez', 'balistreri.newell@example.net', '3782359411', 3, 1, 
+              0, 0, '$2y$10$9xoy63zjDMFQFb22GQhY6O6kKbWuTEFH/UR.E57rxcPtkEWUDm6He', 'vuI,tI');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('dMacejkovic', 'Murphy.Marion@example.com', '2363329693', 6, 0, 
-              0, 0, '$2y$10$Zho7SkFRVh0SIIptEavvsOBKnIWCL6Tu.AC6XrdIMNWZYFAJZNnvC', 'b6[%1mM//8c5O');
+              ('fleta.goodwin', 'volkman.ima@example.net', '5807556743', 5, 0, 
+              0, 0, '$2y$10$b64F9uxWVYgbcZS8BgWIfe2zzn0Vg2bAfDJOy031GCvPfioT3HOCe', 't0A]<nZnI(9l]<A2\5Z');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Jaskolski.Joyce', 'Serena.Gerhold@example.org', '4652755689', 4, 0, 
-              0, 0, '$2y$10$CIaCQiXXRipWSA7sed0BU.HHmo5d/so3U3y/X1PsItgLo5kCkmPk6', 'lC*<S<,I(R');
+              ('cooper.simonis', 'selena.kilback@example.com', '3672416146', 8, 0, 
+              0, 0, '$2y$10$CebwvKPmvTshIJqp1pORduEZTyvOhNSevavkcubSeqrOdqwOPNMEu', '3elbL3*A');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Maria.Franecki', 'Afton.Ruecker@example.com', '1502416556', 10, 0, 
-              0, 0, '$2y$10$uhjdb//gTvZbBvOH3WAss.72w9NtQy5R8YWNPBDzRibsNMn7of1Cu', 'Gy$v>@_gGn');
+              ('marlen33', 'joan74@example.com', '9652612460', 1, 0, 
+              0, 0, '$2y$10$3QSmIv2rij1uqdSCHkmiuel4c0gHq1RX6AeLIR8FuI/qtjlWyeQvG', 'qpM2{|*v*-Berf+{Q');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('jHettinger', 'Heaven65@example.net', '7461825158', 1, 0, 
-              0, 0, '$2y$10$9AL4L8bSqoEk5xLOwbo.FeZmaEpWSaJ.C3dtOHuPuZSOvA6/QCA4O', ']Yc!.No(tMc*U!d]nj5');
+              ('fullrich', 'xrath@example.org', '6818538638', 8, 0, 
+              0, 0, '$2y$10$g7aczf6F0r2UVnNU6WCjOeYEMEk6PyNDuciz/HGLfm6257t6WW.0S', 'bgK7}}`d$*%x');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Johnathon75', 'Irma69@example.org', '0340363035', 9, 0, 
-              0, 0, '$2y$10$OAttqCsEVov0iPxCfH6UMe0NkrIq3zqIiVMLMNRgL5IO7NOZ9u6kO', 'B.f{V4Fqvc6_B<\hn');
+              ('lorenzo.quitzon', 'monroe19@example.net', '9774502506', 6, 0, 
+              0, 0, '$2y$10$.2eip4aIk6CpsUBVLhmQI.xzIVMeOpU2reKmt3WfuGUW2Kk5ut7ku', '7Zlf-f&''Y}sUj,');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('nTromp', 'Hand.Natasha@example.net', '5078238141', 4, 1, 
-              0, 0, '$2y$10$NV.rlU4ceX65rRzkvpKfB.malO1SoQT9xVsE7SmaRN1CDuTlfx8ty', 'l2!_kxDGLg74\fo1jyE');
+              ('crooks.laurianne', 'roberts.letha@example.org', '9282211697', 1, 0, 
+              0, 0, '$2y$10$jaFZgd5RfyT3sT1sdjIX9.dsYDaAF2HabJf7Uk1hfuFAwm7B7TZ9O', '^vBO"hP#}C$');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Vidal.Lemke', 'Waelchi.Queen@example.net', '4271478731', 8, 0, 
-              0, 0, '$2y$10$SuEOoXduPTzG05luMjhr6ulEez0j0dz89kTn8NBoiAKeaf0ycNPjG', '0|yf$Pn|G{k3=');
+              ('aschultz', 'hickle.bella@example.com', '7790342513', 4, 0, 
+              0, 0, '$2y$10$0PbBYcnFz/WpDMkIHe5ApeIebDM9AHKpO3IUQtpxH.WyKJBwczonC', '''l/h!n`Rf)');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Cormier.Domenick', 'Willie.Rolfson@example.org', '6283095993', 3, 0, 
-              0, 0, '$2y$10$Ll9KnJIiaoT/o6xv6FRO5OKySVj3dH11hpT1FgaFa8I7AwXBn1noK', '%MZczEhs`j');
+              ('ardith90', 'jevon.gaylord@example.com', '0017421730', 1, 0, 
+              0, 0, '$2y$10$79fD8vWGdAIzHY40XeWP4O3kPDe/Ur3A1YHVmI/T3A2bUA/wx8L9e', 'bgjpG[HM}JC_QM8');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kuvalis.Deshaun', 'Liana.Nikolaus@example.org', '4869472582', 5, 0, 
-              0, 0, '$2y$10$g34V6EZRFaZAiyy6BzO0tOmGFfM3OllImY/ryx6ZbcqjgDlEGWMLC', 'Ni,Jl,');
+              ('ettie05', 'rodolfo77@example.org', '5630006257', 5, 0, 
+              0, 0, '$2y$10$K5wZFo8gSx1ZC78IQLjXyezsma1IgA.OHdWPjc8OtpEdXEHi0gOcy', '+#95m#bVa).ac');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('bConsidine', 'Heidenreich.Lyla@example.com', '8705056008', 6, 0, 
-              0, 0, '$2y$10$RWCYfD.iNcKAzAeYI//zSO/Wn0Bjbv65Cbvtnc1d74OFTN3xi3p7O', '[KXJul^^JWjRA|@%MyRE');
+              ('dino.monahan', 'hettinger.mauricio@example.net', '9388870757', 5, 1, 
+              0, 0, '$2y$10$0WkwN20P0erNytfFH.P7NuplBmz27iBxRDme8LYiwgOxUHcyiou/.', 'Sba@F[yy0i');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Ova.Gutmann', 'McClure.Maude@example.com', '3741804710', 3, 0, 
-              0, 0, '$2y$10$.fMvxzwWVDrItR9D7llZpu4txO9aTouPqsy9nuEh/xGEthIjzLXf.', 'O#=!e7e=');
+              ('lizeth74', 'jdamore@example.net', '6399989823', 4, 0, 
+              0, 0, '$2y$10$FJ6xuYWNpjhH5ypu8oamNuYmFGztgp8jawkXRXrZBSFpBATaXWuyq', 'axNX^3E1KOaz*');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Reginald56', 'pKuphal@example.org', '8375640231', 3, 0, 
-              0, 0, '$2y$10$c1qXU7CxHAy.ssnEeuOS..8v59ztlTJDMn/e0QEusyKZbEhkgONMO', '6My\4)');
+              ('eliezer61', 'roob.jarret@example.net', '3815788900', 3, 0, 
+              0, 0, '$2y$10$WDnoR3hSphJjlqu7BdyGmO/Wt0xMBPaVie8LxHBmIFHOu/6RB.8Qy', '5.<Y;2N');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Judge.Hudson', 'jPredovic@example.net', '4185665555', 1, 0, 
-              0, 0, '$2y$10$01U0KTZvIK4TN7HQ5/DH9ePE./.QMdGikOLj.kryibnvPcFUCUD1S', '`9)3yF6/dtRVy7r$^f');
+              ('emery.kulas', 'beryl.daniel@example.org', '9105473311', 10, 0, 
+              0, 0, '$2y$10$dFNGgsQRnm6Z0Y6wl.kg8uFuZCLRp0xiZ45GZ75k0xvVocb8J9MLS', '1Jx.f;j+Tqyr_`_g');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Raleigh11', 'Wallace.Bradtke@example.net', '3966259150', 6, 0, 
-              0, 0, '$2y$10$04QeDksuBOosyvPTBcvP../98qxKGnODgS5xgU4f55DG6ZPvk6em2', 'dXHj,lW');
+              ('kris.sienna', 'orn.rosendo@example.org', '2864285883', 9, 0, 
+              0, 0, '$2y$10$OVCrYR4JuU9AomiQWBmkFOGtWNAQPzu0dn7yXu0IIBswjKuiOlOCW', 'LtVVh{+[Y1e0PGlQ');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Lauren59', 'Kreiger.Berneice@example.net', '4167448481', 10, 0, 
-              0, 0, '$2y$10$O6rtQdEH5IIjF9Wu8BneyueZVGu7Qes.4j44FlivxTR1PqhJmriMy', 'L;m#2{kN4*\(4>4}i4');
+              ('frami.kristoffer', 'weimann.hosea@example.org', '9107934896', 5, 1, 
+              0, 0, '$2y$10$zY3h20Ga0F/vy/.Sv9T7vurC0FSNsagRzyeSwf3dbhROCwrwvSy4G', '=2Of`VA2''''%');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Hillary.OConner', 'Alvis.Jacobson@example.org', '0695096630', 4, 0, 
-              0, 0, '$2y$10$xGcm1Jj7.VTpA3iWLNrDw.DKENp/hnmCKyrv1wd3gxGlcXPZLk85m', '2<Lu,q<Y_](sd:|;oT');
+              ('cortez74', 'cole.darryl@example.com', '7387745329', 3, 0, 
+              0, 0, '$2y$10$PQttS62sku19d4utzjvP.Ot0HtDC5Lzr4O5YrlmY0L5g6UMU4TEN.', '(w2ysHH]');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Skyla39', 'Ashton.Jones@example.org', '2640529753', 6, 0, 
-              0, 0, '$2y$10$3w8mNi7iC2ldK40ZKrPWI.UDz0lfj6r8agXc.jleQW5lmpEPqzA8W', '=`wKc#wVd+ysUw!sMT=i');
+              ('zoe.maggio', 'henri.konopelski@example.org', '8324202356', 8, 0, 
+              0, 0, '$2y$10$cI9bRdOFolcQaTCYQV7xyu2hpgBPCEROE9AKCjOltDYBh4vlmMLGW', 'ZX]`?r~}oW');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Dana18', 'Jayson97@example.org', '3630898244', 1, 0, 
-              0, 0, '$2y$10$0Y24xh.9bwUr7QaaDI9ivOXAfJTKiUILNY3qhs9WNzOeIQAE0akHO', 'zahi<|h''');
+              ('ugerhold', 'cflatley@example.com', '0243107368', 4, 0, 
+              0, 0, '$2y$10$m0GM3mzMee369xesbomaLORJoy97vFkWNl8LgHlZg9.yz4jfOBi7q', '}mQ0_Y.vB6NtLw');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Broderick25', 'iBailey@example.com', '8291071818', 4, 0, 
-              0, 0, '$2y$10$Rg0DOG4sbaDAxTUud.pLTezueekMeLXYMySNOn4Qwh61.qKu9xeKO', 'wmJ:1,1J');
+              ('rgibson', 'jaylon29@example.org', '8717496330', 8, 0, 
+              0, 0, '$2y$10$XgjFoY.Bm6lIHf4..Ubkpuiwgntynr.D9wqFBVrXange659l8U9Cm', '9hf"!uSeM~]');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Jacquelyn79', 'Stanton.Elbert@example.net', '2859617081', 2, 0, 
-              0, 0, '$2y$10$h0uLTe8JIFLMAqEZjEIbCesWn/cUWbot2Q9jQr.NewcgKJ4gIScAe', 'uNU"IFH|iQg7/c');
+              ('raynor.hugh', 'zkuhic@example.org', '0941246191', 3, 0, 
+              0, 0, '$2y$10$.gXKToQj1axLKf4WIJfR9elROnMKAOksdr4tHTpfbYMQxbg3mfcOK', 'K\&Z"ap1N#');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Adella.Abbott', 'Neal.Lemke@example.net', '5930612876', 2, 1, 
-              0, 0, '$2y$10$FSGh/KlgVdCDUEeZcXZVdOsE7NmOu1JIksCag2ijSGTnt7KxMsTCq', 'nw&w&2Y+l(o`R45Tdu');
+              ('arnaldo.hoeger', 'boris17@example.net', '5512011940', 4, 0, 
+              0, 0, '$2y$10$Ys8v3yJM95NALKWENJGVYe.GQ4ik5qLFiIRpFxeqp34tq.ssG3LFC', '@T/!A:=');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Brooke.McCullough', 'Abdiel.Bartell@example.net', '2006862828', 9, 0, 
-              0, 0, '$2y$10$WF0iiF8P0nmfCJBd5Bb2U.HSXNStZD//mSLUG1CDSIykP2hb.b/FO', 'Hz:Zz&B');
+              ('doyle03', 'rleuschke@example.org', '0842192785', 8, 0, 
+              0, 0, '$2y$10$2B.gFNdl0WdML/5Xrk/teOKxZsmL0Mvvj5RsswLYg.zOXEff0/fGS', 'pG`/4H"');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kasey.Heller', 'Guy16@example.net', '9850457817', 6, 0, 
-              0, 0, '$2y$10$lQUqSnJPKuYZmUyG4VZj/.2CbJFx7q6.ajjpxvhVeico3oo7YC5nW', 'Aqv.<LZGO@^$n[T/V{^n');
+              ('danial.kerluke', 'kmedhurst@example.net', '4518224831', 6, 0, 
+              0, 0, '$2y$10$e6J.M0urJCvxs8LwLIsZ6eqgNwCICiOf/yRSECdndEYwllT3Uwu9a', 'M]~]o@<Q+n');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('hLowe', 'Cummerata.Marietta@example.org', '8202939531', 1, 0, 
-              0, 0, '$2y$10$FhR/e08pd5PqznsqZ.Kf8e7QIEHoG/He6CdtzqDx0ghY93BVSRPju', ':&V<>B}GJE{''T-');
+              ('edwardo.kuhic', 'brown.haven@example.net', '6667776958', 6, 0, 
+              0, 0, '$2y$10$.T3d8QE5of2VGELnTcL0u.LBd4yokmeaLGkNb5tBYgYyQ1Se2P6aG', '''^wi~.A');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Tressa27', 'pKohler@example.org', '9939938878', 6, 0, 
-              0, 0, '$2y$10$8xWl6hsvn1cLc6MNtXE5bOFXa5278/xPUm/4vSNY6fHJ0T16CHWEa', 'tOLe),-z+.iuF1|kGa');
+              ('alaina.ullrich', 'regan.harvey@example.net', '2584755165', 5, 0, 
+              0, 0, '$2y$10$eB8bVl4DXyMdi2.q1gHgL.0sidUndvj3QBTedCn86vClb0GDPe9n2', '''rMmj#]p1');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Koch.Sheila', 'hRyan@example.org', '7275627770', 7, 0, 
-              0, 0, '$2y$10$tfat9oipgn.TUhQcMV5L/OaiMVszTnuDKuH7cuyIQzqs1aZYKqxAG', '~-Zq}u>^o\U*-mo^b');
+              ('robel.kyra', 'ulises64@example.com', '8932249625', 8, 0, 
+              0, 0, '$2y$10$/xUH05g87ew1rHywxFqbzehcBjz/vJLi2s.Rg3cPXzDoFgrGrrsSK', '{EW%?{=dG(ft7`5Xqqr\');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('lBoyle', 'Miller.Kaley@example.com', '6685157914', 5, 0, 
-              0, 0, '$2y$10$BxlNXDhsg8lBTHX5./5Z8OIVBjd.fwLzWcQ0aNOtjRwH7xv4DEcmy', '}Ix0z%k.k');
+              ('hank16', 'jones.elnora@example.net', '8927334950', 6, 0, 
+              0, 0, '$2y$10$Fl2HoSs1MucYnh21r7rMU.vwm.PG8/CyG2WDIOwGeqq3MYqu7XNb.', 'RCqDV|m');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kailey.Hudson', 'wKub@example.net', '9774129339', 5, 0, 
-              0, 0, '$2y$10$iOxiqYMJ2h69ipN1/stJpeGmz74EKzk42yRcAYaTeGW2pakTEAZB6', 'X"5"PUi.]Ipo');
+              ('sandrine76', 'rogahn.camden@example.org', '1409000302', 1, 0, 
+              0, 0, '$2y$10$EbQHPVXitCwQSSaSTCbvhOKH7lQ.TT53wkKA3swfuluBYQRWXTdda', 'iJO",6''H');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Simonis.Evans', 'Bauch.Isidro@example.org', '2136615276', 6, 0, 
-              0, 0, '$2y$10$KvICsyKQ6ys/iNHOxGkRZOhlFxEPy3.Q5I1nhkTGWtXFqZ.WRObeS', 'F@|.7K+R^_%r%4');
+              ('grover.price', 'tania75@example.net', '2155529236', 6, 0, 
+              0, 0, '$2y$10$HJgWcqEhYn71NMJfQ7T/Ju/9cFCD0Xvx8QOs4U3/KHUeM4SKAI1Ua', 'bd,zhv1wWIQ5XKB1l0%');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('mLind', 'Schuppe.Koby@example.net', '2044661965', 9, 0, 
-              0, 0, '$2y$10$wm2P9ndmoEwKhSC9DwyNN.R7/M3fWyTmWbkDaPZbEtZJ2kySDotGW', 'LZaM\zl-i2pTS>n~A+');
+              ('mckayla21', 'jakob.lynch@example.com', '6702215462', 10, 0, 
+              0, 0, '$2y$10$kK5Uu5LD8sl5Ft2ojUKLeeOYtUBAj4SsTvlz4oAD7WFypm9outBNK', 'CtSs??DVd9D1YGR');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Abshire.Jennie', 'Mante.Antonietta@example.net', '9616943010', 9, 0, 
-              0, 0, '$2y$10$RRBBYBGDxkWtDxX5QydzYuht8mAn7PURhWgOe31FO2hj184ddJnR2', 'm6eVDw80%');
+              ('ila37', 'tmcclure@example.com', '6519292957', 9, 0, 
+              0, 0, '$2y$10$LPYnanPSmfiEMTsBahDnceEEobIkVTaGIosGcAXLowa/EpbqBooQm', 'g|FeheOV#9_(iiq)IU');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Orie.Wilkinson', 'tRutherford@example.org', '0477304683', 7, 0, 
-              0, 0, '$2y$10$7jHCMRhkzT3C2zsotBxtpeWdod8/E5Lo8rToFPkFJ/Y1wniD/g6c.', 'sbOZOyEV');
+              ('turcotte.bennett', 'aurelio15@example.org', '7497495118', 7, 0, 
+              0, 0, '$2y$10$.HmF.XpfFu47SD3PtOVEneoBOlnvXlebfgwY7TRh/IRYvLgY8oWFe', 'BZZI@s|G');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Diana40', 'Jabari.Crooks@example.net', '5599205813', 4, 0, 
-              0, 0, '$2y$10$e9qF2fJlruGjDyC5ZYom4OC9iLTxwMZ/ltx9suUgIroLhGyWxnxHi', '\l*:?$:wT+hIzv');
+              ('althea07', 'kris.sigrid@example.org', '6586091124', 1, 0, 
+              0, 0, '$2y$10$Kp1N3Lb05/lOAB4suXbtfeMqzu2BPPMtI1M5rqwrk.jnC0S/1rIhC', '-r9[6@Z#l(_i\nw');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Marisol85', 'Jayda.Hermann@example.com', '4899312717', 9, 0, 
-              0, 0, '$2y$10$mWJDFg.34CYCGZSkTYZJw.24hF9uORMsjHp.v39Q3YiJ0bp6gbjtO', 'f_a|~<7A]p');
+              ('weber.louisa', 'halvorson.cyril@example.org', '4531306954', 10, 1, 
+              0, 0, '$2y$10$z75SbA3YyL8Zmj7GZR72NOBdMqdcUS7xiRhW7q0AQrjBKCalaw8lm', 'B;([I!$:GbeInX6#qwNz');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Jaskolski.Junior', 'bBergnaum@example.com', '1303913294', 5, 1, 
-              0, 0, '$2y$10$L35JCBcm0tTvRzVcm.raSOnwrjr2Ywdwu9vPi/t4C86GpBIdZGv0C', '3D_;<Nt7(dQW|5qT>');
+              ('sporer.lennie', 'peggie.hackett@example.com', '3017465329', 9, 0, 
+              0, 0, '$2y$10$o6LxQicV6VVSaesLjsI6NuQn7Dnb2PZx9hBouYqtUb4O9/eB2wD6.', 'Sn{8uF|P1\1DG8mt,');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('fBailey', 'Holly04@example.com', '3117830973', 7, 0, 
-              0, 0, '$2y$10$xN92glDrvk4IsqF5WNBfIOdeEOGM5cFkDY7hCxnnCzPl2oOR5WGa2', '(~54n_8a4\}Hz"FYE_');
+              ('erica.rohan', 'carrie.wolff@example.net', '7442639225', 4, 0, 
+              0, 0, '$2y$10$UdOonNYkdcYYW2/ctiRrj.4va2bK3HMPUuDkHEd6N9fVRmUFqxt.6', '|`-_D7O:g@2gC');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Valentine85', 'Devan19@example.com', '2214671294', 5, 0, 
-              0, 0, '$2y$10$9wDGyZ33/DZCqy6tisTssOuPwVkrheoN3mSK5HmjpsTlEqF/.w2KW', 'q4QG!C"@3S?U{');
+              ('ebaumbach', 'senger.cristobal@example.org', '5596329346', 5, 0, 
+              0, 0, '$2y$10$WvASxrDPendhIm/lRY5LmuzylSwG/l3J7hV1.q4N/xZitNnUyp0QW', '`9jN%#}>4S');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Maxime.Gibson', 'Orie31@example.com', '5684097906', 1, 0, 
-              0, 0, '$2y$10$ks2zZ92V0vlIp8V5F9eVYe3Pl.GxFa/MwcCgOXKVdxgQlpZ0bojmq', '2@u`B~K5hLC~kSx');
+              ('lina31', 'river.jast@example.com', '3118556480', 9, 1, 
+              0, 0, '$2y$10$Hbx/zfKcZWXOfpQypXnddeOMAxPqIWm0FGM7OXQuBNxA2vQbYUDu.', '-^3!||0p4r|/');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Madge.Schmeler', 'aGreen@example.org', '8441022295', 3, 0, 
-              0, 0, '$2y$10$pdVCBZsRPfLBMzk6cNsB0.dajR6HkXQben1MoxXYjan3jYJnOih0y', '/hcpd$:V+WLm](');
+              ('bailey.chelsie', 'elwyn.murazik@example.net', '6340619804', 6, 0, 
+              0, 0, '$2y$10$wVt8V8txcPDFZ2nL3dZc0.vj6t1.0dG.K4xB.T6HR5r0Wd.EA1vq2', 'K19>f//r#l');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Crist.Guido', 'Herta.Barrows@example.com', '5053859557', 2, 0, 
-              0, 0, '$2y$10$GzUW9wVvS.vftkk3sAYP6Oqsc7IZxEvHC6m/c9ypVSaYCMfw3PUEW', '&H_ahaxFw|y<HW');
+              ('carli.purdy', 'brant10@example.com', '5329605635', 9, 0, 
+              0, 0, '$2y$10$7wr9/1CXCob/qXzOTHuXt.Dc6yAVCNR84824zHuH4u7joQZqIQyna', '[*ljH_@m!)vQ@ZrR');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Mikayla.Lakin', 'eMorar@example.com', '4150564438', 9, 1, 
-              0, 0, '$2y$10$yLOfNU4hwx6OZl6LRE6DKOI6MCTQz.KbW23e7hwnXTHTXVT4j8bsK', '!dSN`f3?<\mmJrI9');
+              ('hamill.regan', 'rebecca28@example.org', '1625811900', 7, 1, 
+              0, 0, '$2y$10$vdchjFgUlBNuYmahduHxfOUmtpCcQp528AOoJvvhRtWFnvWYpP1kq', 'j''O5VY''_%&q9%#[$');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Rau.Dariana', 'Reanna74@example.org', '9762816848', 9, 0, 
-              0, 0, '$2y$10$TjZxWnRDbYCVaG8cAvbdK.x.kHI0Vvx9XixHyieABxaNG3ECT.YkS', 'xL);}>B:MA;');
+              ('keegan.konopelski', 'fbreitenberg@example.org', '2425047626', 5, 0, 
+              0, 0, '$2y$10$AH3Smm5148pDPyzU0rC/0eSizMQtcTw2N/2tP6.Rb63hAW.N8DIeS', 'j;Xj!7w;3\p9)L\D');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Jackson76', 'Montana.Rau@example.net', '3781497004', 8, 0, 
-              0, 0, '$2y$10$.GSxeow.eosQw.NLPoBWSeEeY1Lngnm9ZwlM5Z54oaMs2cdDsjdDi', '~f\Y++zx~E7f.lP');
+              ('kadin06', 'ebba.gottlieb@example.net', '8028740126', 3, 0, 
+              0, 0, '$2y$10$btyW2khkklFRPDERmx0NxOn/uoO5dE16np9sVJfNfAzmKgXwBmYYS', 'hu!+;X:!"GgyI:I');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Gust15', 'Morar.Braxton@example.com', '1638263128', 5, 0, 
-              0, 0, '$2y$10$Z1nxBC3PE7qrNLfb0xJnyOaO0O0JQK9l08L2Kyf0INm..xJU9vYje', '&p<-B~/amdFq3t]|eW<');
+              ('oreilly.leola', 'martin54@example.org', '3238712149', 4, 0, 
+              0, 0, '$2y$10$2hfwW11XrlUIe45iY.yDBet6ya6EEL2pIZ.niUdGQDAcUa/f8WMfq', 'uVw<du=\w');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Huel.Freda', 'Heaney.Cortez@example.net', '9419783890', 5, 0, 
-              0, 0, '$2y$10$ygziepyNjZqdsouVZUngs.nS0Rac5NJKeqTb4zpfDIg8RaxExkBeC', '''%%5w[~@<Xfnb?i7B4');
+              ('neil87', 'edmund.bernier@example.org', '5635361825', 3, 0, 
+              0, 0, '$2y$10$9QkdAUSb/T6J6bN3qcleieAKsZcg6z1faDoiUjlK2D6NVIiLNrNM2', '+0FY~6I5W4Hixu@u');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Jasper31', 'Schmitt.Hector@example.org', '1558093766', 9, 0, 
-              0, 0, '$2y$10$QYQjhFfReZWJc2VAuXUZEOhwhKG4jSId1kMILq1jhBCeUbbv9PZHC', 'DuNO6RhA}p/qW(s)');
+              ('adrianna.haley', 'drew64@example.net', '0214169703', 3, 0, 
+              0, 0, '$2y$10$5k/wDOGsjfsedpD.wk7OHOYrsNd/NdxaW/mfZTx1zbPfqh.rLiL6C', 'dT:r#O&V4*w*5e6Nuqi');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('vReichert', 'Elise21@example.net', '6107591455', 3, 0, 
-              0, 0, '$2y$10$JD4M/8uXytluEXpFjSvQ0eYcFsJSR/YI/zYlHRzkY/bR.8xy2/1Si', '};:3_>_+x');
+              ('marcelina.nader', 'rosamond01@example.org', '1113373531', 1, 0, 
+              0, 0, '$2y$10$fl40ECODYthEU2x61m07cujZPZ98x0S2rIpLdles4XyyxRyUT2W1G', '`,q%WzPxv');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('wStanton', 'fRaynor@example.net', '0825143045', 2, 0, 
-              0, 0, '$2y$10$mIP3CuGL7bJ5RoRNTosb6erD1NDcrN99K69vC9pmvIEkpSr7J1B2K', '09EoFQsGV;V3~)X_!');
+              ('alfred01', 'bmills@example.com', '6522196033', 1, 0, 
+              0, 0, '$2y$10$1QJJPU2ghSnRaiwBga/t.eBf/MOJqlMvYn8/6nqGmaTtUT.u0Usom', 'I.e_CGWQW2]');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Ruecker.Ofelia', 'Oswald48@example.net', '8243094281', 3, 0, 
-              0, 0, '$2y$10$Xvg2nVSMp1QptS1ug37yDud2Wj9jt9.LikgdpLrEXDyPWNrV55ZgC', 'b4yF~ExZ.Qm0R))qHpY');
+              ('crystel52', 'reichert.telly@example.net', '7120814262', 7, 0, 
+              0, 0, '$2y$10$bVgBnBzZS3NoaBV.g2yNB.nCMvBL.6CyQjy0pXW.L610Nu9BC1cz.', '=[A``L;');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Dooley.Ena', 'Presley.Sipes@example.net', '8333445620', 6, 0, 
-              0, 0, '$2y$10$linXq9n4Q1viarQNLN.JoO1gXFuPQzzdL6DtemSG9LrVVJP4dgwvG', 'Q=H&)9xq_''M');
+              ('xwehner', 'hackett.augustine@example.net', '3409484337', 4, 0, 
+              0, 0, '$2y$10$q7XZgWMakG7dkEHNmh0aYeVIonK2YHE9QRjd0/e4LvH1JpOUvINu6', '&}V\$z>Sp=vA%^');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Virginia82', 'Penelope.Bergnaum@example.org', '3447858501', 2, 0, 
-              0, 0, '$2y$10$CAJ/yoGg1D1Sv0GtbNyXaeY6Rg1FOzoPDGTEOlfGRlAqZ7AlxSyHC', '^.EWL6!*3(bZLg8f0w');
+              ('kylie.goldner', 'bwolf@example.net', '6549262776', 6, 0, 
+              0, 0, '$2y$10$R/o4RHKnFC2socA5oGk7DuGsTkHR936GV.x6uLbOM9hTbJVyIT.SG', 'hS@wv4,CtZ1R');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Ellen.Lueilwitz', 'Phyllis31@example.net', '4795295303', 6, 0, 
-              0, 0, '$2y$10$1QaYaCZFOfVIpCcMkjEHMugz.qeq8PvpABRG0BPvzFNil.PqF0NU.', '`vhY*!/Ed0N=hA_KwC');
+              ('ivory.green', 'wbalistreri@example.org', '1746539112', 5, 0, 
+              0, 0, '$2y$10$01oaJl/hyNBhNZGSZblkv.uYjkWop8YogNyG5VJwxPEWGuEe30hPu', 'zC|8`g"SR');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Haley.Jessica', 'dGusikowski@example.net', '5784685013', 7, 0, 
-              0, 0, '$2y$10$UasceIBjLJMSQaJSJCGrtuwjGAWb7Gpd8uZGvN70rjxF5isozbBSu', 'wYDyZY!O|Q3{j;+m');
+              ('stone48', 'frances31@example.net', '3338932815', 6, 0, 
+              0, 0, '$2y$10$D33jPzvES7P2M/lMy7e0Q.zP9SHHi0LXEa3nT5uH9HiWcV3H78Gzy', 'nHAI41!O>;-0yQIvIx');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('xKovacek', 'Katarina55@example.com', '9370031552', 1, 0, 
-              0, 0, '$2y$10$5LRcuTS7KQ1ufZNzlZTpV.h0HK7cYzr73A/Rsmsq7A5ArpHnNQDdK', 'R%KGbD?m+-O[:Y@U*');
+              ('lisa.kunze', 'xjacobson@example.net', '1919118897', 10, 0, 
+              0, 0, '$2y$10$k3fPUckMMboZQQdxVCxH1uAdVJsibZyMpnoDEfRm8WReRyhFnUtKG', 'UeW4unHS');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Oswaldo16', 'xVeum@example.net', '0348953530', 8, 0, 
-              0, 0, '$2y$10$0ql5QLrCaHgKlYxcxup31uBrLGDDmkfbsfiv5yMjqTyYf51Q9nh9y', 'jg~WpY');
+              ('vernon45', 'carmelo.torphy@example.org', '8366922706', 10, 0, 
+              0, 0, '$2y$10$5reHHl7LfbsXrKlHw8P8N.bk68tWLxTEPKxtuPWPhgNYgwF4JBGQq', 'nkcpEu''#pa.lZ');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('tSenger', 'fHyatt@example.net', '4807724752', 1, 0, 
-              0, 0, '$2y$10$bLG9FGRC4DEgYGD5z515sO5JCKzr0/CgSqXuFp0V/3vbS8gQ.vA2u', 'EIo%K|T');
+              ('lila.bernier', 'hortense68@example.com', '9752933850', 1, 0, 
+              0, 0, '$2y$10$bAD2YZCBLWVcg1FlFdhrPu/OtCHPAvLz5VRuvba/Dew5WlLndP7qu', 'sXh9@R7LSC50{!+y0~');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Koelpin.Marlen', 'Nicolas.Jairo@example.net', '1182329267', 3, 0, 
-              0, 0, '$2y$10$vwaywru4U2Rmxxd/kKgRJuamFvPyuJmqm4bfSpvHtk.I.dmG9shfG', '8>`nP"">AG');
+              ('alexane01', 'chaim.fadel@example.org', '2061893562', 7, 0, 
+              0, 0, '$2y$10$niHomBHOs0wGxjvH1vPeeu.auOQ02nwD8qXvLhJeSpXmDfEEhjMLm', ',uq[p;F]=#GUw#=`F^');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Beer.Sarai', 'xHodkiewicz@example.com', '8808392679', 10, 0, 
-              0, 0, '$2y$10$SaaMCH5dFD7Dj0lHx2M91ufV8CBg76Jxq.1Wgs4DkuMDZxNzRzDY2', '"UahXBez|wX:#1!Y,wf6');
+              ('narciso05', 'qdibbert@example.net', '2999784402', 2, 0, 
+              0, 0, '$2y$10$mh7LtL3opl69gILskMNc5eyUmd3A2L08d0bZS/DMtgWtTkCU.AsAO', '4d<i(P3''q3l4');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('jMayert', 'tMante@example.org', '1754737913', 5, 0, 
-              0, 0, '$2y$10$pZSsKkA30EA6owdB8TDcte7bVAw1qeua6hLiOsDAw7SonyoAK1NUK', 'M-22KikO:;''XC4cXe}<f');
+              ('rryan', 'hettie08@example.org', '9673420188', 1, 0, 
+              0, 0, '$2y$10$rcZmVFI8zneCIuuVtqBtU.DFcv5K5o0wk9BXopc1m.l.X29lLV3/a', 'u+^>UqT8xK6APN-&X.)');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Jadyn.Schimmel', 'Lonie.Klein@example.org', '9318126898', 8, 1, 
-              0, 0, '$2y$10$kA8e2RB6LZWev9wqhruF9OYwYApUlMuPMye5MWJSkv48ps4xALUL2', '!%4:nPw./sTMD)JWG`f');
+              ('npagac', 'cwilkinson@example.net', '5864566891', 5, 0, 
+              0, 0, '$2y$10$fNY6u3n.KJfUOsOGCOg.JOXXBgOGiKW6gxbQvvRVUG5.fQ6wXScUu', 'T\KN%x)q?.e');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('hFranecki', 'Bobby.Volkman@example.org', '9992522339', 9, 0, 
-              0, 0, '$2y$10$RwBq1HfHpra.6CuHe8D./OSVklUerBqXESl.8ZGvIZ0KWyz8FxAtK', 'SBf;''e#HC!U');
+              ('nhalvorson', 'rasheed00@example.org', '0853980683', 10, 0, 
+              0, 0, '$2y$10$/CVIhVueYEiWHvE1EnilV.XsszTI5aY/eYMqc/lNk4RVpFM/J/wEy', 'isUM0$[GW');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('bPadberg', 'Klein.Maximus@example.com', '8067603087', 2, 0, 
-              0, 0, '$2y$10$S/1IpchG5i.Ext4Abf9Y4uHRIl33gnV2a9MU5e/g4pEc933vjpHaq', 'xmOsl)');
+              ('bailey.rosenbaum', 'kaela50@example.net', '4637308997', 7, 0, 
+              0, 0, '$2y$10$Kiqc.max.fXoHyFkxXClAO3ICo0n6kujecvDtstOc.FnWbBUEXUCK', 'j+"/&$YUk]/l,"en');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Doug.Kohler', 'Ewald53@example.org', '2335377475', 10, 0, 
-              0, 0, '$2y$10$LuC5/7.bGz54v7cxXysA1enPoLOu8SSSaN3hb.wGqPKpvQUziwmD6', '3Y^)''T;5OmHWR&8w');
+              ('lane74', 'dovie.huels@example.com', '8628850339', 1, 0, 
+              0, 0, '$2y$10$cFPrYMm/bS03Lmfrs47ArOU7tXXt5cxxzkXWYSkFrplP5UccBM3pC', 'o|FtZL_Xn;');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Veda32', 'Crona.Nathaniel@example.org', '7618746971', 4, 1, 
-              0, 0, '$2y$10$0q8LPuZ2T2TFS02kzGXyiOMAVLqhishvhaRij4ys46wdnyGmi7Sve', 'K"S-LrI26''FI+');
+              ('rafael44', 'ziemann.kathryne@example.com', '4609311463', 6, 0, 
+              0, 0, '$2y$10$yrcRrLuitgMtkoJHDkqCFOwsEAYr5GSkIQstwLAVPJgH9NnHl6wcm', 'c}d2I;6zj');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Berniece60', 'Candace.Leffler@example.com', '5920846906', 7, 0, 
-              0, 0, '$2y$10$jqZQ6oz3weqwudCBWgM8U.PSqIsqk4bFC7gIUNuuG/PlmidxZMNCa', '#|;<d%.gF@}Kfp');
+              ('spencer.hildegard', 'darwin.block@example.net', '5220222011', 9, 0, 
+              0, 0, '$2y$10$J/EFdqTdkhM2hjV8aPyS9.DQ9do9tz15ZeFAheFgT51brV5gzNQei', 'iBkBBJK[u1d<X@j^3~');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Rosalind12', 'Orrin.Heller@example.com', '5042514482', 4, 0, 
-              0, 0, '$2y$10$aU4xuRVekNayR73ZptFIFewUIEKo5vbLXgBz9CdwP2mTIWTFpRjcq', 'L<*''kr0|K');
+              ('aabernathy', 'jstamm@example.com', '4715499909', 10, 0, 
+              0, 0, '$2y$10$cmAYb3FMhMfsBMcee0hyxupGjAO/ONserhkDX63hGp52yZGsvc6/m', 'B`1\sVr?D$fV0<=_Y');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Marie.Graham', 'Spencer.Garret@example.net', '2837197273', 6, 0, 
-              0, 0, '$2y$10$aout6xUBDKK24Zkk2IiCVOcPZdCabePm0xkMPWr8PcakQju7P641W', 'BGwbcpsep');
+              ('justice88', 'blemke@example.net', '9358772331', 5, 0, 
+              0, 0, '$2y$10$W4wfCkbwpAuhTFQ9di0PpulE6Zk3CQJq3vGfhyDZaoX7NMrYJU/me', '><_O~e8"=NRE+-');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Cathryn53', 'Theo98@example.com', '6112131545', 7, 0, 
-              0, 0, '$2y$10$48YuN1Fxk1eeQP./s5P62.qVPIGqRhCD66gmHraoFLvDEs42g.7cG', 'gI,''~E*hOg#I`55&yg');
+              ('dicki.marilou', 'corrine50@example.org', '9287216139', 10, 0, 
+              0, 0, '$2y$10$2oAIwB9pVCNd2ZCz062ZKunpUnrY6JGXXnuOhZ.N7a2sEwxfku4i.', '?od*AT`(kFBSGU');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('rWhite', 'Swaniawski.Lula@example.net', '2387226550', 4, 0, 
-              0, 0, '$2y$10$O0sYL4uGGNS1dD7vn3GOWe98GISTDzk6NhfjU3yL8BytvCh9l6SQK', '*F%D`''');
+              ('ptorphy', 'catharine.hills@example.com', '3897191020', 2, 0, 
+              0, 0, '$2y$10$TUSl45Gb1huSgiBO88Q5CeZW/Z2aNPJjWkU2Hm94LN.U1vECZVnsq', 'r&3iuLD)9(pV');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Cora01', 'Sonny.Rodriguez@example.net', '4384948117', 1, 0, 
-              0, 0, '$2y$10$JMH2ThCHuGhTZ4wkqzJ9zuaImYavs6A1MM2x8FeLL5R7Dq84NG6wa', 'B9-^V4g8vK;;j3');
+              ('mcorkery', 'cremin.tobin@example.com', '8953236326', 9, 0, 
+              0, 0, '$2y$10$NwH79I6NrvQ4MO6/IQygJ.TeatCAseZpigAp4/qZSNKATy4uZisVC', '#"*M_~GOr7<');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Margaret.DAmore', 'Cormier.Reuben@example.net', '9716178489', 8, 0, 
-              0, 0, '$2y$10$rDWcdEXJVdg7y9bT6fVY7OefO/mT3fzQhBm9UcFvbUGJQCG3iP2GK', 'ae4ETEs\m{z}D');
+              ('lang.zechariah', 'konopelski.ewald@example.com', '5328620387', 8, 0, 
+              0, 0, '$2y$10$HFgvGNM1sd6V4dvVcgsFjOHS4z0jewid0qSQ6vSnl5Rm.EAgVmrVm', '6^Vic{ibp7=''3Dy#');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kuhn.Syble', 'Brown.Delta@example.com', '0099439451', 9, 0, 
-              0, 0, '$2y$10$gv0jhXp/pN4whPUuSk7Te.UCzGu53HBMBRHNYtRCZoMf4w7pLTM26', '<QC#-\YrUrA');
+              ('nbotsford', 'ezra.lebsack@example.com', '0336497702', 6, 0, 
+              0, 0, '$2y$10$IKjWRPVwIX5SgTk2yRYWeOBcdO2AsRUwuslJEt3.uheUCwYjD7pxy', 'a@!lK:w^[;');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('hEichmann', 'Rebeka14@example.org', '4713972795', 7, 0, 
-              0, 0, '$2y$10$FZSUMswTK/Du43z3TmctOer1BndkTb9CvHV34uf9iE/7vYeQ0REZq', '_m|*\]idylW');
+              ('vickie54', 'quitzon.clark@example.net', '6134634275', 4, 0, 
+              0, 0, '$2y$10$b8Icw4dIa4OGVJzTBknP2eE6uz8.cGPOJvk6rTNcNrjQpwryDw9cW', '}*TFMlXA".]+EDtFtx0>');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Lane81', 'Kenya75@example.com', '5155063282', 2, 0, 
-              0, 0, '$2y$10$kd0EV4W8CheBHOtblBWfPeq11bRy1pMXGORowxRLjR8jOBjGAoq/m', 'PF#''_:|x_H*>,SCi?2C');
+              ('wgusikowski', 'dubuque.flo@example.net', '9619914536', 2, 0, 
+              0, 0, '$2y$10$Z2hVuEUBBJBKv.I8D6Ybxe7aGqej4ORX80QFXy8qcdH6he.nsg4YW', ']8)F/uwa7pg');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Adolphus.DAmore', 'Keeling.Carmella@example.com', '5990335378', 8, 0, 
-              0, 0, '$2y$10$5W9ikbAvIzoHmNgxHcEJY.UmG7uqQCxuk3uFpGYKcHkDTckMNs.6G', 'ydqrsDTfY7');
+              ('rohan.cydney', 'ignatius52@example.com', '9381383320', 6, 0, 
+              0, 0, '$2y$10$cWn8k34eeVe5QClfzELDAu1ACZIhBPzkmZMwBJSVe9hVz0sX5FxXi', '7n{xB,fRXP%A~jLE5TF#');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Clair.Davis', 'Murray.Gilda@example.org', '8064643738', 3, 0, 
-              0, 0, '$2y$10$klhlJ5Hcv0.9OldOd8z4TuPTSMFHsLBTp0RwjPynS4fjYTwlyMOWm', '!^&>$aWW9/zI<tgZis3');
+              ('bonita65', 'tfeeney@example.net', '6920148310', 2, 0, 
+              0, 0, '$2y$10$e0wvmJqtasn9JOop9YbSsut0mKymwh4Toj.SKfRjPLe7zQiR1i42y', ')2k`9D!,A'',=.&&');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Linnie10', 'Rowland36@example.org', '8675870781', 4, 0, 
-              0, 0, '$2y$10$CVWbymKa3YvE8MIYtSm1X.zBi688a4iRYhZqY.WDpTJYKIJBilMWO', '40r&-%I#R');
+              ('edmund11', 'reece96@example.org', '7463618920', 5, 0, 
+              0, 0, '$2y$10$13uRhNoZZbS1jMeLiEOQ/.KR7UANKqbI.tCKyjiUAVVNN9tn7/se6', 'iXScGv2Ad2LTM{');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Greenholt.Jayme', 'Gleichner.Zena@example.net', '7435567656', 10, 1, 
-              0, 0, '$2y$10$l0nvknctj2W9SfXl8NDtMezjKT7ApeQhMO5tyjo0jJIRAdA1fXSeu', '"N.^qrhB}oi^Aun>5');
+              ('rick.weissnat', 'chaim37@example.net', '4981492283', 8, 0, 
+              0, 0, '$2y$10$ublZuL7U9aZP5x91uLDd/O.levVsMXnddsNquff4BYUqdzFSPvhn6', 'G2cpaD:"9N');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Hannah81', 'Annie13@example.org', '4627251825', 5, 0, 
-              0, 0, '$2y$10$NrBqg.3CmHpF40CQCHCHge5T.DxW7dAm3KKIPUiZASgHUV3QXhQke', '"M\8L.{_r}~`TIsE9P%A');
+              ('maggio.savion', 'jamey.vonrueden@example.com', '2552459626', 10, 0, 
+              0, 0, '$2y$10$iYZ4nJHqoNrmwCPeqJa2YOHvMSeOsqIRgmrXMQgkufTZkL.qlVbiC', 'myo_Aw''}aM(e*=*=ST+');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Hickle.Elisabeth', 'Mraz.Elijah@example.org', '9969138364', 10, 0, 
-              0, 0, '$2y$10$UkqpZX4wszZEUVsOitGAnuLzP9.bHmAdsaXaaw.FkYDa8qIyLCdwi', 'HUN^vN*f%d!Hc\D$u');
+              ('desiree40', 'mac.prosacco@example.org', '3467295434', 8, 0, 
+              0, 0, '$2y$10$.cEwvnWaJKFeH5Obdz1Ro.hIN5lVcv/ppyUwDUWjk7RR2L1Py6Os6', 'ng.@!aNCU+l?Y,U,1j{W');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Michaela.Swift', 'Joan21@example.com', '6456077393', 3, 0, 
-              0, 0, '$2y$10$5Xvp8rhn0YqiUtL.vNPnTe.888DPxVwADfwz9BW3jpatVbxX9TULy', '1xvLIp[''(');
+              ('jennifer.nicolas', 'rosamond91@example.org', '1513640043', 1, 0, 
+              0, 0, '$2y$10$Tt59v6eE9TjbXBMd1hScEuKfuNa9aakGMj0VAY0xqks3s55ftKoeO', '~TN6^[$wJcW8Mh');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kiehn.Isabell', 'Kirlin.Genevieve@example.org', '0821976879', 2, 0, 
-              0, 0, '$2y$10$EDFTcWyjXpRJCSDBMXuaj.TTvWVfJrLSggMobWs//rfcx8DkDF5Sq', '.Bdhj:U:$itIc2');
+              ('rhauck', 'quinn.wyman@example.com', '6646115661', 9, 0, 
+              0, 0, '$2y$10$P9NNOR/uFe7xgmuNFpuiUeM12FwkGH5Jqd1jRBUKKVm4EaGnRAE4y', 'JB}aH{E');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('aOberbrunner', 'Annabell.Turner@example.net', '0803574219', 7, 0, 
-              0, 0, '$2y$10$/0YzInAVQb/Hs5XyQQSoT.qUEqFZaHoUriYM/tZ5YioQEuwDy2o0q', '0lo8ms,');
+              ('brian.legros', 'carlie.toy@example.net', '1772028271', 6, 0, 
+              0, 0, '$2y$10$R0PX3rFR99.Tmkdjt9AlK.l0WRFJB5/mIhJK0bHoqnIfdIdN58TJy', '5T==R{`c2,vBD?UUt');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('fSchuster', 'Jerrold.Beatty@example.net', '8771252125', 1, 0, 
-              0, 0, '$2y$10$2VecAVkeiupzzEPlE54Ll.rv6K88KSCtdXgttw6rqewDB40tj7/c6', '9.WAK0,tS{u5KQVY');
+              ('consuelo.kshlerin', 'lance56@example.org', '5757846702', 7, 0, 
+              0, 0, '$2y$10$nnEWy3wtjqvTDtOA6GsH1uALOrNXvUoQJdibYGC1ZDiLIqqGXXTAi', 'JTD3]q]u-X|');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Ledner.Kale', 'Hardy63@example.net', '2238671226', 9, 0, 
-              0, 0, '$2y$10$xdpAiQiqjPgrmplav4IdnOL8nf/ghWnShgnOk7i8I//x1jKDYI4ta', 'yd<Oj*H!');
+              ('sporer.julia', 'qwilliamson@example.com', '7217411203', 4, 0, 
+              0, 0, '$2y$10$QSwdp9foI5iRnQwgr.MONuhGc2Zq/BP3KxPUUmipJyI3o0AHkeKHC', ']wBe+2v9');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Schoen.Eino', 'Noemie53@example.com', '3718005402', 2, 0, 
-              0, 0, '$2y$10$F951cgde.hwGcq0eC9qN1OaZ00/NCDE8c7PPUrJEMzPeRqzp7yAJO', ':Qz>Qac');
+              ('yhudson', 'adelbert.vandervort@example.org', '6988633065', 9, 0, 
+              0, 0, '$2y$10$wlioo3an/ov.mv6ZWCnTveJF5GTPiEMLCVXP98UgSzMp6osnKCmpq', 'b6@w#&A*g.qbw-WF+Y-~');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('jLueilwitz', 'Palma42@example.net', '6962705458', 3, 0, 
-              0, 0, '$2y$10$f6VrFXlNa696GuNoNL5aBu3LQrOXkENcqsYTMRrT.EUdasQk61OH.', '$fwO#9h`^$');
+              ('kling.opal', 'howard52@example.com', '4773098114', 2, 0, 
+              0, 0, '$2y$10$MFJlokjnXpU2WOIsOqvrbudtQUl69Rf2hU5U.lyrWA1I6EvthUwum', '8$K&cghkz''vs2c@{+Wj');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('uLeuschke', 'tLehner@example.net', '4249417461', 4, 0, 
-              0, 0, '$2y$10$fLl178m/oqHl6dTRk89U9OBVYLGQ7yn44me.6MC/Ag.7fL6wVfy5y', '-GOy)rrs!@');
+              ('chase55', 'quinten.ferry@example.net', '6282191399', 10, 1, 
+              0, 0, '$2y$10$BGgUHesFvUn7taPQlH3N9elAQmCPSK6Ml4I8gHzR/ZfUzifqyp2X6', 'PkH)vI2zaIt%e>(C>P3');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('iSchoen', 'iCronin@example.net', '9758916385', 4, 0, 
-              0, 0, '$2y$10$uoeXDlOSs/NtuhHDMmP7nOFVr90qfpvYG.v8cS0RgFzUo/BN3Kagu', '$!R>a5m+Q?d))S');
+              ('carroll14', 'dedrick14@example.com', '1894641639', 8, 0, 
+              0, 0, '$2y$10$9kYhGDz.vCqfvhCzenkekOsUFP1KeK3XXenZnS9MtD/9unduSJeKS', 'xPkz3}');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Skyla69', 'Fadel.Phoebe@example.net', '1574963153', 2, 0, 
-              0, 0, '$2y$10$h43VRygZG1zQdQOdKclg9OZ3blfbgNVLAoHJ65HhUEUKusrPgWLLi', 'k3Bl(2F%MFtI]"&');
+              ('vivienne.macejkovic', 'alexander59@example.com', '2900246890', 3, 0, 
+              0, 0, '$2y$10$cQJ0/VFE.6LDbwfhmtmTxu1zhptnmI9GHOJksnCxBa4mw51g2qmSO', '&{dyJulx^WQ:bGR-[c');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('pHilll', 'Carolanne54@example.com', '6034838724', 1, 0, 
-              0, 0, '$2y$10$HJOSk7P2MJEFv4dH5Yotdu2rEQ3bvKkkjwsB.cjHzrbYw.fP1QnEy', '?*;XC!57\n''o');
+              ('karson.lynch', 'bosco.patience@example.org', '6126700188', 2, 0, 
+              0, 0, '$2y$10$xuDLYN3fpSviZEbECCSzde2hfGcOmf9ZiXHYdmaHhiOA61h.eZDmi', 'U$;c9{V,xw1i4');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Madilyn87', 'Elda.Romaguera@example.net', '0457847872', 3, 0, 
-              0, 0, '$2y$10$b8evJ2xaFZndM9uZ0Dx0k.yfLUmDH6sdYM5SPqBh1zcKjfoQFu/A2', 'r/f5IB)t#|EtB]L]t');
+              ('ali80', 'gino12@example.org', '9117656428', 10, 0, 
+              0, 0, '$2y$10$psG4ctZm9hWMrXAg393KlOt812H/Kk4NFEYGUV3B/XjLiapdN0jqm', '|@6kLC?V%O?,');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Greta79', 'Dolly70@example.com', '5699333821', 6, 0, 
-              0, 0, '$2y$10$Pign9RQvgGxZcuZVb4yVDe4vqh4Y/CtmRZZTFRQmwAFNTvNfP1P/q', 'k^yYJHL>7''$b{WE');
+              ('eliane74', 'dnikolaus@example.net', '0731969511', 6, 0, 
+              0, 0, '$2y$10$OEn9tRWEcDn18//gHr8aL.rpmzt3xBLCNx0Lt01WIm7SxqcS56qEe', '8ym?00^e4a1p0{^w{');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kathryn27', 'Emmet91@example.com', '6402528495', 5, 0, 
-              0, 0, '$2y$10$xD/9mZpEkOAlsibadD9R8u3.XOtdHk/54WHcel/h9YSAJjlkr7beO', 'P[QR{s1DM4]x)O7');
+              ('brooke.grant', 'eloy.pfannerstill@example.com', '1020349969', 7, 0, 
+              0, 0, '$2y$10$CZcDp7VMvlyDbQ/V1uNqceDgwJVvPlONZEL8aIv78dg1jxAeUBNJ2', '6NJ[X$\2sIyh(c');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Florian.Blick', 'Dortha18@example.com', '7051289340', 8, 0, 
-              0, 0, '$2y$10$6jOafZFEl/jQpJgdK2oWE.3r3O34L/3TPzywIqI5Xa96hJFdkv76i', 'i/P(E7swx4M;ZwNe&144');
+              ('torp.madge', 'beier.baylee@example.com', '5655454057', 10, 0, 
+              0, 0, '$2y$10$WBWmiiQOVFm6dzQCZ2FyNeFmg09Fvl6v5FbFtMRdzXzdGBR4aqnvO', '~G>x$&UITxb64`');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Maggio.Frida', 'Harry94@example.net', '1586497662', 2, 0, 
-              0, 0, '$2y$10$9lFh/6AjFduo2IjyR85LGeN6X0.IhAViDBEU.5jiD5/EkEq2B9.Xe', '=|5Em\)[&k.C%ET<');
+              ('omcglynn', 'eulalia.rice@example.com', '9121248568', 3, 1, 
+              0, 0, '$2y$10$c2D2ll8BX9tciHL4YONbLu73vdXgiKJXHCL7z8/JQtU8Vv5jPA40m', 'x/xXs!a4');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Collin90', 'kKulas@example.net', '4218539647', 3, 1, 
-              0, 0, '$2y$10$yqFy4iIGsxQ54fEPRLZa7uWc3vc9Kkp8OX5lwefOTxkor.JYERAwC', 'zxj!l+b');
+              ('heaven98', 'leila66@example.com', '0850895002', 8, 0, 
+              0, 0, '$2y$10$WvQtC1YEBNnyCA61N1cZ0.mxFR4B7rbJ1qsq3/BmoDyNZkdvyBamS', ']"}>:gXw)x_lK');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Lyla51', 'Tremblay.Aileen@example.org', '5877659399', 7, 0, 
-              0, 0, '$2y$10$NbX3VWZr5LdPFuSjH67Wu.nyVgP09lzaGb1hpUljk.//VFfJSYmse', 'Du^.g''ah=NQs');
+              ('leonardo92', 'noelia.carter@example.org', '4624237306', 8, 0, 
+              0, 0, '$2y$10$eGWX.NVZeoH31ORw5JAkPuzNRfXtumGwzgO2tyn6wODts7.w166n6', 'JI/%}yU+tu-Uc');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Foster.Emard', 'Eldora.Morissette@example.net', '2430092042', 3, 0, 
-              0, 0, '$2y$10$Fr99E4Cov3Wfz2q7enwF3eb/yc41trswX1Re6cQTlhYjyu7lUPCLO', '2fJpUV0');
+              ('francesca70', 'blaise.altenwerth@example.org', '6091600535', 6, 1, 
+              0, 0, '$2y$10$a4w9cG.ZjnglyK2oyedLdOLLD2N7sAeXev8hqoMp90jw.I.O.7GWi', 'q68zH)O');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Keara.Pouros', 'Corkery.Antonia@example.com', '4460805929', 9, 0, 
-              0, 0, '$2y$10$UYwLJyf3dIGhUOWTVwT1qO8Aq.125fuLxgrQQSTgdImExjDqOrpNS', 'DGNVgPI!~yC<u');
+              ('kristopher.graham', 'tchamplin@example.com', '2102213574', 6, 0, 
+              0, 0, '$2y$10$2qf.VBsYJowZkucWh8PW3.LrDQYPZk/yaDshkRo2acBaAx2yLgwhe', 'k!-fi#EfhE+r]^S#');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Freeda.Jacobson', 'Grant.Fadel@example.org', '8694982433', 3, 0, 
-              0, 0, '$2y$10$VRkfD3QhdIeqEt92MxWOK.yLDy3Nf4LZtO8lehQvWBce8jr65lsbK', '~|8~X=7h2');
+              ('preinger', 'kailee66@example.net', '6512206936', 4, 1, 
+              0, 0, '$2y$10$1rVPaf0TVpOp6phQFcGvhecrrYagwIViEXTRTesc0X2DaPbGqOzx.', '0X^qy@(>O@oKQ>Uq8');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Clovis34', 'Iliana.Schinner@example.com', '4126276737', 3, 0, 
-              0, 0, '$2y$10$FZd5jdnAcmJ4YvwlPQYA7.r9e/0y7ALd4qFkDLX8JO0TzRHeQmZQW', '(.prE%<sT');
+              ('green.katherine', 'nicolas.celia@example.org', '6600900927', 1, 0, 
+              0, 0, '$2y$10$3/.4uizzaWhYqgOGVPLPNONdFuoyjybSTgPkzwdMsRf2D3lkBwWN6', '<rSv<WwJ*,E`h=p|,');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Shields.Miller', 'Michale96@example.com', '1788683551', 1, 1, 
-              0, 0, '$2y$10$WNM4JUwlc2dnaPoEWnnhduX.HZ06NOSS1XSaqaIvz5ml1VJJusNka', 'tcbz|X(rc');
+              ('kurtis.grimes', 'gonzalo.rosenbaum@example.com', '1056011082', 2, 0, 
+              0, 0, '$2y$10$YwqsVxRRAleEd/AY6E89f.68AxJ/CmVO4OeyIGDQLaO6bUS5/Xa1y', '2#`{(?c]:v');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Frami.Derick', 'Dominic.Ruecker@example.net', '4117140407', 10, 1, 
-              0, 0, '$2y$10$aFxl8LNZAOWXrSBH7yh/oOPotssI208eHvosysivnyjwxGoj2YACS', '/FC~hkV`S`!>d@_*4G6');
+              ('annetta69', 'sadie94@example.net', '4819224015', 10, 0, 
+              0, 0, '$2y$10$mB8QHywEOV18rqxj8Im8PuJOXqGf5cd6/DsQMmdEeMydq0oWQry7y', 'oK*3xjt.''1<<8%l~O6|B');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Lucienne93', 'oStrosin@example.com', '1373187389', 1, 0, 
-              0, 0, '$2y$10$wkBKB6SQGo/eVhVP7H7QxO3kVfpkydi3HjlGcnDyf006uVggKYvJW', '9HX/(]U_3\?(');
+              ('ebony05', 'zharris@example.org', '7582742717', 10, 0, 
+              0, 0, '$2y$10$5eOm/yjN/cxkfvYVjvyqoOAGhLzwKMEMiV1EEa5Uk8HbC6rPx01Om', ']k~t(ywN<UDJGQuX^j');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Franecki.Mackenzie', 'Alva45@example.org', '0977622147', 3, 0, 
-              0, 0, '$2y$10$lAfyOsxEDacsSz4W/4Uc/O5urV4RWxe5SwEtBBGumFogbx8iFSM62', 'Z.,ASLXo1dW[^^r2');
+              ('scottie62', 'lbosco@example.org', '1467283526', 10, 0, 
+              0, 0, '$2y$10$d2w5JHdWnWN/eeTBnDSXD.dozkUaexZAHcil.mmUgUnE0UULIeb9u', '/mkwP(x1?9rFREYa`k');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Crystal.Weimann', 'Lubowitz.Kelsi@example.com', '1850693881', 6, 0, 
-              0, 0, '$2y$10$YYYqRh3ucUVNaW31eM0U6O69wNBJEZ5NT.X69cSiZzI..CXzS1AlW', '?C8uRC');
+              ('ecole', 'gbarrows@example.com', '6424581563', 4, 0, 
+              0, 0, '$2y$10$VmcqW8NZBchbvfIzYU9PpeuSwdzazi2INAmn/EAAAxbm3PeH1kkoq', '?5.xs[IgE~,`');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Ashtyn60', 'Upton.Vivianne@example.net', '4738449667', 3, 0, 
-              0, 0, '$2y$10$rRMrT0Zkx0uWuGuYRUyr.un83PbrDxTaeoQ0ox2zxt0uJ5OMLpdsu', '7]da5.|PR<');
+              ('kariane.senger', 'kuphal.alva@example.org', '8747515906', 6, 0, 
+              0, 0, '$2y$10$f1d3QvpghiGMpDwFIsA1x.k4VCjAOWvTuEhHo/ugFvPwT7l5sjEnW', 'XWwQI<Pl{THk;lR');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Schmeler.Leola', 'Antoinette.Bruen@example.org', '7522753495', 7, 0, 
-              0, 0, '$2y$10$7VgxEre9gsCx//wMl2UFJe3uU94DCvoqcNs4sEcUZQfJLG4Q/jytu', 'vD1F''[GDIY662N7lV');
+              ('tavares.barton', 'ugreenfelder@example.com', '1493431801', 10, 0, 
+              0, 0, '$2y$10$YOyX8U2Kzk2yC44QOXjemuoGBH6EkU6m9j7A/o6Pm7Gq.RJf2SbVC', '6kznch^p7s');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kessler.Ena', 'Olson.Marshall@example.com', '8086666780', 7, 0, 
-              0, 0, '$2y$10$FG/vEh04gqzmNhWigRWT0.SdKnueyRdGUEWt6IsdwK5/5HuRGFTQi', 'p?F9gj[60AX6Iu,!?D');
+              ('benedict.olson', 'kub.geovany@example.com', '5559186870', 2, 0, 
+              0, 0, '$2y$10$EZ3quQS1fFvUgCQFNQUdO.8u4cuQ/l6WNQ47MudIrClYjZUguSjDW', 'r;E,}HBK_Hk[~VE');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Beer.Daron', 'Angelina93@example.net', '1988493209', 5, 0, 
-              0, 0, '$2y$10$jwT73QMBLvzEGzr.rRZPCORgNLvx3x1QQ2PxJe0OYk.uu9Xvz0xl2', '9BQYEc2');
+              ('dario.raynor', 'upton.mona@example.com', '7526833762', 10, 0, 
+              0, 0, '$2y$10$Ulm7VaLiN.5LaLbvJ6btA.tLytusTbe1xi53.N2V6ccd5iPc8UR7i', '(?ZBajt}oGeZySR');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Dickinson.Wyman', 'Fannie.Koch@example.com', '0746221536', 1, 1, 
-              0, 0, '$2y$10$lN.V3CAwCjG8xvcWtouzOuhB.gru4LWfUhztdfmp5jT8u201FeM4i', '5[748nr.ks)Y9nI02dg');
+              ('dariana.goldner', 'earl.eichmann@example.net', '1255005245', 1, 0, 
+              0, 0, '$2y$10$5XkSq3nqDP.RQd2/CAcDf.q/qJgP9hDTfRATnKbVToOMEv3eKQIHO', 'Rcj@Y"&{P94A');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Delfina78', 'Tremblay.Keely@example.org', '4575214778', 6, 0, 
-              0, 0, '$2y$10$W2MGDPgo7e.dd/Tyit4P3.QNWzRA9rx4tEQSY2oRrzMpFNBhY2dYa', 'Bg\[Hw?cv');
+              ('upollich', 'kohler.rey@example.net', '2146636247', 6, 0, 
+              0, 0, '$2y$10$4YDiVUAlKvE9kzw7mkMz3uiN9EMhhIQGSq04MG9vLYZ/Q4DxVEol.', 'K"t%jaa:^NM/f-`k');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Kling.Ryleigh', 'Casper.Lonzo@example.net', '7901207954', 10, 0, 
-              0, 0, '$2y$10$LvCDUWB1yd2eI7BUHygJOugfgvws858g9jY/sjlKN.h6ambTLjwoS', 'C*ms:Hc$A;R)DFO');
+              ('ratke.meagan', 'fwolf@example.com', '8972264301', 8, 0, 
+              0, 0, '$2y$10$fD1qO/w9qfIpkZ5lOJd3TuDeoa1O3tHHUa4eJiQu7nYAcWSXacS0q', '>\m-{e(Q{Qr4fer35');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Twila.Muller', 'Randall47@example.org', '1950969271', 5, 0, 
-              0, 0, '$2y$10$NbSWYh8vkF0/lq/eqBrw5OpfSITZD9w6TG.9nU7KRhyKHkAsJGCOa', '>tHS?p#');
+              ('wterry', 'jones.cedrick@example.org', '1992383004', 7, 0, 
+              0, 0, '$2y$10$RxfUAUYkCwbVmv9/SKyVte.o.8p.P21kqRp9wTEjv0FJdN1ig5egm', 'R48%eCF2#7a7');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Jade.Dickens', 'Strosin.Myrtie@example.net', '7774325793', 4, 0, 
-              0, 0, '$2y$10$UdLEu3GWU96Xth4NJ0qOPuTVmltevUyZIw6KFjr0PW6AaBlv3v9Ny', '18QC$8d)ao|ab/0:');
+              ('pat.stanton', 'pnikolaus@example.net', '0365026476', 1, 0, 
+              0, 0, '$2y$10$Cwc.f..yzrkdeBOGgAUTJOo.ai7IT1lZphILTv6o9zuTlR.CfzQOi', '7}>y$/^G');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Corkery.Felicita', 'Richie79@example.net', '6004176670', 1, 0, 
-              0, 0, '$2y$10$D5Cw3VgcEnvspwsOD8jQ8eC/unqWconet.bHxoBbY8Sk51KfUx4iG', 'x7U|C){''T43#Il99Kg`z');
+              ('madge39', 'barrows.bridget@example.net', '4349092457', 10, 0, 
+              0, 0, '$2y$10$kIMxIwQwE8W8PSRE5LuCaODQofK4dzVHhzF1gJ66EnYqk3na8pCrq', 'TRD&B1?OvH1qP(j[on''');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Schiller.Coralie', 'gAnderson@example.net', '9513531444', 3, 0, 
-              0, 0, '$2y$10$pZPmT9oTwnPxGzQ6LfDbau.SO/JV6eKpG4eH/feMN/pAD5YIjJxKm', 'Q/V!xdWi)');
+              ('garland54', 'stoltenberg.ellsworth@example.com', '7884627032', 6, 0, 
+              0, 0, '$2y$10$jEpeeusuNLHb.QyCHLBIKepanLVd.f9xqWlHvzwfnw/Bs0cxnuttC', '''>qH%OZ');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Andy00', 'iSauer@example.com', '2193058172', 4, 0, 
-              0, 0, '$2y$10$f.WfRDpicC2H9A1TdFYuj.KDiCeaOa5I4zlrBJbeau.ditAaEe2LW', '6NnYW<');
+              ('darius83', 'kihn.david@example.com', '9592139469', 5, 0, 
+              0, 0, '$2y$10$7IoXbg3j.Rc97Snht29mBuY8wIIa.ahvxu.SIqykd96YHpVtND6Ly', 'sSDoDm');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Gibson.Alva', 'pStroman@example.org', '5245009594', 6, 0, 
-              0, 0, '$2y$10$2c6FoDdqz5VrnLgsJE21heXvMAe4Uux1Wm1xW2tYTVJuzUCGMuS0u', '4SIvO7VjZ\`{(}');
+              ('ifunk', 'colleen.deckow@example.com', '3425057450', 6, 0, 
+              0, 0, '$2y$10$h69djfDUft/kQRmIQniAmO0lIjSLDHRqHkwTzDWGy2AQ9i7XwF5Ii', 'J3]Q+Q;');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Teresa22', 'qSchulist@example.net', '2766401318', 2, 0, 
-              0, 0, '$2y$10$3bhaZRydTvfF5Sv3cWtPauTpaEz74r7w3PEbO9YXzuFo58EblBdoe', 'XK2m1x!>%-YX!cJ');
+              ('dchristiansen', 'rosa.jones@example.net', '6800183345', 1, 0, 
+              0, 0, '$2y$10$OsSwUmihZkL8TECaLXMQ6.mbGr1svKYhCiU13FPDBkmkpRGcskrBq', '!5z=x!vd2;Ldz!');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Green.Nathan', 'Boehm.Dave@example.com', '0514957267', 3, 0, 
-              0, 0, '$2y$10$SaaX2n/0/nOUeYUb0C1SN.FPGMhTdEadGsQJ3eTt0iGhfwkTX9q9K', 'km.k<T');
+              ('christiana56', 'rollin87@example.org', '5111784726', 5, 0, 
+              0, 0, '$2y$10$w2iG//mIQP0rCcQGRYK3n.LGuO/Y0/fiXQR36zbg3Sn2lfVUrRIsy', 'G[~)r%h<');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Christa.Larkin', 'Yasmine.Kerluke@example.org', '9673037222', 4, 0, 
-              0, 0, '$2y$10$ezxqwGPWY4hrAoT9e1UUlOz60qSCztT0jE.yzaeg5lrzb2z4xShUe', '^8a;sn,9YEqdCL.jF');
+              ('pfannerstill.michael', 'haley49@example.com', '8460371403', 7, 0, 
+              0, 0, '$2y$10$WZTMnHwGKP/W0H2nZ4InW.t8fEkkmxBn3edN7YKK6nsQr5CMTBsYS', 'B;,\wo(eq/vF")b9/n');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Elvie63', 'Salvador.OHara@example.com', '2115053698', 5, 0, 
-              0, 0, '$2y$10$aHSEV6bGLmHV0m82bShfW.KyHHINtHX6rhX9NvUUAii0ko7c6vYK.', '7''vdL%(;CDnD5fxgN1Ep');
+              ('santino10', 'alice73@example.org', '8903834265', 10, 0, 
+              0, 0, '$2y$10$fyoAA0McF2aUdV49ObmZVOxlCGVCHa9K.mOeUj4/qkwpunHHCrcFK', '[)T<yd');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Sven.Greenholt', 'Ardith85@example.net', '9742632039', 9, 1, 
-              0, 0, '$2y$10$DyVoM.54ASgt.2MEohe5E.qmn9ju4g5WnIEJsnuhTYRnIWlfieiIO', 'dD}aiRoS5WH');
+              ('chesley54', 'seth06@example.org', '2124285203', 5, 0, 
+              0, 0, '$2y$10$xwGke8koICgkPyenltJWSeWwcrSmv2rrnIrxgbkg5E6iJLwtpVc1S', '<yY2nCL');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('wDonnelly', 'wMohr@example.com', '5182900764', 8, 0, 
-              0, 0, '$2y$10$S0Pd78LNyymoxs2wYUzjnu9sugQ0ePQYoc6T0RUm.99h6.rRZxEhO', '@z4''Ha90-(Ll@K|WQ');
+              ('pfannerstill.humberto', 'rhiannon.schuster@example.org', '2157289146', 5, 0, 
+              0, 0, '$2y$10$h1XIquFO8ONoKOlLoHSXVu382yLzfco6N53QdZgTRco0U9D4U/S0m', '|NV/)[O)kE*4');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Harvey.Alejandrin', 'iKoch@example.com', '3322156160', 2, 0, 
-              0, 0, '$2y$10$qQt7swtc/FIx4hClQ8gDCuYn0uwpV8dNR9zcWoBtgQlOIeezmttZC', 'x+P+X]Kk-FgOs~rn');
+              ('kurtis45', 'conroy.jimmy@example.org', '5244161642', 1, 0, 
+              0, 0, '$2y$10$OJ1eOI7qNwXi2Us8VMXab.1qeKMzXbRIJE0qB8BwKYoMqknhaZKNW', '[F5hWjqhTjhoZNWTk(');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Zieme.Lowell', 'Kreiger.Chyna@example.net', '2356637205', 1, 0, 
-              0, 0, '$2y$10$1aX8WCDnH0/lcly1ep6PvuIu6oA98EkzSwTGpIhQiewKEaKfiuPje', 'OP,I/K]o!}M4$drdF');
+              ('cstamm', 'lindsay.yundt@example.org', '2515623557', 9, 0, 
+              0, 0, '$2y$10$dYILlJKRiRhN5rrbkfNvFumGapuRrkI/EH1EK21s4DS0/NK7yBOOW', ';2K,S&;%h1HO[*Xv:z');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('zMetz', 'Troy.Zulauf@example.net', '5170716079', 9, 0, 
-              0, 0, '$2y$10$31YN8qBteDkIwS7gU3IDA.VB7V.ZM5nLgTMZHjYrkZuvePsFCcaYa', 'I+>@y=,_"z>C');
+              ('norene.hagenes', 'willms.filiberto@example.com', '2353415729', 6, 0, 
+              0, 0, '$2y$10$nCKnYtjRmJ1Xt7I3RxR/re3qud5bFyZ9CXWINdhh5j.x3Y0SVvFdO', 'dL}Y+xW[>eq6sm~0-');
 INSERT INTO employees (`username`,`email`,`phone`,`company_id`,`is_admin`,`is_locked`,
              `attempts`,`password`, `plainpassword`) VALUES 
-              ('Hegmann.Arden', 'Wiley.Tremblay@example.com', '9767251491', 3, 0, 
-              0, 0, '$2y$10$wNCMTHAYSQCvOaKEAFr9g.pE5PEqKCMFIkpikeISpgESFcVH90d4S', 'i<MFml');
+              ('rosenbaum.pasquale', 'ortiz.jesus@example.net', '8802997306', 6, 0, 
+              0, 0, '$2y$10$xoZhfRe0jARQ53n76imz5.r5znLFwgV9nChgJW9aWLhmaANnev2Ua', 'KZdSGiA>C[0Z6,ZC');
 --//@UNDO
 PRAGMA foreign_keys=OFF;
 delete from employees;
