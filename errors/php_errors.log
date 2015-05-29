@@ -1,0 +1,227 @@
+[28-May-2015 08:41:35 America/Chicago] PHP Fatal error:  Cannot access parent:: when current class scope has no parent in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 25
+[28-May-2015 08:41:35 America/Chicago] PHP Stack trace:
+[28-May-2015 08:41:35 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/jsHelper/reroute.php:0
+[28-May-2015 08:41:35 America/Chicago] PHP   2. require_once() /home/ubuntu/workspace/public/jsHelper/reroute.php:29
+[28-May-2015 08:41:35 America/Chicago] PHP   3. security\Controllers\Login\CustomerLoginController->__construct() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:82
+[28-May-2015 08:41:35 America/Chicago] PHP   4. security\Models\Login\CustomerLogin->__construct() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:29
+[28-May-2015 08:42:01 America/Chicago] PHP Fatal error:  Cannot access parent:: when current class scope has no parent in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 25
+[28-May-2015 08:42:01 America/Chicago] PHP Stack trace:
+[28-May-2015 08:42:01 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/jsHelper/reroute.php:0
+[28-May-2015 08:42:01 America/Chicago] PHP   2. require_once() /home/ubuntu/workspace/public/jsHelper/reroute.php:29
+[28-May-2015 08:42:01 America/Chicago] PHP   3. security\Controllers\Login\CustomerLoginController->__construct() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:82
+[28-May-2015 08:42:01 America/Chicago] PHP   4. security\Models\Login\CustomerLogin->__construct() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:29
+[28-May-2015 08:43:55 America/Chicago] PHP Fatal error:  Class 'security\Models\Login\BaseLogin' not found in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 15
+[28-May-2015 08:43:55 America/Chicago] PHP Stack trace:
+[28-May-2015 08:43:55 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/jsHelper/reroute.php:0
+[28-May-2015 08:43:55 America/Chicago] PHP   2. require_once() /home/ubuntu/workspace/public/jsHelper/reroute.php:29
+[28-May-2015 08:43:55 America/Chicago] PHP   3. security\Controllers\Login\CustomerLoginController->__construct() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:82
+[28-May-2015 08:43:55 America/Chicago] PHP   4. spl_autoload_call() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:29
+[28-May-2015 08:43:55 America/Chicago] PHP   5. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:29
+[28-May-2015 08:43:55 America/Chicago] PHP   6. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[28-May-2015 08:43:55 America/Chicago] PHP   7. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[28-May-2015 08:45:23 America/Chicago] PHP Fatal error:  Access level to security\Models\Login\CustomerLogin::$pdo must be protected (as in class security\Models\Login\BaseLogin) or weaker in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 15
+[28-May-2015 08:45:23 America/Chicago] PHP Stack trace:
+[28-May-2015 08:45:23 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/jsHelper/reroute.php:0
+[28-May-2015 08:45:23 America/Chicago] PHP   2. require_once() /home/ubuntu/workspace/public/jsHelper/reroute.php:29
+[28-May-2015 08:45:23 America/Chicago] PHP   3. security\Controllers\Login\CustomerLoginController->__construct() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:82
+[28-May-2015 08:45:23 America/Chicago] PHP   4. spl_autoload_call() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:29
+[28-May-2015 08:45:23 America/Chicago] PHP   5. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:29
+[28-May-2015 08:45:23 America/Chicago] PHP   6. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[28-May-2015 08:45:23 America/Chicago] PHP   7. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[28-May-2015 08:47:08 America/Chicago] PHP Fatal error:  Access level to security\Models\Login\CustomerLogin::$pdo must be protected (as in class security\Models\Login\BaseLogin) or weaker in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 15
+[28-May-2015 08:47:08 America/Chicago] PHP Stack trace:
+[28-May-2015 08:47:08 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/jsHelper/reroute.php:0
+[28-May-2015 08:47:08 America/Chicago] PHP   2. require_once() /home/ubuntu/workspace/public/jsHelper/reroute.php:29
+[28-May-2015 08:47:08 America/Chicago] PHP   3. security\Controllers\Login\CustomerLoginController->__construct() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:82
+[28-May-2015 08:47:08 America/Chicago] PHP   4. spl_autoload_call() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:29
+[28-May-2015 08:47:08 America/Chicago] PHP   5. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php:29
+[28-May-2015 08:47:08 America/Chicago] PHP   6. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[28-May-2015 08:47:08 America/Chicago] PHP   7. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[28-May-2015 08:47:45 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: errorRunner' in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php:29
+Stack trace:
+#0 /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php(29): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 29, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(36): security\Models\Login\CustomerLogin->checkUser('vince.aufderhar', 'Jt@p*7?#h=q'p,#...')
+#2 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(83): security\Controllers\Login\CustomerLoginController->verifyLogin()
+#3 /home/ubuntu/workspace/public/jsHelper/reroute.php(29): require_once('/home/ubuntu/wo...')
+#4 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 29
+[28-May-2015 08:48:11 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: pdo' in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php:30
+Stack trace:
+#0 /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php(30): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 30, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(36): security\Models\Login\CustomerLogin->checkUser('vince.aufderhar', 'Jt@p*7?#h=q'p,#...')
+#2 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(83): security\Controllers\Login\CustomerLoginController->verifyLogin()
+#3 /home/ubuntu/workspace/public/jsHelper/reroute.php(29): require_once('/home/ubuntu/wo...')
+#4 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 30
+[28-May-2015 18:38:44 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: pdo' in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php:30
+Stack trace:
+#0 /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php(30): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 30, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(36): security\Models\Login\CustomerLogin->checkUser('vince.aufderhar', 'Jt@p*7?#h=q'p,#...')
+#2 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(83): security\Controllers\Login\CustomerLoginController->verifyLogin()
+#3 /home/ubuntu/workspace/public/jsHelper/reroute.php(29): require_once('/home/ubuntu/wo...')
+#4 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 30
+[28-May-2015 18:39:07 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: pdo' in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php:30
+Stack trace:
+#0 /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php(30): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 30, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(36): security\Models\Login\CustomerLogin->checkUser('vince.aufderhar', 'Jt@p*7?#h=q'p,#...')
+#2 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(83): security\Controllers\Login\CustomerLoginController->verifyLogin()
+#3 /home/ubuntu/workspace/public/jsHelper/reroute.php(29): require_once('/home/ubuntu/wo...')
+#4 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 30
+[28-May-2015 18:41:09 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: blackList' in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php:78
+Stack trace:
+#0 /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php(78): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 78, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(36): security\Models\Login\CustomerLogin->checkUser('vince.aufderhar', 'Jt@p*7?#h=q'p,#...')
+#2 /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php(83): security\Controllers\Login\CustomerLoginController->verifyLogin()
+#3 /home/ubuntu/workspace/public/jsHelper/reroute.php(29): require_once('/home/ubuntu/wo...')
+#4 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Login/CustomerLogin.php on line 78
+[28-May-2015 18:48:38 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: customerID' in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:32
+Stack trace:
+#0 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(32): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 32, Array)
+#1 {main}
+  thrown in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php on line 32
+[28-May-2015 18:52:44 America/Chicago] PHP Fatal error:  Class 'security\Controllers\ViewOrdersController' not found in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php on line 36
+[28-May-2015 18:52:44 America/Chicago] PHP Stack trace:
+[28-May-2015 18:52:44 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[28-May-2015 18:53:03 America/Chicago] PHP Fatal error:  Class 'security\Controllers\Customers\ViewOrders' not found in /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php on line 27
+[28-May-2015 18:53:03 America/Chicago] PHP Stack trace:
+[28-May-2015 18:53:03 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[28-May-2015 18:53:03 America/Chicago] PHP   2. spl_autoload_call() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 18:53:03 America/Chicago] PHP   3. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 18:53:03 America/Chicago] PHP   4. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[28-May-2015 18:53:03 America/Chicago] PHP   5. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[28-May-2015 18:53:03 America/Chicago] PHP   6. security\Controllers\Customers\ViewOrdersController->__construct() /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php:71
+[28-May-2015 18:53:56 America/Chicago] PHP Fatal error:  Class 'security\Models\Customers\ViewOrders' not found in /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php on line 27
+[28-May-2015 18:53:56 America/Chicago] PHP Stack trace:
+[28-May-2015 18:53:56 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[28-May-2015 18:53:56 America/Chicago] PHP   2. spl_autoload_call() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 18:53:56 America/Chicago] PHP   3. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 18:53:56 America/Chicago] PHP   4. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[28-May-2015 18:53:56 America/Chicago] PHP   5. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[28-May-2015 18:53:56 America/Chicago] PHP   6. security\Controllers\Customers\ViewOrdersController->__construct() /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php:71
+[28-May-2015 18:55:40 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\RecoverableErrorException' with message 'Argument 1 passed to security\Models\Customers\ViewOrders::__construct() must be an instance of security\Models\Customers\stdClass, instance of stdClass given, called in /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php on line 27 and defined' in /home/ubuntu/workspace/security/Models/Customers/ViewOrders.php:19
+Stack trace:
+#0 /home/ubuntu/workspace/security/Models/Customers/ViewOrders.php(19): security\Models\Inits->errorHandler(4096, 'Argument 1 pass...', '/home/ubuntu/wo...', 19, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php(27): security\Models\Customers\ViewOrders->__construct(Object(stdClass))
+#2 /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php(71): security\Controllers\Customers\ViewOrdersController->__construct(Object(stdClass), Object(stdClass))
+#3 /home/ubuntu/workspace/vendor/composer/ClassLoader.php(412): include('/h in /home/ubuntu/workspace/security/Models/Customers/ViewOrders.php on line 19
+[28-May-2015 18:56:16 America/Chicago] PHP Fatal error:  Cannot call constructor in /home/ubuntu/workspace/security/Models/Customers/BaseCustomer.php on line 15
+[28-May-2015 18:56:16 America/Chicago] PHP Stack trace:
+[28-May-2015 18:56:16 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[28-May-2015 18:56:16 America/Chicago] PHP   2. spl_autoload_call() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 18:56:16 America/Chicago] PHP   3. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 18:56:16 America/Chicago] PHP   4. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[28-May-2015 18:56:16 America/Chicago] PHP   5. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[28-May-2015 18:56:16 America/Chicago] PHP   6. security\Controllers\Customers\ViewOrdersController->__construct() /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php:71
+[28-May-2015 18:56:16 America/Chicago] PHP   7. security\Models\Customers\ViewOrders->__construct() /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php:27
+[28-May-2015 18:56:16 America/Chicago] PHP   8. security\Models\Customers\BaseCustomer->__construct() /home/ubuntu/workspace/security/Models/Customers/ViewOrders.php:22
+[28-May-2015 18:58:10 America/Chicago] PHP Fatal error:  Cannot call constructor in /home/ubuntu/workspace/security/Models/Customers/ViewOrders.php on line 22
+[28-May-2015 18:58:10 America/Chicago] PHP Stack trace:
+[28-May-2015 18:58:10 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[28-May-2015 18:58:10 America/Chicago] PHP   2. spl_autoload_call() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 18:58:10 America/Chicago] PHP   3. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 18:58:10 America/Chicago] PHP   4. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[28-May-2015 18:58:10 America/Chicago] PHP   5. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[28-May-2015 18:58:10 America/Chicago] PHP   6. security\Controllers\Customers\ViewOrdersController->__construct() /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php:71
+[28-May-2015 18:58:10 America/Chicago] PHP   7. security\Models\Customers\ViewOrders->__construct() /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php:27
+[28-May-2015 19:00:29 America/Chicago] PHP Fatal error:  Call to undefined method security\Controllers\Customers\ViewOrdersController::viewOrder() in /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php on line 72
+[28-May-2015 19:00:29 America/Chicago] PHP Stack trace:
+[28-May-2015 19:00:29 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[28-May-2015 19:00:29 America/Chicago] PHP   2. spl_autoload_call() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 19:00:29 America/Chicago] PHP   3. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:36
+[28-May-2015 19:00:29 America/Chicago] PHP   4. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[28-May-2015 19:00:29 America/Chicago] PHP   5. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[28-May-2015 19:30:36 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: isAjax' in /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php:58
+Stack trace:
+#0 /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php(58): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 58, Array)
+#1 /home/ubuntu/workspace/vendor/composer/ClassLoader.php(412): include('/home/ubuntu/wo...')
+#2 /home/ubuntu/workspace/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/home/ubuntu/wo...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('security\Contro...')
+#4 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(36): spl_autoload_call('security\Contro...')
+#5 {main}
+  thrown in /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php on line 58
+[28-May-2015 19:34:37 America/Chicago] PHP Fatal error:  Call to undefined method security\Controllers\Customers\ViewOrdersController::viewOrder() in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php on line 37
+[28-May-2015 19:34:37 America/Chicago] PHP Stack trace:
+[28-May-2015 19:34:37 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[28-May-2015 19:35:17 America/Chicago] PHP Fatal error:  Call to undefined method security\Controllers\Customers\ViewOrdersController::viewOrder() in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php on line 37
+[28-May-2015 19:35:17 America/Chicago] PHP Stack trace:
+[28-May-2015 19:35:17 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[28-May-2015 19:46:47 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\WarningException' with message 'Invalid argument supplied for foreach()' in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:40
+Stack trace:
+#0 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(40): security\Models\Inits->errorHandler(2, 'Invalid argumen...', '/home/ubuntu/wo...', 40, Array)
+#1 {main}
+  thrown in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php on line 40
+[28-May-2015 19:53:01 America/Chicago] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1142 SELECT command denied to user 'widgetCustomer'@'localhost' for table 'customersToOrders'' in /home/ubuntu/workspace/security/Models/Customers/ViewOrders.php:37
+Stack trace:
+#0 /home/ubuntu/workspace/security/Models/Customers/ViewOrders.php(37): PDOStatement->execute()
+#1 /home/ubuntu/workspace/security/Controllers/Customers/ViewOrdersController.php(31): security\Models\Customers\ViewOrders->viewOrders('2')
+#2 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(37): security\Controllers\Customers\ViewOrdersController->viewOrders()
+#3 {main}
+  thrown in /home/ubuntu/workspace/security/Models/Customers/ViewOrders.php on line 37
+[29-May-2015 07:01:28 America/Chicago] PHP Fatal error:  Access level to security\Controllers\Login\CustomerLoginController::$data must be protected (as in class security\Controllers\Login\BaseLoginController) or weaker in /home/ubuntu/workspace/security/Controllers/Login/CustomerLoginController.php on line 19
+[29-May-2015 07:01:28 America/Chicago] PHP Stack trace:
+[29-May-2015 07:01:28 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/jsHelper/reroute.php:0
+[29-May-2015 07:01:28 America/Chicago] PHP   2. require_once() /home/ubuntu/workspace/public/jsHelper/reroute.php:29
+[29-May-2015 07:21:26 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\WarningException' with message 'Invalid argument supplied for foreach()' in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:74
+Stack trace:
+#0 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(74): security\Models\Inits->errorHandler(2, 'Invalid argumen...', '/home/ubuntu/wo...', 74, Array)
+#1 {main}
+  thrown in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php on line 74
+[29-May-2015 07:56:39 America/Chicago] PHP Fatal error:  Class 'security\Controllers\Customers\stdClass' not found in /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php on line 43
+[29-May-2015 07:56:39 America/Chicago] PHP Stack trace:
+[29-May-2015 07:56:39 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[29-May-2015 07:56:39 America/Chicago] PHP   2. spl_autoload_call() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:74
+[29-May-2015 07:56:39 America/Chicago] PHP   3. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:74
+[29-May-2015 07:56:39 America/Chicago] PHP   4. Composer\Autoload\includeFile() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:301
+[29-May-2015 07:56:39 America/Chicago] PHP   5. include() /home/ubuntu/workspace/vendor/composer/ClassLoader.php:412
+[29-May-2015 07:57:08 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\NoticeException' with message 'Undefined variable: session' in /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php:48
+Stack trace:
+#0 /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php(48): security\Models\Inits->errorHandler(8, 'Undefined varia...', '/home/ubuntu/wo...', 48, Array)
+#1 /home/ubuntu/workspace/vendor/composer/ClassLoader.php(412): include('/home/ubuntu/wo...')
+#2 /home/ubuntu/workspace/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/home/ubuntu/wo...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('security\Contro...')
+#4 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(74): spl_autoload_call('security\Contro...')
+#5 {main}
+  thrown in /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php on line 48
+[29-May-2015 07:57:34 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\RecoverableErrorException' with message 'Argument 1 passed to security\Controllers\Customers\BaseCustomerController::__construct() must be an instance of security\Controllers\Customers\stdClass, instance of stdClass given, called in /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php on line 25 and defined' in /home/ubuntu/workspace/security/Controllers/Customers/BaseCustomerController.php:12
+Stack trace:
+#0 /home/ubuntu/workspace/security/Controllers/Customers/BaseCustomerController.php(12): security\Models\Inits->errorHandler(4096, 'Argument 1 pass...', '/home/ubuntu/wo...', 12, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php(25): security\Controllers\Customers\BaseCustomerController->__construct(Object(stdClass))
+#2 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(74): security\Controllers\Customers\InitCustomerController->__construct(Object(stdClass), Array)
+#3 {main}
+  thrown in /home/ubuntu/workspace/security/Controllers/Customers/BaseCustomerController.php on line 12
+[29-May-2015 07:58:03 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\RecoverableErrorException' with message 'Argument 1 passed to security\Controllers\Customers\BaseCustomerController::__construct() must be an instance of security\Controllers\Customers\stdClass, instance of stdClass given, called in /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php on line 25 and defined' in /home/ubuntu/workspace/security/Controllers/Customers/BaseCustomerController.php:12
+Stack trace:
+#0 /home/ubuntu/workspace/security/Controllers/Customers/BaseCustomerController.php(12): security\Models\Inits->errorHandler(4096, 'Argument 1 pass...', '/home/ubuntu/wo...', 12, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php(25): security\Controllers\Customers\BaseCustomerController->__construct(Object(stdClass))
+#2 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(74): security\Controllers\Customers\InitCustomerController->__construct(Object(stdClass), Array)
+#3 {main}
+  thrown in /home/ubuntu/workspace/security/Controllers/Customers/BaseCustomerController.php on line 12
+[29-May-2015 07:59:05 America/Chicago] PHP Fatal error:  Call to protected method security\Models\Customers\InitCustomer::setCustomerValues() from context 'security\Controllers\Customers\InitCustomerController' in /home/ubuntu/workspace/security/Controllers/Customers/InitCustomerController.php on line 30
+[29-May-2015 07:59:05 America/Chicago] PHP Stack trace:
+[29-May-2015 07:59:05 America/Chicago] PHP   1. {main}() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:0
+[29-May-2015 07:59:05 America/Chicago] PHP   2. security\Controllers\Customers\InitCustomerController->setCustomerValues() /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:75
+[29-May-2015 07:59:31 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\WarningException' with message 'Illegal string offset 'address'' in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:79
+Stack trace:
+#0 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(79): security\Models\Inits->errorHandler(2, 'Illegal string ...', '/home/ubuntu/wo...', 79, Array)
+#1 {main}
+  thrown in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php on line 79
+[29-May-2015 08:01:45 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\WarningException' with message 'Illegal string offset 'address'' in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php:79
+Stack trace:
+#0 /home/ubuntu/workspace/public/goodsite/customers/vieworders.php(79): security\Models\Inits->errorHandler(2, 'Illegal string ...', '/home/ubuntu/wo...', 79, Array)
+#1 {main}
+  thrown in /home/ubuntu/workspace/public/goodsite/customers/vieworders.php on line 79
+[29-May-2015 08:07:36 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\StrictException' with message 'Declaration of security\Controllers\Customers\AddNewOrderController::setObjects() should be compatible with security\BaseModel::setObjects($models)' in /home/ubuntu/workspace/security/Controllers/Customers/AddNewOrderController.php:18
+Stack trace:
+#0 /home/ubuntu/workspace/security/Controllers/Customers/AddNewOrderController.php(18): security\Models\Inits->errorHandler(2048, 'Declaration of ...', '/home/ubuntu/wo...', 18, Array)
+#1 /home/ubuntu/workspace/public/jsHelper/reroute.php(29): require_once('/home/ubuntu/wo...')
+#2 {main}
+  thrown in /home/ubuntu/workspace/security/Controllers/Customers/AddNewOrderController.php on line 18
+[29-May-2015 08:09:54 America/Chicago] PHP Fatal error:  Uncaught exception 'security\Exceptions\RecoverableErrorException' with message 'Argument 1 passed to security\Models\Customers\AddNewOrder::__construct() must be an instance of security\Models\Customers\stdClass, instance of stdClass given, called in /home/ubuntu/workspace/security/Controllers/Customers/AddNewOrderController.php on line 29 and defined' in /home/ubuntu/workspace/security/Models/Customers/AddNewOrder.php:15
+Stack trace:
+#0 /home/ubuntu/workspace/security/Models/Customers/AddNewOrder.php(15): security\Models\Inits->errorHandler(4096, 'Argument 1 pass...', '/home/ubuntu/wo...', 15, Array)
+#1 /home/ubuntu/workspace/security/Controllers/Customers/AddNewOrderController.php(29): security\Models\Customers\AddNewOrder->__construct(Object(stdClass))
+#2 /home/ubuntu/workspace/security/Controllers/Customers/AddNewOrderController.php(75): security\Controllers\Customers\AddNewOrderController->__construct(Object(stdClass), Object(stdClass))
+#3 /home/ubuntu/workspace/public/jsHelper/reroute.php(29): require_ in /home/ubuntu/workspace/security/Models/Customers/AddNewOrder.php on line 15

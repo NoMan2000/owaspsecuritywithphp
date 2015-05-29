@@ -60,8 +60,8 @@ class CheckAuth implements CustomerType
     public function isCustomer()
     {
         $isAuth = $this->isAuth();
-        $customerID = isset($_SESSION['customerType']) ? $_SESSION['customerType'] : null;
-        if (!$isAuth || $customerID !== CustomerType::CUSTOMER) {
+        $customerType = isset($_SESSION['customerType']) ? $_SESSION['customerType'] : null;
+        if (!$isAuth || $customerType !== CustomerType::CUSTOMER) {
             $this->logger->addWarning("This customer was not authenticated.");
             return false;
         }
@@ -70,8 +70,8 @@ class CheckAuth implements CustomerType
     public function isCorporate()
     {
         $isAuth = $this->isAuth();
-        $customerID = isset($_SESSION['customerType']) ? $_SESSION['customerType'] : null;
-        if (!$isAuth || $customerID !== CustomerType::CORPORATE) {
+        $customerType = isset($_SESSION['customerType']) ? $_SESSION['customerType'] : null;
+        if (!$isAuth || $customerType !== CustomerType::CORPORATE) {
             $this->logger->addWarning("This corporate user was not authenticated.");
             return false;
         }
@@ -80,8 +80,8 @@ class CheckAuth implements CustomerType
     public function isGroup()
     {
         $isAuth = $this->isAuth();
-        $customerID = isset($_SESSION['customerType']) ? $_SESSION['customerType'] : null;
-        if (!$isAuth || $customerID !== CustomerType::GROUP) {
+        $customerType = isset($_SESSION['customerType']) ? $_SESSION['customerType'] : null;
+        if (!$isAuth || $customerType !== CustomerType::GROUP) {
             $this->logger->addWarning("This corporate user was not authenticated.");
             return false;
         }

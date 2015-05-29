@@ -8,58 +8,53 @@ use \PDO;
 use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
-use \security\Models\Customers\AddNewOrder;
+use \security\Models\Customers\ViewOrders;
 use \security\Models\ErrorRunner;
 use \security\Models\PDOSingleton;
 use \security\Models\SiteLogger\FullLog;
 use \stdClass;
 
-class AddNewOrderController extends BaseCustomerController
+class ViewOrdersController extends BaseCustomerController
 {
     private $customerID;
-    private $models;
-    private $orderData;
     private $orderModel;
+    private $orderData;
 
     public function __construct(stdClass $models, stdClass $orderData)
     {
-        parent::__construct($models);
+        $this->orderData = $orderData;
         $this->customerID = $orderData->customerID;
-        $this->totalOrdered = $orderData->totalOrdered;
-        $this->orderModel = new AddNewOrder($models);
+        $this->orderModel = new ViewOrders($models);
     }
-    public function addOrder()
+    public function viewOrders()
     {
-        $this->data = $this->orderModel->addOrder($this->customerID, $this->totalOrdered);
+        $this->orders = $this->orderModel->viewOrders($this->customerID);
+    }
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }
 
 $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
 $auth = new Authenticate();
 $errorRunner = new ErrorRunner();
-$logger = new FullLog('Customer Add New Order');
+$logger = new FullLog('Customer Viewing Orders');
 $logger->serverData();
 $checkAuth = new CheckAuth($logger);
 $errors = [];
+$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
-$action = !empty($_POST['action']) ? $_POST['action'] : null;
 $isCustomer = $checkAuth->isCustomer();
 $customerID = !empty($_SESSION['customerid']) ?
 $auth->cInt($_SESSION['customerid']) : null;
-$totalOrdered = !empty($_POST['totalOrdered']) ?
-$auth->cInt($_POST['totalOrdered']) : null;
-$csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
-$action || $errors[] = "No action was specified on this request.";
 $customerID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
 $isCustomer || $errors[] = "You are not authenticated as a customer.";
-$totalOrdered || $errors[] = "No orders were sent over.";
-$csrf || $errors[] = "This form does not appear to have originated from our site.";
-
-if (!isset($_SESSION['csrf_token']) || $csrf !== $_SESSION['csrf_token']) {
-    $errors[] = "This form does not appear to have originated from our site.";
-}
 
 if (empty($errors) && $isAjax) {
     $models = new stdClass();
@@ -68,11 +63,10 @@ if (empty($errors) && $isAjax) {
     $models->logger = $logger;
 
     $orderData = new stdClass();
-    $orderData->action = $action;
-    $orderData->totalOrdered = $totalOrdered;
     $orderData->customerID = $customerID;
 
-    $controller = new AddNewOrderController($models, $orderData);
-    $controller->addOrder();
+    $controller = new ViewOrdersController($models, $orderData);
+    $controller->viewOrders();
+    $controller->viewCustomer();
     echo json_encode($controller);
 }

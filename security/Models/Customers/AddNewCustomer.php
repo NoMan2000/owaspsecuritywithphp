@@ -15,19 +15,15 @@ use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
 use \security\Models\FileUploader\FileUploader;
 use \security\Models\Login\EmailConfirmAccount;
-use \security\Traits\IsDevelopment;
-use \secuirty\Models\Customers\BaseCustomer;
+use \security\Models\Customers\BaseCustomer;
 use \stdClass;
 
-class AddNewCustomer implements Seconds
+class AddNewCustomer extends BaseCustomer implements Seconds
 {
-    use IsDevelopment;
     private $errors = [];
     private $orderID;
     private $customerID;
-    private $pdo;
-    private $errorRunner;
-    private $data;
+    
 
     public function __construct(stdClass $models)
     {

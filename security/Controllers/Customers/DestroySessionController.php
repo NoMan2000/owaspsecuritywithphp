@@ -18,7 +18,7 @@ use \StdClass;
 class DestroySessionController extends BaseCustomerController
 {
     private $action;
-    private $data;
+    
 
     public function __construct(stdClass $models, stdClass $customerData)
     {
@@ -68,6 +68,7 @@ $session || $errors[] = "You do not have a session identifier.";
 if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $csrf) {
     $errors[] = "You do not have permission to perform that action.";
 }
+$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
 if (empty($errors)) {
     $customerData = new StdClass;

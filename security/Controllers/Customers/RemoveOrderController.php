@@ -18,8 +18,9 @@ class RemoveOrderController extends BaseCustomerController
 {
     private $customerID;
     private $orderID;
-    private $action;
-    private $data;
+    private $order;
+    private $models;
+    private $orderData;
 
     public function __construct(stdClass $models, stdClass $orderData)
     {
@@ -32,10 +33,6 @@ class RemoveOrderController extends BaseCustomerController
             $this->orderData->customerID,
             $this->orderData->orderID
         );
-    }
-    public function jsonSerialize()
-    {
-        return $this->data;
     }
 }
 
@@ -53,6 +50,7 @@ $orderID = !empty($_POST['id']) ? $auth->cInt($_POST['id']) : null;
 $isCustomer = $checkAuth->isCustomer();
 $customerID = !empty($_SESSION['customerid']) ?
 $auth->cInt($_SESSION['customerid']) : null;
+$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
 $action || $errors[] = "No action was specified on this request.";
 $orderID || $errors[] = "No orderid was specified on this request.";

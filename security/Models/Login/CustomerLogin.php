@@ -6,29 +6,24 @@ require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/
 
 use \PDO;
 use \security\Interfaces\CustomerType;
+use \security\Models\Login\BaseLogin;
 use \security\Models\Authenticator\PasswordCheck;
-use \security\Models\ErrorRunner;
-use \security\Traits\IsDevelopment;
 use \stdClass;
 
-class CustomerLogin implements CustomerType
+class CustomerLogin extends BaseLogin implements CustomerType
 {
-    use IsDevelopment;
     private $username;
     private $password;
-    private $errorRunner;
-    private $pdo;
-    private $data = [];
-
+    
     public function __construct(stdClass $models)
     {
         parent::__construct($models);
-        parent::setObjects();
     }
-    public function checkUser($username, $password)
+    public function checkCustomerLogin($username, $password)
     {
+        $pdo = $this->pdo;
+        $blackList = $this->blackList;
         $dev = $this->isDev();
-        $this->errorRunner = $errorRunner;
         $sql = 'SELECT id, username, password FROM customers WHERE username = :username';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);

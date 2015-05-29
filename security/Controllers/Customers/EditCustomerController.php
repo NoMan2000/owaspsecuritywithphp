@@ -23,6 +23,8 @@ class EditCustomerController extends BaseCustomerController
 {
     private $editData = [];
     private $errors = [];
+    private $customer;
+    private $customerData;
 
     public function __construct(stdClass $models, array $customerData)
     {
@@ -62,6 +64,7 @@ $auth->cleanString($_POST['address']) : null;
 $phone = !empty($_POST['phone']) ?
 $auth->vPhone($_POST['phone']) : null;
 $csrf = !empty($_POST['csrf']) ? $csrf : null;
+$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
 if ($phone) {
     $phone = $auth->cInt($_POST['phone']);

@@ -4,13 +4,13 @@ namespace security\Controllers\Login;
 
 include_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \JsonSerializable;
+use \security\BaseModel;
+use \stdClass;
 
-abstract class BaseLoginController implements JsonSerializable
+abstract class BaseLoginController extends BaseModel
 {
-    private $data;
-    public function jsonSerialize()
+    public function __construct(stdClass $models)
     {
-        return $this->data;
+        parent::__construct($models);
     }
 }

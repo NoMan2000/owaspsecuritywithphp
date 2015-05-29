@@ -20,7 +20,8 @@ use \stdClass;
 class AddNewCustomerController extends BaseCustomerController
 {
     private $customerData = [];
-    private $errors = [];
+    private $models;
+    private $newCustomer;
 
     public function __construct(stdClass $models, array $customerData)
     {
@@ -30,10 +31,6 @@ class AddNewCustomerController extends BaseCustomerController
     public function addNewCustomer()
     {
         $this->data = $this->newCustomer->addNewCustomer($this->customer);
-    }
-    public function jsonSerialize()
-    {
-        return $this->data;
     }
 }
 
@@ -77,6 +74,7 @@ $instructions = !empty(trim($_POST['instructions'])) ?
 $auth->cleanString($_POST['instructions']) : null;
 $action = !empty($_POST['action']) ?
 $auth->cleanString($_POST['action']) : null;
+$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
 $username || $errors[] = "No username was sent over.";
 $email || $errors[] = "No email was sent over.";
@@ -103,7 +101,7 @@ try {
 if (!empty($errors)) {
     $errorRunner->runErrors($errors);
 }
-if (empty($errors)) {
+if (empty($errors) && $isAjax) {
     $models = new stdClass();
     $models->pdo = $pdo;
     $models->redis = $redis;
@@ -129,7 +127,6 @@ if (empty($errors)) {
 
     $addNewCustomer = new AddNewCustomerController($models, $customerData);
     $addNewCustomer->addNewCustomer();
-    if ($isAjax) {
-        echo json_encode($addNewCustomer);
-    }
+    echo json_encode($addNewCustomer);
+    
 }

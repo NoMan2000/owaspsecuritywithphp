@@ -25,10 +25,6 @@ GRANT ALL ON *.* TO 'widgetMain'@'%' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
 GRANT ALL ON *.* TO 'widgetMain'@'localhost' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
 GRANT ALL ON *.* TO 'widgetMain'@'127.0.0.1' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
 
-GRANT ALL ON widgets.* TO 'widgetMain'@'%' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
-GRANT ALL ON widgets.* TO 'widgetMain'@'localhost' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
-GRANT ALL ON widgets.* TO 'widgetMain'@'127.0.0.1' IDENTIFIED BY 'abc123' WITH GRANT OPTION;
-
 GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.* TO 'widgetSuper'@'%' IDENTIFIED BY 'somepassword';
 GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.* TO 'widgetSuper'@'localhost' IDENTIFIED BY 'somepassword';
 GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.* TO 'widgetSuper'@'127.0.0.1' IDENTIFIED BY 'somepassword';

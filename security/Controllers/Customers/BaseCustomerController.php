@@ -5,15 +5,13 @@ namespace security\Controllers\Customers;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \JsonSerializable;
-use \security\Traits\IsDevelopment;
+use \stdClass;
+use \security\BaseModel;
 
-abstract class BaseCustomerController implements JsonSerializable
+abstract class BaseCustomerController extends BaseModel
 {
-    use IsDevelopment;
-    private $data;
-
-    public function jsonSerialize()
+    public function __construct(stdClass $models)
     {
-        return $this->data;
+        parent::__construct($models);
     }
 }

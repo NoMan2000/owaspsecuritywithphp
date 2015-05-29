@@ -16,9 +16,7 @@ class EditCustomer extends BaseCustomer
     private $errors = [];
     private $orderID;
     private $customerID;
-    private $pdo;
-    private $errorRunner;
-    private $data;
+    
 
     public function __construct(stdClass $models)
     {

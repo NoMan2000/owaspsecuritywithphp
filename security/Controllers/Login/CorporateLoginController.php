@@ -20,7 +20,7 @@ class CorporateLoginController extends BaseLoginController
     private $errors = [];
     private $userName;
     private $password;
-    private $jsonObject = [];
+    
 
     public function __construct(stdClass $models, stdClass $corporateData)
     {
@@ -61,7 +61,7 @@ $userName || $errors[] = "No email was sent over.";
 $password || $errors[] = "No password was sent over.";
 $action || $errors[] = "No action to perform was sent over.";
 
-if (empty($errors)) {
+if (empty($errors) && $isAjax) {
     $modelObjects = new StdClass();
     $modelObjects->pdo = $pdo;
     $modelObjects->redis = $redis;
@@ -76,10 +76,7 @@ if (empty($errors)) {
 
     $controller = new CorporateLoginController($modelObjects, $corporateLoginData);
     $controller->checkUser();
-
-    if ($isAjax) {
-        echo json_encode($controller);
-    }
+    echo json_encode($controller);
 }
 
 if (!empty($errors)) {

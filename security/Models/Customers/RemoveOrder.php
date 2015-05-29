@@ -6,21 +6,14 @@ require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/
 
 use \PDO;
 use \stdClass;
-use \security\Interfaces\FullLogInterface;
-use \security\Models\ErrorRunner;
-use \security\Traits\IsDevelopment;
 use \security\Models\Customers\BaseCustomer;
 
 class RemoveOrder extends BaseCustomer
 {
-    use IsDevelopment;
     private $errors = [];
     private $orderID;
     private $customerID;
-    private $pdo;
-    private $errorRunner;
-    private $data;
-
+    
     public function __construct(stdClass $models)
     {
         parent::__construct($models);

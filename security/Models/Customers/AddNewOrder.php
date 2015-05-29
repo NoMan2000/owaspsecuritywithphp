@@ -5,19 +5,13 @@ namespace security\Models\Customers;
 require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
 
 use \PDO;
-use \security\Models\ErrorRunner;
-use \security\Interfaces\FullLogInterface;
-use \security\Traits\IsDevelopment;
+use \stdClass;
 use \security\Models\Customers\BaseCustomer;
 
 class AddNewOrder extends BaseCustomer
 {
-    use IsDevelopment;
     private $errors = [];
     private $customerID;
-    private $pdo;
-    private $errorRunner;
-    private $data;
 
     public function __construct(stdClass $models)
     {

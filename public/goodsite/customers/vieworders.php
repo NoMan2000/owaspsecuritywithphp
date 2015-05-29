@@ -2,6 +2,8 @@
 require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.php");
 
 use \security\Models\Authenticator\CheckAuth;
+use \security\Controllers\Customers\ViewOrdersController;
+use \security\Controllers\Customers\InitCustomerController;
 use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
 use \security\Models\SiteLogger\FullLog;
@@ -18,64 +20,72 @@ $errorRunner = new ErrorRunner();
 $logger = new FullLog('Customer Login Page');
 $checkAuth = new CheckAuth($logger);
 $isCustomer = $checkAuth->isCustomer();
-if (!$isCustomer) {
+$customerID = isset($_SESSION['customerid']) ? $_SESSION['customerid'] : null;
+if (!$isCustomer || !$customerID) {
     $error = rawurlencode('Not an authenticated consumer.');
     die(header("Location:{$rootPath}goodsite/index.php?errors=$error"));
 }
+
 $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
+$models = new stdClass();
+$models->pdo = $pdo;
+$models->errorRunner = $errorRunner;
+$models->logger = $logger;
+$orderData = new stdClass();
+$orderData->customerID = $customerID;
 
-$query = "SELECT id, fulfilled, unfulfilled FROM `orders`
-    WHERE customers_id = {$_SESSION['customerid']}";
-$customerOrders = "<header id='columnDefinitions'><div class='col-sm-3 definitionHeader'>Order id</div>
-                   <div class='col-sm-3 definitionHeader'>Number Fulfilled</div>
-                   <div class='col-sm-3 definitionHeader'>Number Unfulfilled</div>
-                   <div class='col-sm-3 definitionHeader'>Delete Order</div>
-                   </header>
-                   <section id='customerBody'>";
-foreach ($pdo->query($query) as $row) {
-    $id = htmlentities($row['id']);
-    $fulfilled = htmlentities($row['fulfilled']);
-    $unfulfilled = htmlentities($row['unfulfilled']);
-    $allFulfilled = false;
-    if ($fulfilled === $unfulfilled) {
-        $allFulfilled = true;
-    }
-    if (!$allFulfilled) {
-        $customerOrders .= "<section id='$id' class='clearfix'><div class='col-sm-3'>{$id}</div>
-                             <div class='col-sm-3'>{$fulfilled}</div>
-                             <div class='col-sm-3'>{$unfulfilled}</div>
-                             <div class='col-sm-3'>
-                                 <button type='button' class='btn btn-danger'
-                                 data-confirm='Delete the order?'
-                                 data-id='$id'
-                                 data-unfulfilled='$unfulfilled'
-                                 >
-                                 Delete Order</button>
-                             </div></section>";
-    }
-    if ($allFulfilled) {
-        $customerOrders .= "<section id='$id' class='fulfilled clearfix'><div class='col-sm-3'>{$id}</div>
-                             <div class='col-sm-3'>{$fulfilled}</div>
-                             <div class='col-sm-3'>{$unfulfilled}</div>
-                             <div class='col-sm-3'></div></section>";
-    }
+$controller = new ViewOrdersController($models, $orderData);
+$controller->viewOrders();
+$orders = $controller->getOrders(); 
 
+$customerOrders = "";
+if ($orders) {
+    foreach ($orders as $row) {
+        $id = htmlentities($row['id']);
+        $fulfilled = htmlentities($row['fulfilled']);
+        $unfulfilled = htmlentities($row['unfulfilled']);
+        $allFulfilled = false;
+        if ($fulfilled === $unfulfilled) {
+            $allFulfilled = true;
+        }
+        if (!$allFulfilled) {
+            $customerOrders .= "<section id='$id' class='clearfix'><div class='col-sm-3'>{$id}</div>
+                                 <div class='col-sm-3'>{$fulfilled}</div>
+                                 <div class='col-sm-3'>{$unfulfilled}</div>
+                                 <div class='col-sm-3'>
+                                     <button type='button' class='btn btn-danger'
+                                     data-confirm='Delete the order?'
+                                     data-id='$id'
+                                     data-unfulfilled='$unfulfilled'
+                                     >
+                                     Delete Order</button>
+                                 </div></section>";
+        }
+        if ($allFulfilled) {
+            $customerOrders .= "<section id='$id' class='fulfilled clearfix'><div class='col-sm-3'>{$id}</div>
+                                 <div class='col-sm-3'>{$fulfilled}</div>
+                                 <div class='col-sm-3'>{$unfulfilled}</div>
+                                 <div class='col-sm-3'></div></section>";
+        }
+    
+    }
 }
-    $customerOrders .= "</section>";
-    $query = "SELECT address, email, phone, instructions FROM customers WHERE id={$_SESSION['customerid']}";
-    foreach ($pdo->query($query) as $row) {
-        $address = htmlentities($row['address']);
-        $email = htmlentities($row['email']);
-        $phone = htmlentities($row['phone']);
-        $instructions = isset($row['instructions']) && !empty($row['instructions']) ?
-            htmlentities($row['instructions']) : null;
-    }
-    $customerInformation = "<p>We will send a confirmation email to $email when your packages are ready.</p>
-    <p>They will be
-    delivered to $address and we will call you at $phone when they are delivered.</p>";
-    if (!is_null($instructions)) {
-        $customerInformation .= "<p>You also specified the following additional instructions:</p><blockquote>$instructions</blockquote>";
-    }
+$controller = new InitCustomerController($models, $_SESSION);
+$controller->setCustomerValues();
+$customerInfo = $controller->getCustomerValues();
+
+$address = htmlentities($customerInfo['address']);
+$email = htmlentities($customerInfo['email']);
+$phone = htmlentities($customerInfo['phone']);
+$instructions = !empty($customerInfo['instructions']) ?
+    htmlentities($customerInfo['instructions']) : null;
+
+$customerInformation = "<p>We will send a confirmation email to $email when your packages are ready.</p>
+<p>They will be
+delivered to $address and we will call you at $phone when they are delivered.</p>";
+if ($instructions) {
+    $customerInformation .= "<p>You also specified the following additional instructions:</p><blockquote>$instructions</blockquote>";
+}
 ?>
 <nav class="navbar navbar-default">
   <div class="container-fluid bg-info">
@@ -126,8 +136,14 @@ foreach ($pdo->query($query) as $row) {
                 </button>
             </form>
         </div>
-
+        <header id='columnDefinitions'><div class='col-sm-3 definitionHeader'>Order id</div>
+           <div class='col-sm-3 definitionHeader'>Number Fulfilled</div>
+           <div class='col-sm-3 definitionHeader'>Number Unfulfilled</div>
+           <div class='col-sm-3 definitionHeader'>Delete Order</div>
+       </header>
+       <section id='customerBody'>
         <?= $customerOrders;?>
+        </section>
     </div><!-- End content -->
 
 </section>

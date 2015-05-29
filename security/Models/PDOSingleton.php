@@ -25,8 +25,7 @@ class PDOSingleton extends PDO implements DBPrivileges
         $this->engine = 'mysql';
         $this->host = 'localhost';
         $this->database = 'widgets';
-        $this->privileges = $privileges;
-        $this->switchPrivileges();
+        $this->switchPrivileges($privileges);
         $this->charset = 'utf8mb4';
         $this->socket = ini_get('mysqli.default_socket') ? ini_get('mysqli.default_socket') : null;
         if (PHP_OS === "LINUX") {
@@ -46,9 +45,9 @@ class PDOSingleton extends PDO implements DBPrivileges
             echo "Unable to connect: " . $e->getMessage() . "<p>";
         }
     }
-    protected function switchPrivileges()
+    protected function switchPrivileges($privileges)
     {
-        switch ($this->privileges) {
+        switch ($privileges) {
             case DBPrivileges::GLOBALUSER:
                 $this->user = 'widgetMain';
                 $this->pass = 'abc123';

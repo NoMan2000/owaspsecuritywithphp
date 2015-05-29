@@ -12,15 +12,14 @@ use \security\Models\ErrorRunner;
 use \security\Models\Login\CustomerLogin;
 use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
-use \StdClass;
+use \stdClass;
 
 class BadCustomerLoginController extends BaseLoginController
 {
     private $errors = [];
     private $userName;
     private $password;
-    private $jsonObject = [];
-
+    
     public function __construct(stdClass $models, stdClass $customerLoginData)
     {
         $this->userName = $customerLoginData->userName;
@@ -58,13 +57,13 @@ $userName || $errors[] = "No email was sent over.";
 $password || $errors[] = "No password was sent over.";
 
 if (empty($errors)) {
-    $modelObjects = new StdClass();
+    $modelObjects = new stdClass();
     $modelObjects->pdo = $pdo;
     $modelObjects->redis = $redis;
     $modelObjects->errorRunner = $errorRunner;
     $modelObjects->blackList = $blackList;
 
-    $customerLoginData = new StdClass();
+    $customerLoginData = new stdClass();
     $customerLoginData->userName = $userName;
     $customerLoginData->password = $password;
 

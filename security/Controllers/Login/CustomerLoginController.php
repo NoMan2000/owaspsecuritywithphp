@@ -20,7 +20,6 @@ class CustomerLoginController extends BaseLoginController
     private $errors = [];
     private $userName;
     private $password;
-    private $data = [];
 
     public function __construct(stdClass $models, stdClass $customerLoginData)
     {
@@ -28,9 +27,9 @@ class CustomerLoginController extends BaseLoginController
         $this->password = $customerLoginData->password;
         $this->customerLogin = new CustomerLogin($models);
     }
-    public function verifyLogin()
+    public function checkCustomerLogin()
     {
-        $this->data = $this->customerLogin->checkUser(
+        $this->data = $this->customerLogin->checkCustomerLogin(
             $this->userName,
             $this->password
         );
@@ -59,31 +58,28 @@ $postCsrf = isset($_POST['csrf']) ? $_POST['csrf'] : null;
 $sessionToken = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : null;
 
 if (!$sessionToken || $_SESSION['csrf_token'] !== $postCsrf) {
-    echo $sessionToken;
-    echo $postCsrf;
+    // Session token will not be set if the website is not SSL Encrypted.
     $errors[] = "This form does not appear to have originated on our site.";
 }
 
 $userName || $errors[] = "No username was sent over.";
 $password || $errors[] = "No password was sent over.";
 
-if (empty($errors)) {
-    $modelObjects = new StdClass();
+if (empty($errors) && $isAjax) {
+    $modelObjects = new stdClass();
     $modelObjects->pdo = $pdo;
     $modelObjects->redis = $redis;
     $modelObjects->errorRunner = $errorRunner;
     $modelObjects->blackList = $blackList;
     $modelObjects->logger = $logger;
 
-    $customerLoginData = new StdClass();
+    $customerLoginData = new stdClass();
     $customerLoginData->userName = $userName;
     $customerLoginData->password = $password;
 
     $controller = new CustomerLoginController($modelObjects, $customerLoginData);
-    $controller->verifyLogin();
-    if ($isAjax) {
-        echo json_encode($controller);
-    }
+    $controller->checkCustomerLogin();
+    echo json_encode($controller);
 }
 
 if (!empty($errors)) {

@@ -4,11 +4,10 @@ namespace security\Models\Customers;
 
 require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
 
-use \security\Traits\IsDevelopment;
-use \security\Controllers\Customers\BaseCustomerController;
+use \security\BaseModel;
 use \stdClass;
 
-class BaseCustomer extends BaseCustomerController
+abstract class BaseCustomer extends BaseModel
 {
     public function __construct(stdClass $models)
     {
