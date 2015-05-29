@@ -1,6 +1,7 @@
 .c9/
 vendor/
 composer.phar
+composer.lock
 bower_components/
 .sass-cache/
 node_modules/
