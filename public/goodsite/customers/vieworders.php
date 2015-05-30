@@ -10,7 +10,6 @@ use \security\Models\SiteLogger\FullLog;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
 use \security\Models\PDOSingleton;
-use \PDO;
 
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
@@ -36,7 +35,7 @@ $orderData->customerID = $customerID;
 
 $controller = new ViewOrdersController($models, $orderData);
 $controller->viewOrders();
-$orders = $controller->getOrders(); 
+$orders = $controller->getOrders();
 
 $customerOrders = "";
 if ($orders) {
@@ -67,7 +66,7 @@ if ($orders) {
                                  <div class='col-sm-3'>{$unfulfilled}</div>
                                  <div class='col-sm-3'></div></section>";
         }
-    
+
     }
 }
 $controller = new InitCustomerController($models, $_SESSION);

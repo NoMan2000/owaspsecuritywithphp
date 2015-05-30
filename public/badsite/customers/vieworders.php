@@ -9,7 +9,6 @@ use \Monolog\Handler\StreamHandler;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
 use \security\Models\PDOSingleton;
-use \PDO;
 
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
@@ -25,7 +24,7 @@ if (!$isCustomer) {
 }
 $pdo = new PDOSingleton();
 
-$query = "SELECT id, fulfilled, unfulfilled FROM `orders` 
+$query = "SELECT id, fulfilled, unfulfilled FROM `orders`
     WHERE customers_id = {$_SESSION['customerid']}";
 $customerOrders = "<header id='columnDefinitions'><div class='col-sm-3 definitionHeader'>Order id</div>
                    <div class='col-sm-3 definitionHeader'>Number Fulfilled</div>
@@ -43,10 +42,10 @@ foreach ($pdo->query($query) as $row) {
     }
     if (!$allFulfilled) {
         $customerOrders .= "<section id='$id'><div class='col-sm-3'>{$id}</div>
-                             <div class='col-sm-3'>{$fulfilled}</div> 
+                             <div class='col-sm-3'>{$fulfilled}</div>
                              <div class='col-sm-3'>{$unfulfilled}</div>
                              <div class='col-sm-3'>
-                                 <button type='button' class='btn btn-danger' 
+                                 <button type='button' class='btn btn-danger'
                                  data-confirm='Delete the order?'
                                  data-id='$id'
                                  data-unfulfilled='$unfulfilled'
@@ -56,30 +55,30 @@ foreach ($pdo->query($query) as $row) {
     }
     if ($allFulfilled) {
         $customerOrders .= "<section id='$id'><div class='col-sm-3 fulfilled'>{$id}</div>
-                             <div class='col-sm-3 fulfilled'>{$fulfilled}</div> 
+                             <div class='col-sm-3 fulfilled'>{$fulfilled}</div>
                              <div class='col-sm-3 fulfilled'>{$unfulfilled}</div>
                              <div class='col-sm-3 fulfilled'></div></section>";
     }
-    
+
 }
-    $customerOrders .= "</section>";            
+    $customerOrders .= "</section>";
     $query = "SELECT address, email, phone, instructions FROM customers WHERE id={$_SESSION['customerid']}";
     foreach ($pdo->query($query) as $row) {
         $address = htmlentities($row['address']);
         $email = htmlentities($row['email']);
         $phone = htmlentities($row['phone']);
-        $instructions = isset($row['instructions']) && !empty($row['instructions']) ? 
+        $instructions = isset($row['instructions']) && !empty($row['instructions']) ?
             htmlentities($row['instructions']) : null;
     }
     $customerInformation = "<p>We will send a confirmation email to $email when your packages are ready.</p>
-    <p>They will be 
+    <p>They will be
     delivered to $address and we will call you at $phone when they are delivered.</p>";
     if (!is_null($instructions)) {
         $customerInformation .= "<p>You also specified the following additional instructions:</p><blockquote>$instructions</blockquote>";
     }
 ?>
 <section class="container-fluid row">
-    <div id='content' class='clearfix col-xs-12 
+    <div id='content' class='clearfix col-xs-12
       col-sm-offset-3 col-md-offset-3 col-lg-offset-3
       col-sm-6 col-md-6 col-lg-6'>
         <div id='successHolder' class="alert alert-success" role="alert" style='display:none;'>
@@ -89,12 +88,12 @@ foreach ($pdo->query($query) as $row) {
             <div id='errorContent'></div>
         </div>
         <div id='customerInformation'>
-            <h2>Welcome to your Widget Corp. Customer Orders page.</h2>  
+            <h2>Welcome to your Widget Corp. Customer Orders page.</h2>
             <?= $customerInformation; ?>
-            <p>You can remove any orders that you no longer want and check the status of orders.  Please note that 
+            <p>You can remove any orders that you no longer want and check the status of orders.  Please note that
             you cannot delete an order which has already been fulfilled.</p>
             <p>If this information is inaccurate, go to the <a href="customerEdit.php">Customer Edit Page</a> and change it.
-                
+
             </p>
         <button type="button" class="btn btn-info" id='createNewOrder' aria-label="Left Align">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -107,8 +106,8 @@ foreach ($pdo->query($query) as $row) {
                 <div class="form-group">
                 <label for="newOrder" class="col-sm-2 control-label">New Order:</label>
                 <div class='col-sm-10'>
-                    <input type="number" name='newOrder' id="newOrder" class="form-control" 
-                    placeholder="Number to Order" min='0' required="" autocomplete="off" 
+                    <input type="number" name='newOrder' id="newOrder" class="form-control"
+                    placeholder="Number to Order" min='0' required="" autocomplete="off"
                     data-original=""
                     value=''>
                     </div>
@@ -118,12 +117,12 @@ foreach ($pdo->query($query) as $row) {
                 </button>
             </form>
         </div>
-        
+
         <?= $customerOrders;?>
     </div><!-- End content -->
 
 </section>
-<?php 
+<?php
 require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/footer.php");
 ?>
 <script type="text/javascript" src='<?=$jsPath;?>vieworders.js'></script>

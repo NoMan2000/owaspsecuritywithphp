@@ -1,12 +1,35 @@
 <?xml version="1.0"?>
 
-<project name="migrations" default="build">
+<project name="migrations" default="build" basedir=".">
     <property file='build.properties' />
-    <property name='build.dns'
-        value='${db.engine}:unix_socket=${db.socket};dbname=${db.name};host=${db.host}' />
+    <condition property="build.dns" value='mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name}'>
+        <os family="unix" />
+    </condition>
+    <condition property="build.dns" value='mysql -h${db.host} -u${db.user} -p${db.pass} ${db.name}'>
+        <os family="mac" />
+    </condition>
     <includepath classpath="${phingdir}" />
     <!-- Sets the DSTAMP, TSTAMP and TODAY properties -->
     <tstamp/>
+    <target name="build.setdefaultDatabase">
+        <echo msg="Making sure MySQL has default databases set up."/>
+        <exec command="pwd" passthru="true"/>
+        <property name="mysql.setup" value='mysql -h${db.host} -u${root.user}' />
+
+        <exec
+            command="${mysql.setup} &lt; deltas/mysql/${root.scriptZero}"
+            dir="${build.dir}"
+            passthru="true"
+            checkreturn="true"
+        />
+        <exec
+            command="${mysql.setup} &lt; deltas/mysql/${root.scriptOne}"
+            dir="${build.dir}"
+            passthru="true"
+            checkreturn="true"
+        />
+
+    </target>
 
     <target name="build.cleanup">
         <echo msg="Trying to clean up checkout dir" />
@@ -40,7 +63,7 @@
         <echo message="Generated cleanup SQL." />
         <echo message="Executing cleanup." />
         <exec
-            command="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; revertMySQL.sql"
+            command="${build.dns} &lt; revertMySQL.sql"
             dir="${faker}/reversion"
             passthru="true"
             checkreturn="false"
@@ -52,6 +75,7 @@
             passthru="true"
             checkreturn="false"
         />
+        <echo message="${build.dns} &lt; revertMysql.sql" />
 
     </target>
 
@@ -84,11 +108,11 @@
               outputfile="${build.dbdeploy.sqlite.deployfile}"
               undooutputfile="${build.dbdeploy.sqlite.undofile}"
         />
-        <echo message="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; ${build.dbdeploy.mysql.deployfile}" />
+        <echo message="${build.dns} &lt; ${build.dbdeploy.mysql.deployfile}" />
 
         <!-- Execute the SQL to push it into the MySQL Database. -->
         <exec
-            command="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; ${build.dbdeploy.mysql.deployfile}"
+            command="${build.dns} &lt; ${build.dbdeploy.mysql.deployfile}"
             dir="${build.dir}"
             passthru="true"
             checkreturn="true"
@@ -160,11 +184,11 @@
               outputfile="${build.dbdeploy.sqlite.deployfile}"
               undooutputfile="${build.dbdeploy.sqlite.undofile}"
         />
-        <echo message="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; ${build.dbdeploy.mysql.deployfile}" />
+        <echo message="${build.dns} &lt; ${build.dbdeploy.mysql.deployfile}" />
 
         <!-- Execute the SQL to push it into the MySQL Database. -->
         <exec
-            command="mysql -h${db.host} -u${db.user} -p${db.pass} --protocol=TCP -S ${db.socket} ${db.name} &lt; ${build.dbdeploy.mysql.deployfile}"
+            command="${build.dns} &lt; ${build.dbdeploy.mysql.deployfile}"
             dir="${build.dir}"
             passthru="true"
             checkreturn="true"
@@ -185,7 +209,9 @@
     </target>
 
     <target name="build" depends="build.cleanup,
-                                     build.migrate,
-                                     build.generateSeeds,
-                                     build.seed" />
+                                  build.generateCleanupSQL,
+                                  build.setdefaultDatabase,
+                                  build.migrate,
+                                  build.generateSeeds,
+                                  build.seed" />
 </project>

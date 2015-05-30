@@ -88,7 +88,7 @@ class Inits
         if (!empty($error) && in_array($error['type'], array(E_ERROR, E_USER_ERROR))) {
             echo '<h1>Sorry, something went wrong. The team has been notified.</h1>';
 
-            $errorPath = "/home/ubuntu/workspace/errors/Shutdownerrors.log";
+            $errorPath = dirname(dirname(__DIR__))."Shutdownerrors.log";
             if (!file_exists($errorPath)) {
                 touch($errorPath);
             }
