@@ -2,7 +2,9 @@
 include_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use \security\Models\Generator\RandomGenerator;
+use \security\Models\Generator\CountryList;
 use \security\Models\MySQLISingleton;
+
 
 $rand = new RandomGenerator();
 
@@ -10,6 +12,9 @@ $mysqli = new MySQLISingleton();
 
 $faker = Faker\Factory::create();
 $fakeCustomers = 20;
+
+$countryCodeKeys  = array_keys($countries);
+$countryCodeKeysLen = count($countryCodeKeys);
 
 $mysqlValues = $sqliteValues = [];
 
@@ -39,8 +44,8 @@ for ($i = 1; $i <= $fakeCustomers; $i++) {
     $mysqlPlainpassword = $mysqli->real_escape_string($plainpassword);
     $sqlitePlainpassword = SQLite3::escapeString($plainpassword);
 
-    $mysqlPassword = password_hash($mysqlPlainpassword, PASSWORD_DEFAULT);
-    $sqlitePassword = password_hash($sqlitePlainpassword, PASSWORD_DEFAULT);
+    $mysqlPassword = password_hash($plainpassword, PASSWORD_DEFAULT);
+    $sqlitePassword = password_hash($plainpassword, PASSWORD_DEFAULT);
 
     $email = $faker->safeEmail;
     $mysqlEmail = $mysqli->real_escape_string($email);
@@ -59,22 +64,30 @@ for ($i = 1; $i <= $fakeCustomers; $i++) {
     $sqliteState = SQLite3::escapeString($state);
 
     $phone = $faker->unique()->numerify('##########');
+    $countryCode = $countryCodeKeys[mt_rand(0, $countryCodeKeysLen)];
+    $phone = $faker->unique()->numerify('##########');
+    $zip = $faker->zip('#####');
 
-    $company_id = mt_rand(1, 10);
     $sentences = mt_rand(1, 4);
     $instructions = $faker->optional()->paragraph($sentences);
     $mysqlInstructions = $mysqli->real_escape_string($instructions);
     $sqliteInstructions = SQLite3::escapeString($instructions);
 
-    $mysqlQuery = "INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
-                  `address`, `instructions`, `phone`, `verified`) VALUES
+    $mysqlQuery = "INSERT INTO `customers`(`username`, `password`,
+                  `plainpassword`, `email`,
+                  `address`, `instructions`, `phone`, `verified`,
+                  `city`, `state`, `zip`, `countrycode`) VALUES
               ('$mysqlUsername', '$mysqlPassword', '$mysqlPlainpassword', '$mysqlEmail',
-              '$mysqlAddress', '$mysqlInstructions', $phone, 1)";
+              '$mysqlAddress', '$mysqlInstructions', $phone, 1,
+              '$mysqlCity', '$mysqlState', '$zip', '$countryCode'
+              )";
 
     $sqliteQuery = "INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
-                  `address`, `instructions`, `phone`, `verified`) VALUES
+                  `address`, `instructions`, `phone`, `verified`,
+                  `city`, `state`, `zip`, `countrycode`) VALUES
                   ('$sqliteUsername', '$sqlitePassword', '$sqlitePlainpassword', '$sqliteEmail',
-                   '$sqliteAddress', '$sqliteInstructions', $phone, 1)";
+                   '$sqliteAddress', '$sqliteInstructions', $phone, 1,
+                   '$sqliteCity', '$sqliteState', '$zip', '$countryCode')";
 
     $mysqlValues[] = $mysqlQuery;
     $sqliteValues[] = $sqliteQuery;

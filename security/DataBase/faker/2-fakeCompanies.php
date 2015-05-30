@@ -3,14 +3,20 @@
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use \security\Models\MySQLISingleton;
+use \security\Models\Generator\CountryList;
 
 $mysqli = new MySQLISingleton();
+$countryList = new CountryList();
+$countries = $countryList->getCountryList();
 
 $faker = Faker\Factory::create();
 
 $fakeCompanies = 10;
 
 $mysqlValues = $sqliteValues = [];
+
+$countryCodeKeys  = array_keys($countries);
+$countryCodeKeysLen = count($countryCodeKeys);
 
 for ($i = 0; $i < $fakeCompanies; $i++) {
     $name = $faker->company;
@@ -33,11 +39,21 @@ for ($i = 0; $i < $fakeCompanies; $i++) {
     $mysqlState = $mysqli->real_escape_string($state);
     $sqliteState = SQLite3::escapeString($state);
 
+    $countryCode = $countryCodeKeys[mt_rand(0, $countryCodeKeysLen)];
     $phone = $faker->unique()->numerify('##########');
-    $mysqlQuery = "INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES
-              (null, '$mysqlName', '$mysqlDomain', '$mysqlAddress', '$mysqlCity', '$mysqlState', '$phone')";
-    $sqliteQuery = "INSERT INTO companies (`id`, `name`, `website`, `address`, `city`, `state`, `phone`) VALUES
-                  (null,'$sqliteName', '$sqliteDomain', '$sqliteAddress', '$sqliteCity', '$sqliteState', '$phone')";
+    $zip = $faker->zip('#####');
+
+    $mysqlQuery = "INSERT INTO companies (`id`, `name`, `website`,
+                  `address`, `city`, `state`, `phone`, `countrycode`,
+                  `zip`) VALUES
+              (null, '$mysqlName', '$mysqlDomain', '$mysqlAddress',
+                '$mysqlCity', '$mysqlState', '$phone', '$countryCode',
+                '$zip')";
+    $sqliteQuery = "INSERT INTO companies (`id`, `name`, `website`,
+        `address`, `city`, `state`, `phone`, `countrycode`, `zip`) VALUES
+                  (null,'$sqliteName', '$sqliteDomain',
+                    '$sqliteAddress', '$sqliteCity', '$sqliteState',
+                    '$phone', '$countryCode', '$zip')";
 
     $mysqlValues[] = $mysqlQuery;
     $sqliteValues[] = $sqliteQuery;

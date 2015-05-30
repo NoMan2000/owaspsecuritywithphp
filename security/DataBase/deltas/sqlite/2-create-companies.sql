@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `companies` (
   `phone` VARCHAR(20) NULL DEFAULT NULL,
   `countrycode` VARCHAR(3) NULL DEFAULT 'USA',
   `zip` VARCHAR(12) NOT NULL,
-  `address` VARCHAR(155) NULL DEFAULT NULL,
+  `address` VARCHAR(155) NULL DEFAULT NULL
 );
 
 CREATE INDEX IF NOT EXISTS `companies_zip` ON companies(`zip` ASC);

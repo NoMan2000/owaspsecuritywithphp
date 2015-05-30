@@ -63,17 +63,15 @@
         <echo message="Generated cleanup SQL." />
         <echo message="Executing cleanup." />
         <exec
-            command="${build.dns} &lt; revertMySQL.sql"
-            dir="${faker}/reversion"
+            command="${build.dns} &lt; ${faker}/reversion/revertMySQL.sql"
             passthru="true"
-            checkreturn="false"
+            checkreturn="true"
         />
 
         <exec
-            command="sqlite3 widgets.sqlite &lt; revertSQLite.sql"
-            dir="${faker}/reversion"
+            command="sqlite3 ${build.dir}/sqlite/widgets.sqlite &lt;  ${faker}/reversion/revertSQLite.sql"
             passthru="true"
-            checkreturn="false"
+            checkreturn="true"
         />
         <echo message="${build.dns} &lt; revertMysql.sql" />
 
@@ -113,7 +111,6 @@
         <!-- Execute the SQL to push it into the MySQL Database. -->
         <exec
             command="${build.dns} &lt; ${build.dbdeploy.mysql.deployfile}"
-            dir="${build.dir}"
             passthru="true"
             checkreturn="true"
             error="${errorlog}/phing/mysql-deploy-error-${DSTAMP}${TSTAMP}.log"
@@ -124,8 +121,7 @@
 
         <!-- Execute the SQL to push into the SQLite Database. -->
         <exec
-            command="sqlite3 widgets.sqlite &lt; ${build.dbdeploy.sqlite.deployfile}"
-            dir="${build.dir}/sqlite"
+            command="sqlite3 ${build.dir}/sqlite/widgets.sqlite &lt; ${build.dbdeploy.sqlite.deployfile}"
             passthru="true"
             checkreturn="true"
             error="${errorlog}/phing/sqlite-deploy-error-${DSTAMP}${TSTAMP}.log"
@@ -189,7 +185,6 @@
         <!-- Execute the SQL to push it into the MySQL Database. -->
         <exec
             command="${build.dns} &lt; ${build.dbdeploy.mysql.deployfile}"
-            dir="${build.dir}"
             passthru="true"
             checkreturn="true"
             error="${errorlog}/phing/mysqlSeed-deploy-error-${DSTAMP}${TSTAMP}.log"
@@ -200,10 +195,10 @@
 
         <!-- Execute the SQL to push into the SQLite Database. -->
         <exec
-            command="sqlite3 widgets.sqlite &lt; ${build.dbdeploy.sqlite.deployfile}"
-            dir="${build.dir}/sqlite"
+            command="sqlite3 ${build.dir}/sqlite/widgets.sqlite &lt; ${build.dbdeploy.sqlite.deployfile}"
             passthru="true"
             checkreturn="true"
+            dir=""
             error="${errorlog}/phing/sqlite-deploy-error-${DSTAMP}${TSTAMP}.log"
         />
     </target>
