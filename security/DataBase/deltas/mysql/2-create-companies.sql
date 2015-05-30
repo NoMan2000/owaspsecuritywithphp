@@ -6,11 +6,15 @@ CREATE TABLE IF NOT EXISTS `widgets`.`companies` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `website` VARCHAR(155) NULL DEFAULT NULL,
-  `address` VARCHAR(155) NULL DEFAULT NULL,
   `city` VARCHAR(155) NULL DEFAULT NULL,
   `state` VARCHAR(155) NULL DEFAULT NULL,
   `phone` VARCHAR(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  `countrycode` VARCHAR(3) NULL DEFAULT 'USA',
+  `zip` VARCHAR(12) NOT NULL,
+  `address` VARCHAR(155) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `companies_zip` (`zip` ASC),
+  INDEX `companies_countrycode` (`countrycode` ASC))
 ENGINE = InnoDB
 COLLATE = utf8mb4_bin;
 

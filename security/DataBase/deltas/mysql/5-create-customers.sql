@@ -12,11 +12,17 @@ CREATE TABLE IF NOT EXISTS `widgets`.`customers` (
   `instructions` TEXT NULL DEFAULT NULL,
   `phone` VARCHAR(45) NOT NULL,
   `verified` TINYINT(1) NULL DEFAULT 0,
+  `city` VARCHAR(155) NULL,
+  `state` VARCHAR(155) NULL,
+  `countrycode` VARCHAR(3) NULL DEFAULT 'USA',
+  `zip` VARCHAR(12) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `customer_username_UNIQUE` (`username` ASC),
   UNIQUE INDEX `customer_email_UNIQUE` (`email` ASC),
   UNIQUE INDEX `address_UNIQUE` (`address` ASC),
-  UNIQUE INDEX `phone_UNIQUE` (`phone` ASC))
+  UNIQUE INDEX `phone_UNIQUE` (`phone` ASC),
+  INDEX `customers_zip` (`zip` ASC),
+  INDEX `customers_countrycode` (`countrycode` ASC))
 ENGINE = InnoDB
 COLLATE = utf8mb4_bin;
 
@@ -43,5 +49,5 @@ DROP TABLE IF EXISTS `widgets`.`customers`;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
---//    
-    
+--//
+
