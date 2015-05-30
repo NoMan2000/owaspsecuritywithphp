@@ -6,7 +6,6 @@ bower_components/
 .sass-cache/
 node_modules/
 *.rdb
-logs/
 
 *.com
 *.class
