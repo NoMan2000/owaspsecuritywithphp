@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php');
+include_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use \security\Models\Generator\RandomGenerator;
 use \security\Models\MySQLISingleton;
@@ -87,9 +87,9 @@ for ($i = 1; $i <= $fakeUsers; $i++) {
 }
 
 // Begin MySQL SQL statements.
-
-$valueString = implode(";".PHP_EOL,$mysqlValues);
-$valueString .= ";";
+$valueString = "SET FOREIGN_KEY_CHECKS = 0;";
+$valueString .= implode(";" . PHP_EOL, $mysqlValues);
+$valueString .= ";SET FOREIGN_KEY_CHECKS = 1;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE employees;
 SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL . "--//";
@@ -103,8 +103,9 @@ file_put_contents($seedsFile, $valueString);
  * Begin SQLite Preparations
  */
 
-$valueString = implode(";".PHP_EOL,$sqliteValues);
-$valueString .= ";";
+$valueString = "PRAGMA foreign_keys=OFF;";
+$valueString .= implode(";" . PHP_EOL, $sqliteValues);
+$valueString .= ";PRAGMA foreign_keys=ON;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "PRAGMA foreign_keys=OFF;
 delete from employees;
 PRAGMA foreign_keys=ON;

@@ -61,8 +61,9 @@ for ($i = 0; $i < $fakeCompanies; $i++) {
 
 // Generate SQL files for MySQL
 
-$valueString = implode(";" . PHP_EOL, $mysqlValues);
-$valueString .= ";";
+$valueString = "SET FOREIGN_KEY_CHECKS = 0;";
+$valueString .= implode(";" . PHP_EOL, $mysqlValues);
+$valueString .= ";SET FOREIGN_KEY_CHECKS = 1;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL .
 "SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE companies;
@@ -81,8 +82,9 @@ file_put_contents($seedsFile, $valueString);
 
 // Generate SQL files for SQLite
 
-$valueString = implode(";" . PHP_EOL, $sqliteValues);
-$valueString .= ";";
+$valueString = "PRAGMA foreign_keys=OFF;";
+$valueString .= implode(";" . PHP_EOL, $sqliteValues);
+$valueString .= ";PRAGMA foreign_keys=ON;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "PRAGMA foreign_keys=OFF;
 delete from companies;
 PRAGMA foreign_keys=ON;" . PHP_EOL . "--//";

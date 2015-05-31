@@ -21,10 +21,9 @@ for ($i = 1; $i <= $fakeOrders; $i++) {
     $values[] = $q;
 }
 
-// Begin MySQL SQL statements.
-
-$valueString = implode(";".PHP_EOL,$values);
-$valueString .= ";";
+$valueString = 'SET FOREIGN_KEY_CHECKS = 0;' . PHP_EOL;
+$valueString .= implode(";" . PHP_EOL, $values);
+$valueString .= ";" . PHP_EOL . "SET FOREIGN KEY CHECKS = 1;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE orders;
 SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL . "--//";
@@ -34,12 +33,9 @@ if (!file_exists($seedsFile)) {
 }
 file_put_contents($seedsFile, $valueString);
 
-/**
- * Begin SQLite Preparations
- */
-
-$valueString = implode(";".PHP_EOL,$values);
-$valueString .= ";";
+$valueString = "PRAGMA foreign_keys=OFF;";
+$valueString .= implode(";" . PHP_EOL, $values);
+$valueString .= ";PRAGMA foreign_keys=ON";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "PRAGMA foreign_keys=OFF;
 delete from orders;
 PRAGMA foreign_keys=ON;

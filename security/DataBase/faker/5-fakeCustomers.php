@@ -95,8 +95,9 @@ for ($i = 1; $i <= $fakeCustomers; $i++) {
 
 // Begin MySQL SQL statements.
 
-$valueString = implode(";" . PHP_EOL, $mysqlValues);
-$valueString .= ";";
+$valueString = "SET FOREIGN_KEY_CHECKS = 0;";
+$valueString .= implode(";" . PHP_EOL, $mysqlValues);
+$valueString .= ";SET FOREIGN_KEY_CHECKS = 1;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE customers;
 SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL . "--//";
@@ -110,8 +111,9 @@ file_put_contents($seedsFile, $valueString);
  * Begin SQLite Preparations
  */
 
-$valueString = implode(";" . PHP_EOL, $sqliteValues);
-$valueString .= ";";
+$valueString = "PRAGMA foreign_keys=OFF;";
+$valueString .= implode(";" . PHP_EOL, $sqliteValues);
+$valueString .= ";PRAGMA foreign_keys=ON;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "PRAGMA foreign_keys=OFF;
 delete from customers;
 PRAGMA foreign_keys=ON;
