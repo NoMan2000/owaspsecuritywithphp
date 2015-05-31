@@ -16,7 +16,7 @@ $fakeCustomers = 20;
 $countryList = new CountryList();
 $countries = $countryList->getCountryList();
 $countryCodeKeys  = array_keys($countries);
-$countryCodeKeysLen = count($countryCodeKeys);
+$countryCodeKeysLen = count($countryCodeKeys)-1;
 
 $mysqlValues = $sqliteValues = [];
 
@@ -53,7 +53,7 @@ for ($i = 1; $i <= $fakeCustomers; $i++) {
     $mysqlEmail = $mysqli->real_escape_string($email);
     $sqliteEmail = SQLite3::escapeString($email);
 
-    $address = $faker->address;
+    $address = $faker->streetAddress;
     $mysqlAddress = $mysqli->real_escape_string($address);
     $sqliteAddress = SQLite3::escapeString($address);
 

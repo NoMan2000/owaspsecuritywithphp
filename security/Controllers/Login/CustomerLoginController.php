@@ -57,7 +57,7 @@ $password = !empty($_POST['password']) ? $_POST['password'] : null;
 $postCsrf = isset($_POST['csrf']) ? $_POST['csrf'] : null;
 $sessionToken = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : null;
 
-if (!$sessionToken || $_SESSION['csrf_token'] !== $postCsrf) {
+if (!$sessionToken || $sessionToken !== $postCsrf) {
     // Session token will not be set if the website is not SSL Encrypted.
     $errors[] = "This form does not appear to have originated on our site.";
 }

@@ -31,15 +31,15 @@ $mysqlValues = $sqliteValues = [];
 // Create a default set of admin users so that each company will have at least one admin.
 
 for ($i = 1; $i <= $fakeUsers; $i++) {
-    $username = $faker->userName;
+    $username = $faker->unique()->userName;
     $mysqlUsername = $mysqli->real_escape_string($username);
     $sqliteUsername = SQLite3::escapeString($username);
 
-    $email = $faker->safeEmail;
+    $email = $faker->unique()->safeEmail;
     $mysqlEmail = $mysqli->real_escape_string($email);
     $sqliteEmail = SQLite3::escapeString($email);
 
-    $phone = $faker->numerify('##########');
+    $phone = $faker->unique()->numerify('##########');
     $is_admin = 0;
     if ($rand->returnRandomNumber(0, 100) <= $chance) {
         $is_admin = 1;

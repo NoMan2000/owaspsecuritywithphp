@@ -17,20 +17,12 @@ use \StdClass;
 
 class DestroySessionController extends BaseCustomerController
 {
-    private $action;
-    
-
     public function __construct(stdClass $models, stdClass $customerData)
     {
-        parent::__construct($models);
         $this->customerData = $customerData;
-        $this->setObjects();
+        isset($models->init) && $models->init instanceof SessionInitializers ?
+            $this->setInit($models->init) : $this->setDefaultInit();
         $this->destroy = new DestroySession($this->init);
-    }
-    protected function setObjects()
-    {
-        isset($this->models->init) && $this->models->init instanceof SessionInitializers ?
-        $this->setInit($this->models->init) : $this->setDefaultInit();
     }
     public function setInit(SessionInitializers $init)
     {
@@ -40,10 +32,9 @@ class DestroySessionController extends BaseCustomerController
     {
         $this->init = new SessionInitializers();
     }
-    protected function destroySession()
+    public function destroySession()
     {
         $this->data['loggedout'] = $this->destroy->destroySession();
-
     }
     public function jsonSerialize()
     {
@@ -51,36 +42,39 @@ class DestroySessionController extends BaseCustomerController
     }
 }
 
-$auth = new Authenticate();
-$errorRunner = new ErrorRunner();
-$logger = new FullLog('Customer Logging out');
-$checkAuth = new CheckAuth($logger);
-$init = new SessionInitializers();
-$errors = [];
-
-$action = !empty($_POST['action']) ? $_POST['action'] : null;
-$isCustomer = $checkAuth->isCustomer();
-$csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
-$session = isset($_SESSION) ? $_SESSION : null;
-$csrf || $errors[] = "There is no token for this account.  You have most likely timed out.";
-$isCustomer || $errors[] = "You are not authenticated as a customer.";
-$session || $errors[] = "You do not have a session identifier.";
-if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $csrf) {
-    $errors[] = "You do not have permission to perform that action.";
-}
 $isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
-if (empty($errors)) {
+if ($isAjax) {
+    $auth = new Authenticate();
+    $errorRunner = new ErrorRunner();
+    $logger = new FullLog('Customer Logging out');
+    $checkAuth = new CheckAuth($logger);
+    $init = new SessionInitializers();
+    $errors = [];
+
+    $isCustomer = $checkAuth->isCustomer();
+    $csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
+    $session = isset($_SESSION) ? $_SESSION : null;
+
+    $csrf || $errors[] = "There is no token for this account.  You have most likely timed out.";
+    $isCustomer || $errors[] = "You are not authenticated as a customer.";
+    $session || $errors[] = "You do not have a session identifier.";
+
+    if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $csrf) {
+        $errors[] = "You do not have permission to perform that action.";
+    }
     $customerData = new StdClass;
-    $customerData->action = $action;
     $customerData->session = $session;
 
     $modelObjects = new StdClass;
     $modelObjects->init = $init;
-
-    $controller = new DestroySessionController($modelObjects, $customerData);
-    $controller->destroySession();
-    if ($isAjax) {
+    if (empty($errors)) {
+        $controller = new DestroySessionController($modelObjects, $customerData);
+        $controller->destroySession();
         echo json_encode($controller);
     }
+}
+
+if (!empty($errors)) {
+    $errorRunner->runErrors($errors);
 }

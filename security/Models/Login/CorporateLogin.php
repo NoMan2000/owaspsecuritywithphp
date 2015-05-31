@@ -12,7 +12,7 @@ use \stdClass;
 class CorporateLogin extends BaseLogin implements CustomerType
 {
     protected $errors = [];
-    
+
     public function __construct(stdClass $models)
     {
         parent::__construct($models);
@@ -20,9 +20,23 @@ class CorporateLogin extends BaseLogin implements CustomerType
 
     public function checkUser($username, $password)
     {
-        $this->errorRunner = $errorRunner;
-        $sql = 'SELECT id, company_id, group_id, username, is_admin, is_locked, attempts,
-                password FROM users WHERE username = :username';
+        $pdo = $this->pdo;
+        $blackList = $this->blackList;
+
+        $sql = 'SELECT id,
+                username,
+                email,
+                phone,
+                company_id,
+                is_admin,
+                is_locked,
+                attempts,
+                password,
+                groups_id
+                FROM employees
+                JOIN employeesToGroups
+                ON employees.id = employeesToGroups.employees_id
+                WHERE employees.username = :username';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
@@ -49,7 +63,7 @@ class CorporateLogin extends BaseLogin implements CustomerType
                 $userid = $row['id'];
                 $_SESSION['corporateid'] = $row['company_id'];
                 $_SESSION['is_admin'] = $row['is_admin'];
-                $_SESSION['groupid'] = $row['group_id'];
+                $_SESSION['groupid'] = $row['groups_id'];
                 $_SESSION['isauthenticated'] = true;
                 $_SESSION['customerType'] = CustomerType::CORPORATE;
                 $this->data['userid'] = $userid;

@@ -136,8 +136,8 @@ if ($instructions) {
             </form>
         </div>
         <header id='columnDefinitions'><div class='col-sm-3 definitionHeader'>Order id</div>
-           <div class='col-sm-3 definitionHeader'>Number Fulfilled</div>
-           <div class='col-sm-3 definitionHeader'>Number Unfulfilled</div>
+           <div class='col-sm-3 definitionHeader'>Fulfilled</div>
+           <div class='col-sm-3 definitionHeader'>Unfulfilled</div>
            <div class='col-sm-3 definitionHeader'>Delete Order</div>
        </header>
        <section id='customerBody'>

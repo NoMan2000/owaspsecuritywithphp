@@ -10,7 +10,6 @@ use \security\Models\Customers\BaseCustomer;
 
 class AddNewOrder extends BaseCustomer
 {
-    private $errors = [];
     private $customerID;
 
     public function __construct(stdClass $models)
@@ -19,49 +18,83 @@ class AddNewOrder extends BaseCustomer
     }
     public function addOrder($customerID, $totalOrdered)
     {
-        $errors = $this->errors;
+        $errors = [];
         $pdo = $this->pdo;
+        $transaction = $pdo->beginTransaction();
         $query = "INSERT INTO orders
                   SET unfulfilled = :totalOrdered,
-                  groups_id = 1,
-                  groups_users_companies_id = 9,
-                  customers_id = :customerid";
+                  is_shipped = 0";
         $stmt = $pdo->prepare($query);
         if (!$stmt) {
-            $errors[] = "Unable to delete this record.";
+            $errors[] = "Unable to create a new record.";
         }
         $stmt->bindParam(':totalOrdered', $totalOrdered, PDO::PARAM_INT);
+        $success = $stmt->execute();
+        $orderID = $pdo->lastInsertId();
+        if (!$success || !$orderID) {
+            $errors[] = "Unable to add orders.";
+            $pdo->rollback();
+            $this->errorRunner->runErrors($errors);
+        }
+        $this->addOrdersToCustomers($customerID, $orderID);
+        $this->addOrdersToGroups($customerID, $orderID);
+        if ($success) {
+            $pdo->commit();
+            $this->data['success'] = [
+                "numberAdded"=>"We have added your orders.  A group will be assigned to handle them.",
+                "id"=>$orderID,
+                "fulfilled"=>0,
+                "unfulfilled"=>$totalOrdered
+            ];
+            return $this->data;
+        }
+        if (!empty($errors)) {
+            $this->errorRunner->runErrors($errors);
+        }
+    }
+    protected function addOrdersToCustomers($customerID, $orderID)
+    {
+        $pdo = $this->pdo;
+        $errors = [];
+        $query = "INSERT INTO customersToOrders
+                  SET customers_id = :customerid,
+                  orders_id = {$orderID}";
+        $stmt = $pdo->prepare($query);
+        if (!$stmt) {
+            $errors[] = "Unable to create a new record.";
+        }
         $stmt->bindParam(':customerid', $customerID, PDO::PARAM_INT);
         $success = $stmt->execute();
         $errorInfo = $stmt->errorInfo();
         if (isset($errorInfo[2]) && $this->isDev()) {
             $errors[] = $errorInfo[2];
-            $this->logger->addCritical("Unable to update because {$errorInfo[2]}");
+            $this->logger->addCritical("Unable to add new order because {$errorInfo[2]}");
         }
-
-        if (!$success) {
-            $errors[] = "Unable to add orders.";
+        if ($errors) {
+            $pdo->rollback();
+            $this->errorRunner->runErrors($errors);
         }
-        if ($success) {
-            $numberAdded = $stmt->rowCount();
-            if (!$numberAdded) {
-                $errors[] = "No rows were updated.";
-            }
-            if ($numberAdded) {
-                $id = $pdo->lastInsertId();
-                $query = "SELECT id, fulfilled, unfulfilled FROM orders WHERE id = $id";
-                foreach ($pdo->query($query) as $row) {
-                    $this->data['success'] = [
-                        "numberAdded"=>"We have added your orders.  A group will be assigned to handle them.",
-                        "id"=>$row['id'],
-                        "fulfilled"=>$row['fulfilled'],
-                        "unfulfilled"=>$row['unfulfilled']
-                    ];
-                    return $this->data;
-                }
-            }
+    }
+    protected function addOrdersToGroups($customerID, $orderID)
+    {
+        $pdo = $this->pdo;
+        $errors = [];
+        $group = mt_rand(1, 40);
+        // In a real application, we would probably use the customers
+        // zip code as a lookup for the closest company, and then
+        // assign a group with the lowest outstanding orders.
+        $query = "INSERT INTO groupsToOrders
+                  SET groups_id = $group,
+                  orders_id = $orderID";
+        $stmt = $pdo->prepare($query);
+        $success = $stmt->execute();
+        $errorInfo = $stmt->errorInfo();
+        if (isset($errorInfo[2]) && $this->isDev()) {
+            $errors[] = $errorInfo[2];
+            $this->logger->addCritical("Unable to add new order because {$errorInfo[2]}");
         }
-        if (!empty($errors)) {
+        if ($errors) {
+            $pdo->rollback();
             $this->errorRunner->runErrors($errors);
         }
     }

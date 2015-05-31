@@ -1,143 +1,123 @@
 PRAGMA foreign_keys=OFF;INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('dSchowalter', '$2y$10$reOCrOd.K8w/J4W3ua5.5uTmarq5sA15ml0ChNtTlyQ8Hv2urjTza', '&lwyZ/I/NGofA{o', 'Angelica.Quigley@example.net',
-                   '61813 Trantow Station Suite 489
-Lake Geovany, NY 42987-7773', 'Quia nesciunt quo ipsam et quaerat ut rerum. Est et incidunt eum exercitationem. Enim fugit cum minus totam similique.', 2089724630, 1,
-                   'Lake Mylesmouth', 'Kansas', '15012', 'EH');
+                  ('Elise.Koss', '$2y$10$ET7Z5NC8Iwxxf7HNEZ9kOOu8WrEAXcZAetpmImqEmi6bHPl767S1.', '"E()2|', 'Luther.Hintz@example.org',
+                   '6968 Raegan Gateway', '', 9139121915, 1,
+                   'Dooleymouth', 'South Dakota', '35630', 'SA');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Gleason.Aisha', '$2y$10$Q.BBif0NBHbUFaVcg2FMueZuqnZNiTus6LiR.caM4w85Pb.sXaZJu', 'p_6YP6N3}j', 'Walter.Bogan@example.net',
-                   '635 McGlynn Pass
-Marinabury, MS 07800', 'Reprehenderit impedit mollitia explicabo aut deserunt rerum accusantium. Quod saepe nesciunt vitae laborum. Suscipit delectus voluptas a dolore blanditiis id. Rem amet occaecati ducimus nihil vel doloribus unde. Officia error qui perspiciatis qui reprehenderit harum.', 1607896207, 1,
-                   'Port Cecelia', 'Kentucky', '32644', 'ET');
+                  ('Bradly69', '$2y$10$FxVPSe225NJox2iBS9tAhuqAMIJJEqmekxZCn7p8niAAJofhRJ0qe', '5L{.oM&4,E', 'Krista.Shanahan@example.org',
+                   '014 Elenor Stream', 'Et fugiat rerum suscipit tempora ipsa dignissimos et reprehenderit.', 8646225049, 1,
+                   'West Baileyton', 'California', '97185', 'YD');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Feil.Ruby', '$2y$10$4CP3b...Uy22TnU77o8c1OfpJwYFFpFhSEqq/ZyWG6jYHnzMTGlWi', 'JTSSo-DHgH', 'Schinner.Dakota@example.com',
-                   '65528 Heathcote View
-Lemketon, ID 38725-8538', '', 6186742214, 1,
-                   'Antoniettaborough', 'New Jersey', '02713', 'PL');
+                  ('Berta.Zemlak', '$2y$10$8jSCS7RGzj2ka0.vLPi1COCsGVO/GtDPh53eq7Z3drG5DkCc4QBBK', 'n*I1:!', 'Hackett.Carson@example.com',
+                   '6914 Wallace Place', '', 8321611699, 1,
+                   'Rodriguezmouth', 'Kentucky', '95159', 'BW');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Tyshawn.Ledner', '$2y$10$/89ChgBUf4IzQQGzskwep.ax9gpCEKSsRAScYMdNbrjCJNV1A4W/q', 'QrWHtsj4<onQ^>m)R', 'Donna70@example.org',
-                   '457 Dylan Mountains
-Wunschfort, KS 96832-0939', 'Labore saepe sit debitis facere. Eum eius harum eveniet. Iste deleniti libero id qui.', 1005896130, 1,
-                   'South Chayamouth', 'Kentucky', '21508', 'CL');
+                  ('Don.Wiegand', '$2y$10$3D1d/GM.jKOqTEBOnhn2fe2JrHY9RK01wDDQiuWLe4Jp3H7Va9b7O', 'RWs:i:ek,zGxRVGS', 'Shaun.Boyer@example.net',
+                   '66831 Rodriguez Curve', 'Modi voluptatem quaerat dolor voluptas aliquam dolorum. Aut sed voluptatem ut dolores.', 3655488620, 1,
+                   'Vonton', 'Virginia', '08089', 'TR');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Syble95', '$2y$10$koOh0kev2tiSBTW5noXNGeJjnQw/qcIhJT5w1slORkmOchNpRUoPO', 'S{wH~6rRDz7>%<VT|', 'bJohns@example.com',
-                   '37124 Muller Field Suite 527
-Stammfurt, ND 96590', '', 5101967250, 1,
-                   'Genechester', 'Idaho', '62078', 'BW');
+                  ('Pagac.Ena', '$2y$10$7al.xin/spH5Irioeyoh5ufME7YGQGZRN2Pd./p3.RU3EbNRvPqoO', '-_>o)9&)<', 'Raynor.Everett@example.org',
+                   '4214 Summer Ways', '', 0601786981, 1,
+                   'Generalbury', 'Delaware', '78640', 'SM');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Schumm.Sanford', '$2y$10$ck2yR44Sc7Is6YncHZQZ5..8n/RwiotrtQ.gdMeMu0Ebop/0pPaj6', ']>{Q''"o|FB,jt', 'Pat99@example.com',
-                   '1886 Bernhard Way Suite 172
-Port Adelia, DC 06662-8038', '', 8997021030, 1,
-                   'New Rogerfort', 'South Carolina', '27481', 'FI');
+                  ('kGaylord', '$2y$10$Xn4YovRxKjwun2h8ggAyxOEJhSomYQp91fZtHK207ww3zuDUWa6HK', '%Tr$si]It$C;t"O-', 'Constantin17@example.com',
+                   '734 Noel Hollow Suite 414', '', 8015007683, 1,
+                   'New Ozella', 'Maine', '53471', 'NF');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Allie.Armstrong', '$2y$10$9gn8rus5Gi2EVQ8fm7T0hOVYY.k5IQV0SiICDFwOMqkw9NmBsdgDu', ',g+!dDC2L]\5;Jx0', 'Will.Golden@example.org',
-                   '42338 Bettye Mountains
-Lake Okeyfurt, WI 79775', '', 2933893688, 1,
-                   'Port Evangelinestad', 'Wyoming', '48105', 'MF');
+                  ('Hayes.Misael', '$2y$10$MT/FiuMcuW65RIixDzmKU.K.DXLB8SKZpn.hmE07zHJt9R3YpKoHy', 'Hd5b~n$]qQ`}/l7dk', 'Kirk.Homenick@example.org',
+                   '585 Kihn Viaduct', 'Quaerat quo quam aut eaque fuga. Alias voluptates consectetur et nesciunt. Quae fugiat dicta et dolorem quo dolor voluptatum.', 6147638548, 1,
+                   'Lake Donnellshire', 'Utah', '30383', 'VG');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Brady03', '$2y$10$LE9I6CwirKdDJeg7858H0u.Ya5yzZR77Cu7NtrcYdtRMxoZsvC.mG', '~Z~XIt,aRN', 'lCole@example.org',
-                   '45262 Russell Key
-New Clementineville, MD 51591-5042', 'Incidunt odio aperiam veritatis totam ipsam quo eius. Itaque qui nesciunt at rerum maxime facere corrupti. Vel odit neque dolor rem possimus.', 4108439875, 1,
-                   'Mosciskiland', 'Oklahoma', '41292', 'AM');
+                  ('Caitlyn85', '$2y$10$wiKpoUIRT.OUJa4umB.xr.fIQsDl9iiWTwWAi1aFDajoKJAr6VrXq', 'eVZmo%^t|l(7\O0u', 'Charles.Koelpin@example.net',
+                   '0627 Abernathy Plain Suite 874', 'At odio aperiam magnam dolorem vel. Repudiandae omnis tempora eum quae ea qui est dolorum. Occaecati et nihil rem sint. Ea vero quas consectetur.', 4827798344, 1,
+                   'Port Brando', 'Delaware', '76667', 'FM');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Belle.Zboncak', '$2y$10$7l2g9nCwwK5zU29wvFB.m.bVgjEt7NbvFIw5tR/DaO97kerPp9Gku', '=iR{fi-Ov-4Ixxah', 'Mario.Cremin@example.net',
-                   '175 Ryan Views
-Daxfort, CT 59961', '', 7757952285, 1,
-                   'Ralphland', 'South Carolina', '77875', 'PZ');
+                  ('Aniya.Murphy', '$2y$10$Nph4zAdpk3eu9fJsMAyaK.N6RlrGgv/.5Bt47jaRNS2D1vdFc0UNi', 'Ku"V\NHIkcpSG+2]-A^0', 'Dante90@example.net',
+                   '23681 Block Rapid', 'Voluptas dolorem voluptatum non sit. Aperiam velit nobis nihil vel sed.', 0587996629, 1,
+                   'East Lucianoside', 'Connecticut', '08545', 'MS');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Kilback.Millie', '$2y$10$zxvtRhmlhnMKBUi4aUbaIuYQ6.ED3z6r2Own965bWD4vjvu.7Eph6', '\"_)$m/=k]${', 'uLarkin@example.org',
-                   '327 Litzy Well
-Port Roberto, NM 97660', '', 9392966813, 1,
-                   'East Aaronside', 'Washington', '43034', 'IE');
+                  ('Cormier.Maximillian', '$2y$10$T6uLE7OmNtT06XhngxCzFOMMBijXB5bRAq2qxLh7jqVM4HdvBvuRC', ';@a;e0,!Z$j.C', 'Romaine88@example.net',
+                   '08317 Peter Cliff Apt. 056', 'Excepturi dignissimos nisi placeat deleniti tenetur. Iusto nulla rerum aliquam atque. Fugiat ipsa consequatur error debitis officiis culpa ab ut. Corporis modi ea voluptas assumenda veniam culpa cum iusto.', 3029918270, 1,
+                   'South Neal', 'Washington', '43899', 'WF');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Terry.Khalil', '$2y$10$Lr08kr/q/li2J0M/FLXzNeyHY7P09Do4kIq5wUD24uzygmrkfUIoe', 'ZJ}r}<mQ', 'Cole.Raegan@example.org',
-                   '71696 Jerde Mount Apt. 793
-Port Kenny, ME 01438', '', 3550668126, 1,
-                   'Port Montyport', 'Virginia', '37445', 'CA');
+                  ('Melyssa65', '$2y$10$OSkhBw/gMRmrkKZVRYUlHu3c59SgXU1g.6UB0VjhxLFKOpQm1q5P.', '\JQ7>wzwxpUC,of', 'Moises.Balistreri@example.net',
+                   '201 Heathcote Unions', 'Laboriosam neque inventore hic ea repudiandae voluptatibus iusto ad.', 9563627113, 1,
+                   'Hertaville', 'Delaware', '11615', 'AZ');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Dolly.Berge', '$2y$10$JBAElhCmiVak0GlvVgMnge6XXWFxqO8fhD4MfYRc.Ur9NHTqOl0oi', 'sLNdEp$t-If', 'wJaskolski@example.com',
-                   '533 Augustus Trail Apt. 899
-North Romatown, MI 73533-4748', 'Dolor necessitatibus officia laudantium repellendus error. Illo excepturi fugit voluptatibus qui architecto et. Perferendis qui reiciendis magnam dicta perspiciatis.', 3661073420, 1,
-                   'Harleyfort', 'New Hampshire', '77456', 'GN');
+                  ('Andres.Morar', '$2y$10$glScflkRuITrLc2.6tIJbumXX2WMtNCMRVZeigOp32.8TOi5VBaaS', '\yAqUAvabCV}i/f', 'iWest@example.com',
+                   '9794 Mitchell Oval', 'Quis quisquam rem cupiditate omnis quia. In aperiam et ducimus vel. Porro explicabo voluptatum dignissimos dolor sint. Enim laudantium cum distinctio est magnam.', 7673220130, 1,
+                   'Port Eulaliaview', 'New Jersey', '12410', 'GI');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Cordell.Moen', '$2y$10$du9fUy6YWkOr6N5G/fbumObLAUfWpnCTLAJSZ7PLULRu7/rMSWh7i', '.C&o;Qx$=+;zgqg=', 'wMonahan@example.org',
-                   '6427 Crooks Trail
-Schuppeton, KS 49030-0728', 'Consequatur ab non qui aut. Fugit enim minima occaecati ex ab molestiae nihil impedit.', 3179075833, 1,
-                   'Port Rocioport', 'Texas', '85358', 'SU');
+                  ('Myrtis38', '$2y$10$LCNLtrmrUcgZLK7n1Y.sqOs3s0jo7wdkFeLLuukQWUuisvzbjMOhS', ')Uov})%Sb', 'hSwaniawski@example.com',
+                   '243 Emmy Crest', 'Nobis laborum necessitatibus fugiat sint ab quia maiores. Qui assumenda dolor nesciunt rerum.', 5492761022, 1,
+                   'East Domenick', 'Wisconsin', '13172', 'GH');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Alia92', '$2y$10$u.qD5/H4HciO2qZQUFwCRex6Gn3LuKPh3st0y20uW4jRls5uvhXn.', '?[\Lr}Pq', 'Glover.Mario@example.org',
-                   '032 Allison Route
-New Collinview, MD 87967', '', 2725852211, 1,
-                   'Parkermouth', 'Georgia', '44965', 'GA');
+                  ('Maureen.Dicki', '$2y$10$3XLTL4vZv1g6JkOJ3b2/Mu570IipJdvoGhP0vb7BCfv7GXxBVz4zu', 'N:^*uY[|D%CL', 'xSchuppe@example.org',
+                   '173 Lebsack Tunnel Suite 909', 'Ut ratione est velit non porro molestiae accusamus ducimus. Corporis maiores vel accusamus ut. Velit laudantium consequatur eveniet. Eos ut nemo quam magnam quia.', 5741081798, 1,
+                   'East Madilynton', 'Missouri', '47568', 'PH');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Hamill.Kattie', '$2y$10$KF5J.TVsmrGMNA0Q0lzTkOn1/A6mtsO75SRPC4N3wzhV6G1rjt3wW', 'Lt|K,1', 'kRobel@example.net',
-                   '060 Cronin Radial
-Jeanetteborough, OH 10327', 'Quia soluta ut quas molestiae omnis exercitationem necessitatibus. Ipsum veniam necessitatibus aut ad officiis vel. Odio debitis occaecati et perferendis veritatis non deleniti.', 0624958379, 1,
-                   'Heaneymouth', 'Oregon', '45111', 'PS');
+                  ('Edmund29', '$2y$10$r6qGi2R3DhP/Fz75pDnyvuqNykqdJ9aEc1FIbYh5limlTWOn4cerG', 'I!ye}1fr~zXMM', 'Adams.Maria@example.com',
+                   '8208 O''Reilly Club', 'Ipsum consectetur ut culpa. Dolores sed ipsa delectus ducimus architecto.', 5288296532, 1,
+                   'New Alejandra', 'Virginia', '41823', 'PH');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Darby.Becker', '$2y$10$gkFTtBOL75gwtkOUo/T3hOI597yhLSmVLf1oCLtq7AQ2/4XJGzYla', 'ky#nT\,Ypo:/', 'Lilly.Ortiz@example.org',
-                   '52274 Schumm Locks
-East Milantown, WV 57157', '', 5833988343, 1,
-                   'Denesikfort', 'New Hampshire', '53715', 'TH');
+                  ('Emma.Sporer', '$2y$10$w.swzzl6hbddl8wUfFWuPua6/QzVAYYs7iOctJ4z6bMD0gX2BbXmC', '$zH^#AclMR9>"H''$<.', 'jJones@example.org',
+                   '86676 Dee Heights', 'Sunt nostrum velit natus voluptate voluptas.', 0360665829, 1,
+                   'New Shane', 'Mississippi', '54898', 'VC');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Kozey.Vickie', '$2y$10$HSt/DcPLcpIJgpb6rB2P8.TckuDN/5noAg3Oo/VvMy8.2G3zL03ty', 'KV;]8Yp', 'wBruen@example.com',
-                   '633 Cole Islands
-Heberborough, WI 02209', '', 1438267315, 1,
-                   'South Lenore', 'Utah', '05552', 'TF');
+                  ('Christiansen.Pamela', '$2y$10$vLHP3ygOBCmG.LsBLE3wxu/wOqbI.gEKO8opmAFNMaq1U2ykekeYq', '>S4''W;\#%*M0#8D17}', 'jHegmann@example.org',
+                   '30916 Gleason Union Suite 499', 'Distinctio praesentium voluptatem eum asperiores iste rerum. Reprehenderit porro est dolorem molestiae repellat reiciendis ea. Rerum eum tempore iste aut totam deserunt sit.', 9763832747, 1,
+                   'Wintheiserbury', 'Kansas', '76866', 'RW');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Mozelle94', '$2y$10$Raiizm7ev1Y2mF9VNiACYu6i4x/H8sInGMsxvVUh7ru3OjrCQkJaO', 'gp;A>f%e', 'Klocko.Johnny@example.net',
-                   '7987 Altenwerth Brook
-Rustyfort, IN 83158-5427', 'Recusandae consequuntur dolor et et. Nemo quidem itaque eligendi iusto enim reiciendis.', 7597711557, 1,
-                   'Macieberg', 'Virginia', '10250', 'PU');
+                  ('Alvah.Pacocha', '$2y$10$Dnf.lbU9.cbTTEZFbieA2eCXjKPLOgXNSA2tqsVN2NAcBqnJ11M7S', 'YrgOIH"e`', 'lPfannerstill@example.net',
+                   '13422 Gleichner Parks', '', 4097266407, 1,
+                   'South Alicemouth', 'Kentucky', '45354', 'AM');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Greenholt.Toby', '$2y$10$wlrxqkVthhDpBxVKP1Drxe8GEJ3lTzv2QMARCwgX.WKHPcv6I5A9S', 'S@^dKU&', 'Conn.Edgardo@example.com',
-                   '754 Ettie Mountains
-New Veronaborough, TN 12726', '', 9487011076, 1,
-                   'North Frances', 'New Jersey', '73532', 'SE');
+                  ('Kassulke.Russell', '$2y$10$KOwNdlcoMolLtYkiZ5o2gePaFFEZ4iMplQQvC8irFB56SOGv1DuBu', 'gYxm3"aNK[`vcc>', 'Berge.Gabe@example.com',
+                   '69901 Nikolaus Turnpike Apt. 693', 'Et nemo rerum perspiciatis quia. Est voluptatem hic odit animi neque.', 4777469433, 1,
+                   'Walshbury', 'Idaho', '07215', 'KN');
 INSERT INTO `customers`(`username`, `password`, `plainpassword`, `email`,
                   `address`, `instructions`, `phone`, `verified`,
                   `city`, `state`, `zip`, `countrycode`) VALUES
-                  ('Myron.Tremblay', '$2y$10$gtHcSJZZAbvKCo7oiIKqs.mHD7hqJ9eEaqYF8GDW0wMz.oTw1J38q', '5F6e_p[T8l^~l*wY3yd', 'Valerie80@example.org',
-                   '038 Willard Passage
-Trantowhaven, IA 96395', 'Est officia voluptas nemo quaerat libero. Quis temporibus et maxime suscipit odit nulla cumque. Repudiandae consequatur minima sed praesentium possimus eos nemo.', 6361561109, 1,
-                   'Keelingside', 'Nebraska', '61299', 'SE');PRAGMA foreign_keys=ON;
+                  ('Mayert.Elliott', '$2y$10$6Pnxsx.WUQmp/P54GWFl0uOP7KQ45KSZNIoVNNdiS/anS2UDpAAxO', '{,Z1F\y=', 'Donnell.Ullrich@example.org',
+                   '7200 Bernice Ridge', '', 2276892138, 1,
+                   'Omaview', 'Georgia', '21740', 'IO');PRAGMA foreign_keys=ON;
 --//@UNDO
 PRAGMA foreign_keys=OFF;
 delete from customers;

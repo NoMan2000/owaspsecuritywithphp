@@ -1,53 +1,52 @@
 <?php
-
-namespace security\Controllers\Customers;
+namespace security\Controllers\Corporate;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
-use \stdClass;
-use \security\Controllers\Customers\BaseCustomerController;
+use \security\Controllers\Corporate\BaseCorporateController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
-use \security\Models\Customers\InitCustomer;
+use \security\Models\Corporate\EmployeesGroupsOrders;
 use \security\Models\ErrorRunner;
 use \security\Models\PDOSingleton;
 use \security\Models\SiteLogger\FullLog;
+use \stdClass;
 
-class InitCustomerController extends BaseCustomerController
+class EmployeeGroupsOrdersController extends BaseCorporateController
 {
     private $models;
     private $session;
-    private $initModel;
+    private $model;
 
     public function __construct(stdClass $models, array $session)
     {
         parent::__construct($models);
-        $this->initModel = new InitCustomer($models, $session);
+        $this->model = new EmployeesGroupsOrders($models, $session);
     }
-    public function setCustomerValues()
+    public function setOrders()
     {
-        $this->initModel->setCustomerValues();
+        $this->model->setOrders();
     }
-    public function getCustomerValues()
+    public function getOrders()
     {
-        return $this->initModel->getCustomerValues();
+        return $this->model->getOrders();
     }
 }
 
+
 $isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
+$errors = [];
 
 if ($isAjax) {
-    $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
+    isset($_SESSION) || $errors[] = "No customer is available.";
+    $pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
-    $logger = new FullLog('Customer Initializers');
+    $logger = new FullLog('Employee Initializers');
     $logger->serverData();
     $checkAuth = new CheckAuth($logger);
     $models = new stdClass();
-    $errors = [];
-
-    isset($_SESSION) || $errors[] = "No customer is available.";
     $models->logger = $logger;
     $models->errorRunner = $errorRunner;
     $models->auth = $auth;

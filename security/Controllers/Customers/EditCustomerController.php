@@ -17,6 +17,7 @@ use \security\Models\Login\PasswordVulnerable;
 use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\SiteLogger\FullLog;
+use \security\Models\Customers\EditCustomer;
 use \stdClass;
 
 class EditCustomerController extends BaseCustomerController
@@ -28,12 +29,12 @@ class EditCustomerController extends BaseCustomerController
 
     public function __construct(stdClass $models, array $customerData)
     {
-        $this->customerData = $customerData;
-        $this->customer = new UpdateCustomer($models);
+        $this->editData = $customerData;
+        $this->customer = new EditCustomer($models);
     }
-    public function updateCustomer()
+    public function editCustomer()
     {
-        $this->data = $this->customer->updateCustomer($this->editData);
+        $this->data = $this->customer->editCustomer($this->editData);
     }
     public function jsonSerialize()
     {
@@ -41,76 +42,88 @@ class EditCustomerController extends BaseCustomerController
     }
 }
 
-$pdo = new PDOSingleton();
-$auth = new Authenticate();
-$errorRunner = new ErrorRunner();
-$logger = new FullLog('Customer Editing Account');
-$logger->serverData();
-$checkAuth = new CheckAuth($logger);
-$redis = new RedisSingleton();
-$errors = [];
-$username = !empty($_POST['username']) ?
-$auth->cleanString($_POST['username']) : null;
-$password = !empty($_POST['password']) ?
-$_POST['password'] : null;
-$newpassword = !empty($_POST['newpassword']) ?
-$_POST['newpassword'] : null;
-$newpasswordConfirm = !empty($_POST['newpasswordConfirm']) ?
-$_POST['newpasswordConfirm'] : null;
-$email = !empty($_POST['email']) ?
-$auth->vEmail($_POST['email']) : null;
-$address = !empty($_POST['address']) ?
-$auth->cleanString($_POST['address']) : null;
-$phone = !empty($_POST['phone']) ?
-$auth->vPhone($_POST['phone']) : null;
-$csrf = !empty($_POST['csrf']) ? $csrf : null;
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
+$isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
 
-if ($phone) {
-    $phone = $auth->cInt($_POST['phone']);
-}
-$instructions = !empty(trim($_POST['instructions'])) ?
-$auth->cleanString($_POST['instructions']) : null;
-$action = !empty($_POST['action']) ?
-$auth->cleanString($_POST['action']) : null;
-$isCustomer = $checkAuth->isCustomer();
+if ($isAjax) {
+    // Add a PDOSingleton User here.
+    $pdo = new PDOSingleton();
+    $auth = new Authenticate();
+    $errorRunner = new ErrorRunner();
+    $logger = new FullLog('Customer Editing Account');
+    $logger->serverData();
+    $checkAuth = new CheckAuth($logger);
+    $redis = new RedisSingleton();
+    $errors = [];
+    extract($_POST);
 
-$username || $errors[] = "No username was sent over.";
-$email || $errors[] = "No password was sent over.";
-$address || $errors[] = "No password was sent over.";
-$phone || $errors[] = "No phone number was sent over.";
-$csrf || $errors[] = "No token sent on request.";
-$action || $errors[] = "No action was sent over, do not have enough information.";
-$isCustomer || $errors[] = "Not a valid customer.";
+    $username = !empty($username) ?
+        $auth->cleanString($username) : null;
+    $password = !empty($password) ?
+        $password : null;
+    $newpassword = !empty($newpassword) ?
+        $newpassword : null;
+    $newpasswordConfirm = !empty($newpasswordConfirm) ?
+        $newpasswordConfirm : null;
+    $email = !empty($email) ?
+        $auth->vEmail($email) : null;
+    $address = !empty($address) ?
+        $auth->cleanString($address) : null;
+    $phone = !empty($phone) ?
+        $auth->vPhone($phone) : null;
+    $city = !empty($city) ?
+        $auth->cleanString($city) : null;
+    $state = !empty($state) ?
+        $auth->cleanString($state) : null;
+    $countryCode = !empty($countryCode) ?
+        $auth->cleanString($countryCode) : null;
+    $zip = !empty($zip) ?
+        $auth->cleanString($zip) : null;
 
-if ($newpassword !== $newpasswordConfirm) {
-    $errors[] = "The new password and the old password must match.";
-}
-if (strlen($newpassword) > 0 && strlen($newpassword) < 8) {
-    $errors[] = "The new password must be at least 8 characters long.";
-}
-if (strlen($newpassword) > 0 && strlen($password) === 0) {
-    $errors[] = "You must fill in the old password to update the new one!";
-}
-$passwordCheck = new PasswordVulnerable($newpassword);
-try {
-    $passwordCheck->isNotVulnerable();
-} catch (KnownVulnerablePasswordException $e) {
-    $errors[] = $e->getMessage();
-} catch (WeakPasswordException $e) {
-    $errors[] = $e->getMessage();
-} catch (InvalidArgumentException $e) {
-    $errors[] = $e->getMessage();
-}
+    $csrf = !empty($csrf) ? $csrf : null;
 
-if ($csrf !== $_SESSION['csrf_token']) {
-    $errors[] = "This form does not appear to have originated from our site.";
-}
+    if ($phone) {
+        $phone = $auth->cInt($phone);
+    }
+    $instructions = !empty(trim($instructions)) ?
+    $auth->cleanString($instructions) : null;
+    $isCustomer = $checkAuth->isCustomer();
+    $updatePassword = false;
 
-if (!empty($errors)) {
-    $errorRunner->runErrors($errors);
-}
-if (empty($errors)) {
+    $username || $errors[] = "No username was sent over.";
+    $email || $errors[] = "No password was sent over.";
+    $address || $errors[] = "No address was sent over.";
+    $phone || $errors[] = "No phone number was sent over.";
+    $csrf || $errors[] = "No token sent on request.";
+    $isCustomer || $errors[] = "Not a valid customer.";
+
+    $passwordLen = strlen($password);
+    $newpasswordLen = strlen($newpassword);
+
+    if ($newpassword !== $newpasswordConfirm) {
+        $errors[] = "The new password and the old password must match.";
+    }
+    if ($newpasswordLen > 0 && $newpasswordLen < 8) {
+        $errors[] = "The new password must be at least 8 characters long.";
+    }
+    if ($newpasswordLen > 0 && $passwordLen === 0) {
+        $errors[] = "You must fill in the old password to update the new one!";
+    }
+    if ($newpasswordLen > 0) {
+        $passwordCheck = new PasswordVulnerable($newpassword);
+        try {
+            $passwordCheck->isNotVulnerable();
+        } catch (KnownVulnerablePasswordException $e) {
+            $errors[] = $e->getMessage();
+        } catch (WeakPasswordException $e) {
+            $errors[] = $e->getMessage();
+        } catch (InvalidArgumentException $e) {
+            $errors[] = $e->getMessage();
+        }
+        $updatePassword = true;
+    }
+    if ($csrf !== $_SESSION['csrf_token']) {
+        $errors[] = "This form does not appear to have originated from our site.";
+    }
     $models = new stdClass();
     $models->pdo = $pdo;
     $models->redis = $redis;
@@ -126,11 +139,18 @@ if (empty($errors)) {
     $customerData['phone'] = $phone;
     $customerData['instructions'] = $instructions;
     $customerData['session'] = $_SESSION;
-    $customerData['action'] = $action;
+    $customerData['city'] = $city;
+    $customerData['state'] = $state;
+    $customerData['countryCode'] = $countryCode;
+    $customerData['zip'] = $zip;
+    $customerData['updatePassword'] = $updatePassword;
 
-    $editCustomer = new EditCustomerController($models, $customerData);
-    $editCustomer->updateCustomer();
-    if ($isAjax) {
+    if (empty($errors)) {
+        $editCustomer = new EditCustomerController($models, $customerData);
+        $editCustomer->editCustomer();
         echo json_encode($editCustomer);
     }
+}
+if (!empty($errors)) {
+    $errorRunner->runErrors($errors);
 }

@@ -235,5 +235,6 @@
                                   build.setdefaultDatabase,
                                   build.migrate,
                                   build.generateSeeds,
-                                  build.seed" />
+                                  build.seed,
+                                  build.cleanup" />
 </project>

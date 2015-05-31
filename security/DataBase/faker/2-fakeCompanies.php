@@ -15,7 +15,7 @@ $fakeCompanies = 10;
 $mysqlValues = $sqliteValues = [];
 
 $countryCodeKeys  = array_keys($countries);
-$countryCodeKeysLen = count($countryCodeKeys);
+$countryCodeKeysLen = count($countryCodeKeys)-1;
 
 for ($i = 0; $i < $fakeCompanies; $i++) {
     $name = $faker->company;
@@ -26,7 +26,7 @@ for ($i = 0; $i < $fakeCompanies; $i++) {
     $mysqlDomain = $mysqli->real_escape_string($domain);
     $sqliteDomain = SQLite3::escapeString($domain);
 
-    $address = $faker->address;
+    $address = $faker->streetAddress;
     $mysqlAddress = $mysqli->real_escape_string($address);
     $sqliteAddress = SQLite3::escapeString($address);
 

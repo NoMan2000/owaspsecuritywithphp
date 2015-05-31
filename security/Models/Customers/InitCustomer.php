@@ -10,7 +10,7 @@ use \stdClass;
 class InitCustomer
 {
     private $session;
-    
+
     public function __construct(stdClass $models, array $session)
     {
         $this->pdo = $models->pdo;
@@ -20,11 +20,12 @@ class InitCustomer
     {
         $errors = [];
         $pdo = $this->pdo;
-        $session = $this->session;
-        $query = "SELECT username, email, address, phone, instructions
-                  FROM customers WHERE id={$session['customerid']}";
+        $id = intval($this->session['customerid']);
+        $query = "SELECT username, email, address, phone,
+                  instructions, city, state, countrycode, zip
+                  FROM customers WHERE id={$id}";
         $result = $pdo->query($query);
-        
+
         if ($result) {
             foreach ($result as $row) {
                 $this->data = [
@@ -32,7 +33,11 @@ class InitCustomer
                     'email' => $row['email'],
                     'address' => $row['address'],
                     'phone' => $row['phone'],
-                    'instructions' => $row['instructions']
+                    'instructions' => $row['instructions'],
+                    'city'=> $row['city'],
+                    'state' => $row['state'],
+                    'countrycode' => $row['countrycode'],
+                    'zip' => $row['zip']
                 ];
             }
         }

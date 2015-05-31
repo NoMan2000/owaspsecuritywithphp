@@ -5,6 +5,9 @@ use \security\Models\Router\Router;
 
 $router = new Router(__DIR__);
 $cssPath = $router->rootPath . 'css/';
+if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
+    die("<h1>Warning:  This website does not work if not on a secure https Server.</h1>");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

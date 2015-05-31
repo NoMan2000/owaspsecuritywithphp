@@ -1,34 +1,34 @@
 <?php
 
-namespace security\Controllers\Customers;
+namespace security\Controllers\Corporate;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
-use \security\Controllers\Customers\BaseCustomerController;
+use \security\Controllers\Corporate\BaseCorporateController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
-use \security\Models\Customers\ViewOrders;
+use \security\Models\Corporate\ViewCorporateOrders;
 use \security\Models\ErrorRunner;
 use \security\Models\PDOSingleton;
 use \security\Models\SiteLogger\FullLog;
 use \stdClass;
 
-class ViewOrdersController extends BaseCustomerController
+class ViewCorporateOrdersController extends BaseCustomerController
 {
-    private $customerID;
+    private $orderID;
     private $orderModel;
     private $orderData;
 
     public function __construct(stdClass $models, stdClass $orderData)
     {
         $this->orderData = $orderData;
-        $this->customerID = $orderData->customerID;
-        $this->orderModel = new ViewOrders($models);
+        $this->customerID = $orderData->orderID;
+        $this->orderModel = new ViewCorporateOrders($models);
     }
     public function viewOrders()
     {
-        $this->orders = $this->orderModel->viewOrders($this->customerID);
+        $this->orders = $this->orderModel->viewOrders($this->orderID);
     }
     public function getOrders()
     {
@@ -43,7 +43,7 @@ class ViewOrdersController extends BaseCustomerController
 $isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
 if ($isAjax) {
-    $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
+    $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $logger = new FullLog('Customer Viewing Orders');
@@ -53,7 +53,7 @@ if ($isAjax) {
 
     $isCustomer = $checkAuth->isCustomer();
     $customerID = !empty($_SESSION['customerid']) ?
-    $auth->cInt($_SESSION['customerid']) : null;
+        $auth->cInt($_SESSION['customerid']) : null;
 
     $customerID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
     $isCustomer || $errors[] = "You are not authenticated as a customer.";
@@ -63,9 +63,9 @@ if ($isAjax) {
     $models->logger = $logger;
 
     $orderData = new stdClass();
-    $orderData->customerID = $customerID;
+    $orderData->orderID = $customerID;
     if (empty($errors)) {
-        $controller = new ViewOrdersController($models, $orderData);
+        $controller = new ViewCorporateOrdersController($models, $orderData);
         $controller->viewOrders();
         $controller->viewCustomer();
         echo json_encode($controller);

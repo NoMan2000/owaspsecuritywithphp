@@ -34,34 +34,34 @@ class AddNewOrderController extends BaseCustomerController
     }
 }
 
-$pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
-$auth = new Authenticate();
-$errorRunner = new ErrorRunner();
-$logger = new FullLog('Customer Add New Order');
-$logger->serverData();
-$checkAuth = new CheckAuth($logger);
-$errors = [];
-
-$action = !empty($_POST['action']) ? $_POST['action'] : null;
-$isCustomer = $checkAuth->isCustomer();
-$customerID = !empty($_SESSION['customerid']) ?
-$auth->cInt($_SESSION['customerid']) : null;
-$totalOrdered = !empty($_POST['totalOrdered']) ?
-$auth->cInt($_POST['totalOrdered']) : null;
-$csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
 $isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
-$action || $errors[] = "No action was specified on this request.";
-$customerID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
-$isCustomer || $errors[] = "You are not authenticated as a customer.";
-$totalOrdered || $errors[] = "No orders were sent over.";
-$csrf || $errors[] = "This form does not appear to have originated from our site.";
+if ($isAjax) {
+    $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
+    $auth = new Authenticate();
+    $errorRunner = new ErrorRunner();
+    $logger = new FullLog('Customer Add New Order');
+    $logger->serverData();
+    $checkAuth = new CheckAuth($logger);
+    $errors = [];
 
-if (!isset($_SESSION['csrf_token']) || $csrf !== $_SESSION['csrf_token']) {
-    $errors[] = "This form does not appear to have originated from our site.";
-}
+    $action = !empty($_POST['action']) ? $_POST['action'] : null;
+    $isCustomer = $checkAuth->isCustomer();
+    $customerID = !empty($_SESSION['customerid']) ?
+    $auth->cInt($_SESSION['customerid']) : null;
+    $totalOrdered = !empty($_POST['totalOrdered']) ?
+    $auth->cInt($_POST['totalOrdered']) : null;
+    $csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
 
-if (empty($errors) && $isAjax) {
+    $action || $errors[] = "No action was specified on this request.";
+    $customerID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
+    $isCustomer || $errors[] = "You are not authenticated as a customer.";
+    $totalOrdered || $errors[] = "No orders were sent over.";
+    $csrf || $errors[] = "This form does not appear to have originated from our site.";
+
+    if (!isset($_SESSION['csrf_token']) || $csrf !== $_SESSION['csrf_token']) {
+        $errors[] = "This form does not appear to have originated from our site.";
+    }
     $models = new stdClass();
     $models->pdo = $pdo;
     $models->errorRunner = $errorRunner;
@@ -75,4 +75,8 @@ if (empty($errors) && $isAjax) {
     $controller = new AddNewOrderController($models, $orderData);
     $controller->addOrder();
     echo json_encode($controller);
+}
+
+if (!empty($errors)) {
+    $errorRunner->runErrors($errors);
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace security\Controllers\Customers;
+namespace security\Controllers\Corporate;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \stdClass;
 use \security\BaseModel;
 
-abstract class BaseCustomerController extends BaseModel
+abstract class BaseCorporateController extends BaseModel
 {
     public function __construct(stdClass $models)
     {
