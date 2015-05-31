@@ -130,23 +130,50 @@
 
     <target name="build.generateSeeds">
         <echo message="executing php commands at ${faker}" />
-        <exec dir="${faker}" command="php 2-fakeCompanies.php"  escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeCompanies.log"
+            command="php 2-fakeCompanies.php"  escape="false" />
         <echo message="Built fake companies." />
-        <exec dir="${faker}" command="php 3-fakeEmployees.php" escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeEmployees.log"
+            command="php 3-fakeEmployees.php" escape="false" />
         <echo message="Built fake employees." />
-        <exec dir="${faker}" command="php 4-fakeGroups.php"  escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeGroups.log"
+            command="php 4-fakeGroups.php"  escape="false" />
         <echo message="Built fake groups." />
-        <exec dir="${faker}" command="php 5-fakeCustomers.php" escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeCustomers.log"
+            command="php 5-fakeCustomers.php" escape="false" />
         <echo message="Built fake customers." />
-        <exec dir="${faker}" command="php 6-fakeOrders.php"  escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeOrders.log"
+            command="sudo php 6-fakeOrders.php"  escape="false" />
         <echo message="Built fake orders." />
-        <exec dir="${faker}" command="php 7-fakeCompanyToGroups.php" escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeCompanyToGroups.log"
+            command="php 7-fakeCompanyToGroups.php" escape="false" />
         <echo message="Built fake Company To Groups." />
-        <exec dir="${faker}" command="php 8-fakeCustomersToOrders.php"  escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeCustomersToOrders.log"
+            command="php 8-fakeCustomersToOrders.php"  escape="false" />
         <echo message="Built fake Customers to Orders." />
-        <exec dir="${faker}" command="php 9-fakeGroupsToOrders.php" escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeGroupsToOrders.log"
+            command="php 9-fakeGroupsToOrders.php" escape="false" />
         <echo message="Built fake Groups To Orders." />
-        <exec dir="${faker}" command="php 10-fakeEmployeesToGroups.php" escape="false" />
+        <exec dir="${faker}"
+            checkreturn="true"
+            error="${errorlog}/phing/fakeEmployeesToGroups.log"
+            command="php 10-fakeEmployeesToGroups.php" escape="false" />
         <echo message="Built fake Employees to Groups." />
 
     </target>

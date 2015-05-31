@@ -8,7 +8,6 @@ use \security\Models\Generator\CountryList;
 $mysqli = new MySQLISingleton();
 $countryList = new CountryList();
 $countries = $countryList->getCountryList();
-
 $faker = Faker\Factory::create();
 
 $fakeCompanies = 10;
@@ -41,7 +40,7 @@ for ($i = 0; $i < $fakeCompanies; $i++) {
 
     $countryCode = $countryCodeKeys[mt_rand(0, $countryCodeKeysLen)];
     $phone = $faker->unique()->numerify('##########');
-    $zip = $faker->zip('#####');
+    $zip = $faker->numerify('#####');
 
     $mysqlQuery = "INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
@@ -61,7 +60,7 @@ for ($i = 0; $i < $fakeCompanies; $i++) {
 
 // Generate SQL files for MySQL
 
-$valueString = "SET FOREIGN_KEY_CHECKS = 0;";
+$valueString = "SET FOREIGN_KEY_CHECKS = 0;" . PHP_EOL;
 $valueString .= implode(";" . PHP_EOL, $mysqlValues);
 $valueString .= ";SET FOREIGN_KEY_CHECKS = 1;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL .

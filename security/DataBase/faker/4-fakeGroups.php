@@ -29,9 +29,9 @@ for ($i = 1; $i <= $fakeGroups; $i++) {
 
 // Begin MySQL SQL statements.
 
-$valueString = "SET FOREIGN_KEY_CHECKS = 0;";
+$valueString = "SET FOREIGN_KEY_CHECKS = 0;" . PHP_EOL;
 $valueString .= implode(";" . PHP_EOL, $mysqlValues);
-$valueString .= ";SET FOREIGN_KEY_CHECKS = 1;";
+$valueString .= ";SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL;
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE groups;
 SET FOREIGN_KEY_CHECKS = 1;" . PHP_EOL . "--//";
@@ -45,9 +45,9 @@ file_put_contents($seedsFile, $valueString);
  * Begin SQLite Preparations
  */
 
-$valueString = "PRAGMA foreign_keys=OFF;";
+$valueString = "PRAGMA foreign_keys=OFF;" . PHP_EOL;
 $valueString .= implode(";" . PHP_EOL, $sqliteValues);
-$valueString .= ";PRAGMA foreign_keys=ON;";
+$valueString .= ";PRAGMA foreign_keys=ON;" . PHP_EOL;
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "
 PRAGMA foreign_keys=OFF;
 delete from groups;

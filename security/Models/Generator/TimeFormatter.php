@@ -2,7 +2,7 @@
 
 namespace security\Models\Generator;
 
-require_once dirname(dirname(__DIR__)) . '/public/init.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/public/init.php';
 
 use \DateTimeZone;
 use \DateTime;

@@ -41,7 +41,7 @@ DELETE FROM changelog
 -- Fragment begins: 16 --
 PRAGMA foreign_keys=OFF;
 delete from orders;
-PRAGMA foreign_keys=ON; 
+PRAGMA foreign_keys=ON;
 
 --//
 DELETE FROM changelog
@@ -72,7 +72,7 @@ DELETE FROM changelog
 -- Fragment begins: 13 --
 PRAGMA foreign_keys=OFF;
 delete from employees;
-PRAGMA foreign_keys=ON; 
+PRAGMA foreign_keys=ON;
 
 --//
 DELETE FROM changelog

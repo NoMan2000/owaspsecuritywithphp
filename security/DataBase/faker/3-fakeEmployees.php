@@ -51,8 +51,8 @@ for ($i = 1; $i <= $fakeUsers; $i++) {
     $mysqlPlainpassword = $mysqli->real_escape_string($plainpassword);
     $sqlitePlainpassword = SQLite3::escapeString($plainpassword);
 
-    $mysqlPassword = password_hash($plainpassword, PASSWORD_DEFAULT);
-    $sqlitePassword = password_hash($plainpassword, PASSWORD_DEFAULT);
+    $mysqlPassword = $mysqli->real_escape_string(password_hash($plainpassword, PASSWORD_DEFAULT));
+    $sqlitePassword = SQLite3::escapeString(password_hash($plainpassword, PASSWORD_DEFAULT));
 
     $company_id = mt_rand(1, 10);
 
@@ -87,7 +87,7 @@ for ($i = 1; $i <= $fakeUsers; $i++) {
 }
 
 // Begin MySQL SQL statements.
-$valueString = "SET FOREIGN_KEY_CHECKS = 0;";
+$valueString = "SET FOREIGN_KEY_CHECKS = 0;" . PHP_EOL;
 $valueString .= implode(";" . PHP_EOL, $mysqlValues);
 $valueString .= ";SET FOREIGN_KEY_CHECKS = 1;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "SET FOREIGN_KEY_CHECKS = 0;
@@ -103,7 +103,7 @@ file_put_contents($seedsFile, $valueString);
  * Begin SQLite Preparations
  */
 
-$valueString = "PRAGMA foreign_keys=OFF;";
+$valueString = "PRAGMA foreign_keys=OFF;" . PHP_EOL;
 $valueString .= implode(";" . PHP_EOL, $sqliteValues);
 $valueString .= ";PRAGMA foreign_keys=ON;";
 $valueString .= PHP_EOL . "--//@UNDO" . PHP_EOL . "PRAGMA foreign_keys=OFF;

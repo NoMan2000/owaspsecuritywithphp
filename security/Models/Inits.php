@@ -64,9 +64,9 @@ class Inits
         // $frameSrc is marked as deprecated.
         // $frameSrc = "'self' *.qbaka.net *.googleapis.com *.gstatic.com";
         $reportUri = "report-uri /logger/report.php";
-
+        $serverName = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
         header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
-        header("Access-Control-Allow-Origin: *.{$_SERVER['SERVER_NAME']}");
+        header("Access-Control-Allow-Origin: *.{$serverName}");
         header('X-XSS-Protection: 1');
         header('X-Content-Type-Options: nosniff');
         header("Content-Security-Policy: default-src $defaultSrc; img-src $imgSrc; script-src $scriptSrc; child-src $childSrc; style-src $styleSrc; font-src $fontSrc; connect-src $connectSrc; media-src $mediaSrc; $reportUri");
@@ -95,7 +95,8 @@ class Inits
             $fromEmail = ini_get('sendmail_from') ? ini_get('sendmail_from') : "admin@example.com";
             $fromName = "From: Example Webmaster";
             $to = "webmaster@example.com";
-            $subject = "[{$_SERVER['SERVER_NAME']}] Fatal error in {$error['file']} on line {$error['line']}";
+            $serverName = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
+            $subject = "[{$serverName}] Fatal error in {$error['file']} on line {$error['line']}";
             $message = var_export($error, true) . PHP_EOL;
             $message .= var_export($_SERVER, true) . PHP_EOL;
             $logger->addWarning($message);

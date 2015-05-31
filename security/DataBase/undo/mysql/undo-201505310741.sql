@@ -35,8 +35,8 @@ DELETE FROM changelog
 	                         AND delta_set = 'Main';
 -- Fragment ends: 17 --
 -- Fragment begins: 16 --
-SET FOREIGN_KEY_CHECKS = 0; 
-TRUNCATE orders; 
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE orders;
 SET FOREIGN_KEY_CHECKS = 1;
 --//
 DELETE FROM changelog
@@ -53,8 +53,8 @@ DELETE FROM changelog
 	                         AND delta_set = 'Main';
 -- Fragment ends: 15 --
 -- Fragment begins: 14 --
-SET FOREIGN_KEY_CHECKS = 0; 
-TRUNCATE groups; 
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE groups;
 SET FOREIGN_KEY_CHECKS = 1;
 --//
 DELETE FROM changelog
@@ -62,8 +62,8 @@ DELETE FROM changelog
 	                         AND delta_set = 'Main';
 -- Fragment ends: 14 --
 -- Fragment begins: 13 --
-SET FOREIGN_KEY_CHECKS = 0; 
-TRUNCATE employees; 
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE employees;
 SET FOREIGN_KEY_CHECKS = 1;
 --//
 DELETE FROM changelog

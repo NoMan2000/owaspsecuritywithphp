@@ -13,6 +13,8 @@ $mysqli = new MySQLISingleton();
 $faker = Faker\Factory::create();
 $fakeCustomers = 20;
 
+$countryList = new CountryList();
+$countries = $countryList->getCountryList();
 $countryCodeKeys  = array_keys($countries);
 $countryCodeKeysLen = count($countryCodeKeys);
 
@@ -66,7 +68,7 @@ for ($i = 1; $i <= $fakeCustomers; $i++) {
     $phone = $faker->unique()->numerify('##########');
     $countryCode = $countryCodeKeys[mt_rand(0, $countryCodeKeysLen)];
     $phone = $faker->unique()->numerify('##########');
-    $zip = $faker->zip('#####');
+    $zip = $faker->numerify('#####');
 
     $sentences = mt_rand(1, 4);
     $instructions = $faker->optional()->paragraph($sentences);
