@@ -2,63 +2,63 @@ SET FOREIGN_KEY_CHECKS = 0;
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Sauer-Ebert', 'Kemmer.com', '8107 Kunde Trail Apt. 435',
-                'Langworthmouth', 'Wyoming', '4954052961', 'BD',
-                '24619');
+              (null, 'Medhurst, Luettgen and Sauer', 'Tromp.info', '07522 Dooley Manor Apt. 156',
+                'Rauport', 'Washington', '5029314059', 'RS',
+                '94818');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Runolfsdottir LLC', 'Gottlieb.info', '7503 Doyle Plains Apt. 328',
-                'South Sabrina', 'District of Columbia', '3797012774', 'HR',
-                '66047');
+              (null, 'Harber-Prohaska', 'Monahan.net', '57105 Jaeden Dam',
+                'Lake Solon', 'New York', '1216387111', 'TO',
+                '11375');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Rolfson-Fay', 'Pacocha.com', '17555 Welch Islands',
-                'Macejkovicside', 'Wisconsin', '4406969002', 'FM',
-                '42059');
+              (null, 'Wiegand Ltd', 'Bechtelar.com', '7379 Hermann Centers Suite 356',
+                'Modestachester', 'Colorado', '6175169994', 'RE',
+                '32397');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Weissnat, Farrell and Robel', 'Jakubowski.com', '78447 Bruen Light',
-                'East Corbin', 'Wisconsin', '2506942950', 'TD',
-                '28105');
+              (null, 'Turcotte Ltd', 'Stanton.com', '964 Wyman Union',
+                'Greenfelderview', 'West Virginia', '7198723086', 'DO',
+                '24337');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Ledner LLC', 'Mills.com', '09828 Bayer Burg',
-                'Gradyport', 'Oregon', '1009712919', 'AD',
-                '82744');
+              (null, 'Kozey-Cartwright', 'Schmitt.com', '4663 Larson Port',
+                'East Roscoe', 'Iowa', '9777990194', 'TR',
+                '34136');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Bailey, Berge and Roob', 'Weimann.com', '652 Murazik Plain Apt. 628',
-                'Port Federico', 'Pennsylvania', '9759344506', 'HR',
-                '12146');
+              (null, 'Heathcote, Turcotte and Witting', 'Olson.info', '063 Rolfson Island',
+                'Borischester', 'Oregon', '5971110754', 'EE',
+                '37402');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Brakus-Okuneva', 'Greenholt.net', '86497 Hahn Route Suite 365',
-                'Keeblerfort', 'Missouri', '4189974845', 'SR',
-                '85039');
+              (null, 'Osinski-Pagac', 'Pfeffer.info', '1937 Nathaniel Place',
+                'East Cletus', 'Arizona', '3296987845', 'KI',
+                '25033');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Howe Ltd', 'Zieme.com', '7665 Berneice Brooks',
-                'Lake Ivahmouth', 'New Mexico', '6614631297', 'PU',
-                '54489');
+              (null, 'Schmeler, Goodwin and Durgan', 'Hills.info', '0582 Saige Manors Suite 087',
+                'West Kaylin', 'Tennessee', '1307994739', 'UM',
+                '07102');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Reichert, Wolff and McLaughlin', 'Armstrong.com', '85947 Danial Mountains',
-                'Omarifurt', 'Maine', '7734576276', 'SB',
-                '08517');
+              (null, 'Wuckert LLC', 'Towne.com', '4280 Ezekiel Square Apt. 978',
+                'Boylehaven', 'Indiana', '4780857144', 'BV',
+                '77924');
 INSERT INTO companies (`id`, `name`, `website`,
                   `address`, `city`, `state`, `phone`, `countrycode`,
                   `zip`) VALUES
-              (null, 'Lehner, Dicki and Schaefer', 'Mraz.com', '9709 Dietrich Harbor',
-                'West Jasentown', 'Oregon', '7962071701', 'IS',
-                '67750');SET FOREIGN_KEY_CHECKS = 1;
+              (null, 'Roob, Schowalter and Kuhic', 'Feeney.com', '9067 Celia Squares Suite 628',
+                'Lake Ignatiusside', 'Alaska', '6240377610', 'SN',
+                '11525');SET FOREIGN_KEY_CHECKS = 1;
 --//@UNDO
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE companies;
