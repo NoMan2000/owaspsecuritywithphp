@@ -8,13 +8,13 @@ use \PDO;
 use \security\Controllers\Corporate\BaseCorporateController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
-use \security\Models\Corporate\ViewCorporateOrders;
+use \security\Models\Corporate\CorporateEditOrder;
 use \security\Models\ErrorRunner;
 use \security\Models\PDOSingleton;
 use \security\Models\SiteLogger\FullLog;
 use \stdClass;
 
-class ViewCorporateOrdersController extends BaseCorporateController
+class CorporateEditOrderController extends BaseCorporateController
 {
     private $orderID;
     private $orderModel;
@@ -22,30 +22,41 @@ class ViewCorporateOrdersController extends BaseCorporateController
 
     public function __construct(stdClass $models, stdClass $orderData)
     {
-        $this->orderModel = new ViewCorporateOrders($models, $orderData);
+        $this->orderModel = new CorporateEditOrder($models, $orderData);
     }
-    public function setOrders()
+    public function updateOrder()
     {
-        $this->orders = $this->orderModel->setOrders();
-    }
-    public function getOrders()
-    {
-        return $this->orders;
+        $this->data = $this->orderModel->updateOrder();
     }
 }
 
 $isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
+$errors = [];
 
 if ($isAjax) {
-    $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
-    $auth = new Authenticate();
-    $errorRunner = new ErrorRunner();
+    extract($_POST);
     $logger = new FullLog('Corporate Viewing Orders');
     $logger->serverData();
     $checkAuth = new CheckAuth($logger);
-    $errors = [];
-    $orderID = !empty($_POST['orderid']) ?
-        $auth->cInt($_POST['orderid']) : null;
+    $auth = new Authenticate();
+    $isAdmin = $checkAuth->isAdmin();
+    if ($isAdmin) {
+        $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
+    }
+    if (!$isAdmin) {
+        $errors[] = "Only an admin can update orders.";
+    }
+    $errorRunner = new ErrorRunner();
+    $orderID = !empty($_SESSION['orderID']) ?
+        $auth->cInt($_SESSION['orderID']) : null;
+    $csrf = !empty($csrf) ? $csrf : null;
+    if (!$csrf || $csrf !== $_SESSION['csrf_token']) {
+        $errors[] = "This form does not appear to have originated on our site.";
+    }
+    // Isset has to be used on these numbers because they can be a Zero.
+    $fulfilled = isset($fulfilled) ? $auth->cInt($fulfilled) : null;
+    $unfulfilled = isset($unfulfilled) ? $auth->cInt($unfulfilled) : null;
+    $isShipped = isset($isShipped) ? $auth->cInt($isShipped) : null;
 
     $isCorporate = $checkAuth->isCorporate();
     $employeeID = !empty($_SESSION['employeeid']) ?
@@ -61,12 +72,13 @@ if ($isAjax) {
 
     $orderData = new stdClass();
     $orderData->orderID = $orderID;
-    $orderData->employeeID = $employeeID;
+    $orderData->fulfilled = $fulfilled;
+    $orderData->unfulfilled = $unfulfilled;
+    $orderData->isShipped = $isShipped;
     $orderData->session = $_SESSION;
     if (empty($errors)) {
-        $controller = new ViewCorporateOrdersController($models, $orderData);
-        $controller->setOrders();
-        $controller->getOrders();
+        $controller = new CorporateEditOrderController($models, $orderData);
+        $controller->updateOrder();
         echo json_encode($controller);
     }
 }

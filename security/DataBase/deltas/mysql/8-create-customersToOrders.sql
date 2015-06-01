@@ -25,6 +25,10 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.customersToOrders TO 'widgetCust
 GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.customersToOrders TO 'widgetCustomer'@'localhost' IDENTIFIED BY 'somepassword';
 GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.customersToOrders TO 'widgetCustomer'@'127.0.0.1' IDENTIFIED BY 'somepassword';
 
+GRANT SELECT ON widgets.customersToOrders TO 'widgetCorporate'@'%' IDENTIFIED BY 'somepassword';
+GRANT SELECT ON widgets.customersToOrders TO 'widgetCorporate'@'localhost' IDENTIFIED BY 'somepassword';
+GRANT SELECT ON widgets.customersToOrders TO 'widgetCorporate'@'127.0.0.1' IDENTIFIED BY 'somepassword';
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -38,9 +42,14 @@ REVOKE SELECT, INSERT, UPDATE, DELETE ON widgets.customersToOrders TO 'widgetCus
 REVOKE SELECT, INSERT, UPDATE, DELETE ON widgets.customersToOrders TO 'widgetCustomer'@'localhost';
 REVOKE SELECT, INSERT, UPDATE, DELETE ON widgets.customersToOrders TO 'widgetCustomer'@'127.0.0.1';
 
+REVOKE SELECT ON widgets.customersToOrders TO 'widgetCorporate'@'%' IDENTIFIED BY 'somepassword';
+REVOKE SELECT ON widgets.customersToOrders TO 'widgetCorporate'@'localhost' IDENTIFIED BY 'somepassword';
+REVOKE SELECT ON widgets.customersToOrders TO 'widgetCorporate'@'127.0.0.1' IDENTIFIED BY 'somepassword';
+
+
 DROP TABLE IF EXISTS `widgets`.`customersToOrders`;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
---//    
+--//

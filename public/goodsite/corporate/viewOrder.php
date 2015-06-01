@@ -2,31 +2,49 @@
 require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.php");
 
 use \security\Models\Authenticator\CheckAuth;
+use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
 use \security\Models\SiteLogger\FullLog;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
 use \security\Models\PDOSingleton;
-use \security\Controllers\Corporate\EmployeeGroupsOrdersController;
+use \security\Controllers\Corporate\ViewCorporateOrdersController;
 
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
-
+$auth = new Authenticate();
 $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
-$pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
 $logger = new FullLog('Corporate View Page');
 $checkAuth = new CheckAuth($logger);
 $blackList = new BlackLister($redis);
 $isCorporate = $checkAuth->isCorporate();
+
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
+$userType = PDOSingleton::CORPORATEUSER;
+if ($checkAuth->isAdmin()) {
+    $userType = PDOSingleton::ADMINUSER;
+}
+
+$pdo = new PDOSingleton($userType);
+
+$orderID = !empty($_GET['order']) ?
+    $auth->cInt($_GET['order']) : null;
+$employeeID = !empty($_SESSION['employeeid']) ?
+    $auth->cInt($_SESSION['employeeid']) : null;
 
 if (!$isCorporate) {
     $logger->serverData();
     $logger->addWarning("User attempted to access unauthorized location.");
     $error = rawurlencode('Not an authenticated corporate user.');
+    die(header("Location:{$rootPath}goodsite/corporate/corporatelogin.php?errors=$error"));
+}
+if (!$orderID) {
+    $logger->serverData();
+    $logger->addWarning("User attempted to access an order without an orderID.");
+    $error = rawurlencode('No order was given.');
     die(header("Location:{$rootPath}goodsite/corporate/corporatelogin.php?errors=$error"));
 }
 
@@ -37,60 +55,49 @@ $models->pdo = $pdo;
 $models->logger = $logger;
 $models->blackList = $blackList;
 
-$ordersController = new EmployeeGroupsOrdersController($models, $_SESSION);
+
+
+$orderData = new stdClass();
+$orderData->orderID = $orderID;
+$orderData->employeeID = $employeeID;
+$orderData->session = $_SESSION;
+
+$ordersController = new ViewCorporateOrdersController($models, $orderData);
 $ordersController->setOrders();
-$orders = $ordersController->getOrders();
+$order = $ordersController->getOrders();
 
 $corporateOrders = "";
-// $pdo query returns false on fail
+if (!empty($order)) {
+        extract($order);
+        $id = intval($id);
+        $fulfilled = intval($fulfilled);
+        $unfulfilled = intval($unfulfilled);
+        $is_shipped = intval($is_shipped);
+        $username = htmlentities($username);
+        $address = htmlentities($address);
+        $email = htmlentities($email);
+        $phone = htmlentities($phone);
+        $instructions = htmlentities($instructions);
+        $city = htmlentities($city);
+        $state = htmlentities($state);
+        $countrycode = htmlentities($countrycode);
+        $zip = htmlentities($zip);
 
-$canEdit = isset($_SESSION['is_admin']) ?
-    $_SESSION['is_admin'] : null;
-
-$addNewOrderButton = null;
-if ($canEdit) {
-    $addNewOrderButton = "<button type='submit'
-                        class='btn btn-default' id='submitNewOrder'>
-                        Add Order
-                        </button>";
-}
-
-if (!empty($orders)) {
-    foreach ($orders as $order) {
-        $id = htmlentities($order['id']);
-        $fulfilled = htmlentities($order['fulfilled']);
-        $unfulfilled = htmlentities($order['unfulfilled']);
-        $allFulfilled = false;
-        if ($fulfilled === $unfulfilled || $order['is_shipped']) {
-            $allFulfilled = true;
-        }
-        $encodeID = rawurlencode($order['id']);
-        $viewOrder = "<a href='viewOrder.php?order={$encodeID}'>{$id}</a>";
-        if ($canEdit) {
-            $viewOrder = "<a href='editOrder.php?order={$encodeID}'>{$id}</a>";
-        }
-        if (!$allFulfilled) {
-            $corporateOrders .= "<section id='$id'><div class='col-sm-3'>{$viewOrder}</div>
-                                 <div class='col-sm-3'>{$fulfilled}</div>
-                                 <div class='col-sm-3'>{$unfulfilled}</div>
-                                 <div class='col-sm-3'>";
-            if ($canEdit) {
-                $corporateOrders .= "<button type='button' class='btn btn-danger'
-                                     data-confirm='Delete the order?'
-                                     data-id='$id'
-                                     data-unfulfilled='$unfulfilled'
-                                     >
-                                     Delete Order</button>";
-            }
-            $corporateOrders.= "</div></section>";
-        }
-        if ($allFulfilled) {
-            $corporateOrders .= "<section id='$id'><div class='col-sm-3 fulfilled'>{$viewOrder}</div>
-                                 <div class='col-sm-3 fulfilled'>{$fulfilled}</div>
-                                 <div class='col-sm-3 fulfilled'>{$unfulfilled}</div>
-                                 <div class='col-sm-3 fulfilled'></div></section>";
-        }
-    }
+        $corporateOrders = "<section id='$id'>
+            <div class='col-sm-3 col-sm-offset-1'>Order ID:</div><div class='col-sm-8'>{$id}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Fulfilled:</div><div class='col-sm-8'>{$fulfilled}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Unfulfilled:</div><div class='col-sm-8'>{$unfulfilled}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Is Shipped:</div><div class='col-sm-8'>{$is_shipped}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Username:</div><div class='col-sm-8'>{$username}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Address:</div><div class='col-sm-8'>{$unfulfilled}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Email:</div><div class='col-sm-8'>{$email}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Phone:</div><div class='col-sm-8'>{$phone}</div>
+            <div class='col-sm-3 col-sm-offset-1'>City:</div><div class='col-sm-8'>{$city}</div>
+            <div class='col-sm-3 col-sm-offset-1'>State:</div><div class='col-sm-8'>{$state}</div>
+            <div class='col-sm-3 col-sm-offset-1'>CountryCode:</div><div class='col-sm-8'>{$countrycode}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Zip:</div><div class='col-sm-8'>{$zip}</div>
+            <div class='col-sm-3 col-sm-offset-1'>Instructions:</div><div class='col-sm-8'>{$instructions}</div>
+         </section>";
 }
 
 ?>
@@ -104,44 +111,19 @@ if (!empty($orders)) {
         <div id='errorHolder' class="alert alert-danger" role="alert" style='display:none;'>
             <div id='errorContent'></div>
         </div>
-        <div id='customerInformation'>
-            <h2>Welcome to your Widget Corp. Corporate Orders page.</h2>
-            <p>If you are an admin, you can remove any orders that are fulfilled and you can edit
-            an order. </p>
-            <button type="button" class="btn btn-info" id='createNewOrder' aria-label="Left Align">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              <span id='textForOrder'>Make new order</span>
-            </button>
+        <div id='corporateInformation'>
+            <h2>Order page.</h2>
+            <p>Verify the information for this order.
+            </p>
         </div>
-        <div id='showOrder' style='display:none;margin-bottom:2rem;'>
-            <form id='addNewOrder' name='addNewOrder' method='post' action='#' novalidate>
-                <input type='hidden' id='csrf' value='<?= $_SESSION['csrf_token'];?>' />
-                <div class="form-group">
-                <label for="newOrder" class="col-sm-2 control-label">New Order:</label>
-                <div class='col-sm-10'>
-                    <input type="number" name='newOrder' id="newOrder" class="form-control"
-                    placeholder="Number to Order" min='0' required="" autocomplete="off"
-                    data-original=""
-                    value=''>
-                    </div>
-                </div>
-                <?= $addNewOrderButton;?>
-            </form>
-        </div>
-        <header id='columnDefinitions'>
-            <div class='col-sm-3 definitionHeader'>Order id</div>
-            <div class='col-sm-3 definitionHeader'>Number Fulfilled</div>
-            <div class='col-sm-3 definitionHeader'>Number Unfulfilled</div>
-            <div class='col-sm-3 definitionHeader'>Delete Order</div>
-        </header>
-        <section id='customerBody'>
+
+        <section id='corporateBody'>
             <?= $corporateOrders;?>
         </section>
     </div><!-- End content -->
 </section>
 <?php
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/footer.php");
+    require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/footer.php");
 ?>
-<script type="text/javascript" src='<?=$jsPath;?>vieworders.js'></script>
   </body>
 </html>

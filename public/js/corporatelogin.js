@@ -25,7 +25,7 @@ todo: true,
 vars: true,
 white: false
 */
-/*global $, jQuery, alert, Spinner, swal, CookieFunctions, isValidJSON, 
+/*global $, jQuery, alert, Spinner, swal, CookieFunctions, isValidJSON,
 setErrorMessage, setSuccessMessage, hideErrorMessage, hideSuccessMessage
 confirm */
 (function corporatelogin(global, $) {
@@ -48,8 +48,8 @@ confirm */
         }).done(function (data, textStatus, jqXHR){
             var testJSON = isValidJSON(data);
             if (testJSON) {
-                JSON.parse(data, function jsonFunc(k,v) {
-                           
+                JSON.parse(data, function jsonFunc(k, v) {
+
                 });
                 window.location.href = CookieFunctions.rootPath + "goodsite/corporate/viewCorporate.php";
             }
@@ -60,7 +60,7 @@ confirm */
             console.log(textStatus);
             console.log(errorThrown);
         });
-        
+
     });
-    
+
 }(window, jQuery));

@@ -87,4 +87,15 @@ class CheckAuth implements CustomerType
         }
         return true;
     }
+    public function isAdmin()
+    {
+        $isAuth = $this->isAuth();
+        $customerType = isset($_SESSION['customerType']) ? $_SESSION['customerType'] : null;
+        $isAdmin = isset($_SESSION['is_admin']) ? $_SESSION['is_admin'] : null;
+        $isCorporateUser = $customerType === CustomerType::CORPORATE || $customerType === CustomerType::GROUP;
+        if (!$isAuth || !$isAdmin || !$isCorporateUser) {
+            return false;
+        }
+        return true;
+    }
 }

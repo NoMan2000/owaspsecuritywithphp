@@ -22,9 +22,9 @@ CREATE TABLE IF NOT EXISTS `widgets`.`companyToGroups` (
 ENGINE = InnoDB
 COLLATE = utf8mb4_bin;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.companyToGroups TO 'widgetCorporate'@'%' IDENTIFIED BY 'somepassword'; 
-GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.companyToGroups TO 'widgetCorporate'@'localhost' IDENTIFIED BY 'somepassword'; 
-GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.companyToGroups TO 'widgetCorporate'@'127.0.0.1' IDENTIFIED BY 'somepassword'; 
+GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.companyToGroups TO 'widgetCorporate'@'%' IDENTIFIED BY 'somepassword';
+GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.companyToGroups TO 'widgetCorporate'@'localhost' IDENTIFIED BY 'somepassword';
+GRANT SELECT, INSERT, UPDATE, DELETE ON widgets.companyToGroups TO 'widgetCorporate'@'127.0.0.1' IDENTIFIED BY 'somepassword';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -44,4 +44,4 @@ DROP TABLE IF EXISTS `widgets`.`companyToGroups`;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
---//    
+--//

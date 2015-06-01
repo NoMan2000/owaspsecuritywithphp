@@ -61,6 +61,7 @@ class CorporateLogin extends BaseLogin implements CustomerType
                 $blackList->removeBlackList();
                 $blackList->removeSleeper("corporateuser:{$row['username']}");
                 $userid = $row['id'];
+                $_SESSION['employeeid'] = $row['id'];
                 $_SESSION['corporateid'] = $row['company_id'];
                 $_SESSION['is_admin'] = $row['is_admin'];
                 $_SESSION['groupid'] = $row['groups_id'];
