@@ -1,15 +1,15 @@
 <?php
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/header.php";
 
-use \security\Models\Authenticator\CheckAuth;
+use \security\Controllers\Corporate\ViewCorporateOrdersController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\BlackLister;
+use \security\Models\Authenticator\CheckAuth;
 use \security\Models\ErrorRunner;
-use \security\Models\SiteLogger\FullLog;
+use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
-use \security\Models\PDOSingleton;
-use \security\Controllers\Corporate\ViewCorporateOrdersController;
+use \security\Models\SiteLogger\FullLog;
 
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
@@ -31,9 +31,9 @@ if ($checkAuth->isAdmin()) {
 $pdo = new PDOSingleton($userType);
 
 $orderID = !empty($_GET['order']) ?
-    $auth->cInt($_GET['order']) : null;
+$auth->cInt($_GET['order']) : null;
 $employeeID = !empty($_SESSION['employeeid']) ?
-    $auth->cInt($_SESSION['employeeid']) : null;
+$auth->cInt($_SESSION['employeeid']) : null;
 
 if (!$isCorporate) {
     $logger->serverData();
@@ -81,7 +81,8 @@ if (!empty($order)) {
     $instructions = htmlentities($instructions);
 }
 
-?>
+require_once dirname(dirname(__DIR__)) . '/partials/corporate/editOrderNavbar.php';?>
+
 <section class="container-fluid row">
     <div id='content' class='clearfix col-xs-12
       col-sm-offset-2 col-md-offset-2 col-lg-offset-2
@@ -102,13 +103,13 @@ if (!empty($order)) {
             <form class="form-signin form-horizontal" id='updateOrderForm'
             role="form" method='POST'
             action='#' novalidate='novalidate'>
-        <input type='hidden' id='csrf' name='csrf' value='<?= $_SESSION['csrf_token'];?>' />
+        <input type='hidden' id='csrf' name='csrf' value='<?=$_SESSION['csrf_token'];?>' />
 
         <div class="form-group">
             <label for="inputOrderID" class="col-sm-2 control-label">Order ID:</label>
             <div class='col-sm-10'>
             <input type="number" name='inputOrderID' id="inputOrderID" class="form-control"
-                placeholder="Order ID" min="0" disabled='disabled' readonly="readonly" required="" autocomplete="off" value='<?= $id;?>'>
+                placeholder="Order ID" min="0" disabled='disabled' readonly="readonly" required="" autocomplete="off" value='<?=$id;?>'>
             </div>
         </div>
 
@@ -116,7 +117,7 @@ if (!empty($order)) {
             <label for="inputFulfilled" class="col-sm-2 control-label">Fulfilled:</label>
             <div class='col-sm-10'>
             <input type="number" name='inputFulfilled' id="inputFulfilled" class="form-control"
-                placeholder="Number Fulfilled" min="0" required="" autocomplete="off" value='<?= $fulfilled;?>'>
+                placeholder="Number Fulfilled" min="0" required="" autocomplete="off" value='<?=$fulfilled;?>'>
             </div>
         </div>
 
@@ -124,7 +125,7 @@ if (!empty($order)) {
             <label for="inputUnfulfilled" class="col-sm-2 control-label">Unfulfilled:</label>
             <div class='col-sm-10'>
             <input type="number" name='inputUnfulfilled' id="inputUnfulfilled" class="form-control"
-                placeholder="Number Fulfilled" min="0" required="" autocomplete="off" value='<?= $unfulfilled;?>'>
+                placeholder="Number Fulfilled" min="0" required="" autocomplete="off" value='<?=$unfulfilled;?>'>
             </div>
         </div>
 
@@ -132,7 +133,7 @@ if (!empty($order)) {
             <label for="inputIsShipped" class="col-sm-2 control-label">Is Shipped:</label>
             <div class='col-sm-10'>
             <input type="checkbox" name='inputIsShipped' id="inputIsShipped" class="form-control"
-                <?= $checked;?>>
+                <?=$checked;?>>
             </div>
         </div>
 
@@ -141,7 +142,7 @@ if (!empty($order)) {
             <div class='col-sm-10'>
             <input type="text" name='inputIsShipped' id="inputIsShipped"
             disabled='disabled' readonly="readonly" class="form-control"
-                placeholder="Username"  required="" autocomplete="off" value='<?= $username;?>'>
+                placeholder="Username"  required="" autocomplete="off" value='<?=$username;?>'>
             </div>
         </div>
 
@@ -150,7 +151,7 @@ if (!empty($order)) {
             <div class='col-sm-10'>
             <input type="email" name='inputEmail' id="inputEmail"
             disabled='disabled' readonly="readonly" class="form-control"
-                placeholder="Email"  required="" autocomplete="off" value='<?= $email;?>'>
+                placeholder="Email"  required="" autocomplete="off" value='<?=$email;?>'>
             </div>
         </div>
 
@@ -159,7 +160,7 @@ if (!empty($order)) {
             <div class='col-sm-10'>
             <input type="text" name='inputAddress' id="inputAddress"
             disabled='disabled' readonly="readonly" class="form-control"
-                placeholder="Street Address"  required="" autocomplete="off" value='<?= $address;?>'>
+                placeholder="Street Address"  required="" autocomplete="off" value='<?=$address;?>'>
             </div>
         </div>
 
@@ -168,7 +169,7 @@ if (!empty($order)) {
             <div class='col-sm-10'>
             <input type="tel" name='inputPhone' id="inputPhone"
             disabled='disabled' readonly="readonly" class="form-control"
-                placeholder="Phone Number"  required="" autocomplete="off" value='<?= $phone;?>'>
+                placeholder="Phone Number"  required="" autocomplete="off" value='<?=$phone;?>'>
             </div>
         </div>
 
@@ -177,7 +178,7 @@ if (!empty($order)) {
             <div class='col-sm-10'>
             <input type="text" name='inputCity' id="inputCity"
             disabled='disabled' readonly="readonly" class="form-control"
-                placeholder="City"  required="" autocomplete="off" value='<?= $city;?>'>
+                placeholder="City"  required="" autocomplete="off" value='<?=$city;?>'>
             </div>
         </div>
 
@@ -186,7 +187,7 @@ if (!empty($order)) {
             <div class='col-sm-10'>
             <input type="text" name='inputState' id="inputState"
             disabled='disabled' readonly="readonly" class="form-control"
-                placeholder="City"  required="" autocomplete="off" value='<?= $state;?>'>
+                placeholder="City"  required="" autocomplete="off" value='<?=$state;?>'>
             </div>
         </div>
 
@@ -195,7 +196,7 @@ if (!empty($order)) {
             <div class='col-sm-10'>
             <input type="text" name='inputCountryCode' id="inputCountryCode"
             disabled='disabled' readonly="readonly" class="form-control"
-                placeholder="Country Code"  required="" autocomplete="off" value='<?= $countrycode;?>'>
+                placeholder="Country Code"  required="" autocomplete="off" value='<?=$countrycode;?>'>
             </div>
         </div>
 
@@ -204,7 +205,7 @@ if (!empty($order)) {
             <div class='col-sm-10'>
             <input type="text" name='inputZip' id="inputZip"
             disabled='disabled' readonly="readonly" class="form-control"
-                placeholder="Zip"  required="" autocomplete="off" value='<?= $zip;?>'>
+                placeholder="Zip"  required="" autocomplete="off" value='<?=$zip;?>'>
             </div>
         </div>
         <div class="form-group">
@@ -223,7 +224,7 @@ if (!empty($order)) {
     </div><!-- End content -->
 </section>
 <?php
-    require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/footer.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
 <script type="text/javascript" src='../../js/corporateEditOrder.js'></script>
   </body>

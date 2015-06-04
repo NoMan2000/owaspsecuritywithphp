@@ -1,14 +1,14 @@
 <?php
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/header.php";
 
-use \security\Models\Authenticator\CheckAuth;
+use \security\Controllers\Corporate\EmployeeGroupsOrdersController;
 use \security\Models\Authenticator\BlackLister;
+use \security\Models\Authenticator\CheckAuth;
 use \security\Models\ErrorRunner;
-use \security\Models\SiteLogger\FullLog;
+use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
-use \security\Models\PDOSingleton;
-use \security\Controllers\Corporate\EmployeeGroupsOrdersController;
+use \security\Models\SiteLogger\FullLog;
 
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
@@ -45,10 +45,16 @@ $corporateOrders = "";
 // $pdo query returns false on fail
 
 $canEdit = isset($_SESSION['is_admin']) ?
-    $_SESSION['is_admin'] : null;
+$_SESSION['is_admin'] : null;
 
 $addNewOrderButton = $orderButton = null;
 if ($canEdit) {
+    $ordersController->setCustomerList();
+    $customers = $ordersController->getCustomerList();
+    $customerList = '';
+    foreach ($customers as $customer) {
+        $customerList .= "<option value='{$customer['id']}'>{$customer['username']}</option>";
+    }
     $orderButton = "<button type='button' class='btn btn-info'
               id='createNewOrder'>
               <span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
@@ -78,7 +84,7 @@ if (!empty($orders)) {
             $corporateOrders .= "<section id='$id'><div class='col-sm-3'>{$viewOrder}</div>
                                  <div class='col-sm-3'>{$fulfilled}</div>
                                  <div class='col-sm-3'>{$unfulfilled}</div>
-                                 <div class='col-sm-3'>N/A";
+                                 <div class='col-sm-3'>";
             if ($canEdit) {
                 $corporateOrders .= "<button type='button' class='btn btn-danger'
                                      data-confirm='Delete the order?'
@@ -87,7 +93,10 @@ if (!empty($orders)) {
                                      >
                                      Delete Order</button>";
             }
-            $corporateOrders.= "</div></section>";
+            if (!$canEdit) {
+                $corporateOrders .= "N/A";
+            }
+            $corporateOrders .= "</div></section>";
         }
         if ($allFulfilled) {
             $corporateOrders .= "<section id='$id'><div class='col-sm-3 fulfilled'>{$viewOrder}</div>
@@ -97,8 +106,10 @@ if (!empty($orders)) {
         }
     }
 }
-
 ?>
+<?php require_once dirname(dirname(__DIR__)) . '/partials/corporate/viewCorporateNavbar.php';?>
+
+
 <section class="container-fluid row">
     <div id='content' class='clearfix col-xs-12
       col-sm-offset-2 col-md-offset-2 col-lg-offset-2
@@ -118,17 +129,26 @@ if (!empty($orders)) {
         </div>
         <div id='showOrder' style='display:none;margin-bottom:2rem;'>
             <form id='addNewOrder' name='addNewOrder' method='post' action='#' novalidate>
-                <input type='hidden' id='csrf' value='<?= $_SESSION['csrf_token'];?>' />
-                <div class="form-group">
-                <label for="newOrder" class="col-sm-2 control-label">New Order:</label>
-                <div class='col-sm-10'>
-                    <input type="number" name='newOrder' id="newOrder" class="form-control"
-                    placeholder="Number to Order" min='0' required="" autocomplete="off"
-                    data-original=""
-                    value=''>
+                <input type='hidden' id='csrf' value='<?=$_SESSION['csrf_token'];?>' />
+                <div class="form-group clearfix">
+                    <label for="newOrder" class="col-sm-2 control-label">New Order:</label>
+                    <div class='col-sm-10'>
+                        <input type="number" name='newOrder' id="newOrder" class="form-control"
+                        placeholder="Number to Order" min='0' required="" autocomplete="off"
+                        data-original=""
+                        value=''>
                     </div>
                 </div>
-                <?= $addNewOrderButton;?>
+                <div class="form-group clearfix">
+                    <label for="customerOrder" class="col-sm-2 control-label">Customer:</label>
+                    <div class='col-sm-10'>
+                    <select class='form-control' id='customerList'>
+                        <?=$customerList;?>
+                    </select>
+
+                    </div>
+                </div>
+                <?=$addNewOrderButton;?>
             </form>
         </div>
         <header id='columnDefinitions'>
@@ -138,12 +158,12 @@ if (!empty($orders)) {
             <div class='col-sm-3 definitionHeader'>Delete Order</div>
         </header>
         <section id='customerBody'>
-            <?= $corporateOrders;?>
+            <?=$corporateOrders;?>
         </section>
     </div><!-- End content -->
 </section>
 <?php
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/footer.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
 <script type="text/javascript" src='<?=$jsPath;?>vieworders.js'></script>
   </body>

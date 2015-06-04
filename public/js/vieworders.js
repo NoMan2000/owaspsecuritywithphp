@@ -33,14 +33,14 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
     var hasConfirm = function hasConfirm(e, obj) {
         hideErrorMessage();
         hideSuccessMessage();
-        obj = obj || {}; 
+        obj = obj || {};
         var $el = $(this),
             message = $el.attr('data-confirm'),
             dataId = $el.attr('data-id'),
             dataUnfulfilled = $el.attr('data-unfulfilled'),
             csrf = $('#csrf').val(),
             confirmButtonClass = 'btn-danger';
-        
+
         obj.message = message;
         obj.text = "You will delete order number " + dataId + " which has " + dataUnfulfilled + " items in it.";
         obj.confirmButtonClass = confirmButtonClass;
@@ -76,8 +76,8 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
             }).fail(function (data){
                 setErrorMessage(data.responseText);
             }).always(function(a,b,c){
-                
-            });  
+
+            });
         };
         e.preventDefault();
         BeginSweetAlert.genericConfirm(obj);
@@ -91,7 +91,8 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
             hideErrorMessage();
             e.preventDefault();
             var totalOrdered = $("#newOrder").val(),
-                csrf = $('#csrf').val();
+                csrf = $('#csrf').val(),
+                customerID = $("#customerList option:selected").val();
             if (!totalOrdered || totalOrdered < 0) {
                 setErrorMessage("Must have a value greater than 0.");
                 return false;
@@ -104,12 +105,19 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                    isAjax: true,
                    action: "addOrder",
                    csrf: csrf,
-                   totalOrdered: totalOrdered
+                   totalOrdered: totalOrdered,
+                   customerID : customerID
                }
-            }).done(function (data, textStatus, jqXHR){
+            }).done(function (data, textStatus, jqXHR) {
                 var jsonResponse = isValidJSON(data),
-                        section, fulfilled, unfulfilled, button, dataID, dataFulfilled, dataUnfulfilled, full;
-                console.log(jqXHR);
+                    section,
+                    fulfilled,
+                    unfulfilled,
+                    button,
+                    dataID,
+                    dataFulfilled,
+                    dataUnfulfilled,
+                    full;
                 if (jsonResponse) {
                     JSON.parse(data, function (k, v) {
                         switch(k) {
@@ -118,7 +126,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                                 break;
                             case 'id':
                                 dataID = v;
-                                section = "<section id='"+ v + "' style='display:none;' class='animateHidden'>" + 
+                                section = "<section id='"+ v + "' style='display:none;' class='animateHidden'>" +
                                 "<div class='col-sm-3'>" + v + "</div>";
                                 break;
                             case 'fulfilled':
@@ -128,13 +136,13 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                                 break;
                             case 'unfulfilled':
                                 dataUnfulfilled = v;
-                                unfulfilled = "<div class='col-sm-3'>" + v + 
+                                unfulfilled = "<div class='col-sm-3'>" + v +
                                 "</div>";
                                 break;
                         }
                     });
                     button = '<div class="col-sm-3">' +
-                    '<button type="button" class="btn btn-danger" data-confirm="Delete the order?" data-id="'+ dataID + 
+                    '<button type="button" class="btn btn-danger" data-confirm="Delete the order?" data-id="'+ dataID +
                     '" data-unfulfilled="' + dataUnfulfilled + '">Delete Order</button></div></section>';
                     full = section + fulfilled + unfulfilled + button;
                 }
@@ -149,7 +157,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                 console.log(data);
                 setErrorMessage(data.responseText);
             });
-            
+
         },
         logout = function logout(e) {
             var csrf = $('#csrf').val();
@@ -183,9 +191,9 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
             }).fail(function (data){
                 console.log(data);
                 setErrorMessage(data.responseText);
-            });  
+            });
         };
-    
+
     $('#content').off('click.hasConfirm').on('click.hasConfirm', '[data-confirm]', hasConfirm)
                  .on('click.addNewOrder', '#createNewOrder', clickAddNewOrder)
                  .on('submit.addNewOrder', 'form#addNewOrder', addNewOrder);

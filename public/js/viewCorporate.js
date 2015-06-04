@@ -28,60 +28,59 @@ white: false
 /*global $, jQuery, alert, Spinner, swal, confirm, hideErrorMessage, hideSuccessMessage, CookieFunctions, setSuccessMessage,
 setErrorMessage, BeginSweetAlert, isValidJSON*/
 
-(function customerViewOrders() {
+(function customerViewOrders(global, doc, $) {
     'use strict';
     var hasConfirm = function hasConfirm(e, obj) {
-            hideErrorMessage();
-            hideSuccessMessage();
-            obj = obj || {};
-            var $el = $(this),
-                message = $el.attr("data-confirm"),
-                dataId = $el.attr("data-id"),
-                dataUnfulfilled = $el.attr("data-unfulfilled"),
-                csrf = $("#csrf").val(),
-                confirmButtonClass = "btn-danger";
+        hideErrorMessage();
+        hideSuccessMessage();
+        obj = obj || {};
+        var $el = $(this),
+            message = $el.attr("data-confirm"),
+            dataId = $el.attr("data-id"),
+            dataUnfulfilled = $el.attr("data-unfulfilled"),
+            csrf = $("#csrf").val(),
+            confirmButtonClass = "btn-danger";
 
-            obj.message = message;
-            obj.text = "You will delete order number " + dataId + " which has " + dataUnfulfilled + " items in it.";
-            obj.confirmButtonClass = confirmButtonClass;
-            obj.successCallback = function () {
-                $.ajax({
-                    url: CookieFunctions.reroutePath,
-                    type: "POST",
-                    data: {
-                        to: "Controllers/Customers/RemoveOrderController.php",
-                        isAjax: true,
-                        action: "removeOrder",
-                        csrf: csrf,
-                        id: dataId
-                    }
-                }).done(function(data) {
-                    var jsonResponse = isValidJSON(data);
-                    if (jsonResponse) {
-                        JSON.parse(data, function(k, v) {
-                            switch (k) {
-                                case 'numberRemoved':
-                                    setSuccessMessage(v);
-                                    break;
-                                case 'id':
-                                    var $removeID = $("#" + v);
-                                    $($removeID).fadeOut(2000, function() {
-                                        ($removeID).remove();
-                                    });
-                                    break;
-                            }
-                        });
-                    }
-                    console.log(data);
-                }).fail(function(data) {
-                    setErrorMessage(data.responseText);
-                }).always(function(a, b, c) {
+        obj.message = message;
+        obj.text = "You will delete order number " + dataId + " which has " + dataUnfulfilled + " items in it.";
+        obj.confirmButtonClass = confirmButtonClass;
+        obj.successCallback = function () {
+            $.ajax({
+                url: CookieFunctions.reroutePath,
+                type: "POST",
+                data: {
+                    to: "Controllers/Customers/RemoveOrderController.php",
+                    isAjax: true,
+                    action: "removeOrder",
+                    csrf: csrf,
+                    id: dataId
+                }
+            }).done(function (data) {
+                var jsonResponse = isValidJSON(data);
+                if (jsonResponse) {
+                    JSON.parse(data, function (k, v) {
+                        switch (k) {
+                        case 'numberRemoved':
+                            setSuccessMessage(v);
+                            break;
+                        case 'id':
+                            var $removeID = $("#" + v);
+                            $($removeID).fadeOut(2000, function() {
+                                ($removeID).remove();
+                            });
+                            break;
+                        }
+                    });
+                }
+            }).fail(function(data) {
+                setErrorMessage(data.responseText);
+            }).always(function(a, b, c) {
 
-                });
-            };
-            e.preventDefault();
-            BeginSweetAlert.genericConfirm(obj);
-        },
+            });
+        };
+        e.preventDefault();
+        BeginSweetAlert.genericConfirm(obj);
+    },
         clickAddNewOrder = function clickAddNewOrder(e) {
             e.preventDefault();
             $("#showOrder").show();
@@ -91,7 +90,8 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
             hideErrorMessage();
             e.preventDefault();
             var totalOrdered = $("#newOrder").val(),
-                csrf = $('#csrf').val();
+                csrf = $("#csrf").val(),
+                customerID = $("#customerList option:selected").val();
             if (!totalOrdered || totalOrdered < 0) {
                 setErrorMessage("Must have a value greater than 0.");
                 return false;
@@ -104,33 +104,39 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                     isAjax: true,
                     action: "addOrder",
                     csrf: csrf,
-                    totalOrdered: totalOrdered
+                    totalOrdered: totalOrdered,
+                    customerID: customerID
                 }
-            }).done(function(data, textStatus, jqXHR) {
+            }).done(function (data, textStatus, jqXHR) {
                 var jsonResponse = isValidJSON(data),
-                    section, fulfilled, unfulfilled, button, dataID, dataFulfilled, dataUnfulfilled, full;
-                console.log(jqXHR);
+                    section,
+                    fulfilled,
+                    unfulfilled,
+                    button,
+                    dataID,
+                    dataUnfulfilled,
+                    full;
                 if (jsonResponse) {
-                    JSON.parse(data, function(k, v) {
+                    JSON.parse(data, function (k, v) {
                         switch (k) {
-                            case 'numberAdded':
-                                setSuccessMessage(v);
-                                break;
-                            case 'id':
-                                dataID = v;
-                                section = "<section id='" + v + "' style='display:none;' class='animateHidden'>" +
-                                    "<div class='col-sm-3'>" + v + "</div>";
-                                break;
-                            case 'fulfilled':
-                                dataFulfilled = v;
-                                fulfilled = "<div class='col-sm-3'>" + v +
-                                    "</div>";
-                                break;
-                            case 'unfulfilled':
-                                dataUnfulfilled = v;
-                                unfulfilled = "<div class='col-sm-3'>" + v +
-                                    "</div>";
-                                break;
+                        case 'numberAdded':
+                            setSuccessMessage(v);
+                            break;
+                        case 'id':
+                            dataID = v;
+                            section = "<section id='" + v + "' style='display:none;' class='animateHidden'>" +
+                                "<div class='col-sm-3'>" + v + "</div>";
+                            break;
+                        case 'fulfilled':
+                            dataFulfilled = v;
+                            fulfilled = "<div class='col-sm-3'>" + v +
+                                "</div>";
+                            break;
+                        case 'unfulfilled':
+                            dataUnfulfilled = v;
+                            unfulfilled = "<div class='col-sm-3'>" + v +
+                                "</div>";
+                            break;
                         }
                     });
                     button = '<div class="col-sm-3">' +
@@ -182,4 +188,4 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
         .on('click.addNewOrder', '#createNewOrder', clickAddNewOrder)
         .on('submit.addNewOrder', 'form#addNewOrder', addNewOrder);
     $("#sessionLogout").on('click.sessionLogout', logout);
-}());
+}(window, document, jQuery));

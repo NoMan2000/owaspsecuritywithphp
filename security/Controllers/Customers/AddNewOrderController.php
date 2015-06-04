@@ -46,9 +46,9 @@ if ($isAjax) {
     $errors = [];
 
     $action = !empty($_POST['action']) ? $_POST['action'] : null;
-    $isCustomer = $checkAuth->isCustomer();
-    $customerID = !empty($_SESSION['customerid']) ?
-    $auth->cInt($_SESSION['customerid']) : null;
+    $isCustomer = $checkAuth->isAuth();
+    $customerID = !empty($_POST['customerID']) ?
+    $auth->cInt($_POST['customerid']) : null;
     $totalOrdered = !empty($_POST['totalOrdered']) ?
     $auth->cInt($_POST['totalOrdered']) : null;
     $csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;

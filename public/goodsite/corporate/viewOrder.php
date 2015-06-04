@@ -1,15 +1,15 @@
 <?php
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/header.php";
 
-use \security\Models\Authenticator\CheckAuth;
+use \security\Controllers\Corporate\ViewCorporateOrdersController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\BlackLister;
+use \security\Models\Authenticator\CheckAuth;
 use \security\Models\ErrorRunner;
-use \security\Models\SiteLogger\FullLog;
+use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
-use \security\Models\PDOSingleton;
-use \security\Controllers\Corporate\ViewCorporateOrdersController;
+use \security\Models\SiteLogger\FullLog;
 
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
@@ -31,9 +31,9 @@ if ($checkAuth->isAdmin()) {
 $pdo = new PDOSingleton($userType);
 
 $orderID = !empty($_GET['order']) ?
-    $auth->cInt($_GET['order']) : null;
+$auth->cInt($_GET['order']) : null;
 $employeeID = !empty($_SESSION['employeeid']) ?
-    $auth->cInt($_SESSION['employeeid']) : null;
+$auth->cInt($_SESSION['employeeid']) : null;
 
 if (!$isCorporate) {
     $logger->serverData();
@@ -54,8 +54,6 @@ $models->errorRunner = $errorRunner;
 $models->pdo = $pdo;
 $models->logger = $logger;
 $models->blackList = $blackList;
-
-
 
 $orderData = new stdClass();
 $orderData->orderID = $orderID;
@@ -101,6 +99,8 @@ if (!empty($order)) {
 }
 
 ?>
+<?php require_once dirname(dirname(__DIR__)) . '/partials/corporate/viewOrderNavbar.php';?>
+
 <section class="container-fluid row">
     <div id='content' class='clearfix col-xs-12
       col-sm-offset-2 col-md-offset-2 col-lg-offset-2
@@ -118,12 +118,12 @@ if (!empty($order)) {
         </div>
 
         <section id='corporateBody'>
-            <?= $corporateOrders;?>
+            <?=$corporateOrders;?>
         </section>
     </div><!-- End content -->
 </section>
 <?php
-    require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/footer.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
   </body>
 </html>

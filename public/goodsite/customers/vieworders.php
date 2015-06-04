@@ -1,15 +1,14 @@
 <?php
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/header.php";
 
-use \security\Models\Authenticator\CheckAuth;
-use \security\Controllers\Customers\ViewOrdersController;
 use \security\Controllers\Customers\InitCustomerController;
-use \security\Models\Authenticator\BlackLister;
+use \security\Controllers\Customers\ViewOrdersController;
+use \security\Models\Authenticator\CheckAuth;
 use \security\Models\ErrorRunner;
-use \security\Models\SiteLogger\FullLog;
+use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
-use \security\Models\PDOSingleton;
+use \security\Models\SiteLogger\FullLog;
 
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
@@ -77,26 +76,17 @@ $address = htmlentities($customerInfo['address']);
 $email = htmlentities($customerInfo['email']);
 $phone = htmlentities($customerInfo['phone']);
 $instructions = !empty($customerInfo['instructions']) ?
-    htmlentities($customerInfo['instructions']) : null;
+htmlentities($customerInfo['instructions']) : null;
 
 $customerInformation = "<p>We will send a confirmation email to $email when your packages are ready.</p>
 <p>They will be
 delivered to $address and we will call you at $phone when they are delivered.</p>";
 if ($instructions) {
-    $customerInformation .= "<p>You also specified the following additional instructions:</p><blockquote>$instructions</blockquote>";
+    $customerInformation .= "<p>You also specified the following additional instructions:</p>
+    <blockquote>$instructions</blockquote>";
 }
 ?>
-<nav class="navbar navbar-default">
-  <div class="container-fluid bg-info">
-    <div class="navbar-header">
-      <a class="navbar-brand" id='sessionLogout' href="#">Log out</a>
-      <ul class="nav navbar-nav">
-          <li><a href="customerEdit.php">Edit Account</a></li>
-          <li class='active'><a href="vieworders.php">View Orders</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<?php require_once dirname(dirname(__DIR__)) . '/partials/customers/viewordersNavbar.php';?>
 
 
 <section class="container-fluid row">
@@ -111,7 +101,7 @@ if ($instructions) {
         </div>
         <div id='customerInformation'>
             <h2>Welcome to your Widget Corp. Customer Orders page.</h2>
-            <?= $customerInformation; ?>
+            <?=$customerInformation;?>
             <p>You can remove any orders that you no longer want and check the status of orders.  Please note that
             you cannot delete an order which has already been fulfilled.</p>
             <p>If this information is inaccurate, go to the <a href="customerEdit.php">Customer Edit Page</a> and change it.
@@ -124,7 +114,7 @@ if ($instructions) {
         </div>
         <div id='showOrder' style='display:none;margin-bottom:2rem;'>
             <form id='addNewOrder' name='addNewOrder' method='post' action='#' novalidate>
-                <input type='hidden' id='csrf' value='<?= $_SESSION['csrf_token'];?>' />
+                <input type='hidden' id='csrf' value='<?=$_SESSION['csrf_token'];?>' />
                 <div class="form-group">
                 <label for="newOrder" class="col-sm-2 control-label">New Order:</label>
                 <div class='col-sm-10'>
@@ -145,13 +135,13 @@ if ($instructions) {
            <div class='col-sm-3 definitionHeader'>Delete Order</div>
        </header>
        <section id='customerBody'>
-        <?= $customerOrders;?>
+        <?=$customerOrders;?>
         </section>
     </div><!-- End content -->
 
 </section>
 <?php
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/footer.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
 <script type="text/javascript" src='<?=$jsPath;?>vieworders.js'></script>
   </body>

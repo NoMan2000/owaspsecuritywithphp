@@ -34,17 +34,8 @@ $customerValues = $customer->getCustomerValues();
 extract($customerValues);
 
 ?>
-<nav class="navbar navbar-default">
-  <div class="container-fluid bg-info">
-    <div class="navbar-header">
-      <a class="navbar-brand" id='sessionLogout' href="#">Log out</a>
-      <ul class="nav navbar-nav">
-          <li class='active'><a href="customerEdit.php">Edit Account</a></li>
-          <li><a href="vieworders.php">View Orders</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<?php require_once dirname(dirname(__DIR__)) . '/partials/customers/customerEditNavbar.php';?>
+
 <section class="container-fluid row">
 
     <div id='content' class='clearfix col-xs-12
@@ -70,7 +61,7 @@ extract($customerValues);
         <h1 class="form-signin-heading text-center">Customer edit form</h1>
         <h4 class='textContent'><?=$username;?></h4>
         <input type='hidden' name='actionType' id='actionType' data-action='updateCustomer' />
-        <?php require_once dirname(dirname(__DIR__)) . '/partials/customers/customerEditInputs.php'; ?>
+        <?php require_once dirname(dirname(__DIR__)) . '/partials/customers/customerEditInputs.php';?>
         <button class="btn btn-lg btn-primary center-block" type="submit">Change info</button>
         <p>&nbsp;</p>
       </form>

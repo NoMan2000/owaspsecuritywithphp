@@ -32,8 +32,15 @@ class EmployeeGroupsOrdersController extends BaseCorporateController
     {
         return $this->model->getOrders();
     }
+    public function setCustomerList()
+    {
+        $this->model->setCustomerList();
+    }
+    public function getCustomerList()
+    {
+        return $this->model->getCustomerList();
+    }
 }
-
 
 $isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 $errors = [];
