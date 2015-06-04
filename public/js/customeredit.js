@@ -102,7 +102,8 @@ confirm */
             return doc.gID("inputZip").defaultValue;
         },
         hasChanged: function hasChanged() {
-            if (this.username !== this.defaultUsername ||
+            if (this.newpasswordConfirm ||
+                this.username !== this.defaultUsername ||
                 this.email !== this.defaultEmail ||
                 this.address !== this.defaultAddress ||
                 this.phone !== this.defaultPhone ||

@@ -68,8 +68,7 @@ if ($isAjax) {
         $auth->vEmail($email) : null;
     $address = !empty($address) ?
         $auth->cleanString($address) : null;
-    $phone = !empty($phone) ?
-        $auth->vPhone($phone) : null;
+    $phone = !empty($phone) ?: null;
     $city = !empty($city) ?
         $auth->cleanString($city) : null;
     $state = !empty($state) ?
@@ -80,10 +79,10 @@ if ($isAjax) {
         $auth->cleanString($zip) : null;
 
     $csrf = !empty($csrf) ? $csrf : null;
-
     if ($phone) {
-        $phone = $auth->cInt($phone);
+        $phone = $auth->vPhone($phone) ?: $errors[] = "Invalid phone format.";
     }
+
     $instructions = !empty(trim($instructions)) ?
     $auth->cleanString($instructions) : null;
     $isCustomer = $checkAuth->isCustomer();

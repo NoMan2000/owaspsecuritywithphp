@@ -24,9 +24,9 @@ class Authenticate
         return (trim(filter_var($string, FILTER_SANITIZE_STRING)));
     }
 
-    public function vPhone($phone, $isInternational = false)
+    public function vPhone($phone = null, $isInternational = false)
     {
-        $phone = $this->filledAndSet(@$phone) ? $this->cInt($phone) : null;
+        $phone = !empty($phone) ? $this->cInt($phone) : null;
         if ($phone && !$isInternational) {
             $phone = (strlen($phone) === 10 || strlen($phone) === 11) ?: null;
         }

@@ -47,8 +47,13 @@ $corporateOrders = "";
 $canEdit = isset($_SESSION['is_admin']) ?
     $_SESSION['is_admin'] : null;
 
-$addNewOrderButton = null;
+$addNewOrderButton = $orderButton = null;
 if ($canEdit) {
+    $orderButton = "<button type='button' class='btn btn-info'
+              id='createNewOrder'>
+              <span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
+              <span id='textForOrder'>Make new order</span>
+            </button>";
     $addNewOrderButton = "<button type='submit'
                         class='btn btn-default' id='submitNewOrder'>
                         Add Order
@@ -73,7 +78,7 @@ if (!empty($orders)) {
             $corporateOrders .= "<section id='$id'><div class='col-sm-3'>{$viewOrder}</div>
                                  <div class='col-sm-3'>{$fulfilled}</div>
                                  <div class='col-sm-3'>{$unfulfilled}</div>
-                                 <div class='col-sm-3'>";
+                                 <div class='col-sm-3'>N/A";
             if ($canEdit) {
                 $corporateOrders .= "<button type='button' class='btn btn-danger'
                                      data-confirm='Delete the order?'
@@ -108,10 +113,8 @@ if (!empty($orders)) {
             <h2>Welcome to your Widget Corp. Corporate Orders page.</h2>
             <p>If you are an admin, you can remove any orders that are fulfilled and you can edit
             an order. </p>
-            <button type="button" class="btn btn-info" id='createNewOrder' aria-label="Left Align">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              <span id='textForOrder'>Make new order</span>
-            </button>
+
+            <?=$orderButton;?>
         </div>
         <div id='showOrder' style='display:none;margin-bottom:2rem;'>
             <form id='addNewOrder' name='addNewOrder' method='post' action='#' novalidate>
