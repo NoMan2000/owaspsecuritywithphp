@@ -50,7 +50,7 @@ body, html {
     font-size:18px;
 }
 #centerContent {
-    position: absolute; 
+    position: absolute;
     left: 50%;
     top:50%;
 }
@@ -59,7 +59,7 @@ body, html {
     text-align:left;
 }
 #spinnerText {
-    position: relative; 
+    position: relative;
     left: -50%;
     top:-50%;
     p {
@@ -104,4 +104,7 @@ a.list-group-item {
         cursor: inherit;
         display: block;
     }
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    background-color:white;
 }

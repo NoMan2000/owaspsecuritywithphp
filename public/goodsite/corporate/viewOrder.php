@@ -68,36 +68,36 @@ $order = $ordersController->getOrders();
 
 $corporateOrders = "";
 if (!empty($order)) {
-        extract($order);
-        $id = intval($id);
-        $fulfilled = intval($fulfilled);
-        $unfulfilled = intval($unfulfilled);
-        $is_shipped = intval($is_shipped);
-        $username = htmlentities($username);
-        $address = htmlentities($address);
-        $email = htmlentities($email);
-        $phone = htmlentities($phone);
-        $instructions = htmlentities($instructions);
-        $city = htmlentities($city);
-        $state = htmlentities($state);
-        $countrycode = htmlentities($countrycode);
-        $zip = htmlentities($zip);
+    extract($order);
+    $id = intval($id);
+    $fulfilled = intval($fulfilled);
+    $unfulfilled = intval($unfulfilled);
+    $is_shipped = intval($is_shipped);
+    $username = htmlentities($username);
+    $address = htmlentities($address);
+    $email = htmlentities($email);
+    $phone = htmlentities($phone);
+    $instructions = htmlentities($instructions);
+    $city = htmlentities($city);
+    $state = htmlentities($state);
+    $countrycode = htmlentities($countrycode);
+    $zip = htmlentities($zip);
 
-        $corporateOrders = "<section id='$id'>
-            <div class='col-sm-3 col-sm-offset-1'>Order ID:</div><div class='col-sm-8'>{$id}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Fulfilled:</div><div class='col-sm-8'>{$fulfilled}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Unfulfilled:</div><div class='col-sm-8'>{$unfulfilled}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Is Shipped:</div><div class='col-sm-8'>{$is_shipped}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Username:</div><div class='col-sm-8'>{$username}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Address:</div><div class='col-sm-8'>{$unfulfilled}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Email:</div><div class='col-sm-8'>{$email}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Phone:</div><div class='col-sm-8'>{$phone}</div>
-            <div class='col-sm-3 col-sm-offset-1'>City:</div><div class='col-sm-8'>{$city}</div>
-            <div class='col-sm-3 col-sm-offset-1'>State:</div><div class='col-sm-8'>{$state}</div>
-            <div class='col-sm-3 col-sm-offset-1'>CountryCode:</div><div class='col-sm-8'>{$countrycode}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Zip:</div><div class='col-sm-8'>{$zip}</div>
-            <div class='col-sm-3 col-sm-offset-1'>Instructions:</div><div class='col-sm-8'>{$instructions}</div>
-         </section>";
+    $corporateOrders = "<section id='$id'>
+        <div class='col-sm-3 col-sm-offset-1'>Order ID:</div><div class='col-sm-8'>{$id}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Fulfilled:</div><div class='col-sm-8'>{$fulfilled}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Unfulfilled:</div><div class='col-sm-8'>{$unfulfilled}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Is Shipped:</div><div class='col-sm-8'>{$is_shipped}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Username:</div><div class='col-sm-8'>{$username}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Address:</div><div class='col-sm-8'>{$unfulfilled}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Email:</div><div class='col-sm-8'>{$email}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Phone:</div><div class='col-sm-8'>{$phone}</div>
+        <div class='col-sm-3 col-sm-offset-1'>City:</div><div class='col-sm-8'>{$city}</div>
+        <div class='col-sm-3 col-sm-offset-1'>State:</div><div class='col-sm-8'>{$state}</div>
+        <div class='col-sm-3 col-sm-offset-1'>CountryCode:</div><div class='col-sm-8'>{$countrycode}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Zip:</div><div class='col-sm-8'>{$zip}</div>
+        <div class='col-sm-3 col-sm-offset-1'>Instructions:</div><div class='col-sm-8'>{$instructions}</div>
+     </section>";
 }
 
 ?>

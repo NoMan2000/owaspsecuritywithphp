@@ -34,6 +34,17 @@ $customerValues = $customer->getCustomerValues();
 extract($customerValues);
 
 ?>
+<nav class="navbar navbar-default">
+  <div class="container-fluid bg-info">
+    <div class="navbar-header">
+      <a class="navbar-brand" id='sessionLogout' href="#">Log out</a>
+      <ul class="nav navbar-nav">
+          <li class='active'><a href="customerEdit.php">Edit Account</a></li>
+          <li><a href="vieworders.php">View Orders</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <section class="container-fluid row">
 
     <div id='content' class='clearfix col-xs-12

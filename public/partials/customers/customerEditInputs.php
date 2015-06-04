@@ -6,6 +6,9 @@
                 value='<?=$username;?>'>
             </div>
         </div>
+    <?php
+        if ($hasPassword) {
+    ?>
         <div class="form-group">
             <label for="originalPassword" class="col-sm-2 control-label">Original Password:</label>
             <div class='col-sm-10'>
@@ -13,6 +16,7 @@
                 placeholder="old Password" autocomplete="off" value=''>
             </div>
         </div>
+    <?php } ?>
 
         <div class="form-group">
             <label for="newPassword" class="col-sm-2 control-label">New Password:</label>

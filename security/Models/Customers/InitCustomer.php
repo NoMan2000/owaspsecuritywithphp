@@ -21,7 +21,8 @@ class InitCustomer
         $errors = [];
         $pdo = $this->pdo;
         $id = intval($this->session['customerid']);
-        $query = "SELECT username, email, address, phone,
+        $query = "SELECT IF(LENGTH(password) > 0, 1, 0) AS hasPassword,
+                  username, email, address, phone,
                   instructions, city, state, countrycode, zip
                   FROM customers WHERE id={$id}";
         $result = $pdo->query($query);
@@ -29,6 +30,7 @@ class InitCustomer
         if ($result) {
             foreach ($result as $row) {
                 $this->data = [
+                    'hasPassword' => $row['hasPassword'],
                     'username' => $row['username'],
                     'email' => $row['email'],
                     'address' => $row['address'],

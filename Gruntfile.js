@@ -36,16 +36,16 @@ module.exports = function(grunt) {
                 nonull: true,
                 expand: true,
                 flatten: true,
-                cwd: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/',
+                cwd: 'bower_components/bootstrap/dist/fonts/',
                 src: ['**'],
-                dest: 'public/fonts/bootstrap/'
+                dest: 'public/fonts/'
             },
-            sassFiles: {
+            bootstrapCSSFiles: {
                 expand: true,
                 flatten: false,
-                cwd: 'bower_components/bootstrap-sass-official/assets/stylesheets/',
+                cwd: 'bower_components/bootstrap/dist/css/',
                 src: ['**'],
-                dest: 'tmp/sass/'
+                dest: 'tmp/css/'
             },
             cssFiles: {
                 src: 'bower_components/bootstrap-sweetalert/lib/sweet-alert.css',
@@ -62,8 +62,6 @@ module.exports = function(grunt) {
 
                 },
                 files: [{
-                    "tmp/css/bootstrap.css": ["tmp/sass/main.scss"]
-                }, {
                     "tmp/css/style.css": ["public/sass/style.scss"],
                     "tmp/css/vieworders.css": ["public/sass/vieworders.scss"]
                 }]
@@ -124,7 +122,7 @@ module.exports = function(grunt) {
                 files: [{
                     "public/js/fullAssets.js": [
                         "bower_components/jquery/dist/jquery.js",
-                        "bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js",
+                        "bower_components/bootstrap/dist/js/bootstrap.js",
                         "bower_components/bootstrap-sweetalert/lib/sweet-alert.js",
                         "bower_components/spinner/spin.js"
                     ]

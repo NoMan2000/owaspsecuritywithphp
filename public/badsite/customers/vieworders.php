@@ -24,8 +24,10 @@ if (!$isCustomer) {
 }
 $pdo = new PDOSingleton();
 
-$query = "SELECT id, fulfilled, unfulfilled FROM `orders`
-    WHERE customers_id = {$_SESSION['customerid']}";
+$query = "SELECT orders.id, orders.fulfilled, orders.unfulfilled,
+orders.is_shipped FROM orders JOIN customersToOrders ON
+(orders.id, customersToOrders.customers_id) =
+(customersToOrders.orders_id, {$_SESSION['customerid']});";
 $customerOrders = "<header id='columnDefinitions'><div class='col-sm-3 definitionHeader'>Order id</div>
                    <div class='col-sm-3 definitionHeader'>Number Fulfilled</div>
                    <div class='col-sm-3 definitionHeader'>Number Unfulfilled</div>

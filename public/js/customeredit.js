@@ -182,9 +182,37 @@ confirm */
             }
             return false;
         }
-    };
-
-    $("#customerEditForm").on("submit", function submitEditForm(e) {
+    },
+    logout = function logout(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: CookieFunctions.reroutePath,
+            data: {
+                to: "Controllers/Customers/DestroySessionController.php",
+                isAjax: true,
+                csrf: EditForm.csrf,
+                action: "destroySession"
+            }
+        }).done(function(data, textStatus, jqXHR) {
+            var jsonResponse = isValidJSON(data);
+            if (jsonResponse) {
+                JSON.parse(data, function(k, v) {
+                    switch (k) {
+                        case 'loggedout':
+                            setSuccessMessage("You have logged out the system");
+                            break;
+                    }
+                });
+                global.setTimeout(function() {
+                    global.location.href = CookieFunctions.rootPath + 'goodsite/index.php';
+                }, 1500);
+            }
+        }).fail(function(jqXHR) {
+            setErrorMessage(jqXHR.responseText);
+        });
+    },
+    submitEditForm = function submitEditForm(e) {
         $(".has-error").removeClass("has-error");
         e.preventDefault();
         hideErrorMessage();
@@ -225,7 +253,10 @@ confirm */
                 setErrorMessage(data.responseText);
             });
         }
-    });
+    };
+
+    $("#customerEditForm").on("submit", submitEditForm);
+    $("#sessionLogout").on('click', logout);
     $("[data-toggle='tooltip']").tooltip({
         container: "body"
     });
