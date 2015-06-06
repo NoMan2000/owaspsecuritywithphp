@@ -42,8 +42,9 @@ class EmployeeGroupsOrdersController extends BaseCorporateController
     }
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
+    extract($_GET);
     $errors = [];
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     isset($_SESSION) || $errors[] = "No customer is available.";

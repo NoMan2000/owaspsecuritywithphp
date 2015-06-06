@@ -41,10 +41,11 @@ class EditCustomerController extends BaseCustomerController
     }
 }
 
-$isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
-
-if ($isAjax) {
+if (isset($_POST['submit']) || isset($_GET['submit'])) {
     // Add a PDOSingleton User here.
+    extract($_GET);
+    extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $pdo = new PDOSingleton();
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
@@ -55,27 +56,17 @@ if ($isAjax) {
     $errors = [];
     extract($_POST);
 
-    $username = !empty($username) ?
-    $auth->cleanString($username) : null;
-    $password = !empty($password) ?
-    $password : null;
-    $newpassword = !empty($newpassword) ?
-    $newpassword : null;
-    $newpasswordConfirm = !empty($newpasswordConfirm) ?
-    $newpasswordConfirm : null;
-    $email = !empty($email) ?
-    $auth->vEmail($email) : null;
-    $address = !empty($address) ?
-    $auth->cleanString($address) : null;
-    $phone = !empty($phone) ?: null;
-    $city = !empty($city) ?
-    $auth->cleanString($city) : null;
-    $state = !empty($state) ?
-    $auth->cleanString($state) : null;
-    $countryCode = !empty($countryCode) ?
-    $auth->cleanString($countryCode) : null;
-    $zip = !empty($zip) ?
-    $auth->cleanString($zip) : null;
+    $username = !empty($username) ? $auth->cleanString($username) : null;
+    $password = !empty($password) ? $password : null;
+    $newpassword = !empty($newpassword) ? $newpassword : null;
+    $newpasswordConfirm = !empty($newpasswordConfirm) ? $newpasswordConfirm : null;
+    $email = !empty($email) ? $auth->vEmail($email) : null;
+    $address = !empty($address) ? $auth->cleanString($address) : null;
+    $phone = !empty($phone) ? $phone : null;
+    $city = !empty($city) ? $auth->cleanString($city) : null;
+    $state = !empty($state) ? $auth->cleanString($state) : null;
+    $countryCode = !empty($countryCode) ? $auth->cleanString($countryCode) : null;
+    $zip = !empty($zip) ? $auth->cleanString($zip) : null;
 
     $csrf = !empty($csrf) ? $csrf : null;
     if ($phone) {

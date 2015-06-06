@@ -30,11 +30,12 @@ if (empty($errors)) {
     // but from an Ajax call, only the non-accessible areas
     // are difficult to manage.
     //
-    // Limit 3 attacks:  Unauthorized areas with the whitelist, Null-byte with the
-    // realpath, and traversal with the realpath
+    // Limit 3 attacks:
+    // Unauthorized areas with the whitelist,
+    // Null-byte with the realpath
+    // Path traversal with the realpath
     $security = $paths['security'];
     $requested = realpath($security . DIRECTORY_SEPARATOR . $to);
-    echo $requested;
     if (!file_exists($requested)) {
         $errors[] = "The file requested could not be found.";
     }

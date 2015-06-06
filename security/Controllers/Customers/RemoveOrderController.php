@@ -33,8 +33,9 @@ class RemoveOrderController extends BaseCustomerController
     }
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
+    extract($_GET);
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
     $auth = new Authenticate();
@@ -44,12 +45,11 @@ if (isset($_POST['submit'])) {
     $checkAuth = new CheckAuth($logger);
     $errors = [];
 
-    $action = !empty($action) ?
-    $action : null;
+    $action = !empty($action) ? $action : null;
     $orderID = !empty($id) ? $auth->cInt($id) : null;
     $isCustomer = $checkAuth->isCustomer();
-    $customerID = !empty($_SESSION['customerid) ?
-    $auth->cInt($_SESSION['customerid) : null;
+    $customerID = !empty($_SESSION['customerid']) ?
+    $auth->cInt($_SESSION['customerid']) : null;
 
     $action || $errors[] = "No action was specified on this request.";
     $orderID || $errors[] = "No orderid was specified on this request.";

@@ -38,42 +38,48 @@ class CorporateLoginController extends BaseLoginController
     }
 }
 
-$errors = array();
+if (isset($_POST['submit']) || isset($_GET['submit'])) {
+    extract($_POST);
+    extract($_GET);
+    $errors = [];
+    $auth = new Authenticate();
+    $errorRunner = new ErrorRunner();
+    $redis = new RedisSingleton();
+    $blackList = new BlackLister($redis);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
+    $pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
+    $logger = new FullLog('Corporate Login');
+    $logger->serverData();
 
-$auth = new Authenticate();
-$errorRunner = new ErrorRunner();
-$redis = new RedisSingleton();
-$blackList = new BlackLister($redis);
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-$pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
-$logger = new FullLog('Corporate Login');
-$logger->serverData();
+    $userName = !empty($userName) ? $auth->cleanString($userName) : null;
+    $password = !empty($password) ? $password : null;
+    $action = !empty($action) ? $auth->cleanString($action) : null;
 
-$userName = !empty($_POST['userName']) ?
-$auth->cleanString($_POST['userName']) : null;
-$password = !empty($_POST['password']) ?
-$_POST['password'] : null;
-$action = !empty($_POST['action']) ?
-$auth->cleanString($_POST['action']) : null;
+    $userName || $errors[] = "No email was sent over.";
+    $password || $errors[] = "No password was sent over.";
 
-$userName || $errors[] = "No email was sent over.";
-$password || $errors[] = "No password was sent over.";
+    if (empty($errors)) {
+        $modelObjects = new StdClass();
+        $modelObjects->pdo = $pdo;
+        $modelObjects->redis = $redis;
+        $modelObjects->errorRunner = $errorRunner;
+        $modelObjects->blackList = $blackList;
+        $modelObjects->logger = $logger;
 
-if (empty($errors) && $isAjax) {
-    $modelObjects = new StdClass();
-    $modelObjects->pdo = $pdo;
-    $modelObjects->redis = $redis;
-    $modelObjects->errorRunner = $errorRunner;
-    $modelObjects->blackList = $blackList;
-    $modelObjects->logger = $logger;
+        $corporateLoginData = new StdClass();
+        $corporateLoginData->userName = $userName;
+        $corporateLoginData->password = $password;
 
-    $corporateLoginData = new StdClass();
-    $corporateLoginData->userName = $userName;
-    $corporateLoginData->password = $password;
+        $controller = new CorporateLoginController($modelObjects, $corporateLoginData);
+        $controller->checkUser();
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
 
-    $controller = new CorporateLoginController($modelObjects, $corporateLoginData);
-    $controller->checkUser();
-    echo json_encode($controller);
+    }
 }
 
 if (!empty($errors)) {

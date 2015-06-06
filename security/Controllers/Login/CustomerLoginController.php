@@ -35,11 +35,10 @@ class CustomerLoginController extends BaseLoginController
     }
 }
 
-$errors = [];
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
-}
-if (!empty($submit)) {
+    extract($_GET);
+    $errors = [];
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $redis = new RedisSingleton();
@@ -49,8 +48,7 @@ if (!empty($submit)) {
     $logger = new FullLog("Customer Login");
     $logger->serverData();
 
-    $userName = !empty($userName) ?
-    $auth->cleanString($userName) : null;
+    $userName = !empty($userName) ? $auth->cleanString($userName) : null;
     $password = !empty($password) ? $password : null;
     $postCsrf = isset($csrf) ? $csrf : null;
     $sessionToken = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : null;

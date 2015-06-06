@@ -33,8 +33,9 @@ class CorporateEditOrderController extends BaseCorporateController
 
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
+    extract($_GET);
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $errors = [];
     $isAjax = null;

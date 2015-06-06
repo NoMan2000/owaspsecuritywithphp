@@ -32,12 +32,10 @@ class BadCustomerLoginController extends BaseLoginController
     }
 }
 
-$errors = [];
-if (!empty($_GET)) {
+if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_GET);
-}
-
-if (isset($submit)) {
+    extract($_POST);
+    $errors = [];
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $redis = new RedisSingleton();
@@ -48,7 +46,7 @@ if (isset($submit)) {
     $userName = !empty($userName) ? $userName : null;
     $password = !empty($password) ? $password : null;
 
-    $userName || $errors[] = "No email was sent over.";
+    $userName || $errors[] = "No username was sent over.";
     $password || $errors[] = "No password was sent over.";
     if (empty($errors)) {
         $models = new stdClass();
