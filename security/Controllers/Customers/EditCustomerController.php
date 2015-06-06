@@ -12,12 +12,12 @@ use \security\Exceptions\KnownVulnerablePasswordException;
 use \security\Exceptions\WeakPasswordException;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
+use \security\Models\Customers\EditCustomer;
 use \security\Models\ErrorRunner;
 use \security\Models\Login\PasswordVulnerable;
 use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\SiteLogger\FullLog;
-use \security\Models\Customers\EditCustomer;
 use \stdClass;
 
 class EditCustomerController extends BaseCustomerController
@@ -27,10 +27,9 @@ class EditCustomerController extends BaseCustomerController
     private $customer;
     private $customerData;
 
-    public function __construct(stdClass $models, array $customerData)
+    public function __construct(stdClass $models, stdClass $customer)
     {
-        $this->editData = $customerData;
-        $this->customer = new EditCustomer($models);
+        $this->customer = new EditCustomer($models, $customer);
     }
     public function editCustomer()
     {
@@ -57,26 +56,26 @@ if ($isAjax) {
     extract($_POST);
 
     $username = !empty($username) ?
-        $auth->cleanString($username) : null;
+    $auth->cleanString($username) : null;
     $password = !empty($password) ?
-        $password : null;
+    $password : null;
     $newpassword = !empty($newpassword) ?
-        $newpassword : null;
+    $newpassword : null;
     $newpasswordConfirm = !empty($newpasswordConfirm) ?
-        $newpasswordConfirm : null;
+    $newpasswordConfirm : null;
     $email = !empty($email) ?
-        $auth->vEmail($email) : null;
+    $auth->vEmail($email) : null;
     $address = !empty($address) ?
-        $auth->cleanString($address) : null;
+    $auth->cleanString($address) : null;
     $phone = !empty($phone) ?: null;
     $city = !empty($city) ?
-        $auth->cleanString($city) : null;
+    $auth->cleanString($city) : null;
     $state = !empty($state) ?
-        $auth->cleanString($state) : null;
+    $auth->cleanString($state) : null;
     $countryCode = !empty($countryCode) ?
-        $auth->cleanString($countryCode) : null;
+    $auth->cleanString($countryCode) : null;
     $zip = !empty($zip) ?
-        $auth->cleanString($zip) : null;
+    $auth->cleanString($zip) : null;
 
     $csrf = !empty($csrf) ? $csrf : null;
     if ($phone) {
@@ -143,11 +142,18 @@ if ($isAjax) {
     $customerData['countryCode'] = $countryCode;
     $customerData['zip'] = $zip;
     $customerData['updatePassword'] = $updatePassword;
+    $customer = new stdClass();
+    $customer->customerData = $customerData;
 
     if (empty($errors)) {
-        $editCustomer = new EditCustomerController($models, $customerData);
+        $editCustomer = new EditCustomerController($models, $customer);
         $editCustomer->editCustomer();
-        echo json_encode($editCustomer);
+        if (!$isAjax) {
+            echo json_encode($editCustomer);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
     }
 }
 if (!empty($errors)) {

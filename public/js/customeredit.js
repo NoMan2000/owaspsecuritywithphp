@@ -193,7 +193,8 @@ confirm */
                 to: "Controllers/Customers/DestroySessionController.php",
                 isAjax: true,
                 csrf: EditForm.csrf,
-                action: "destroySession"
+                action: "destroySession",
+                submit: true
             }
         }).done(function(data, textStatus, jqXHR) {
             var jsonResponse = isValidJSON(data);
@@ -237,7 +238,8 @@ confirm */
                     countryCode: EditForm.countryCode,
                     zip: EditForm.zip,
                     csrf: EditForm.csrf,
-                    instructions: EditForm.instructions
+                    instructions: EditForm.instructions,
+                    submit: true
                 }
             }).done(function(data) {
                 var jsonResponse = isValidJSON(data);

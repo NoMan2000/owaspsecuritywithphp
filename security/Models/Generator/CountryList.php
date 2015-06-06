@@ -8,6 +8,10 @@ class CountryList
     public function getCountryList()
     {
         return $this->countryList = [
+            "US" => "United States",
+            "CA" => "Canada",
+            "GB" => "United Kingdom",
+            "MX" => "Mexico",
             "AF" => "Afghanistan",
             "AL" => "Albania",
             "DZ" => "Algeria",
@@ -47,7 +51,6 @@ class CountryList
             "BI" => "Burundi",
             "KH" => "Cambodia",
             "CM" => "Cameroon",
-            "CA" => "Canada",
             "CT" => "Canton and Enderbury Islands",
             "CV" => "Cape Verde",
             "KY" => "Cayman Islands",
@@ -153,7 +156,6 @@ class CountryList
             "MU" => "Mauritius",
             "YT" => "Mayotte",
             "FX" => "Metropolitan France",
-            "MX" => "Mexico",
             "FM" => "Micronesia",
             "MI" => "Midway Islands",
             "MD" => "Moldova",
@@ -256,8 +258,6 @@ class CountryList
             "UA" => "Ukraine",
             "SU" => "Union of Soviet Socialist Republics",
             "AE" => "United Arab Emirates",
-            "GB" => "United Kingdom",
-            "US" => "United States",
             "ZZ" => "Unknown or Invalid Region",
             "UY" => "Uruguay",
             "UZ" => "Uzbekistan",
@@ -271,7 +271,7 @@ class CountryList
             "YE" => "Yemen",
             "ZM" => "Zambia",
             "ZW" => "Zimbabwe",
-            "AX" => "Åland Islands"
+            "AX" => "Åland Islands",
         ];
     }
 }

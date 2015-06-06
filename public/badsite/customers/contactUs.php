@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (isset($_FILES) && !empty($_FILES['filename'])) {
-        $destination = '/home/ubuntu/workspace/public/uploads/';
+        $destination = dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR;
         try {
             $upload = new FileUploader($destination);
             $upload->setMaxSize($max);
@@ -82,9 +82,37 @@ if (isset($_POST['submit'])) {
     }
 }
 
+$resultList = '';
+if (!empty($results)) {
+    $resultsIterator = new RecursiveArrayIterator($results);
+    foreach (new RecursiveIteratorIterator($resultsIterator) as $result) {
+        $resultList .= "<div class='alert alert-success' role='alert'>
+            $result</div>";
+    }
+}
+$errorList = '';
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        $errorList .= "<div class='alert alert-danger' role='alert'>
+            <div>$error</div></div>";
+    }
+}
+$userList = '';
+if (isset($usersExist['users']) && !empty($usersExist['users'])) {
+    $usersIterator = new RecursiveArrayIterator($usersExist['users']);
+    foreach (new RecursiveIteratorIterator($usersIterator) as $users) {
+        $userList .= "<div class='alert alert-danger' role='alert'>
+            <div>$users is already taken.</div></div>";
+    }
+}
+if (isset($usersSearch) && !empty($usersSearch) && empty($usersExist['users'])) {
+    $userList = "<div class='alert alert-success' role='alert>
+            No users matching that username
+    </div>";
+
+}
+
 ?>
-
-
 <section class="container-fluid row">
 
     <div id='content' class='clearfix col-xs-12
@@ -95,28 +123,11 @@ if (isset($_POST['submit'])) {
 
             </div>
         </div>
-        <?php
-if (!empty($results)) {
-    $resultsIterator = new RecursiveArrayIterator($results);
-    foreach (new RecursiveIteratorIterator($resultsIterator) as $result) {
-        ?>
-            <div class="alert alert-success" role="alert">
-                    <?=$result;?>
-            </div>
-            <?php }
-}
-?>
+        <?=$resultList;?>
         <div id='errorHolder' class="alert alert-danger" role="alert" style='display:none;'>
             <div id='errorContent'></div>
         </div>
-        <?php if (!empty($errors)) {
-    foreach ($errors as $error) {
-        ?>
-            <div class="alert alert-danger" role="alert">
-            <div><?=$error;?></div>
-            </div>
-        <?php }}
-?>
+        <?=$errorList;?>
 
       <form class="form-signin form-horizontal" id='customerEditForm'
         role="form" method='POST'
@@ -135,22 +146,7 @@ if (!empty($results)) {
                 value=''>
             </div>
         </div>
-        <?php if (isset($usersExist['users']) && !empty($usersExist['users'])) {
-    $usersIterator = new RecursiveArrayIterator($usersExist['users']);
-    foreach (new RecursiveIteratorIterator($usersIterator) as $users) {
-        ?>
-        <div class="alert alert-danger" role="alert">
-            <div><?=$users;?> is already taken.</div>
-            </div>
-        <?php }}
-?>
-        <?php if (isset($usersSearch) && !empty($usersSearch) && empty($usersExist['users'])) {?>
-            <div class="alert alert-success" role="alert">
-                    No users matching that username
-            </div>
-        <?php }
-?>
-
+        <?=$userList;?>
         <div class="form-group">
             <label for="inputEmail" class="col-sm-2 control-label">Email:</label>
             <div class='col-sm-10'>
@@ -190,27 +186,28 @@ if (!empty($results)) {
             </div>
         </div>
 
-        <input type="hidden" id='MAX_FILE_SIZE' name="MAX_FILE_SIZE" value="<?php echo $max;?>">
+        <input type="hidden" id='MAX_FILE_SIZE' name="MAX_FILE_SIZE" value="<?=$max;?>">
         <div class='col-sm-10 col-sm-offset-2 bg-info' id='fileUploadMessages'>
         <h3>Special Upload Instructions:</h3>
         <p>If you have a long list of instructions you need to upload, you can do so here.</p>
-        <p>Up to <?php echo $_SESSION['maxfiles'];?> files can be uploaded simultaneously.</p>
-        <p>Each file should be no more than <?php echo FileUploader::convertFromBytes($max);?>.</p>
-        <p>Combined total should not exceed <?php echo $_SESSION['displaymax'];?>.</p>
+        <p>Up to <?=$_SESSION['maxfiles'];?> files can be uploaded simultaneously.</p>
+        <p>Each file should be no more than <?=FileUploader::convertFromBytes($max);?>.</p>
+        <p>Combined total should not exceed <?=$_SESSION['displaymax'];?>.</p>
         <p>&nbsp;</p>
         </div>
         <div class="form-group">
             <label for="filename" class="col-sm-2 control-label">Select Files:</label>
             <span class='col-sm-3 file-input btn btn-default btn-file' style='margin-top:1rem;margin-left:1rem;'>
             <input type="file" class='' name="filename[]" id="filename" multiple
-            data-maxfiles="<?php echo $_SESSION['maxfiles'];?>"
-            data-postmax="<?php echo $_SESSION['postmax'];?>"
-            data-displaymax="<?php echo $_SESSION['displaymax'];?>">
+            data-maxfiles="<?=$_SESSION['maxfiles'];?>"
+            data-postmax="<?=$_SESSION['postmax'];?>"
+            data-displaymax="<?=$_SESSION['displaymax'];?>">
             Choose Files for Upload.
             </span>
             <div class='col-sm-7'></div>
         </div>
-        <button class="btn btn-lg btn-primary center-block" id='submit' name='submit' type="submit">Create new Customer</button>
+        <button class="btn btn-lg btn-primary center-block"
+        id='submit' name='submit' type="submit">Create new Customer</button>
         <p>&nbsp;</p>
 
       </form>

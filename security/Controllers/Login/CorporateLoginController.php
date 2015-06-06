@@ -20,7 +20,6 @@ class CorporateLoginController extends BaseLoginController
     private $errors = [];
     private $userName;
     private $password;
-    
 
     public function __construct(stdClass $models, stdClass $corporateData)
     {
@@ -59,7 +58,6 @@ $auth->cleanString($_POST['action']) : null;
 
 $userName || $errors[] = "No email was sent over.";
 $password || $errors[] = "No password was sent over.";
-$action || $errors[] = "No action to perform was sent over.";
 
 if (empty($errors) && $isAjax) {
     $modelObjects = new StdClass();
@@ -72,7 +70,6 @@ if (empty($errors) && $isAjax) {
     $corporateLoginData = new StdClass();
     $corporateLoginData->userName = $userName;
     $corporateLoginData->password = $password;
-    $corporateLoginData->action = $action;
 
     $controller = new CorporateLoginController($modelObjects, $corporateLoginData);
     $controller->checkUser();

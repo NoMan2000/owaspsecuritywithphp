@@ -22,6 +22,7 @@ class CorporateLogin extends BaseLogin implements CustomerType
     {
         $pdo = $this->pdo;
         $blackList = $this->blackList;
+        $logger = $this->logger;
 
         $sql = 'SELECT id,
                 username,

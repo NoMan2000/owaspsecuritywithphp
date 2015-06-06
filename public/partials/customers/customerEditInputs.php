@@ -1,4 +1,4 @@
-<div class="form-group">
+        <div class="form-group">
             <label for="inputUserName" class="col-sm-2 control-label">Username:</label>
             <div class='col-sm-10'>
                 <input type="text" name='inputUserName' id="inputUserName" class="form-control"
@@ -7,7 +7,7 @@
             </div>
         </div>
     <?php
-        if ($hasPassword) {
+if ($hasPassword) {
     ?>
         <div class="form-group">
             <label for="originalPassword" class="col-sm-2 control-label">Original Password:</label>
@@ -16,7 +16,8 @@
                 placeholder="old Password" autocomplete="off" value=''>
             </div>
         </div>
-    <?php } ?>
+    <?php }
+?>
 
         <div class="form-group">
             <label for="newPassword" class="col-sm-2 control-label">New Password:</label>
@@ -50,7 +51,7 @@
             <label for="inputAddress" class="col-sm-2 control-label">Address:</label>
             <div class='col-sm-10'>
                 <input type="text" name='inputAddress' id="inputAddress" class="form-control"
-                placeholder="Your Email address" required="" autocomplete="off"
+                placeholder="Your Street address" required="" autocomplete="off"
                 value='<?=$address;?>'>
             </div>
         </div>
@@ -80,11 +81,9 @@
         </div>
         <div class="form-group">
             <label for="inputCountryCode" class="col-sm-2 control-label">CountryCode:</label>
-            <div class='col-sm-10'>
-                <input type="text" name='inputCountryCode' id="inputCountryCode" class="form-control"
-                placeholder="Your Country Code" required="" autocomplete="off"
-                value='<?=$countrycode;?>'>
-            </div>
+            <select class="form-control" id="inputCountryCode" style='width: 79%;margin-left: 18.5%;'>
+                <?=$countryOptions;?>
+            </select>
         </div>
         <div class="form-group">
             <label for="inputZip" class="col-sm-2 control-label">Zip:</label>

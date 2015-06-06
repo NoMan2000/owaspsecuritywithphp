@@ -42,10 +42,10 @@ class EmployeeGroupsOrdersController extends BaseCorporateController
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-$errors = [];
-
-if ($isAjax) {
+if (isset($_POST['submit'])) {
+    extract($_POST);
+    $errors = [];
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     isset($_SESSION) || $errors[] = "No customer is available.";
     $pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
     $auth = new Authenticate();
@@ -63,7 +63,12 @@ if ($isAjax) {
     if (empty($errors)) {
         $controller = new InitCustomerController($models, $session);
         $controller->getCustomerValues();
-        echo json_encode($controller);
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
     }
 }
 

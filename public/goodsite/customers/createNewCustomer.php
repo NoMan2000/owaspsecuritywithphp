@@ -1,19 +1,22 @@
 <?php
 
-require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/header.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/header.php";
 
-use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
-use \Monolog\Logger;
-use \Monolog\Handler\StreamHandler;
+use \security\Models\FileUploader\FileUploader;
+use \security\Models\Generator\CountryList;
+use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
-use \security\Models\PDOSingleton;
-use \security\Controllers\Customers\InitCustomerController;
-use \security\Models\FileUploader\FileUploader;
-use \security\Exceptions\FolderException;
 use \security\Models\SiteLogger\FullLog;
+
+$countryList = new CountryList();
+$countries = $countryList->getCountryList();
+$countryOptions = '';
+foreach ($countries as $code => $countryName) {
+    $countryOptions .= "<option value='{$code}'>{$countryName}</option>";
+}
 
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
@@ -49,8 +52,8 @@ $_SESSION['displaymax'] = FileUploader::convertFromBytes($_SESSION['postmax']);
 
 $max = 200 * 1024;
 
-$username = $email =  $address = $phone = $city = $state = $countrycode =
-$zip =  $instructions = $hasPassword = null;
+$username = $email = $address = $phone = $city = $state = $countrycode =
+$zip = $instructions = $hasPassword = null;
 
 ?>
 
@@ -70,36 +73,37 @@ $zip =  $instructions = $hasPassword = null;
         </div>
         <?php if (isset($error)) {?>
             <div id='inlineErrorHolder' class="alert alert-danger" role="alert">
-            <div id='inlineErrorContent'><?= $error;?></div>
+            <div id='inlineErrorContent'><?=$error;?></div>
             </div>
-        <?php } ?>
+        <?php }
+?>
 
       <form class="form-signin form-horizontal" id='customerEditForm'
         role="form" method='POST'
-        action='<?= $_SERVER['PHP_SELF'];?>' novalidate='novalidate'
+        action='<?=$_SERVER['PHP_SELF'];?>' novalidate='novalidate'
         enctype="multipart/form-data">
-        <input type='hidden' id='csrf' value='<?= $_SESSION['csrf_token'];?>' />
+        <input type='hidden' id='csrf' value='<?=$_SESSION['csrf_token'];?>' />
         <h1 class="form-signin-heading text-center">Create Customer form</h1>
         <h4 class='textContent'>Create new customer:</h4>
 
-        <?php require_once dirname(dirname(__DIR__)) . '/partials/customers/customerEditInputs.php'; ?>
+        <?php require_once dirname(dirname(__DIR__)) . '/partials/customers/customerEditInputs.php';?>
 
         <input type="hidden" id='MAX_FILE_SIZE' name="MAX_FILE_SIZE" value="<?php echo $max;?>">
         <div class='col-sm-10 col-sm-offset-2 bg-info' id='fileUploadMessages'>
         <h3>Special Upload Instructions:</h3>
         <p>If you have a long list of instructions you need to upload, you can do so here.</p>
-        <p>Up to <?= $_SESSION['maxfiles'];?> files can be uploaded simultaneously.</p>
-        <p>Each file should be no more than <?= FileUploader::convertFromBytes($max);?>.</p>
-        <p>Combined total should not exceed <?= $_SESSION['displaymax'];?>.</p>
+        <p>Up to <?=$_SESSION['maxfiles'];?> files can be uploaded simultaneously.</p>
+        <p>Each file should be no more than <?=FileUploader::convertFromBytes($max);?>.</p>
+        <p>Combined total should not exceed <?=$_SESSION['displaymax'];?>.</p>
         <p>&nbsp;</p>
         </div>
         <div class="form-group">
             <label for="filename" class="col-sm-2 control-label">Select Files:</label>
-            <span class='col-sm-3 file-input btn btn-default btn-file' style='margin-top:1rem;margin-left:1rem;'>
+            <span class='file-input btn btn-default btn-file' style='margin-top:1rem;margin-left:1rem;'>
             <input type="file" class='' name="filename[]" id="filename" multiple
-            data-maxfiles="<?= $_SESSION['maxfiles'];?>"
-            data-postmax="<?= $_SESSION['postmax'];?>"
-            data-displaymax="<?= $_SESSION['displaymax'];?>">
+            data-maxfiles="<?=$_SESSION['maxfiles'];?>"
+            data-postmax="<?=$_SESSION['postmax'];?>"
+            data-displaymax="<?=$_SESSION['displaymax'];?>">
             Choose Files for Upload.
             </span>
             <div class='col-sm-7'></div>
@@ -113,7 +117,7 @@ $zip =  $instructions = $hasPassword = null;
     </div><!-- End content -->
 </section>
 <?php
-    require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ."partials/footer.php");
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
 <script type="text/javascript" src="<?=$jsPath;?>customerCreate.js"></script>
 </body>

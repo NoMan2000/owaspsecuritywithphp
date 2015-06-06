@@ -14,13 +14,14 @@ class EditCustomer extends BaseCustomer
     private $orderID;
     private $customerID;
 
-    public function __construct(stdClass $models)
+    public function __construct(stdClass $models, stdClass $customer)
     {
         parent::__construct($models);
+        $this->customerData = $customer->customerData;
     }
-    public function editCustomer(array $customerData)
+    public function editCustomer()
     {
-        extract($customerData);
+        extract($this->customerData);
         $errors = $this->errors;
         $pdo = $this->pdo;
         $customerID = $session['customerid'];
@@ -95,7 +96,7 @@ class EditCustomer extends BaseCustomer
                 ":state" => $state,
                 ":countryCode" => $countryCode,
                 ":zip" => $zip,
-                ":customerID" => $customerID
+                ":customerID" => $customerID,
             ];
             $result = $stmt->execute($bindings);
             if ($result) {
@@ -150,7 +151,7 @@ class EditCustomer extends BaseCustomer
             ":state" => $state,
             ":countryCode" => $countryCode,
             ":zip" => $zip,
-            ":customerID" => $customerID
+            ":customerID" => $customerID,
         ];
         $result = $stmt->execute($bindings);
         if ($result) {

@@ -23,20 +23,20 @@ class AddNewCustomerController extends BaseCustomerController
     private $models;
     private $newCustomer;
 
-    public function __construct(stdClass $models, array $customerData)
+    public function __construct(stdClass $models, stdClass $customer)
     {
         $this->customerData = $customerData;
-        $this->newCustomer = new AddNewCustomer($models);
+        $this->newCustomer = new AddNewCustomer($models, $customer);
     }
     public function addNewCustomer()
     {
-        $this->data = $this->newCustomer->addNewCustomer($this->customer);
+        $this->data = $this->newCustomer->addNewCustomer();
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-
-if ($isAjax) {
+if (isset($_POST['submit'])) {
+    extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
@@ -48,35 +48,25 @@ if ($isAjax) {
     $errors = [];
 
     $files = $MAX_FILE_SIZE = $upload = null;
-    if (isset($_POST['upload']) && $_POST['upload'] === 'true') {
+    if (isset($upload) && $upload === 'true') {
         $files = $_FILES;
         $upload = true;
-        $MAX_FILE_SIZE = $_POST['MAX_FILE_SIZE'];
+        $MAX_FILE_SIZE = $MAX_FILE_SIZE;
     }
 
-    $username = !empty($_POST['username']) ?
-    $auth->cleanString($_POST['username']) : null;
-    $password = !empty($_POST['password']) ?
-        $_POST['password'] : null;
-    $email = !empty($_POST['email']) ?
-        $auth->vEmail($_POST['email']) : null;
-    $address = !empty($_POST['address']) ?
-        $auth->cleanString($_POST['address']) : null;
-    $phone = !empty($_POST['phone']) ?
-        $auth->vPhone($_POST['phone']) : null;
-    $stop = !empty($_POST['stop']) ? true : false;
-    $potentialAbuse = isset($_POST['potentialAbuse']) ?
-        $auth->cInt($_POST['potentialAbuse']) : null;
+    $username = !empty($username) ? $auth->cleanString($username) : null;
+    $password = !empty($password) ? $password : null;
+    $email = !empty($email) ? $auth->vEmail($email) : null;
+    $address = !empty($address) ? $auth->cleanString($address) : null;
+    $phone = !empty($phone) ? $auth->vPhone($phone) : null;
+    $stop = !empty($stop) ? true : false;
+    $potentialAbuse = isset($potentialAbuse) ? $auth->cInt($potentialAbuse) : null;
     if ($stop) {
         return false;
     }
-    if ($phone) {
-        $phone = $auth->cInt($_POST['phone']);
-    }
-    $instructions = !empty(trim($_POST['instructions'])) ?
-        $auth->cleanString($_POST['instructions']) : null;
-    $action = !empty($_POST['action']) ?
-        $auth->cleanString($_POST['action']) : null;
+
+    $instructions = !empty(trim($instructions)) ? $auth->cleanString($instructions) : null;
+    $action = !empty($action) ? $auth->cleanString($action) : null;
 
     $username || $errors[] = "No username was sent over.";
     $email || $errors[] = "No email was sent over.";
@@ -105,6 +95,8 @@ if ($isAjax) {
     $models->errorRunner = $errorRunner;
     $models->logger = $logger;
 
+    $customer = new stdClass();
+
     $customerData = [];
     $customerData['username'] = $username;
     $customerData['password'] = $password;
@@ -121,10 +113,13 @@ if ($isAjax) {
         $sleepTime = pow(2, $potentialAbuse);
         sleep($sleepTime);
     }
+    $customer->customerData = $customerData;
 
-    $addNewCustomer = new AddNewCustomerController($models, $customerData);
+    $addNewCustomer = new AddNewCustomerController($models, $customer);
     $addNewCustomer->addNewCustomer();
-    echo json_encode($addNewCustomer);
+    if ($isAjax) {
+        echo json_encode($addNewCustomer);
+    }
 }
 
 if (!empty($errors)) {

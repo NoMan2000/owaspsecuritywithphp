@@ -1,37 +1,48 @@
 <?php
-$paths = require_once __DIR__.'/../bootstrap/paths.php';
-require_once($paths['vendor'].DIRECTORY_SEPARATOR.'autoload.php');
+$paths = require_once __DIR__ . '/../bootstrap/paths.php';
+require_once $paths['vendor'] . DIRECTORY_SEPARATOR . 'autoload.php';
 
-use \security\Models\Authenticator\Authenticate;
 use \security\Models\ErrorRunner;
 
-$auth = new Authenticate();
+$whiteList = [
+    'Controllers/',
+];
+
 $errorRunner = new ErrorRunner();
 $errors = [];
 
-$isAjax = ($auth->isAjax() && $auth->filledAndSet(@$_POST['isAjax'])) ? true : false;
-$to = $auth->filledAndSet(@$_POST['to']) ? $_POST['to'] : null;
-
-if (is_null($isAjax) || is_null($to)) {
-    $isAjax || $errors[] = "This is only meant to be used by Ajax calls.";
-    $to || $errors[] = "This needs a mapper to go to.";
+$to = null;
+if (!empty($_POST['to'])) {
+    $to = $_POST['to'];
 }
+if (!empty($_GET['to'])) {
+    $to = $_GET['to'];
+}
+$to || $errors[] = "We need a mapper to go to.";
 
+$checkSafeTo = preg_split("/(?<=[\/\\\])(?![\/\\\])/", $to);
+if (!in_array($checkSafeTo[0], $whiteList)) {
+    $errors[] = "Not a whitelisted area.";
+}
 if (empty($errors)) {
-    // You can change this to route anywhere you want, but from an Ajax call, only the non-accessible areas 
+
+    // You can change this to route anywhere you want,
+    // but from an Ajax call, only the non-accessible areas
     // are difficult to manage.
+    //
+    // Limit 3 attacks:  Unauthorized areas with the whitelist, Null-byte with the
+    // realpath, and traversal with the realpath
     $security = $paths['security'];
-    $requested = $security.DIRECTORY_SEPARATOR.$to;
+    $requested = realpath($security . DIRECTORY_SEPARATOR . $to);
+    echo $requested;
     if (!file_exists($requested)) {
         $errors[] = "The file requested could not be found.";
     }
     if (file_exists($requested)) {
-        require_once($requested);
+        require_once $requested;
     }
 }
 
 if (!empty($errors)) {
     $errorRunner->runErrors($errors);
 }
-
-

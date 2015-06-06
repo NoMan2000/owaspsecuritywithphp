@@ -53,7 +53,8 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                     isAjax: true,
                     action: "removeOrder",
                     csrf: csrf,
-                    id: dataId
+                    id: dataId,
+                    submit: true
                 }
             }).done(function (data) {
                 var jsonResponse = isValidJSON(data);
@@ -105,7 +106,8 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                     action: "addOrder",
                     csrf: csrf,
                     totalOrdered: totalOrdered,
-                    customerID: customerID
+                    customerID: customerID,
+                    submit: true
                 }
             }).done(function (data, textStatus, jqXHR) {
                 var jsonResponse = isValidJSON(data),
@@ -163,7 +165,8 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                     to: "Controllers/Customers/DestroySessionController.php",
                     isAjax: true,
                     csrf: csrf,
-                    action: "destroySession"
+                    action: "destroySession",
+                    submit: true
                 }
             }).done(function(data, textStatus, jqXHR) {
                 var jsonResponse = isValidJSON(data);

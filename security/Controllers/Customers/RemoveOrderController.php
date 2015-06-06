@@ -25,21 +25,17 @@ class RemoveOrderController extends BaseCustomerController
     public function __construct(stdClass $models, stdClass $orderData)
     {
         parent::__construct($models);
-        $this->orderData = $orderData;
-        $this->order = new RemoveOrder($models);
+        $this->order = new RemoveOrder($models, $orderData);
     }
     public function removeOrder()
     {
-        $this->data = $this->order->removeOrder(
-            $this->orderData->customerID,
-            $this->orderData->orderID
-        );
+        $this->data = $this->order->removeOrder();
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-
-if ($isAjax) {
+if (isset($_POST['submit'])) {
+    extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
@@ -48,19 +44,19 @@ if ($isAjax) {
     $checkAuth = new CheckAuth($logger);
     $errors = [];
 
-    $action = !empty($_POST['action']) ?
-        $_POST['action'] : null;
-    $orderID = !empty($_POST['id']) ? $auth->cInt($_POST['id']) : null;
+    $action = !empty($action) ?
+    $action : null;
+    $orderID = !empty($id) ? $auth->cInt($id) : null;
     $isCustomer = $checkAuth->isCustomer();
-    $customerID = !empty($_SESSION['customerid']) ?
-    $auth->cInt($_SESSION['customerid']) : null;
+    $customerID = !empty($_SESSION['customerid) ?
+    $auth->cInt($_SESSION['customerid) : null;
 
     $action || $errors[] = "No action was specified on this request.";
     $orderID || $errors[] = "No orderid was specified on this request.";
     $customerID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
     $isCustomer || $errors[] = "You are not authenticated as a customer.";
 
-    $csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
+    $csrf = !empty($csrf) ? $csrf : null;
     if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $csrf) {
         $errors[] = "This form does not appear to have originated from our site.";
     }
@@ -76,7 +72,12 @@ if ($isAjax) {
     if (empty($errors)) {
         $controller = new RemoveOrderController($modelObjects, $orderData);
         $controller->removeOrder();
-        echo json_encode($controller);
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
     }
 }
 if (!empty($errors)) {

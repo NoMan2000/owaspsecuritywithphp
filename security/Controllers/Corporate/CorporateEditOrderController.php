@@ -30,11 +30,14 @@ class CorporateEditOrderController extends BaseCorporateController
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-$errors = [];
 
-if ($isAjax) {
+}
+
+if (isset($_POST['submit'])) {
     extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
+    $errors = [];
+    $isAjax = null;
     $logger = new FullLog('Corporate Viewing Orders');
     $logger->serverData();
     $checkAuth = new CheckAuth($logger);
@@ -79,7 +82,12 @@ if ($isAjax) {
     if (empty($errors)) {
         $controller = new CorporateEditOrderController($models, $orderData);
         $controller->updateOrder();
-        echo json_encode($controller);
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do Something else
+        }
     }
 }
 if (!empty($errors)) {

@@ -15,6 +15,7 @@ class ViewCorporateOrders
         $this->pdo = $models->pdo;
         $this->orderData = $orderData;
         $this->session = $orderData->session;
+        $this->errorRunner = $models->errorRunner;
     }
     public function setOrders()
     {
@@ -30,7 +31,6 @@ class ViewCorporateOrders
                   ON (gTo.groups_id, gTo.orders_id, cTo.orders_id) =
                   (g.id, o.id, o.id)
                   WHERE (g.id, o.id, c.id) = ($groupID, $orderID, cTo.customers_id)";
-
         foreach ($pdo->query($query) as $row) {
             return [
                 'id' => $row['id'],
@@ -45,11 +45,15 @@ class ViewCorporateOrders
                 'city' => $row['city'],
                 'state' => $row['state'],
                 'countrycode' => $row['countrycode'],
-                'zip' => $row['zip']
+                'zip' => $row['zip'],
             ];
         }
         $errors[] = "No order could be found.";
-        $this->models->errorRunner->runErrors($errors);
+        $this->runErrors($errors);
+    }
+    protected function runErrors(array $errors)
+    {
+        $this->errorRunner->runErrors($errors);
     }
     public function getOrders()
     {

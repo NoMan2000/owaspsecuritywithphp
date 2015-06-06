@@ -2,20 +2,17 @@
 
 namespace security\Models\Customers;
 
-require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
 use \Redis;
-use \Rhumsaa\Uuid\Exception\UnsatisfiedDependencyException;
 use \Rhumsaa\Uuid\Uuid;
 use \security\Exceptions\FolderException;
-use \security\Interfaces\FullLogInterface;
 use \security\Interfaces\Seconds;
-use \security\Models\Authenticator\BlackLister;
+use \security\Models\Customers\BaseCustomer;
 use \security\Models\ErrorRunner;
 use \security\Models\FileUploader\FileUploader;
 use \security\Models\Login\EmailConfirmAccount;
-use \security\Models\Customers\BaseCustomer;
 use \stdClass;
 
 class AddNewCustomer extends BaseCustomer implements Seconds
@@ -23,15 +20,14 @@ class AddNewCustomer extends BaseCustomer implements Seconds
     private $errors = [];
     private $orderID;
     private $customerID;
-    
 
-    public function __construct(stdClass $models)
+    public function __construct(stdClass $models, stdClass $customer)
     {
         parent::__construct($models);
+        $this->customerData = $customer->customerData;
     }
-    public function addNewCustomer(array $customerData)
+    public function addNewCustomer()
     {
-        $this->customerData = $customerData;
         $errors = $this->errors;
         $pdo = $this->pdo;
         $redis = $this->redis;
@@ -126,7 +122,7 @@ class AddNewCustomer extends BaseCustomer implements Seconds
     }
     public function setUploads()
     {
-        $destination = dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR .'public/uploads/';
+        $destination = dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/uploads/';
         try {
             $upload = new FileUploader($destination, $this->customerData['files']);
             $upload->setMaxSize($this->customerData['MAX_FILE_SIZE']);

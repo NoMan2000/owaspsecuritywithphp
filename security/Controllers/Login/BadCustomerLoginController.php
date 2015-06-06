@@ -4,12 +4,10 @@ namespace security\Controllers\Login;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \PDO;
-use \Redis;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\BlackLister;
 use \security\Models\ErrorRunner;
-use \security\Models\Login\CustomerLogin;
+use \security\Models\Login\BadCustomerLogin;
 use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \stdClass;
@@ -19,21 +17,14 @@ class BadCustomerLoginController extends BaseLoginController
     private $errors = [];
     private $userName;
     private $password;
-    
+
     public function __construct(stdClass $models, stdClass $customerLoginData)
     {
-        $this->userName = $customerLoginData->userName;
-        $this->password = $customerLoginData->password;
-        $this->action = $customerLoginData->action;
-
-        $this->customerLoginModel = new CustomerLogin($models);
+        $this->customerLogin = new BadCustomerLogin($models, $customerLoginData);
     }
     public function verifyLogin()
     {
-        $this->data = $customerLogin->checkUser(
-            $this->userName,
-            $this->password
-        );
+        $this->data = $this->customerLogin->checkCustomerLogin();
     }
     public function jsonSerialize()
     {
@@ -42,35 +33,42 @@ class BadCustomerLoginController extends BaseLoginController
 }
 
 $errors = [];
+if (!empty($_GET)) {
+    extract($_GET);
+}
 
-$auth = new Authenticate();
-$errorRunner = new ErrorRunner();
-$redis = new RedisSingleton();
-$blackList = new BlackLister($redis);
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-$pdo = new PDOSingleton();
+if (isset($submit)) {
+    $auth = new Authenticate();
+    $errorRunner = new ErrorRunner();
+    $redis = new RedisSingleton();
+    $blackList = new BlackLister($redis);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
+    $pdo = new PDOSingleton();
 
-$userName = !empty($_POST['userName']) ? $_POST['userName'] : null;
-$password = !empty($_POST['password']) ? $_POST['password'] : null;
+    $userName = !empty($userName) ? $userName : null;
+    $password = !empty($password) ? $password : null;
 
-$userName || $errors[] = "No email was sent over.";
-$password || $errors[] = "No password was sent over.";
+    $userName || $errors[] = "No email was sent over.";
+    $password || $errors[] = "No password was sent over.";
+    if (empty($errors)) {
+        $models = new stdClass();
+        $models->pdo = $pdo;
+        $models->redis = $redis;
+        $models->errorRunner = $errorRunner;
+        $models->blackList = $blackList;
 
-if (empty($errors)) {
-    $modelObjects = new stdClass();
-    $modelObjects->pdo = $pdo;
-    $modelObjects->redis = $redis;
-    $modelObjects->errorRunner = $errorRunner;
-    $modelObjects->blackList = $blackList;
+        $customerLoginData = new stdClass();
+        $customerLoginData->userName = $userName;
+        $customerLoginData->password = $password;
 
-    $customerLoginData = new stdClass();
-    $customerLoginData->userName = $userName;
-    $customerLoginData->password = $password;
-
-    $controller = new CustomerLoginController($models, $customerLoginData);
-    $controller->verifyLogin();
-    if ($isAjax) {
-        echo json_encode($controller);
+        $controller = new BadCustomerLoginController($models, $customerLoginData);
+        $controller->verifyLogin();
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
     }
 }
 

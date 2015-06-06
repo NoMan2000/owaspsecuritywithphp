@@ -25,7 +25,7 @@ todo: true,
 vars: true,
 white: false
 */
-/*global $, jQuery, alert, Spinner, swal, CookieFunctions, isValidJSON, 
+/*global $, jQuery, alert, Spinner, swal, CookieFunctions, isValidJSON,
 setErrorMessage, setSuccessMessage, hideErrorMessage, hideSuccessMessage
 confirm */
 
@@ -42,8 +42,6 @@ confirm */
                 labelName += labels[i] + "<br/>";
             }
             errorExists = $(".bg-danger").length > 0 ? true : false;
-            console.log(errorExists);
-            console.log(labelName);
             $("#fileUploadNames").remove();
             if (!errorExists) {
                 formData.append('numFiles', numFiles);
@@ -67,19 +65,17 @@ confirm */
                 errorHolder,
                 maxSize = $("[name='MAX_FILE_SIZE']").val(),
                 i;
-            console.dir(input);
             errorHolder = false;
             labels = fileHolder = [];
             size, difference, i = 0;
             numFiles = $input.get(0).files ? $input.get(0).files.length : 1;
-            console.log(errorHolder);
-            console.log(numFiles);
+
             for (i; i < numFiles; i += 1) {
                 name = $input.get(0).files[i].name;
                 size = $input.get(0).files[i].size;
                 if (size > maxSize) {
                     difference = size - maxSize;
-                    labels.push("<span class='badName'>" + name + " is at size " + size + " which is greater than " + maxSize + 
+                    labels.push("<span class='badName'>" + name + " is at size " + size + " which is greater than " + maxSize +
                     " by " + difference + " bytes.</span>");
                     $(".bg-info").removeClass("bg-info").addClass('bg-danger');
                     errorHolder = true;
@@ -90,8 +86,7 @@ confirm */
                     fileHolder['file'+i] = input.files[i];
                 }
             }
-            console.log(errorHolder);
-            console.log(formData);
+
             if (errorHolder === false) {
                 formData = new FormData();
                 for (i = 0; i < fileHolder.length; i += 1) {
@@ -137,6 +132,10 @@ confirm */
                email = $("#inputEmail").val(),
                address = $("#inputAddress").val(),
                phone = $("#inputPhone").val(),
+               city = $("#inputCity").val(),
+               state = $("#inputState").val(),
+               countryCode = $("#inputCountryCode option:selected").val(),
+               zip = $("#inputZip").val(),
                instructions = $("#inputInstructions").val(),
                stop = $("#inputStop").val(),
                errors = [],
@@ -154,7 +153,7 @@ confirm */
             if (stop) {
                 return false;
             }
-            
+
             if (username.length === 0) {
                 errors.push("No username was supplied.");
                 $("#inputUserName").parents('.form-group').addClass('has-error');
@@ -187,7 +186,7 @@ confirm */
                 formData.append('upload', true);
                 formData.append('MAX_FILE_SIZE', MAX_FILE_SIZE);
             }
-    
+
             errorLength = errors.length;
             if (errorLength > 0) {
                 for (i =0; i < errorLength; i += 1) {
@@ -208,7 +207,12 @@ confirm */
                 formData.append('isAjax', true);
                 formData.append('potentialAbuse', potentialAbuse);
                 formData.append('action', "addNewCustomer");
-                console.log(formData);
+                formData.append('city', city);
+                formData.append('state', state);
+                formData.append('countryCode', countryCode);
+                formData.append('zip', zip);
+                formData.append('submit', true);
+
                 $.ajax({
                    url: CookieFunctions.reroutePath,
                    type: "POST",
@@ -237,12 +241,12 @@ confirm */
                         console.log(data);
                         console.log("That didn't work.");
                     }
-                    
-                }).fail(function (data){
-                    setErrorMessage(data.responseText);
-                }); 
+
+                }).fail(function (jqXHR){
+                    setErrorMessage(jqXHR.responseText);
+                });
             }
-        }; 
+        };
 
     $("#customerEditForm").on("submit", submitEditForm);
     $(document).on('change', '.btn-file :file', setFilesSelector);

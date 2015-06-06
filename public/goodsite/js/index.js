@@ -1,5 +1,34 @@
+/*jslint
+browser: true,
+couch: false,
+devel: false,
+node: false,
+rhino: false,
+passfail: false,
+ass: false,
+bitwise: false,
+closure: true,
+continue: false,
+debug: true,
+eqeq: false,
+evil: false,
+forin: false,
+newcap: false,
+nomen: false,
+plusplus: false,
+regexp: false,
+unparam: false,
+sloppy: false,
+stupid: false,
+sub: false,
+todo: true,
+vars: true,
+white: false
+*/
+/*global $, jQuery, alert, Spinner, qbaka */
 (function indexCallBack(global, $) {
-    $("#indexForm").on('submit', function(e) {
+    'use strict';
+    var submitForm = function(e) {
         e.preventDefault();
         hideErrorMessage();
         hideSuccessMessage();
@@ -8,7 +37,7 @@
             honeypot = $("#email").val(),
             password = $("#password").val();
 
-        if (honeypot.length > 0) {
+        if (honeypot) {
             return false;
         }
 
@@ -20,6 +49,7 @@
                 "isAjax": true,
                 "userName": userName,
                 csrf: csrf,
+                "submit":true,
                 "password": password
             }
         }).done(function(data, textStatus, jqXHR) {
@@ -33,11 +63,9 @@
         }).fail(function(jqXHR, textStatus, errorThrown) {
             var errorMessage = $.trim(jqXHR.responseText);
             setErrorMessage(errorMessage);
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
         });
 
-    });
+    };
+    $("#indexForm").on('submit', submitForm);
 
 }(window, jQuery));

@@ -34,9 +34,10 @@ class ViewCorporateOrdersController extends BaseCorporateController
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
+if (isset($_POST['submit'])) {
+    extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
 
-if ($isAjax) {
     $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
@@ -44,12 +45,11 @@ if ($isAjax) {
     $logger->serverData();
     $checkAuth = new CheckAuth($logger);
     $errors = [];
-    $orderID = !empty($_POST['orderid']) ?
-        $auth->cInt($_POST['orderid']) : null;
+    $orderID = !empty($orderid) ? $auth->cInt($orderid) : null;
 
     $isCorporate = $checkAuth->isCorporate();
     $employeeID = !empty($_SESSION['employeeid']) ?
-        $auth->cInt($_SESSION['employeeid']) : null;
+    $auth->cInt($_SESSION['employeeid']) : null;
 
     $employeeID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
     $isCorporate || $errors[] = "You are not authenticated as a corporate user.";
@@ -67,7 +67,12 @@ if ($isAjax) {
         $controller = new ViewCorporateOrdersController($models, $orderData);
         $controller->setOrders();
         $controller->getOrders();
-        echo json_encode($controller);
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // do Something else
+        }
     }
 }
 if (!empty($errors)) {

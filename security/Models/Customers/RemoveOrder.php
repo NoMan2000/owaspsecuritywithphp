@@ -14,9 +14,11 @@ class RemoveOrder extends BaseCustomer
     private $orderID;
     private $customerID;
 
-    public function __construct(stdClass $models)
+    public function __construct(stdClass $models, stdClass $customerData)
     {
         parent::__construct($models);
+        $this->customerID = $customerData->customerID;
+        $this->orderID = $customerData->orderID;
     }
     public function removeOrder($customerID, $orderID)
     {

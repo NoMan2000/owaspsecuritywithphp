@@ -17,20 +17,19 @@ $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
 $logger = new FullLog('Customer Login Page');
 $checkAuth = new CheckAuth($logger);
-$isCustomer = $checkAuth->isCustomer();
-$customerID = isset($_SESSION['customerid']) ? $_SESSION['customerid'] : null;
+$customerID = isset($_GET['id']) ? $_GET['id'] : null;
 if (!$isCustomer || !$customerID) {
     $error = rawurlencode('Not an authenticated consumer.');
     die(header("Location:{$rootPath}goodsite/index.php?errors=$error"));
 }
 
-$pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
+$pdo = new PDOSingleton();
 $models = new stdClass();
 $models->pdo = $pdo;
 $models->errorRunner = $errorRunner;
 $models->logger = $logger;
 $orderData = new stdClass();
-$orderData->customerID = $customerID;
+$orderData->customerID = $_GET['id'];
 
 $controller = new ViewOrdersController($models, $orderData);
 $controller->viewOrders();
@@ -86,9 +85,10 @@ if ($instructions) {
     <blockquote>$instructions</blockquote>";
 }
 ?>
+
 <?php
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'partials/customers/viewordersNavbar.php';
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'partials/customers/viewordersForm.php';
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/customers/viewordersForm.php";
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
 <script type="text/javascript" src='<?=$jsPath;?>vieworders.js'></script>

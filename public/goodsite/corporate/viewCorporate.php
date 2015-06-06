@@ -61,7 +61,7 @@ if ($canEdit) {
               <span id='textForOrder'>Make new order</span>
             </button>";
     $addNewOrderButton = "<button type='submit'
-                        class='btn btn-default' id='submitNewOrder'>
+                        class='btn btn-default' name='submitNewOrder' id='submitNewOrder'>
                         Add Order
                         </button>";
 }

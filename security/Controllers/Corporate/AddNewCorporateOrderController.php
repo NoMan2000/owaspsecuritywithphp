@@ -5,7 +5,6 @@ namespace security\Controllers\Corporate;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
-use \security\Controllers\Customers\BaseCorpoateController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Customers\AddNewOrder;
@@ -24,18 +23,18 @@ class AddNewOrderController extends BaseCorporateController
     public function __construct(stdClass $models, stdClass $orderData)
     {
         parent::__construct($models);
-        $this->employeeID = $orderData->employeeID;
-        $this->totalOrdered = $orderData->totalOrdered;
-        $this->orderModel = new AddNewOrder($models);
+        $this->orderModel = new AddNewOrder($models, $orderData);
     }
     public function addOrder()
     {
-        $this->data = $this->orderModel->addOrder($this->employeeID, $this->totalOrdered);
+        $this->data = $this->orderModel->addOrder();
     }
 }
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
 
-if ($isAjax) {
+if (isset($_POST['submit'])) {
+    extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
+
     $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
@@ -44,13 +43,13 @@ if ($isAjax) {
     $checkAuth = new CheckAuth($logger);
     $errors = [];
 
-    $action = !empty($_POST['action']) ? $_POST['action'] : null;
+    $action = !empty($action) ? $action : null;
     $isCustomer = $checkAuth->isCustomer();
     $customerID = !empty($_SESSION['customerid']) ?
-        $auth->cInt($_SESSION['customerid']) : null;
-    $totalOrdered = !empty($_POST['totalOrdered']) ?
-        $auth->cInt($_POST['totalOrdered']) : null;
-    $csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
+    $auth->cInt($_SESSION['customerid']) : null;
+    $totalOrdered = !empty($totalOrdered) ?
+    $auth->cInt($totalOrdered) : null;
+    $csrf = !empty($csrf) ? $csrf : null;
 
     $action || $errors[] = "No action was specified on this request.";
     $customerID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
@@ -74,7 +73,12 @@ if ($isAjax) {
     if (empty($errors)) {
         $controller = new AddNewOrderController($models, $orderData);
         $controller->addOrder();
-        echo json_encode($controller);
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
     }
 }
 if (!empty($errors)) {

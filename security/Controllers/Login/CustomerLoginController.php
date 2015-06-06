@@ -23,16 +23,11 @@ class CustomerLoginController extends BaseLoginController
 
     public function __construct(stdClass $models, stdClass $customerLoginData)
     {
-        $this->userName = $customerLoginData->userName;
-        $this->password = $customerLoginData->password;
-        $this->customerLogin = new CustomerLogin($models);
+        $this->customerLogin = new CustomerLogin($models, $customerLoginData);
     }
     public function checkCustomerLogin()
     {
-        $this->data = $this->customerLogin->checkCustomerLogin(
-            $this->userName,
-            $this->password
-        );
+        $this->data = $this->customerLogin->checkCustomerLogin();
     }
     public function jsonSerialize()
     {
@@ -41,45 +36,53 @@ class CustomerLoginController extends BaseLoginController
 }
 
 $errors = [];
-
-$auth = new Authenticate();
-$errorRunner = new ErrorRunner();
-$redis = new RedisSingleton();
-$blackList = new BlackLister($redis);
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-$pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
-$logger = new FullLog("Customer Login");
-$logger->serverData();
-
-$userName = !empty($_POST['userName']) ?
-$auth->cleanString($_POST['userName']) : null;
-$password = !empty($_POST['password']) ? $_POST['password'] : null;
-$postCsrf = isset($_POST['csrf']) ? $_POST['csrf'] : null;
-$sessionToken = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : null;
-
-if (!$sessionToken || $sessionToken !== $postCsrf) {
-    // Session token will not be set if the website is not SSL Encrypted.
-    $errors[] = "This form does not appear to have originated on our site.";
+if (isset($_POST['submit'])) {
+    extract($_POST);
 }
+if (!empty($submit)) {
+    $auth = new Authenticate();
+    $errorRunner = new ErrorRunner();
+    $redis = new RedisSingleton();
+    $blackList = new BlackLister($redis);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
+    $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
+    $logger = new FullLog("Customer Login");
+    $logger->serverData();
 
-$userName || $errors[] = "No username was sent over.";
-$password || $errors[] = "No password was sent over.";
+    $userName = !empty($userName) ?
+    $auth->cleanString($userName) : null;
+    $password = !empty($password) ? $password : null;
+    $postCsrf = isset($csrf) ? $csrf : null;
+    $sessionToken = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : null;
 
-if (empty($errors) && $isAjax) {
-    $modelObjects = new stdClass();
-    $modelObjects->pdo = $pdo;
-    $modelObjects->redis = $redis;
-    $modelObjects->errorRunner = $errorRunner;
-    $modelObjects->blackList = $blackList;
-    $modelObjects->logger = $logger;
+    if (!$sessionToken || $sessionToken !== $postCsrf) {
+        // Session token will not be set if the website is not SSL Encrypted.
+        $errors[] = "This form does not appear to have originated on our site.";
+    }
 
-    $customerLoginData = new stdClass();
-    $customerLoginData->userName = $userName;
-    $customerLoginData->password = $password;
+    $userName || $errors[] = "No username was sent over.";
+    $password || $errors[] = "No password was sent over.";
+    if (empty($errors)) {
+        $models = new stdClass();
+        $models->pdo = $pdo;
+        $models->redis = $redis;
+        $models->errorRunner = $errorRunner;
+        $models->blackList = $blackList;
+        $models->logger = $logger;
 
-    $controller = new CustomerLoginController($modelObjects, $customerLoginData);
-    $controller->checkCustomerLogin();
-    echo json_encode($controller);
+        $customerLoginData = new stdClass();
+        $customerLoginData->userName = $userName;
+        $customerLoginData->password = $password;
+
+        $controller = new CustomerLoginController($models, $customerLoginData);
+        $controller->checkCustomerLogin();
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do Something else.
+        }
+    }
 }
 
 if (!empty($errors)) {

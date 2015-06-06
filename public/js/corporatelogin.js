@@ -43,7 +43,8 @@ confirm */
                  "action": "verifyLogin",
                  "isAjax": true,
                  "userName": userName,
-                 "password": password
+                 "password": password,
+                 "submit": true
              }
         }).done(function (data, textStatus, jqXHR){
             var testJSON = isValidJSON(data);
@@ -56,9 +57,7 @@ confirm */
         }).fail(function (jqXHR, textStatus, errorThrown){
             var errorMessage = $.trim(jqXHR.responseText);
             setErrorMessage(errorMessage);
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+
         });
 
     });

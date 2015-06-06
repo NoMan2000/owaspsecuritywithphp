@@ -17,11 +17,10 @@ use \StdClass;
 
 class DestroySessionController extends BaseCustomerController
 {
-    public function __construct(stdClass $models, stdClass $customerData)
+    public function __construct(stdClass $models, stdClass $userData)
     {
-        $this->customerData = $customerData;
         isset($models->init) && $models->init instanceof SessionInitializers ?
-            $this->setInit($models->init) : $this->setDefaultInit();
+        $this->setInit($models->init) : $this->setDefaultInit();
         $this->destroy = new DestroySession($this->init);
     }
     public function setInit(SessionInitializers $init)
@@ -42,36 +41,42 @@ class DestroySessionController extends BaseCustomerController
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-
-if ($isAjax) {
+if (isset($_POST['submit'])) {
+    extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
-    $logger = new FullLog('Customer Logging out');
+    $logger = new FullLog('User Logging out');
     $checkAuth = new CheckAuth($logger);
     $init = new SessionInitializers();
     $errors = [];
 
     $isCustomer = $checkAuth->isCustomer();
-    $csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
+    $isCorporate = $checkAuth->isCorporate();
+    $csrf = !empty($csrf) ? $csrf : null;
     $session = isset($_SESSION) ? $_SESSION : null;
 
     $csrf || $errors[] = "There is no token for this account.  You have most likely timed out.";
-    $isCustomer || $errors[] = "You are not authenticated as a customer.";
+    ($isCustomer || $isCorporate) || $errors[] = "You are not authenticated as a customer.";
     $session || $errors[] = "You do not have a session identifier.";
 
     if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $csrf) {
         $errors[] = "You do not have permission to perform that action.";
     }
-    $customerData = new StdClass;
-    $customerData->session = $session;
+    $userData = new StdClass;
+    $userData->session = $session;
 
     $modelObjects = new StdClass;
     $modelObjects->init = $init;
     if (empty($errors)) {
-        $controller = new DestroySessionController($modelObjects, $customerData);
+        $controller = new DestroySessionController($modelObjects, $userData);
         $controller->destroySession();
-        echo json_encode($controller);
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
     }
 }
 

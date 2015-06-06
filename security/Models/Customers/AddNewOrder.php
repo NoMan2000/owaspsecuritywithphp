@@ -2,22 +2,28 @@
 
 namespace security\Models\Customers;
 
-require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
-use \stdClass;
 use \security\Models\Customers\BaseCustomer;
+use \stdClass;
 
 class AddNewOrder extends BaseCustomer
 {
     private $customerID;
 
-    public function __construct(stdClass $models)
+    public function __construct(stdClass $models, stdClass $orderData)
     {
         parent::__construct($models);
+        $this->orderData = $orderData;
     }
-    public function addOrder($customerID, $totalOrdered)
+    public function addOrder()
     {
+        $customerID = $this->orderData->customerID;
+        $totalOrdered = $this->orderData->totalOrdered;
+        $groupID = $this->orderData->groupID;
+        $isAdmin = $this->orderData->isAdmin;
+        $isCustomer = $this->orderData->isCustomer;
         $errors = [];
         $pdo = $this->pdo;
         $transaction = $pdo->beginTransaction();
@@ -37,14 +43,29 @@ class AddNewOrder extends BaseCustomer
             $this->errorRunner->runErrors($errors);
         }
         $this->addOrdersToCustomers($customerID, $orderID);
-        $this->addOrdersToGroups($customerID, $orderID);
+        $this->addOrdersToGroups($customerID, $orderID, $groupID);
+        $editOrder = $orderID;
+        if ($isAdmin) {
+            $editOrder = "<a href='editOrder.php?order={$orderID}'>
+                {$orderID}</a>";
+        }
+        $html = "<section id='{$orderID}' class='animateHidden'>
+                <div class='col-sm-3'>$editOrder</div><div class='col-sm-3'>0</div>
+                <div class='col-sm-3'>{$totalOrdered}</div>
+                <div class='col-sm-3'>
+                <button type='button' class='btn btn-danger'
+                data-confirm='Delete the order?' data-id='{$orderID}'
+                data-unfulfilled='{$totalOrdered}'>Delete Order</button>
+                </div></section>";
+
         if ($success) {
             $pdo->commit();
             $this->data['success'] = [
-                "numberAdded"=>"We have added your orders.  A group will be assigned to handle them.",
-                "id"=>$orderID,
-                "fulfilled"=>0,
-                "unfulfilled"=>$totalOrdered
+                "numberAdded" => "We have added your orders.  A group will be assigned to handle them.",
+                "id" => $orderID,
+                "fulfilled" => 0,
+                "unfulfilled" => $totalOrdered,
+                "html" => $html,
             ];
             return $this->data;
         }
@@ -75,16 +96,15 @@ class AddNewOrder extends BaseCustomer
             $this->errorRunner->runErrors($errors);
         }
     }
-    protected function addOrdersToGroups($customerID, $orderID)
+    protected function addOrdersToGroups($customerID, $orderID, $groupID)
     {
         $pdo = $this->pdo;
         $errors = [];
-        $group = mt_rand(1, 40);
         // In a real application, we would probably use the customers
         // zip code as a lookup for the closest company, and then
         // assign a group with the lowest outstanding orders.
         $query = "INSERT INTO groupsToOrders
-                  SET groups_id = $group,
+                  SET groups_id = $groupID,
                   orders_id = $orderID";
         $stmt = $pdo->prepare($query);
         $success = $stmt->execute();

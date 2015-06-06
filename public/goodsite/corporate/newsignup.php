@@ -1,5 +1,4 @@
 <?php
-require_once "../partials/header.php";
 
 $userName = isset($_POST['inputUserName']) ? strip_tags($_POST['inputUserName']) : null;
 $errors = isset($_GET['errors']) ? htmlentities($_GET['errors']) : null;
@@ -11,16 +10,15 @@ if ($errors) {
 }
 
 ?>
- <!--Demo CSP Protection. -->
-<!--<link href='http://www.momshomecookin.net/wp-content/themes/civilized-10/style.css' -->
-<!--type='text/css' rel='stylesheet'>-->
+
+<input>
 
 
 <?php
-require_once "../partials/indexFormPartial.php";
-require_once "../partials/footer.php";
+require_once "../../partials/corporate/signupFormPartial.php";
+require_once "../../partials/footer.php";
 ?>
 
-<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
 </body>
 </html>

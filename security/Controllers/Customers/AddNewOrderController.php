@@ -24,44 +24,69 @@ class AddNewOrderController extends BaseCustomerController
     public function __construct(stdClass $models, stdClass $orderData)
     {
         parent::__construct($models);
-        $this->customerID = $orderData->customerID;
-        $this->totalOrdered = $orderData->totalOrdered;
-        $this->orderModel = new AddNewOrder($models);
+        $this->orderModel = new AddNewOrder($models, $orderData);
     }
     public function addOrder()
     {
-        $this->data = $this->orderModel->addOrder($this->customerID, $this->totalOrdered);
+        $this->data = $this->orderModel->addOrder();
+    }
+    public function getOrder()
+    {
+        return $this->data;
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
+if (isset($_POST['submit'])) {
+    extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
 
-if ($isAjax) {
-    $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $logger = new FullLog('Customer Add New Order');
     $logger->serverData();
     $checkAuth = new CheckAuth($logger);
     $errors = [];
+    $isValidUser = $checkAuth->isAuth();
+    $isAdmin = $checkAuth->isAdmin();
+    $isCustomer = $checkAuth->isCustomer();
+    // We need admin privileges to assign a group to this.
+    // For demo purposes, this assignment will be random,
+    // but in a real app, this order would be pending until
+    // someone could assign it.
+    if ($isAdmin || $isCustomer) {
+        $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
+    }
+    if (!$isAdmin && !$isCustomer) {
+        $errors[] = "Not a privileged account. Cannot perform action.";
+    }
+    if ($isAdmin) {
+        $groupID = $_SESSION['groupid'];
+    }
+    if (!$isAdmin) {
+        $query = "SELECT COUNT(id) as groupCount from groups";
+        foreach ($pdo->query($query) as $row) {
+            $groupID = mt_rand(1, $row['groupCount']);
+        }
+    }
 
-    $action = !empty($_POST['action']) ? $_POST['action'] : null;
-    $isCustomer = $checkAuth->isAuth();
-    $customerID = !empty($_POST['customerID']) ?
-    $auth->cInt($_POST['customerid']) : null;
-    $totalOrdered = !empty($_POST['totalOrdered']) ?
-    $auth->cInt($_POST['totalOrdered']) : null;
-    $csrf = !empty($_POST['csrf']) ? $_POST['csrf'] : null;
+    $action = !empty($action) ? $action : null;
+    $customerID = !empty($customerID) ?
+    $auth->cInt($customerID) : $_SESSION['customerid'];
+
+    $totalOrdered = !empty($totalOrdered) ?
+    $auth->cInt($totalOrdered) : null;
+    $csrf = !empty($csrf) ? $csrf : null;
 
     $action || $errors[] = "No action was specified on this request.";
     $customerID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
-    $isCustomer || $errors[] = "You are not authenticated as a customer.";
+    $isValidUser || $errors[] = "You are not authenticated as a customer.";
     $totalOrdered || $errors[] = "No orders were sent over.";
     $csrf || $errors[] = "This form does not appear to have originated from our site.";
 
     if (!isset($_SESSION['csrf_token']) || $csrf !== $_SESSION['csrf_token']) {
         $errors[] = "This form does not appear to have originated from our site.";
     }
+
     $models = new stdClass();
     $models->pdo = $pdo;
     $models->errorRunner = $errorRunner;
@@ -71,10 +96,20 @@ if ($isAjax) {
     $orderData->action = $action;
     $orderData->totalOrdered = $totalOrdered;
     $orderData->customerID = $customerID;
+    $orderData->groupID = $groupID;
+    $orderData->isCustomer = $isCustomer;
+    $orderData->isAdmin = $isAdmin;
 
-    $controller = new AddNewOrderController($models, $orderData);
-    $controller->addOrder();
-    echo json_encode($controller);
+    if (empty($errors)) {
+        $controller = new AddNewOrderController($models, $orderData);
+        $controller->addOrder();
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
+    }
 }
 
 if (!empty($errors)) {

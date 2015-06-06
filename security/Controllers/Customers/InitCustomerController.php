@@ -5,7 +5,6 @@ namespace security\Controllers\Customers;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
-use \stdClass;
 use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
@@ -13,6 +12,7 @@ use \security\Models\Customers\InitCustomer;
 use \security\Models\ErrorRunner;
 use \security\Models\PDOSingleton;
 use \security\Models\SiteLogger\FullLog;
+use \stdClass;
 
 class InitCustomerController extends BaseCustomerController
 {
@@ -20,10 +20,10 @@ class InitCustomerController extends BaseCustomerController
     private $session;
     private $initModel;
 
-    public function __construct(stdClass $models, array $session)
+    public function __construct(stdClass $models, stdClass $customerData)
     {
         parent::__construct($models);
-        $this->initModel = new InitCustomer($models, $session);
+        $this->initModel = new InitCustomer($models, $customerData);
     }
     public function setCustomerValues()
     {
@@ -35,9 +35,10 @@ class InitCustomerController extends BaseCustomerController
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
-
-if ($isAjax) {
+if (isset($_POST['submit'])) {
+    extract($_POST);
+    $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
+    isset($_SESSION) || $errors[] = "No customer is available.";
     $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
@@ -45,19 +46,24 @@ if ($isAjax) {
     $logger->serverData();
     $checkAuth = new CheckAuth($logger);
     $models = new stdClass();
+    $customerData = new stdClass();
     $errors = [];
+    $customerData->session = $_SESSION;
 
-    isset($_SESSION) || $errors[] = "No customer is available.";
     $models->logger = $logger;
     $models->errorRunner = $errorRunner;
     $models->auth = $auth;
     $models->pdo = $pdo;
     $models->checkAuth = $checkAuth;
-    $session = $_SESSION;
     if (empty($errors)) {
-        $controller = new InitCustomerController($models, $session);
+        $controller = new InitCustomerController($models, $customerData);
         $controller->getCustomerValues();
-        echo json_encode($controller);
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
     }
 }
 

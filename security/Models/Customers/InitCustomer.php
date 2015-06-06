@@ -11,10 +11,10 @@ class InitCustomer
 {
     private $session;
 
-    public function __construct(stdClass $models, array $session)
+    public function __construct(stdClass $models, stdClass $customerData)
     {
         $this->pdo = $models->pdo;
-        $this->session = $session;
+        $this->session = $customerData->session;
     }
     public function setCustomerValues()
     {
@@ -36,10 +36,10 @@ class InitCustomer
                     'address' => $row['address'],
                     'phone' => $row['phone'],
                     'instructions' => $row['instructions'],
-                    'city'=> $row['city'],
+                    'city' => $row['city'],
                     'state' => $row['state'],
                     'countrycode' => $row['countrycode'],
-                    'zip' => $row['zip']
+                    'zip' => $row['zip'],
                 ];
             }
         }

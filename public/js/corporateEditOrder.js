@@ -73,7 +73,8 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                     "csrf": Order.csrf,
                     "fulfilled": Order.fulfilled,
                     "unfulfilled": Order.unfulfilled,
-                    "isShipped": Order.isShipped
+                    "isShipped": Order.isShipped,
+                    "submit": true
                 }
             }).done(function (data) {
 

@@ -16,13 +16,11 @@ $rootPath = $router->rootPath;
 $auth = new Authenticate();
 $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
-$logger = new FullLog('Corporate View Page');
+$logger = new FullLog('Corporate Edit Orders Page');
 $checkAuth = new CheckAuth($logger);
 $blackList = new BlackLister($redis);
 $isCorporate = $checkAuth->isCorporate();
 
-$router = new Router(__DIR__);
-$rootPath = $router->rootPath;
 $userType = PDOSingleton::CORPORATEUSER;
 if ($checkAuth->isAdmin()) {
     $userType = PDOSingleton::ADMINUSER;

@@ -6,27 +6,31 @@ require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/
 
 use \PDO;
 use \security\Interfaces\CustomerType;
-use \security\Models\Login\BaseLogin;
 use \security\Models\Authenticator\PasswordCheck;
+use \security\Models\Login\BaseLogin;
 use \stdClass;
 
 class CustomerLogin extends BaseLogin implements CustomerType
 {
     private $username;
     private $password;
-    
-    public function __construct(stdClass $models)
+
+    public function __construct(stdClass $models, stdClass $customerData)
     {
         parent::__construct($models);
+        $this->userName = $customerData->userName;
+        $this->password = $customerData->password;
     }
-    public function checkCustomerLogin($username, $password)
+    public function checkCustomerLogin()
     {
+        $userName = $this->userName;
+        $password = $this->password;
         $pdo = $this->pdo;
         $blackList = $this->blackList;
         $dev = $this->isDev();
         $sql = 'SELECT id, username, password FROM customers WHERE username = :username';
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':username', $userName, PDO::PARAM_STR);
         $stmt->execute();
         $errorInfo = $stmt->errorInfo();
         if (isset($errorInfo[2]) && $dev) {
@@ -56,12 +60,12 @@ class CustomerLogin extends BaseLogin implements CustomerType
                     $password = $passwordHasher->makeHash();
                     $query = "UPDATE customers SET password='$password' WHERE username = :username";
                     $update = $pdo->prepare($query);
-                    $update->bindParam(':username', $username, PDO::PARAM_STR);
+                    $update->bindParam(':username', $userName, PDO::PARAM_STR);
                     $update->execute();
                 }
 
                 $blackList->removeBlackList();
-                $blackList->removeSleeper("$username:{$row['username']}");
+                $blackList->removeSleeper("$userName:{$row['username']}");
                 // Careful when using session_regenerate_id true.  This calls session_destroy.
                 session_regenerate_id(true);
                 $userid = $row['id'];
@@ -72,7 +76,7 @@ class CustomerLogin extends BaseLogin implements CustomerType
                 return $this->data;
             }
             if (!$isCorrectPassword) {
-                $sleep = $blackList->setSleeper("$username:{$row['username']}");
+                $sleep = $blackList->setSleeper("$userName:{$row['userName']}");
                 if ($dev) {
                     $this->errors[] = "Sleeping for $sleep.";
                 }

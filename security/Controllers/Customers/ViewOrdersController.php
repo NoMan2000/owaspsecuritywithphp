@@ -24,11 +24,11 @@ class ViewOrdersController extends BaseCustomerController
     {
         $this->orderData = $orderData;
         $this->customerID = $orderData->customerID;
-        $this->orderModel = new ViewOrders($models);
+        $this->orderModel = new ViewOrders($models, $orderData);
     }
     public function viewOrders()
     {
-        $this->orders = $this->orderModel->viewOrders($this->customerID);
+        $this->orders = $this->orderModel->viewOrders();
     }
     public function getOrders()
     {
@@ -40,9 +40,13 @@ class ViewOrdersController extends BaseCustomerController
     }
 }
 
-$isAjax = (isset($_POST['isAjax']) && $auth->isAjax()) ? true : false;
+$submit = null;
+if (isset($POST['submit'])) {
+    extract($_POST);
+}
+$isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
 
-if ($isAjax) {
+if ($submit) {
     $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
     $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
@@ -64,12 +68,19 @@ if ($isAjax) {
 
     $orderData = new stdClass();
     $orderData->customerID = $customerID;
+
+    $controller = new ViewOrdersController($models, $orderData);
+    $controller->viewOrders();
+    $controller->viewCustomer();
     if (empty($errors)) {
-        $controller = new ViewOrdersController($models, $orderData);
-        $controller->viewOrders();
-        $controller->viewCustomer();
-        echo json_encode($controller);
+        if ($isAjax) {
+            echo json_encode($controller);
+        }
+        if (!$isAjax) {
+            // Do something else.
+        }
     }
+
 }
 if (!empty($errors)) {
     $errorRunner->runErrors($errors);

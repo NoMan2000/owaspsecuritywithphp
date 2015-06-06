@@ -2,7 +2,7 @@
 
 namespace security\Models\Customers;
 
-require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php');
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
 use \security\Models\Customers\BaseCustomer;
@@ -13,15 +13,17 @@ class ViewOrders extends BaseCustomer
     private $errors = [];
     private $customerID;
 
-    public function __construct(stdClass $models)
+    public function __construct(stdClass $models, stdClass $orderData)
     {
         parent::__construct($models);
+        $this->customerID = $orderData->customerData;
     }
-    public function viewOrders($customerID)
+    public function viewOrders()
     {
         $data = [];
         $errors = $this->errors;
         $pdo = $this->pdo;
+        $customerID = $this->customerID;
         $query = "SELECT o.id, o.fulfilled, o.unfulfilled FROM orders AS o
                   JOIN customersToOrders AS c ON o.id = c.orders_id
                   WHERE c.customers_id = :customerID";
@@ -29,7 +31,7 @@ class ViewOrders extends BaseCustomer
         $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
         $success = $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         if (!empty($data)) {
             return $data;
         }
@@ -42,5 +44,4 @@ class ViewOrders extends BaseCustomer
             $this->errorRunner->runErrors($errors);
         }
     }
-    
 }
