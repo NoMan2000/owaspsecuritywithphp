@@ -109,8 +109,8 @@ echo "Creating a special Apache user and group"
 echo "In a production environment, you would need to edit the /etc/apache2/envvars file to change the user and the group.  I do not \
 recommend this when using c9 as the ACE editor has problems with this and you will go through some serious pain to get it all working again."
 
-sudo groupadd apache                                           
-sudo useradd -d /home/ubuntu/workspace/ -g apache -s /bin/bash apache                                                     
+sudo groupadd apache
+sudo useradd -d /home/ubuntu/workspace/ -g apache -s /bin/bash apache
 sudo usermod -a -G apache ubuntu
 mkdir /home/ubuntu/workspace/tmp
 mkdir -p /home/ubuntu/workspace/errors/phing
@@ -118,11 +118,10 @@ mkdir /home/ubuntu/workspace/logs
 
 echo "Starting up MySQL"
 
-sudo mysql-ctl install
-sudo mysql-ctl start
-
 echo "Installing phpmyadmin.  This will not work from a bash script, but it is a placeholder for you to see"
-#phpmyadmin-ctl install
+# sudo mysql-ctl install
+# sudo mysql-ctl start
+# phpmyadmin-ctl install
 
 sudo service apache2 start
 

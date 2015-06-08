@@ -75,8 +75,6 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                 }
             }).fail(function(data) {
                 setErrorMessage(data.responseText);
-            }).always(function(a, b, c) {
-
             });
         };
         e.preventDefault();
@@ -158,7 +156,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                         }
                     });
                     setTimeout(function() {
-                        window.location.href = CookieFunctions.rootPath + 'goodsite/index.php';
+                        window.location.href = CookieFunctions.rootPath + 'goodsite/corporate/corporatelogin.php';
                     }, 1500);
                 }
             }).fail(function(data) {

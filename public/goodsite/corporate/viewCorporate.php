@@ -20,6 +20,7 @@ $logger = new FullLog('Corporate View Orders Page');
 $checkAuth = new CheckAuth($logger);
 $blackList = new BlackLister($redis);
 $isCorporate = $checkAuth->isCorporate();
+$isAdmin = $checkAuth->isAdmin();
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
 
@@ -37,17 +38,19 @@ $models->pdo = $pdo;
 $models->logger = $logger;
 $models->blackList = $blackList;
 
-$ordersController = new EmployeeGroupsOrdersController($models, $_SESSION);
+$order = new stdClass();
+$order->session = $_SESSION;
+
+$ordersController = new EmployeeGroupsOrdersController($models, $order);
 $ordersController->setOrders();
 $orders = $ordersController->getOrders();
 
 $corporateOrders = "";
 // $pdo query returns false on fail
 
-$canEdit = isset($_SESSION['is_admin']) ?
-$_SESSION['is_admin'] : null;
+$canEdit = $isAdmin;
 
-$addNewOrderButton = $orderButton = null;
+$addNewOrderButton = $orderButton = $customerList = null;
 if ($canEdit) {
     $ordersController->setCustomerList();
     $customers = $ordersController->getCustomerList();

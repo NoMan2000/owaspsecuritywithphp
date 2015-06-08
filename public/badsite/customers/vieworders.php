@@ -54,6 +54,7 @@ if ($orders) {
                                      type='submit' name='submit'
                                      data-confirm='Delete the order?'
                                      data-id='$id'
+                                     data-customer='{$_GET['id']}'
                                      data-unfulfilled='$unfulfilled'
                                      >
                                      Delete Order</button>
@@ -95,6 +96,6 @@ require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'partials/custome
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/customers/viewordersForm.php";
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
-<script type="text/javascript" src='<?=$jsPath;?>vieworders.js'></script>
+<script type="text/javascript" src='<?=$jsPath;?>badvieworders.js'></script>
   </body>
 </html>

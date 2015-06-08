@@ -51,9 +51,6 @@
                 <a href='../customers/createNewCustomer.php' class="list-group-item text-center text-uppercase text-info">
                     New Customer sign-up form
                 </a>
-                <a href='newsignup.php' class="list-group-item text-center text-uppercase text-info">
-                    New Corporate sign-up form
-                </a>
 
             </div><!-- End list Group -->
         </div> <!-- end noAccount -->

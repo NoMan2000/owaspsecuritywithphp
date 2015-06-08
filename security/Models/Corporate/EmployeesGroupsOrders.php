@@ -10,10 +10,10 @@ class EmployeesGroupsOrders
 {
     private $session;
 
-    public function __construct(stdClass $models, array $session)
+    public function __construct(stdClass $models, stdClass $order)
     {
         $this->pdo = $models->pdo;
-        $this->session = $session;
+        $this->session = $order->session;
     }
     public function setOrders()
     {

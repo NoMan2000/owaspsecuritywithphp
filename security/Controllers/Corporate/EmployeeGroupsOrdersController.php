@@ -19,10 +19,10 @@ class EmployeeGroupsOrdersController extends BaseCorporateController
     private $session;
     private $model;
 
-    public function __construct(stdClass $models, array $session)
+    public function __construct(stdClass $models, stdClass $order)
     {
         parent::__construct($models);
-        $this->model = new EmployeesGroupsOrders($models, $session);
+        $this->model = new EmployeesGroupsOrders($models, $order);
     }
     public function setOrders()
     {
@@ -48,7 +48,6 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $auth = new Authenticate();
     $errors = [];
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
-    isset($_SESSION) || $errors[] = "No customer is available.";
     $pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
     $errorRunner = new ErrorRunner();
     $logger = new FullLog('Employee Initializers');
@@ -60,9 +59,22 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $models->auth = $auth;
     $models->pdo = $pdo;
     $models->checkAuth = $checkAuth;
+
+    $isAuth = $checkAuth->isAuth();
+    $isCorporate = $checkAuth->isCorporate();
+    $isGroup = $checkAuth->isGroup();
+
+    $isAuth || $errors[] = "Not authenticated";
+    $isGroup || $errors[] = "Not valid group member";
+    $isCorporate || $errors[] = "Incorrect user type.";
+    isset($_SESSION) || $errors[] = "No customer is available.";
+
+    $order = new stdClass();
+    $order->session = $_SESSION;
+    $order->groupID = $_SESSION['groupid'];
     $session = $_SESSION;
     if (empty($errors)) {
-        $controller = new InitCustomerController($models, $session);
+        $controller = new EmployeeGroupsOrdersController($models, $order);
         $controller->getCustomerValues();
         if ($isAjax) {
             echo json_encode($controller);

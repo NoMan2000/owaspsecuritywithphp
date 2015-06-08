@@ -28,7 +28,7 @@ class Inits
     {
         // This is used to compress output, but it can cause errors during debugging
         // if output is sent before compression.
-        // ini_set("zlib.output_compression", "On");
+        ini_set("zlib.output_compression", "On");
         ob_start();
         date_default_timezone_set('America/Chicago');
         mb_internal_encoding('UTF-8');
@@ -65,8 +65,15 @@ class Inits
         // $frameSrc = "'self' *.qbaka.net *.googleapis.com *.gstatic.com";
         $reportUri = "report-uri /logger/report.php";
         $serverName = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
+        header("Access-Control-Allow-Origin: https://{$serverName}");
+
         header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
-        header("Access-Control-Allow-Origin: *.{$serverName}");
+
+        // These four settings can open up your app to attacks.
+        // header("Access-Control-Allow-Origin: *");
+        // header("Access-Control-Allow-Credentials: true");
+        // header("Access-Control-Allow-Methods: GET, POST");
+        // header("Access-Control-Allow-Headers: Content-Type, *");
         header('X-XSS-Protection: 1');
         header('X-Content-Type-Options: nosniff');
         header("Content-Security-Policy: default-src $defaultSrc; img-src $imgSrc; script-src $scriptSrc; child-src $childSrc; style-src $styleSrc; font-src $fontSrc; connect-src $connectSrc; media-src $mediaSrc; $reportUri");
@@ -88,7 +95,7 @@ class Inits
         if (!empty($error) && in_array($error['type'], array(E_ERROR, E_USER_ERROR))) {
             echo '<h1>Sorry, something went wrong. The team has been notified.</h1>';
 
-            $errorPath = dirname(dirname(__DIR__))."Shutdownerrors.log";
+            $errorPath = dirname(dirname(__DIR__)) . "Shutdownerrors.log";
             if (!file_exists($errorPath)) {
                 touch($errorPath);
             }

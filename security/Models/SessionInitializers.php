@@ -14,8 +14,12 @@ class SessionInitializers implements Seconds
     public function __construct()
     {
         $this->params = session_get_cookie_params();
+
         $this->params["secure"] = true;
         $this->params['httponly'] = true;
+        // unsecure version of cookies.
+        // $this->params["secure"] = false;
+        // $this->params['httponly'] = false;
         // session register shutdown will call session_write_close when a die or exit is called.
         session_register_shutdown();
         session_set_cookie_params(
