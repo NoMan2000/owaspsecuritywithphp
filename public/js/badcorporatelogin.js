@@ -28,44 +28,38 @@ white: false
 /*global $, jQuery, alert, Spinner, swal, CookieFunctions, isValidJSON,
 setErrorMessage, setSuccessMessage, hideErrorMessage, hideSuccessMessage
 confirm */
-(function indexCallBack(global, $) {
-    'use strict';
-    var submitForm = function submitForm (e){
+(function corporatelogin(global, $) {
+    $("#indexForm").on('submit', function(e){
         e.preventDefault();
         hideErrorMessage();
         hideSuccessMessage();
         var userName = $("#inputUserName").val(),
-            password = $("#password").val();
+            password = $("#password").val(),
+            redirectPath = $("#redirectPath").val();
         $.ajax({
              url: CookieFunctions.reroutePath,
-             type: "GET",
+             type: "POST",
              data: {
-                 "to": "Controllers/Login/BadCustomerLoginController.php",
+                 "to": "Controllers/Login/BadCorporateLoginController.php",
                  "action": "verifyLogin",
                  "isAjax": true,
                  "userName": userName,
                  "password": password,
                  "submit": true
              }
-        }).done(function (data, textStatus, jqXHR){
-            var testJSON = isValidJSON(data),
-                userid;
-            if (testJSON) {
-                data = JSON.parse(data);
-                userid = data.userid;
-                setSuccessMessage("You have successfully logged in!");
-                window.setTimeout(function relocation(){
-                    window.location.href = CookieFunctions.rootPath + "badsite/customers/vieworders.php?id=" + userid;
-                }, 750);
+        }).done(function (data, textStatus, jqXHR) {
+            var data = JSON.parse(data),
+                id;
+            if (data) {
+                id = data.id;
             }
-            if (!testJSON) {
-                setErrorMessage(data);
-            }
+            window.location.href = CookieFunctions.rootPath + redirectPath + id;
         }).fail(function (jqXHR, textStatus, errorThrown){
             var errorMessage = $.trim(jqXHR.responseText);
             setErrorMessage(errorMessage);
+
         });
-    };
-    $("#indexForm").on('submit', submitForm);
+
+    });
 
 }(window, jQuery));

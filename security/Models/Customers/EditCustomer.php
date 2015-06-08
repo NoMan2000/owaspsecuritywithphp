@@ -42,10 +42,10 @@ class EditCustomer extends BaseCustomer
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row && empty($errors)) {
             if ($updatePassword) {
-                return $this->updatePassword($row, $customerData);
+                return $this->updatePassword($row, $this->customerData);
             }
             if (!$updatePassword) {
-                return $this->updateCustomer($row, $customerData);
+                return $this->updateCustomer($row, $this->customerData);
             }
         }
         if (!empty($errors)) {

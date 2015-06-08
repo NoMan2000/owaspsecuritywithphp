@@ -4,9 +4,10 @@ namespace security\Models\Corporate;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
+use \security\Models\Corporate\BaseCorporate;
 use \stdClass;
 
-class CorporateEditOrder
+class CorporateEditOrder extends BaseCorporate
 {
     private $session;
 
@@ -60,7 +61,7 @@ class CorporateEditOrder
                 'city' => $row['city'],
                 'state' => $row['state'],
                 'countrycode' => $row['countrycode'],
-                'zip' => $row['zip']
+                'zip' => $row['zip'],
             ];
         }
         $errors[] = "No order could be found.";

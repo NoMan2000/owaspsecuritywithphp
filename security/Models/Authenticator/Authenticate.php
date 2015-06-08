@@ -27,8 +27,9 @@ class Authenticate
     public function vPhone($phone = null, $isInternational = false)
     {
         $phone = !empty($phone) ? $this->cInt($phone) : null;
+        $phoneLen = strlen($phone);
         if ($phone && !$isInternational) {
-            $phone = (strlen($phone) === 10 || strlen($phone) === 11) ?: null;
+            $phone = ($phoneLen === 10 || $phoneLen === 11) ? $phone : null;
         }
         if ($phone && $isInternational) {
             // You need a more sophisticated framework for this sort of check.
@@ -39,6 +40,7 @@ class Authenticate
 
     public function cInt($value)
     {
+        $value = preg_replace("/[^\d]+(?<!^[+-])/", '', $value);
         $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
         if ($value <= PHP_INT_MAX) {
             return intval($value);

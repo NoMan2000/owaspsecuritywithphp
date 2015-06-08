@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__DIR__) . '/init.php');
+require_once dirname(__DIR__) . '/init.php';
 
 use \security\Models\Router\Router;
 
@@ -28,3 +28,4 @@ if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
     <![endif]-->
   </head>
   <body>
+  <div class='wrapper clearfix' id='wrapper'>

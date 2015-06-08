@@ -23,7 +23,6 @@ class ViewOrdersController extends BaseCustomerController
     public function __construct(stdClass $models, stdClass $orderData)
     {
         $this->orderData = $orderData;
-        $this->customerID = $orderData->customerID;
         $this->orderModel = new ViewOrders($models, $orderData);
     }
     public function viewOrders()
@@ -43,9 +42,9 @@ class ViewOrdersController extends BaseCustomerController
 if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
     extract($_GET);
+    $auth = new Authenticate();
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $pdo = new PDOSingleton(PDOSingleton::CUSTOMERUSER);
-    $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $logger = new FullLog('Customer Viewing Orders');
     $logger->serverData();

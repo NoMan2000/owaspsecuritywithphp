@@ -4,9 +4,10 @@ namespace security\Models\Corporate;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
+use \security\Models\Corporate\BaseCorporate;
 use \stdClass;
 
-class ViewCorporateOrders
+class ViewCorporateOrders extends BaseCorporate
 {
     private $session;
 
@@ -30,8 +31,12 @@ class ViewCorporateOrders
                   JOIN (groupsToOrders AS gTo, groups AS g, customersToOrders AS cTo, customers AS c)
                   ON (gTo.groups_id, gTo.orders_id, cTo.orders_id) =
                   (g.id, o.id, o.id)
-                  WHERE (g.id, o.id, c.id) = ($groupID, $orderID, cTo.customers_id)";
-        foreach ($pdo->query($query) as $row) {
+                  WHERE (g.id, o.id, c.id) = (:groupID, :orderID, cTo.customers_id)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':groupID', $groupID, PDO::PARAM_INT);
+        $stmt->bindParam(':orderID', $orderID, PDO::PARAM_INT);
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             return [
                 'id' => $row['id'],
                 'fulfilled' => $row['fulfilled'],

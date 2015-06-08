@@ -18,7 +18,7 @@ $errorRunner = new ErrorRunner();
 $logger = new FullLog('Customer Login Page');
 $checkAuth = new CheckAuth($logger);
 $customerID = isset($_GET['id']) ? $_GET['id'] : null;
-if (!$isCustomer || !$customerID) {
+if (!$customerID) {
     $error = rawurlencode('Not an authenticated consumer.');
     die(header("Location:{$rootPath}goodsite/index.php?errors=$error"));
 }
@@ -51,6 +51,7 @@ if ($orders) {
                                  <div class='col-sm-3'>{$unfulfilled}</div>
                                  <div class='col-sm-3'>
                                      <button type='button' class='btn btn-danger'
+                                     type='submit' name='submit'
                                      data-confirm='Delete the order?'
                                      data-id='$id'
                                      data-unfulfilled='$unfulfilled'
@@ -67,7 +68,10 @@ if ($orders) {
 
     }
 }
-$controller = new InitCustomerController($models, $_SESSION);
+$customer = new stdClass();
+$customer->session = $_SESSION;
+
+$controller = new InitCustomerController($models, $customer);
 $controller->setCustomerValues();
 $customerInfo = $controller->getCustomerValues();
 

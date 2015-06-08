@@ -77,7 +77,7 @@ if (!empty($orders)) {
         }
         $encodeID = rawurlencode($order['id']);
         $viewOrder = "<a href='viewOrder.php?order={$encodeID}'>{$id}</a>";
-        if ($canEdit) {
+        if ($canEdit && !$allFulfilled) {
             $viewOrder = "<a href='editOrder.php?order={$encodeID}'>{$id}</a>";
         }
         if (!$allFulfilled) {
@@ -112,6 +112,6 @@ require_once dirname(dirname(__DIR__)) . '/partials/corporate/viewCorporateNavba
 require_once dirname(dirname(__DIR__)) . '/partials/corporate/viewCorporateMain.php';
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
-<script type="text/javascript" src='<?=$jsPath;?>vieworders.js'></script>
+<script type="text/javascript" src='<?=$jsPath;?>viewCorporate.js'></script>
   </body>
 </html>

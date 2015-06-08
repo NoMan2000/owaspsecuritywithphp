@@ -9,17 +9,13 @@
         <div id='errorHolder' class="alert alert-danger" role="alert" style='display:none;'>
             <div id='errorContent'></div>
         </div>
-<?php if (isset($error)) {?>
-        <div id='inlineErrorHolder' class="alert alert-danger" role="alert">
-            <div id='inlineErrorContent'><?=$error;?></div>
-        </div>
-<?php }
-?>
+        <?=$errorList;?>
 
       <form class="form-signin form-horizontal" id='customerEditForm'
         role="form" method='POST'
-        action='#' novalidate='novalidate'>
-        <input type='hidden' id='csrf' value='<?=$_SESSION['csrf_token'];?>' />
+        action='../../jsHelper/reroute.php' novalidate='novalidate'>
+        <input type='hidden' id='csrf' name='csrf' value='<?=$_SESSION['csrf_token'];?>' />
+        <input type='hidden' name='to' id='to' value='Controllers/Customers/EditCustomerController.php' />
         <h1 class="form-signin-heading text-center">Customer edit form</h1>
         <h4 class='textContent'><?=$username;?></h4>
         <input type='hidden' name='actionType' id='actionType' data-action='updateCustomer' />

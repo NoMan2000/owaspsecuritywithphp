@@ -14,12 +14,14 @@
             </p>
         </div>
 
+    <form class="form-signin form-horizontal" id='updateOrderForm'
+    name='updateOrderForm'
+    role="form" method='POST'
+    action='../../jsHelper/reroute.php' novalidate='novalidate'>
         <section id='corporateBody'>
-            <form class="form-signin form-horizontal" id='updateOrderForm'
-            name='updateOrderForm'
-            role="form" method='POST'
-            action='#' novalidate='novalidate'>
+
         <input type='hidden' id='csrf' name='csrf' value='<?=$_SESSION['csrf_token'];?>' />
+        <input type='hidden' name='to' value='Controllers/Corporate/CorporateEditOrderController.php' />
 
         <div class="form-group">
             <label for="inputOrderID" class="col-sm-2 control-label">Order ID:</label>
@@ -135,7 +137,8 @@
 
         <input type='text' id='honeypot' style='display:none;' />
         <button class="btn btn-lg btn-primary center-block" type="submit" name='submit' id='submit'>Update</button>
-      </form>
+
         </section>
+    </form>
     </div><!-- End content -->
 </section>

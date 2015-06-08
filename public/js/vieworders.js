@@ -33,6 +33,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
     var hasConfirm = function hasConfirm(e, obj) {
             hideErrorMessage();
             hideSuccessMessage();
+            e.preventDefault();
             obj = obj || {};
             var $el = $(this),
                 message = $el.attr('data-confirm'),
@@ -79,6 +80,9 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
             };
             e.preventDefault();
             BeginSweetAlert.genericConfirm(obj);
+        },
+        preventForm = function preventForm(e) {
+            e.preventDefault();
         },
         clickAddNewOrder = function clickAddNewOrder(e) {
             e.preventDefault();
@@ -171,6 +175,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
 
     $('#content').off('click.hasConfirm').on('click.hasConfirm', '[data-confirm]', hasConfirm)
         .on('click.addNewOrder', '#createNewOrder', clickAddNewOrder)
-        .on('submit.addNewOrder', 'form#addNewOrder', addNewOrder);
+        .on('submit.addNewOrder', 'form#addNewOrder', addNewOrder)
+        .on('submit.removeOrder', 'form#removeOrder', preventForm);
     $("#sessionLogout").on('click.sessionLogout', logout);
 }());

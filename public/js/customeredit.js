@@ -252,8 +252,8 @@ confirm */
                         }
                     });
                 }
-            }).fail(function(data) {
-                setErrorMessage(data.responseText);
+            }).fail(function(jqXHR) {
+                setErrorMessage(jqXHR.responseText);
             });
         }
     };

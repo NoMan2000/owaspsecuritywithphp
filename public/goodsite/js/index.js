@@ -53,7 +53,6 @@ white: false
                 "password": password
             }
         }).done(function(data, textStatus, jqXHR) {
-            debugger;
             var testJSON = isValidJSON(data);
             if (testJSON) {
                 window.location.href = CookieFunctions.rootPath + "goodsite/customers/vieworders.php";

@@ -45,11 +45,11 @@ class EmployeeGroupsOrdersController extends BaseCorporateController
 if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
     extract($_GET);
+    $auth = new Authenticate();
     $errors = [];
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     isset($_SESSION) || $errors[] = "No customer is available.";
     $pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
-    $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $logger = new FullLog('Employee Initializers');
     $logger->serverData();

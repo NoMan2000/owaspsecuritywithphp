@@ -30,20 +30,17 @@ class CorporateEditOrderController extends BaseCorporateController
     }
 }
 
-
-}
-
 if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
     extract($_GET);
+    $auth = new Authenticate();
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $errors = [];
-    $isAjax = null;
     $logger = new FullLog('Corporate Viewing Orders');
     $logger->serverData();
     $checkAuth = new CheckAuth($logger);
-    $auth = new Authenticate();
     $isAdmin = $checkAuth->isAdmin();
+    $pdo = null;
     if ($isAdmin) {
         $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
     }
@@ -52,7 +49,7 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     }
     $errorRunner = new ErrorRunner();
     $orderID = !empty($_SESSION['orderID']) ?
-        $auth->cInt($_SESSION['orderID']) : null;
+    $auth->cInt($_SESSION['orderID']) : null;
     $csrf = !empty($csrf) ? $csrf : null;
     if (!$csrf || $csrf !== $_SESSION['csrf_token']) {
         $errors[] = "This form does not appear to have originated on our site.";
@@ -63,8 +60,7 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $isShipped = isset($isShipped) ? $auth->cInt($isShipped) : null;
 
     $isCorporate = $checkAuth->isCorporate();
-    $employeeID = !empty($_SESSION['employeeid']) ?
-        $auth->cInt($_SESSION['employeeid']) : null;
+    $employeeID = !empty($_SESSION['employeeid']) ? $auth->cInt($_SESSION['employeeid']) : null;
 
     $employeeID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
     $isCorporate || $errors[] = "You are not authenticated as a corporate user.";

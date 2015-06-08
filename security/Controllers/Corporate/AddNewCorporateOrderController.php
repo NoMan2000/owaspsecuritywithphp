@@ -7,13 +7,13 @@ require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/
 use \PDO;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
-use \security\Models\Customers\AddNewOrder;
+use \security\Models\Corporate\AddNewCorporateOrder;
 use \security\Models\ErrorRunner;
 use \security\Models\PDOSingleton;
 use \security\Models\SiteLogger\FullLog;
 use \stdClass;
 
-class AddNewOrderController extends BaseCorporateController
+class AddNewCorporateOrderController extends BaseCorporateController
 {
     private $employeeID;
     private $models;
@@ -23,7 +23,7 @@ class AddNewOrderController extends BaseCorporateController
     public function __construct(stdClass $models, stdClass $orderData)
     {
         parent::__construct($models);
-        $this->orderModel = new AddNewOrder($models, $orderData);
+        $this->orderModel = new AddNewCorporateOrder($models, $orderData);
     }
     public function addOrder()
     {
@@ -34,10 +34,10 @@ class AddNewOrderController extends BaseCorporateController
 if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
     extract($_GET);
+    $auth = new Authenticate();
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
 
     $pdo = new PDOSingleton(PDOSingleton::ADMINUSER);
-    $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $logger = new FullLog('Employee Add New Order');
     $logger->serverData();
@@ -45,18 +45,17 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $errors = [];
 
     $action = !empty($action) ? $action : null;
-    $isCustomer = $checkAuth->isCustomer();
-    $customerID = !empty($_SESSION['customerid']) ?
-    $auth->cInt($_SESSION['customerid']) : null;
-    $totalOrdered = !empty($totalOrdered) ?
-    $auth->cInt($totalOrdered) : null;
+    $isAdmin = $checkAuth->isAdmin();
+    $customerID = !empty($customerID) ? $auth->cInt($customerID) : null;
+    $totalOrdered = !empty($totalOrdered) ? $auth->cInt($totalOrdered) : null;
     $csrf = !empty($csrf) ? $csrf : null;
+    $groupID = !empty($_SESSION['groupid']) ? $_SESSION['groupid'] : null;
 
-    $action || $errors[] = "No action was specified on this request.";
-    $customerID || $errors[] = "No customer id.  You have most likely timed out.  Log out and log back in.";
-    $isCustomer || $errors[] = "You are not authenticated as a customer.";
+    $customerID || $errors[] = "No customer id was sent over on the request.";
+    $isAdmin || $errors[] = "You are not authenticated as an admin.";
     $totalOrdered || $errors[] = "No orders were sent over.";
     $csrf || $errors[] = "This form does not appear to have originated from our site.";
+    $groupID || $errors[] = "Not an authenticated group member.";
 
     if (!isset($_SESSION['csrf_token']) || $csrf !== $_SESSION['csrf_token']) {
         $errors[] = "This form does not appear to have originated from our site.";
@@ -70,9 +69,11 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $orderData->action = $action;
     $orderData->totalOrdered = $totalOrdered;
     $orderData->customerID = $customerID;
+    $orderData->groupID = $groupID;
+    $orderData->isAdmin = $isAdmin;
 
     if (empty($errors)) {
-        $controller = new AddNewOrderController($models, $orderData);
+        $controller = new AddNewCorporateOrderController($models, $orderData);
         $controller->addOrder();
         if ($isAjax) {
             echo json_encode($controller);

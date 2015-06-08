@@ -16,13 +16,11 @@ $rootPath = $router->rootPath;
 $auth = new Authenticate();
 $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
-$logger = new FullLog('Corporate View Page');
+$logger = new FullLog('Corporate Edit Orders Page');
 $checkAuth = new CheckAuth($logger);
 $blackList = new BlackLister($redis);
 $isCorporate = $checkAuth->isCorporate();
 
-$router = new Router(__DIR__);
-$rootPath = $router->rootPath;
 $userType = PDOSingleton::CORPORATEUSER;
 if ($checkAuth->isAdmin()) {
     $userType = PDOSingleton::ADMINUSER;
@@ -64,45 +62,27 @@ $ordersController = new ViewCorporateOrdersController($models, $orderData);
 $ordersController->setOrders();
 $order = $ordersController->getOrders();
 
-$corporateOrders = "";
+$id = $fulfilled = $unfulfilled = $is_shipped = $username =
+$address = $email = $phone = $instructions = $city =
+$state = $countrycode = $zip = null;
+$checked = null;
 if (!empty($order)) {
     extract($order);
     $id = intval($id);
+    $_SESSION['orderID'] = $id;
     $fulfilled = intval($fulfilled);
     $unfulfilled = intval($unfulfilled);
     $is_shipped = intval($is_shipped);
-    $username = htmlentities($username);
-    $address = htmlentities($address);
-    $email = htmlentities($email);
-    $phone = htmlentities($phone);
+    if ($is_shipped) {
+        $checked = "checked='checked'";
+    }
     $instructions = htmlentities($instructions);
-    $city = htmlentities($city);
-    $state = htmlentities($state);
-    $countrycode = htmlentities($countrycode);
-    $zip = htmlentities($zip);
-
-    $corporateOrders = "<section id='$id' class='clearfix'>
-        <div class='col-sm-3 col-sm-offset-1'>Order ID:</div><div class='col-sm-8'>{$id}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Fulfilled:</div><div class='col-sm-8'>{$fulfilled}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Unfulfilled:</div><div class='col-sm-8'>{$unfulfilled}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Is Shipped:</div><div class='col-sm-8'>{$is_shipped}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Username:</div><div class='col-sm-8'>{$username}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Address:</div><div class='col-sm-8'>{$unfulfilled}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Email:</div><div class='col-sm-8'>{$email}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Phone:</div><div class='col-sm-8'>{$phone}</div>
-        <div class='col-sm-3 col-sm-offset-1'>City:</div><div class='col-sm-8'>{$city}</div>
-        <div class='col-sm-3 col-sm-offset-1'>State:</div><div class='col-sm-8'>{$state}</div>
-        <div class='col-sm-3 col-sm-offset-1'>CountryCode:</div><div class='col-sm-8'>{$countrycode}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Zip:</div><div class='col-sm-8'>{$zip}</div>
-        <div class='col-sm-3 col-sm-offset-1'>Instructions:</div><div class='col-sm-8'>{$instructions}</div>
-     </section>";
 }
 
-?>
-<?php
-require_once dirname(dirname(__DIR__)) . '/partials/corporate/viewOrderNavbar.php';
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/corporate/viewOrderMain.php";
+require_once dirname(dirname(__DIR__)) . '/partials/corporate/editOrderNavbar.php';
+require_once dirname(dirname(__DIR__)) . '/partials/corporate/editOrderMain.php';
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
 ?>
+<script type="text/javascript" src='../../js/corporateEditOrder.js'></script>
   </body>
 </html>

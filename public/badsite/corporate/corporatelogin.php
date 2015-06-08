@@ -17,10 +17,10 @@ if ($errors) {
                    role='alert'>
                    <div id='errorContent'>$errors</div></div>";
 }
-require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'partials/corporate/corporateloginMain.php';
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'partials/corporate/badcorporateloginMain.php';
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'partials/footer.php';
 ?>
-
-<script type="text/javascript" src="<?=$jsPath;?>corporatelogin.js"></script>
+<input type='hidden' id='redirectPath' name='redirectPath' value='badsite/corporate/viewCorporate.php?id='>
+<script type="text/javascript" src="<?=$jsPath;?>badcorporatelogin.js"></script>
 </body>
 </html>

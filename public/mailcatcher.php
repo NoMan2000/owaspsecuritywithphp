@@ -22,6 +22,7 @@ if ($validMail && !empty($messages)) {
     echo "</pre>";
 }
 $mail = file_get_contents('/var/mail/ubuntu');
+$mail = htmlentities($mail);
 ?>
 <div style='width:90%;margin:0 auto;'>
     <pre>

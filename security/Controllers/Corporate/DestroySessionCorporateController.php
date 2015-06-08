@@ -1,25 +1,25 @@
 <?php
 
-namespace security\Controllers\Customers;
+namespace security\Controllers\Corporate;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \security\Controllers\Customers\BaseCustomerController;
+use \security\Controllers\Corporate\BaseCorporateController;
 use \security\Models\Authenticator\Authenticate;
 use \security\Models\Authenticator\CheckAuth;
-use \security\Models\Customers\DestroySession;
+use \security\Models\Corporate\DestroySessionCorporate;
 use \security\Models\ErrorRunner;
 use \security\Models\SessionInitializers;
 use \security\Models\SiteLogger\FullLog;
 use \StdClass;
 
-class DestroySessionController extends BaseCustomerController
+class DestroySessionCorporateController extends BaseCorporateController
 {
     public function __construct(stdClass $models, stdClass $userData)
     {
         isset($models->init) && $models->init instanceof SessionInitializers ?
         $this->setInit($models->init) : $this->setDefaultInit();
-        $this->destroy = new DestroySession($this->init);
+        $this->destroy = new DestroySessionCorporate($this->init);
     }
     public function setInit(SessionInitializers $init)
     {
@@ -50,12 +50,12 @@ if (isset($_POST['submit']) || isset($_GET)) {
     $init = new SessionInitializers();
     $errors = [];
 
-    $isCustomer = $checkAuth->isCustomer();
+    $isUser = $checkAuth->isAuth();
     $csrf = !empty($csrf) ? $csrf : null;
     $session = isset($_SESSION) ? $_SESSION : null;
 
     $csrf || $errors[] = "There is no token for this account.  You have most likely timed out.";
-    ($isCustomer || $isCorporate) || $errors[] = "You are not authenticated as a customer.";
+    $isUser || $errors[] = "You are not authenticated as a iser.";
     $session || $errors[] = "You do not have a session identifier.";
 
     if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $csrf) {
@@ -67,7 +67,7 @@ if (isset($_POST['submit']) || isset($_GET)) {
     $modelObjects = new StdClass;
     $modelObjects->init = $init;
     if (empty($errors)) {
-        $controller = new DestroySessionController($modelObjects, $userData);
+        $controller = new DestroySessionCorporateController($modelObjects, $userData);
         $controller->destroySession();
         if ($isAjax) {
             echo json_encode($controller);

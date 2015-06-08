@@ -60,7 +60,7 @@ white: false
             return false;
         }
         try {
-            var o = JSON.parse(data);     
+            var o = JSON.parse(data);
             // if o checks for null, empty, or undefined.
             // typeof object and not instanceof array makes sure it's an object and not an array.
             // the error checker does the rest.
@@ -89,7 +89,7 @@ white: false
             this.callback = args.callback !== undefined ? args.callback : null;
             this.successCallback = args.successCallback !== undefined ? args.successCallback : null;
             this.failCallback = args.failCallback !== undefined ? args.failCallback : null;
-            // Setting up three potential callbacks, an always called 'callback', 
+            // Setting up three potential callbacks, an always called 'callback',
             // a success callback, and a failed callback.
             var that = this;
             swal({
@@ -138,6 +138,23 @@ white: false
             $('#successHolder').hide();
             $('#successContent').html('');
             $('.state-success').removeClass('state-success');
+        },
+        getLink = function getLink() {
+            var el = document.getElementsByClassName('emailLink'),
+                elLen = el.length,
+                i = 0,
+                emailName,
+                emailCompany,
+                emailExtension,
+                emailLink;
+            for (i = 0; i < elLen; i += 1) {
+                emailName = el[i].getAttribute('data-name');
+                emailCompany = el[i].getAttribute('data-company');
+                emailExtension = el[i].getAttribute('data-extension');
+                emailName = emailName + '@' + emailCompany + emailExtension;
+                el[i].setAttribute('href', "mailto:" + emailName);
+                el[i].innerHTML = "Email: " + emailName;
+            }
         };
     window.BeginSweetAlert = BeginSweetAlert;
     window.isValidJSON = isValidJSON;
@@ -147,5 +164,6 @@ white: false
     window.hideSuccessMessage = hideSuccessMessage;
 
    $(document).on('ajaxStart', startSpinner).on('ajaxStop', stopSpinner);
+   getLink();
 
 }());

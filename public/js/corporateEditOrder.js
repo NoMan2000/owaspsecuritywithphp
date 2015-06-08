@@ -77,9 +77,12 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                     "submit": true
                 }
             }).done(function (data) {
-
+                var valid = isValidJSON(data);
+                if (valid) {
+                    setSuccessMessage("Updated account.");
+                }
             }).fail(function (jqXHR) {
-
+                setErrorMessage(jqXHR.responseText);
             });
         };
     $("#updateOrderForm").off("submit.updateOrderForm")

@@ -35,14 +35,20 @@ $models->logger = $logger;
 $models->checkAuth = $checkAuth;
 $models->pdo = $pdo;
 
-$customer = new InitCustomerController($models, $_SESSION);
+$customerModel = new stdClass();
+$customerModel->session = $_SESSION;
+
+$customer = new InitCustomerController($models, $customerModel);
 $customer->setCustomerValues();
 $customerValues = $customer->getCustomerValues();
 extract($customerValues);
-
-?>
-
-<?php
+$errorList = '';
+if (isset($error)) {
+    $errorList .= "<div id='inlineErrorHolder'
+            class='alert alert-danger' role='alert'>
+            <div id='inlineErrorContent'>$error</div>
+        </div>";
+}
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'partials/customers/customerEditNavbar.php';
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'partials/customers/customerEditMain.php';
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";

@@ -39,9 +39,9 @@ class AddNewOrderController extends BaseCustomerController
 if (isset($_POST['submit']) || isset($_GET['submit'])) {
     extract($_POST);
     extract($_GET);
+    $auth = new Authenticate();
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
 
-    $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $logger = new FullLog('Customer Add New Order');
     $logger->serverData();
@@ -71,8 +71,7 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     }
 
     $action = !empty($action) ? $action : null;
-    $customerID = !empty($customerID) ?
-    $auth->cInt($customerID) : $_SESSION['customerid'];
+    $customerID = !empty($customerID) ? $auth->cInt($customerID) : $_SESSION['customerid'];
 
     $totalOrdered = !empty($totalOrdered) ?
     $auth->cInt($totalOrdered) : null;

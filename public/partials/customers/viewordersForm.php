@@ -22,8 +22,9 @@
         </button>
         </div>
         <div id='showOrder' style='display:none;margin-bottom:2rem;'>
-            <form id='addNewOrder' name='addNewOrder' method='post' action='#' novalidate>
-                <input type='hidden' id='csrf' value='<?=$_SESSION['csrf_token'];?>' />
+            <form id='addNewOrder' name='addNewOrder' method='POST' action='../../jsHelper/reroute.php' novalidate>
+                <input type='hidden' id='csrf' name='csrf' value='<?=$_SESSION['csrf_token'];?>' />
+                <input type='hidden' id='to' name='to' value='Controllers/Customers/AddNewOrderController.php' />
                 <div class="form-group">
                 <label for="newOrder" class="col-sm-2 control-label">New Order:</label>
                 <div class='col-sm-10'>
@@ -44,8 +45,13 @@
            <div class='col-sm-3 definitionHeader'>Delete Order</div>
        </header>
        <section id='customerBody'>
-        <?=$customerOrders;?>
+       <form id='removeOrders' name='removeOrders'
+       method='POST' action='../../jsHelper/reroute.php' novalidate>
+       <input type='hidden' name='to' value='Controllers/Customers/RemoveOrderController.php' />
+            <?=$customerOrders;?>
+        </form>
         </section>
+
     </div><!-- End content -->
 
 </section>

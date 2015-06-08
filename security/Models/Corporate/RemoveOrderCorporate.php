@@ -1,14 +1,14 @@
 <?php
 
-namespace security\Models\Customers;
+namespace security\Models\Corporate;
 
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
-use \security\Models\Customers\BaseCustomer;
+use \security\Models\Corporate\BaseCorporate;
 use \stdClass;
 
-class RemoveOrder extends BaseCustomer
+class RemoveOrderCorporate extends BaseCorporate
 {
     private $errors = [];
     private $orderID;
@@ -17,12 +17,12 @@ class RemoveOrder extends BaseCustomer
     public function __construct(stdClass $models, stdClass $customerData)
     {
         parent::__construct($models);
-        $this->customerID = $customerData->customerID;
+        $this->groupID = $customerData->groupID;
         $this->orderID = $customerData->orderID;
     }
     public function removeOrder()
     {
-        $customerID = $this->customerID;
+        $groupID = $this->groupID;
         $orderID = $this->orderID;
         $errors = $this->errors;
         $pdo = $this->pdo;
@@ -31,15 +31,15 @@ class RemoveOrder extends BaseCustomer
            JOIN (customersToOrders AS cTo,
             groupsToOrders AS gTo)
            ON o.id = cTo.orders_id AND gTo.orders_id=o.id
-           WHERE cTo.customers_id = :customerID AND
+           WHERE gTo.groups_id = :groupID AND
            o.id = :orderID";
         $stmt = $pdo->prepare($query);
         if (!$stmt) {
             $errors[] = "Unable to delete this record.";
-            $this->logger->addCritical("Unable to delete order number $orderID for customer $customerID");
+            $this->logger->addCritical("Unable to delete order number $orderID for group $groupID");
         }
+        $stmt->bindParam(':groupID', $groupID, PDO::PARAM_INT);
         $stmt->bindParam(':orderID', $orderID, PDO::PARAM_INT);
-        $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
         $success = $stmt->execute();
         $errorInfo = $stmt->errorInfo();
         if (isset($errorInfo[2]) && $this->isDev()) {

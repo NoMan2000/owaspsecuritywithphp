@@ -49,7 +49,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                 url: CookieFunctions.reroutePath,
                 type: "POST",
                 data: {
-                    to: "Controllers/Customers/RemoveOrderController.php",
+                    to: "Controllers/Corporate/RemoveOrderCorporateController.php",
                     isAjax: true,
                     action: "removeOrder",
                     csrf: csrf,
@@ -101,7 +101,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                 type: "POST",
                 url: CookieFunctions.reroutePath,
                 data: {
-                    to: "Controllers/Customers/AddNewOrderController.php",
+                    to: "Controllers/Corporate/AddNewCorporateOrderController.php",
                     isAjax: true,
                     action: "addOrder",
                     csrf: csrf,
@@ -111,47 +111,26 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                 }
             }).done(function (data, textStatus, jqXHR) {
                 var jsonResponse = isValidJSON(data),
-                    section,
-                    fulfilled,
                     unfulfilled,
-                    button,
-                    dataID,
-                    dataUnfulfilled,
-                    full;
+                    html;
                 if (jsonResponse) {
                     JSON.parse(data, function (k, v) {
                         switch (k) {
                         case 'numberAdded':
                             setSuccessMessage(v);
                             break;
-                        case 'id':
-                            dataID = v;
-                            section = "<section id='" + v + "' style='display:none;' class='animateHidden'>" +
-                                "<div class='col-sm-3'>" + v + "</div>";
-                            break;
-                        case 'fulfilled':
-                            dataFulfilled = v;
-                            fulfilled = "<div class='col-sm-3'>" + v +
-                                "</div>";
-                            break;
-                        case 'unfulfilled':
-                            dataUnfulfilled = v;
-                            unfulfilled = "<div class='col-sm-3'>" + v +
-                                "</div>";
+                        case 'html':
+                            html = v;
                             break;
                         }
                     });
-                    button = '<div class="col-sm-3">' +
-                        '<button type="button" class="btn btn-danger" data-confirm="Delete the order?" data-id="' + dataID +
-                        '" data-unfulfilled="' + dataUnfulfilled + '">Delete Order</button></div></section>';
-                    full = section + fulfilled + unfulfilled + button;
                 }
-                if (full) {
-                    $("#customerBody").prepend(full);
+                if (html) {
+                    $("#customerBody").prepend(html);
                     $('.animateHidden').fadeIn(1500);
                 }
-            }).fail(function(data) {
-                setErrorMessage(data.responseText);
+            }).fail(function(jqXHR) {
+                setErrorMessage(jqXHR.responseText);
             });
 
         },
@@ -162,7 +141,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                 type: "POST",
                 url: CookieFunctions.reroutePath,
                 data: {
-                    to: "Controllers/Customers/DestroySessionController.php",
+                    to: "Controllers/Corporate/DestroySessionCorporateController.php",
                     isAjax: true,
                     csrf: csrf,
                     action: "destroySession",

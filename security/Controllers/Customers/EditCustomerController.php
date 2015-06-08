@@ -29,15 +29,12 @@ class EditCustomerController extends BaseCustomerController
 
     public function __construct(stdClass $models, stdClass $customer)
     {
+        parent::__construct($models);
         $this->customer = new EditCustomer($models, $customer);
     }
     public function editCustomer()
     {
         $this->data = $this->customer->editCustomer($this->editData);
-    }
-    public function jsonSerialize()
-    {
-        return $this->data;
     }
 }
 
@@ -45,9 +42,9 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     // Add a PDOSingleton User here.
     extract($_GET);
     extract($_POST);
+    $auth = new Authenticate();
     $isAjax = (isset($isAjax) && $auth->isAjax()) ? true : false;
     $pdo = new PDOSingleton();
-    $auth = new Authenticate();
     $errorRunner = new ErrorRunner();
     $logger = new FullLog('Customer Editing Account');
     $logger->serverData();
@@ -70,11 +67,10 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
 
     $csrf = !empty($csrf) ? $csrf : null;
     if ($phone) {
-        $phone = $auth->vPhone($phone) ?: $errors[] = "Invalid phone format.";
+        $phone = $auth->vPhone($phone) or $errors[] = "Invalid phone format.";
     }
 
-    $instructions = !empty(trim($instructions)) ?
-    $auth->cleanString($instructions) : null;
+    $instructions = !empty(trim($instructions)) ? $auth->cleanString($instructions) : null;
     $isCustomer = $checkAuth->isCustomer();
     $updatePassword = false;
 
@@ -139,7 +135,7 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     if (empty($errors)) {
         $editCustomer = new EditCustomerController($models, $customer);
         $editCustomer->editCustomer();
-        if (!$isAjax) {
+        if ($isAjax) {
             echo json_encode($editCustomer);
         }
         if (!$isAjax) {

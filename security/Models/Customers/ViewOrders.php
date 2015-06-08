@@ -16,7 +16,7 @@ class ViewOrders extends BaseCustomer
     public function __construct(stdClass $models, stdClass $orderData)
     {
         parent::__construct($models);
-        $this->customerID = $orderData->customerData;
+        $this->customerID = $orderData->customerID;
     }
     public function viewOrders()
     {

@@ -14,21 +14,20 @@ $rootPath = $router->rootPath;
 $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
 $pdo = new PDOSingleton(PDOSingleton::CORPORATEUSER);
-$logger = new FullLog('Corporate View Page');
+$logger = new FullLog('Bad Corporate View Page');
 $checkAuth = new CheckAuth($logger);
-$isCorporate = $checkAuth->isCorporate();
 $router = new Router(__DIR__);
 $rootPath = $router->rootPath;
 
-if (!$isCorporate) {
-    $logger->serverData();
-    $logger->addWarning("User attempted to access unauthorized location.");
-    $error = rawurlencode('Not an authenticated corporate user.');
-    header("Location:{$rootPath}goodsite/corporate/corporatelogin.php?errors=$error");
-}
+// if (!$isCorporate) {
+//     $logger->serverData();
+//     $logger->addWarning("User attempted to access unauthorized location.");
+//     $error = rawurlencode('Not an authenticated corporate user.');
+//     header("Location:{$rootPath}goodsite/corporate/corporatelogin.php?errors=$error");
+// }
 
 $query = "SELECT id, fulfilled, unfulfilled FROM `orders` WHERE
-          `groups_id` = {$_SESSION['groupid']}";
+          `groups_id` = {$_GET['id']}";
 $corporateOrders = "<header id='columnDefinitions'>
                     <div class='col-sm-3 definitionHeader'>Order id</div>
                    <div class='col-sm-3 definitionHeader'>Number Fulfilled</div>

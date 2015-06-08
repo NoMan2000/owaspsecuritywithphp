@@ -1,4 +1,4 @@
-<section class="container-fluid row">
+<section class="container-fluid row clearfix">
     <div id='content' class='clearfix col-xs-12
       col-sm-offset-2 col-md-offset-2 col-lg-offset-2
       col-sm-8 col-md-8 col-lg-8'>
