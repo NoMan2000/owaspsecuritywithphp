@@ -127,14 +127,20 @@ sudo service apache2 start
 
 sudo a2ensite phpliteadmin
 
-sudo service mysql start
-
 cd bashScript
 
+sudo service mysql start
 mysql -uroot < phpmyadmin.sql
 
 sudo mysql_secure_installation
 
 sudo service apache2 start
 
+sudo cp /home/ubuntu/workspace/bashScript/conf/phpmyadmin.conf /etc/apache2/sites-available/
+sudo cp ~/workspace/bashScript/conf/config.inc.php /etc/phpmyadmin/config.inc.php
+sudo a2ensite phpmyadmin
+sudo service apache2 reload
+
+echo 'export PATH="$PATH:~/.composer/vendor/bin"' >> ~/.bashrc
+export PATH="$PATH:~/.composer/vendor/bin"
 echo "All Done!"
