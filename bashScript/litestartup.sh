@@ -127,7 +127,11 @@ sudo service apache2 start
 
 sudo a2ensite phpliteadmin
 
-echo "All Done!"
+sudo service mysql start
+mysql -uroot < phpmyadmin.sql
 
-echo "If mysql will not start, try sudo service mysql start"
-echo "If your phpmyadmin installation goes wrong /etc/phpmyadmin has the config files"
+sudo mysql_secure_installation
+
+sudo service apache2 start
+
+echo "All Done!"
