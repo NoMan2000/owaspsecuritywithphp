@@ -128,6 +128,9 @@ sudo service apache2 start
 sudo a2ensite phpliteadmin
 
 sudo service mysql start
+
+cd bashScript
+
 mysql -uroot < phpmyadmin.sql
 
 sudo mysql_secure_installation
