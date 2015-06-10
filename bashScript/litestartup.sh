@@ -130,7 +130,7 @@ sudo a2ensite phpliteadmin
 cd bashScript
 
 sudo service mysql start
-mysql -uroot < phpmyadmin.sql
+mysql -uroot phpmyadmin < phpmyadmin.sql
 
 sudo mysql_secure_installation
 
@@ -140,6 +140,11 @@ sudo cp /home/ubuntu/workspace/bashScript/conf/phpmyadmin.conf /etc/apache2/site
 sudo cp ~/workspace/bashScript/conf/config.inc.php /etc/phpmyadmin/config.inc.php
 sudo a2ensite phpmyadmin
 sudo service apache2 reload
+
+echo "You only have to do this on c9, the default user is ubuntu with group of ubuntu"
+
+sudo chown -R ubuntu:ubuntu /var/lib/phpmyadmin
+sudo chown -R ubuntu:ubuntu /etc/phpmyadmin/
 
 echo 'export PATH="$PATH:~/.composer/vendor/bin"' >> ~/.bashrc
 export PATH="$PATH:~/.composer/vendor/bin"

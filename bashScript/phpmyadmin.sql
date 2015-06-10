@@ -33,10 +33,10 @@ USE phpmyadmin;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__bookmark`
+-- Table structure for table `pma_bookmark`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__bookmark` (
+CREATE TABLE IF NOT EXISTS `pma_bookmark` (
   `id` int(11) NOT NULL auto_increment,
   `dbase` varchar(255) NOT NULL default '',
   `user` varchar(255) NOT NULL default '',
@@ -50,10 +50,10 @@ CREATE TABLE IF NOT EXISTS `pma__bookmark` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__column_info`
+-- Table structure for table `pma_column_info`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__column_info` (
+CREATE TABLE IF NOT EXISTS `pma_column_info` (
   `id` int(5) unsigned NOT NULL auto_increment,
   `db_name` varchar(64) NOT NULL default '',
   `table_name` varchar(64) NOT NULL default '',
@@ -73,10 +73,10 @@ CREATE TABLE IF NOT EXISTS `pma__column_info` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__history`
+-- Table structure for table `pma_history`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__history` (
+CREATE TABLE IF NOT EXISTS `pma_history` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `username` varchar(64) NOT NULL default '',
   `db` varchar(64) NOT NULL default '',
@@ -92,10 +92,10 @@ CREATE TABLE IF NOT EXISTS `pma__history` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__pdf_pages`
+-- Table structure for table `pma_pdf_pages`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__pdf_pages` (
+CREATE TABLE IF NOT EXISTS `pma_pdf_pages` (
   `db_name` varchar(64) NOT NULL default '',
   `page_nr` int(10) unsigned NOT NULL auto_increment,
   `page_descr` varchar(50) COLLATE utf8_general_ci NOT NULL default '',
@@ -108,10 +108,10 @@ CREATE TABLE IF NOT EXISTS `pma__pdf_pages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__recent`
+-- Table structure for table `pma_recent`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__recent` (
+CREATE TABLE IF NOT EXISTS `pma_recent` (
   `username` varchar(64) NOT NULL,
   `tables` text NOT NULL,
   PRIMARY KEY (`username`)
@@ -122,10 +122,10 @@ CREATE TABLE IF NOT EXISTS `pma__recent` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__favorite`
+-- Table structure for table `pma_favorite`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__favorite` (
+CREATE TABLE IF NOT EXISTS `pma_favorite` (
   `username` varchar(64) NOT NULL,
   `tables` text NOT NULL,
   PRIMARY KEY (`username`)
@@ -136,10 +136,10 @@ CREATE TABLE IF NOT EXISTS `pma__favorite` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__table_uiprefs`
+-- Table structure for table `pma_table_uiprefs`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__table_uiprefs` (
+CREATE TABLE IF NOT EXISTS `pma_table_uiprefs` (
   `username` varchar(64) NOT NULL,
   `db_name` varchar(64) NOT NULL,
   `table_name` varchar(64) NOT NULL,
@@ -153,10 +153,10 @@ CREATE TABLE IF NOT EXISTS `pma__table_uiprefs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__relation`
+-- Table structure for table `pma_relation`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__relation` (
+CREATE TABLE IF NOT EXISTS `pma_relation` (
   `master_db` varchar(64) NOT NULL default '',
   `master_table` varchar(64) NOT NULL default '',
   `master_field` varchar(64) NOT NULL default '',
@@ -172,10 +172,10 @@ CREATE TABLE IF NOT EXISTS `pma__relation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__table_coords`
+-- Table structure for table `pma_table_coords`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__table_coords` (
+CREATE TABLE IF NOT EXISTS `pma_table_coords` (
   `db_name` varchar(64) NOT NULL default '',
   `table_name` varchar(64) NOT NULL default '',
   `pdf_page_number` int(11) NOT NULL default '0',
@@ -189,10 +189,10 @@ CREATE TABLE IF NOT EXISTS `pma__table_coords` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__table_info`
+-- Table structure for table `pma_table_info`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__table_info` (
+CREATE TABLE IF NOT EXISTS `pma_table_info` (
   `db_name` varchar(64) NOT NULL default '',
   `table_name` varchar(64) NOT NULL default '',
   `display_field` varchar(64) NOT NULL default '',
@@ -204,10 +204,10 @@ CREATE TABLE IF NOT EXISTS `pma__table_info` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__tracking`
+-- Table structure for table `pma_tracking`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__tracking` (
+CREATE TABLE IF NOT EXISTS `pma_tracking` (
   `db_name` varchar(64) NOT NULL,
   `table_name` varchar(64) NOT NULL,
   `version` int(10) unsigned NOT NULL,
@@ -226,10 +226,10 @@ CREATE TABLE IF NOT EXISTS `pma__tracking` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__userconfig`
+-- Table structure for table `pma_userconfig`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__userconfig` (
+CREATE TABLE IF NOT EXISTS `pma_userconfig` (
   `username` varchar(64) NOT NULL,
   `timevalue` timestamp NOT NULL,
   `config_data` text NOT NULL,
@@ -241,10 +241,10 @@ CREATE TABLE IF NOT EXISTS `pma__userconfig` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__users`
+-- Table structure for table `pma_users`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__users` (
+CREATE TABLE IF NOT EXISTS `pma_users` (
   `username` varchar(64) NOT NULL,
   `usergroup` varchar(64) NOT NULL,
   PRIMARY KEY (`username`,`usergroup`)
@@ -255,10 +255,10 @@ CREATE TABLE IF NOT EXISTS `pma__users` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__usergroups`
+-- Table structure for table `pma_usergroups`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__usergroups` (
+CREATE TABLE IF NOT EXISTS `pma_usergroups` (
   `usergroup` varchar(64) NOT NULL,
   `tab` varchar(64) NOT NULL,
   `allowed` enum('Y','N') NOT NULL DEFAULT 'N',
@@ -270,10 +270,10 @@ CREATE TABLE IF NOT EXISTS `pma__usergroups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__navigationhiding`
+-- Table structure for table `pma_navigationhiding`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__navigationhiding` (
+CREATE TABLE IF NOT EXISTS `pma_navigationhiding` (
   `username` varchar(64) NOT NULL,
   `item_name` varchar(64) NOT NULL,
   `item_type` varchar(64) NOT NULL,
@@ -287,10 +287,10 @@ CREATE TABLE IF NOT EXISTS `pma__navigationhiding` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__savedsearches`
+-- Table structure for table `pma_savedsearches`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__savedsearches` (
+CREATE TABLE IF NOT EXISTS `pma_savedsearches` (
   `id` int(5) unsigned NOT NULL auto_increment,
   `username` varchar(64) NOT NULL default '',
   `db_name` varchar(64) NOT NULL default '',
@@ -305,10 +305,10 @@ CREATE TABLE IF NOT EXISTS `pma__savedsearches` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pma__central_columns`
+-- Table structure for table `pma_central_columns`
 --
 
-CREATE TABLE IF NOT EXISTS `pma__central_columns` (
+CREATE TABLE IF NOT EXISTS `pma_central_columns` (
   `db_name` varchar(64) NOT NULL,
   `col_name` varchar(64) NOT NULL,
   `col_type` varchar(64) NOT NULL,
