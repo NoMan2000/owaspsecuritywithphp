@@ -87,7 +87,7 @@ use \security\Models\FileUploader\FileUploader;
         </div>
         <div class="form-group">
             <label for="filename" class="col-sm-2 control-label">Select Files:</label>
-            <span class='col-sm-3 file-input btn btn-default btn-file' style='margin-top:1rem;margin-left:1rem;'>
+            <span class='file-input btn btn-default btn-file' style='margin-top:1rem;margin-left:1rem;'>
             <input type="file" class='' name="filename[]" id="filename" multiple
             data-maxfiles="<?=$_SESSION['maxfiles'];?>"
             data-postmax="<?=$_SESSION['postmax'];?>"

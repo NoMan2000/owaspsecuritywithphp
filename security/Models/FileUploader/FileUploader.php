@@ -287,7 +287,7 @@ class FileUploader
                 $name = $this->newName;
             }
             // Demo only, remove this or rewrite this for a real server.
-            $convertDestination = $_SERVER['SERVER_NAME'];
+            $convertDestination = $_SERVER['SERVER_NAME'] . '/uploads/';
             $result .= " and sent to <a href='//{$convertDestination}{$name}'>{$convertDestination}{$name}</a>.";
             $this->messages[] = $result;
         }
