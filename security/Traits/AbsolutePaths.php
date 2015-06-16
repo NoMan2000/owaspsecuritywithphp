@@ -8,8 +8,26 @@ trait AbsolutePaths
 
     public function isServerSecure()
     {
-        $https = getservbyname('https', 'tcp');
-        if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == $https) {
+        // Some of these settings are Apache 2.4 specific.
+        // Checks for https on the server and aginst the load
+        // balancer.
+        $httpsPort = intval(getservbyname('https', 'tcp'));
+        $requestSchemeHttps = isset($_SERVER['REQUEST_SCHEME']) ?
+        $_SERVER['REQUEST_SCHEME'] === "https" : null;
+        $serverHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+        $serverPortSecure = isset($_SERVER['SERVER_PORT']) ?
+        $httpsPort === $_SERVER['SERVER_PORT'] : null;
+        $forwardHttps = isset($_SERVER['HTTP_X_FORWARDED_PORT']) ?
+        $_SERVER['HTTP_X_FORWARDED_PORT'] === 'https' : null;
+        $forwardProtocolHttps = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ?
+        $_SERVER['HTTP_X_FORWARDED_PROTO'] === "https" : null;
+        if (
+            $requestSchemeHttps ||
+            $serverHttps ||
+            $serverPortSecure ||
+            $forwardHttps ||
+            $forwardProtocolHttps
+        ) {
             return true;
         }
         return false;

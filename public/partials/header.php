@@ -2,10 +2,18 @@
 require_once dirname(__DIR__) . '/init.php';
 
 use \security\Models\Router\Router;
+use \security\Traits\AbsolutePaths;
 
 $router = new Router(__DIR__);
 $cssPath = $router->rootPath . 'css/';
-if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
+
+class HttpsCheck
+{
+    use AbsolutePaths;
+}
+$check = new HttpsCheck();
+
+if (!$check->isServerSecure()) {
     die("<h1>Warning:  This website does not work if not on a secure https Server.</h1>");
 }
 ?>
