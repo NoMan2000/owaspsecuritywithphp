@@ -2,7 +2,7 @@
 
 namespace security\Models\FileUploader;
 
-require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 // Code modified from David Power's source code.
 
@@ -37,8 +37,11 @@ class FileUploader
     protected $suffix = '.upload';
     protected $renameDuplicates;
 
-    public function __construct($uploadFolder = '/home/ubuntu/workspace/public/uploads/', $files = null)
+    public function __construct($uploadFolder = null, $files = null)
     {
+        if (!$uploadFolder) {
+            $uploadFolder = dirname(dirname(dirname(__DIR__))) . '/public/uploads/';
+        }
         if (!is_dir($uploadFolder) || !is_writable($uploadFolder)) {
             throw new FolderException("$uploadFolder must be a valid, writable folder.");
         }
@@ -87,10 +90,10 @@ class FileUploader
                 // Using fallthrough to calculate the values.
                 case 'g' || 'G':
                     $val *= 1024;
-                    // A gigabyte is 1024 * 1024 * 1024
+                // A gigabyte is 1024 * 1024 * 1024
                 case 'm' || 'M':
                     $val *= 1024;
-                    // A megabyte is 1024 * 1024
+                // A megabyte is 1024 * 1024
                 case 'k' || 'K':
                     $val *= 1024;
                     break;
@@ -284,7 +287,7 @@ class FileUploader
                 $name = $this->newName;
             }
             // Demo only, remove this or rewrite this for a real server.
-            $convertDestination = str_replace('/home/ubuntu/workspace/public', $_SERVER['SERVER_NAME'], $this->destination);
+            $convertDestination = $_SERVER['SERVER_NAME'];
             $result .= " and sent to <a href='//{$convertDestination}{$name}'>{$convertDestination}{$name}</a>.";
             $this->messages[] = $result;
         }

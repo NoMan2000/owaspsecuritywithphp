@@ -2,8 +2,6 @@
 
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/header.php";
 
-use \RecursiveArrayIterator;
-use \RecursiveIteratorIterator;
 use \security\Exceptions\FolderException;
 use \security\Models\ErrorRunner;
 use \security\Models\FileUploader\FileUploader;
@@ -55,10 +53,7 @@ if (isset($_POST['submit'])) {
 
     if ($usersSearch) {
         $query = "SELECT username FROM customers WHERE username = '$usersSearch'";
-        $result = $mysqli->query($query)
-        or $errors[] = $mysqli->error . ' on ' . __LINE__;
-        $isObj = is_object($result);
-        while ($isObj && $row = $result->fetch_assoc()) {
+        foreach ($mysqli->query($query) as $row) {
             $usersExist['users'][] = $row;
         }
     }

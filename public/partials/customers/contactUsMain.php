@@ -1,3 +1,8 @@
+<?php
+require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/header.php";
+use \security\Models\FileUploader\FileUploader;
+?>
+
 <section class="container-fluid row">
 
     <div id='content' class='clearfix col-xs-12
