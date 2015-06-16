@@ -21,7 +21,7 @@ class MySQLISingleton extends mysqli
         $this->host = 'localhost';
         $this->database = 'widgets';
         $this->user = 'root';
-        $this->pass = '';
+        $this->pass = 'admin';
         $this->charset = "utf8mb4";
         $this->port = ini_get("mysqli.default_port");
         $this->socket = ini_get("mysql.default_socket");

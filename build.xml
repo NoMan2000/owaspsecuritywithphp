@@ -14,7 +14,7 @@
     <target name="build.setdefaultDatabase">
         <echo msg="Making sure MySQL has default databases set up."/>
         <exec command="pwd" passthru="true"/>
-        <property name="mysql.setup" value='mysql -h${db.host} -u${root.user}' />
+        <property name="mysql.setup" value='mysql -h${db.host} -u${root.user} -p${root.password}' />
 
         <exec
             command="${mysql.setup} &lt; deltas/mysql/${root.scriptZero}"
@@ -231,8 +231,8 @@
     </target>
 
     <target name="build" depends="build.cleanup,
-                                  build.generateCleanupSQL,
                                   build.setdefaultDatabase,
+                                  build.generateCleanupSQL,
                                   build.migrate,
                                   build.generateSeeds,
                                   build.seed,

@@ -11,7 +11,7 @@
         "psr/log": "dev-master",
         "swiftmailer/swiftmailer": "dev-master",
         "monolog/monolog": "dev-master",
-        "guzzle/guzzle": "dev-master",
+        "guzzlehttp/guzzle" :"~6.0.1",
         "ramsey/uuid": "dev-master",
         "moontoast/math": "dev-master",
         "ircmaxell/random-lib": "dev-master",
