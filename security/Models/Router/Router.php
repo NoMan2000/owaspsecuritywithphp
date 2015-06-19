@@ -2,7 +2,7 @@
 
 namespace security\Models\Router;
 
-require_once(dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . "public/init.php");
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . "public/init.php";
 
 use \security\Traits\AbsolutePaths;
 
@@ -20,13 +20,13 @@ class Router
         // some compatibility fixes for Windows paths
         $from = $this->from;
         $from = is_dir($from) ? rtrim($from, '\/') . '/' : $from;
-        $to   = is_dir($to)   ? rtrim($to, '\/') . '/'   : $to;
+        $to = is_dir($to) ? rtrim($to, '\/') . '/' : $to;
         $from = str_replace('\\', '/', $from);
-        $to   = str_replace('\\', '/', $to);
+        $to = str_replace('\\', '/', $to);
 
-        $from     = explode('/', $from);
-        $to       = explode('/', $to);
-        $relPath  = $to;
+        $from = explode('/', $from);
+        $to = explode('/', $to);
+        $relPath = $to;
 
         foreach ($from as $depth => $dir) {
             // find first non-matching dir
@@ -49,6 +49,3 @@ class Router
         return implode('/', $relPath);
     }
 }
-
-
-

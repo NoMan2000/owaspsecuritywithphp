@@ -6,7 +6,6 @@ use \security\Exceptions\FolderException;
 use \security\Models\ErrorRunner;
 use \security\Models\FileUploader\FileUploader;
 use \security\Models\MySQLISingleton;
-use \security\Models\PDOSingleton;
 use \security\Models\RedisSingleton;
 use \security\Models\Router\Router;
 use \security\Models\SiteLogger\FullLog;
@@ -16,7 +15,6 @@ $rootPath = $router->rootPath;
 $redis = new RedisSingleton();
 $errorRunner = new ErrorRunner();
 $logger = new FullLog('Customer Create Form');
-$pdo = new PDOSingleton();
 $mysqli = new MySQLISingleton();
 
 $_SESSION['maxfiles'] = ini_get('max_file_uploads');
@@ -25,16 +23,25 @@ $_SESSION['displaymax'] = FileUploader::convertFromBytes($_SESSION['postmax']);
 
 $max = 200 * 1024;
 $errors = $usersExist = [];
-if (isset($_POST['submit'])) {
+
+if (isset($_POST['submitUsers'])) {
     $usersExist['users'] = [];
+    $usersSearch = isset($_POST['usersSearch']) ? $_POST['usersSearch'] : null;
+    if ($usersSearch) {
+        $query = "SELECT username FROM customers WHERE username = '$usersSearch'";
+        foreach ($mysqli->query($query) as $row) {
+            $usersExist['users'][] = $row;
+        }
+    }
+}
+
+if (isset($_POST['submit'])) {
 
     $username = isset($_POST['inputUsername']) ? $_POST['inputUsername'] : null;
     $email = isset($_POST['inputEmail']) ? $_POST['inputEmail'] : null;
     $name = isset($_POST['inputName']) ? $_POST['inputName'] : null;
     $subject = isset($_POST['inputSubject']) ? $_POST['inputSubject'] : null;
     $message = isset($_POST['inputMessage']) ? $_POST['inputMessage'] : null;
-
-    $usersSearch = isset($_POST['usersSearch']) ? $_POST['usersSearch'] : null;
 
     if ($email && $subject && $message && $name) {
         $to = ini_get('sendmail_from') ? ini_get('sendmail_from') : "admin@example.com";
@@ -48,13 +55,6 @@ if (isset($_POST['submit'])) {
 
         if (!$send) {
             $errors[] = "Unable to send message.";
-        }
-    }
-
-    if ($usersSearch) {
-        $query = "SELECT username FROM customers WHERE username = '$usersSearch'";
-        foreach ($mysqli->query($query) as $row) {
-            $usersExist['users'][] = $row;
         }
     }
 
@@ -92,19 +92,20 @@ if (!empty($errors)) {
     }
 }
 
-if (isset($usersExist['users']) && !empty($usersExist['users'])) {
+if (!empty($usersExist['users'])) {
     $usersIterator = new RecursiveArrayIterator($usersExist['users']);
     foreach (new RecursiveIteratorIterator($usersIterator) as $users) {
         $userList .= "<div class='alert alert-danger' role='alert'>
             <div>$users is already taken.</div></div>";
     }
 }
-if (isset($usersSearch) && !empty($usersSearch) && empty($usersExist['users'])) {
-    $userList = "<div class='alert alert-success' role='alert>
+if (!empty($usersSearch) && empty($usersExist['users'])) {
+    $userList = "<div class='alert alert-success' role='alert'>
             No users matching that username
     </div>";
 
 }
+$self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
 
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/customers/contactUsMain.php";
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "partials/footer.php";
