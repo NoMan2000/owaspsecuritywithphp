@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
             $errors[] = "Email appears suspicious.";
         }
         $mailLog = dirname(dirname(__DIR__)) . '/logs/mail.log';
-        if (!file_exists($mailLog) {
+        if (!file_exists($mailLog)) {
             touch($mailLog);
         }
 
