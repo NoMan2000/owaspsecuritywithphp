@@ -4,7 +4,7 @@ namespace security\Models;
 
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'public/init.php';
 
-use \Guzzle\Http\Client;
+use \GuzzleHttp\Client;
 
 class MailCatcher
 {
