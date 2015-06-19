@@ -29,8 +29,15 @@ if (isset($_POST['submitUsers'])) {
     $usersSearch = isset($_POST['usersSearch']) ? $_POST['usersSearch'] : null;
     if ($usersSearch) {
         $query = "SELECT username FROM customers WHERE username = '$usersSearch'";
-        foreach ($mysqli->query($query) as $row) {
-            $usersExist['users'][] = $row;
+        $res = $mysqli->query($query);
+        if (!$res) {
+            $errors[] = "On Query: [$query] <p>An Error Type of [{$mysqli->errno}] was generated.</p>
+            With a Message of: $mysqli->error on PHP line " . __LINE__ . " in file " . __FILE__;
+        }
+        if ($res) {
+            foreach ($res as $row) {
+                $usersExist['users'][] = $row;
+            }
         }
     }
 }
@@ -59,7 +66,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (isset($_FILES) && !empty($_FILES['filename'])) {
-        $destination = dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR;
+        $destination = dirname(dirname(__DIR__)) . '/uploads/';
         try {
             $upload = new FileUploader($destination);
             $upload->setMaxSize($max);
