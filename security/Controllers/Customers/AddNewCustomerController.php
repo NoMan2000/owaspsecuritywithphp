@@ -71,7 +71,7 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $action = !empty($action) ? $auth->cleanString($action) : null;
 
     $username || $errors[] = "No username was sent over.";
-    $email || $errors[] = "No email was sent over.";
+    $email || $errors[] = "No email was sent over or an invalid Email was sent.";
     $address || $errors[] = "No address was sent over.";
     $phone || $errors[] = "No phone number was sent over.";
     $action || $errors[] = "No action was sent over, do not have enough information.";
@@ -117,14 +117,17 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
         sleep($sleepTime);
     }
     $customer->customerData = $customerData;
-
-    $addNewCustomer = new AddNewCustomerController($models, $customer);
-    $addNewCustomer->addNewCustomer();
-    if ($isAjax) {
-        echo json_encode($addNewCustomer);
+    if (empty($errors)) {
+        $addNewCustomer = new AddNewCustomerController($models, $customer);
+        $addNewCustomer->addNewCustomer();
+        if ($isAjax) {
+            echo json_encode($addNewCustomer);
+        }
+        if (!$isAjax) {
+            // Do something else
+        }
     }
-}
-
-if (!empty($errors)) {
-    $errorRunner->runErrors($errors);
+    if (!empty($errors)) {
+        $errorRunner->runErrors($errors);
+    }
 }

@@ -81,8 +81,7 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
             // Do Something else.
         }
     }
-}
-
-if (!empty($errors)) {
-    $errorRunner->runErrors($errors);
+    if (!empty($errors)) {
+        $errorRunner->runErrors($errors);
+    }
 }

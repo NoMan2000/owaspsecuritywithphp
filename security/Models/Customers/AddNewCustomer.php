@@ -106,7 +106,11 @@ class AddNewCustomer extends BaseCustomer implements Seconds
                 $redis->expire($uniqueID, Seconds::DAY);
                 $this->blackList->removeSleeper("username:$username");
                 // Adding a class directly in a method is a bad practice, so mark this as a refactor.
-                $emailAccount = new EmailConfirmAccount($email, $uniqueID);
+                try {
+                    $emailAccount = new EmailConfirmAccount($email, $uniqueID);
+                } catch (Exception $e) {
+                    $this->data["n"] = ["info" => $e->getMessage()];
+                }
                 $this->data["s"] = [
                     "success" => "Successfully created a new customer.  This will not be active until you
                         activate your email.  It expires in 24 hours.",

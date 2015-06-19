@@ -13,8 +13,9 @@ class Authenticate
     public function vEmail($email)
     {
         $isValid = filter_var($email, FILTER_VALIDATE_EMAIL);
-        if ($isValid) {
-            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+        $isValidTest = strlen($sanitizedEmail) === strlen($email);
+        if ($isValidTest && $isValid) {
             return $email;
         }
         return false;
