@@ -97,7 +97,7 @@ class AddNewCustomer extends BaseCustomer implements Seconds
                 try {
                     $uniqueID = Uuid::uuid4();
                 } catch (UnsatisfiedDependencyException $e) {
-                    $errors[] = 'Caught exception: ' . $e->getMessage() . "\n";
+                    $errors[] = 'Caught exception: ' . $e->getMessage();
                 } catch (Exception $e) {
                     $errors[] = $e->getMessage();
                 }

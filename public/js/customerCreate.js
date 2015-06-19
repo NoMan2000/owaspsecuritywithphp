@@ -234,6 +234,9 @@ confirm */
                                 case "uploadResults":
                                     message += v + "<br/>";
                                     break;
+                                case "info":
+                                    message += v + "<br/>";
+                                    break;
                             }
                         });
                         setSuccessMessage(message);
