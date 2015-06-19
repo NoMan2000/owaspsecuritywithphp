@@ -48,12 +48,12 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $blackList = new BlackLister($redis);
     $error = error_get_last();
     $errors = [];
+    $files = null;
 
-    $files = $MAX_FILE_SIZE = $upload = null;
-    if (isset($upload) && $upload === 'true') {
-        $files = $_FILES;
-        $upload = true;
-        $MAX_FILE_SIZE = $MAX_FILE_SIZE;
+    if ($numFiles) {
+        for ($i = 0; $i < intval($numFiles); $i += 1) {
+            $files = $_FILES;
+        }
     }
 
     $username = !empty($username) ? $auth->cleanString($username) : null;

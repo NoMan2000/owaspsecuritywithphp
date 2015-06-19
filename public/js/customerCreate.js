@@ -88,7 +88,6 @@ confirm */
             }
 
             if (errorHolder === false) {
-                formData = new FormData();
                 for (i = 0; i < fileHolder.length; i += 1) {
                     formData.append("file" + i, fileHolder["file" + i]);
                 }
@@ -146,6 +145,7 @@ confirm */
                 i,
                 regex = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
                 goodRegEx,
+                emailRegex = /^[a-zA-Z0-9&#39;._%+\-]+@[a-zA-Z0-9\-][a-zA-Z0-9.\-]*\.[a-zA-Z]{2,63}$/,
                 MAX_FILE_SIZE = $("#MAX_FILE_SIZE").val(),
                 hasFiles = $("#filename").get(0).files.length,
                 errorLength,
@@ -185,7 +185,13 @@ confirm */
                 errors.push("The new password must be at least 8 characters long.");
                 $("#newPassword, #newPasswordConfirm").parents(".form-group").addClass("has-error");
             }
-            if (hasFiles > 0) {
+            if (email) {
+                goodRegEx = emailRegex.test(email);
+                if (!goodRegEx) {
+                    errors.push("You need to enter a valid email address.");
+                }
+            }
+            if (hasFiles) {
                 formData.append("upload", true);
                 formData.append("MAX_FILE_SIZE", MAX_FILE_SIZE);
             }
