@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
         if (strlen($sanitizedEmail) !== strlen($email)) {
             $errors[] = "Email appears suspicious.";
         }
-        $mailLog = dirname(dirname(__DIR__)) . '/logs/mail.log';
+        $mailLog = dirname(dirname(dirname(__DIR__))) . '/logs/mail.log';
         if (!file_exists($mailLog)) {
             touch($mailLog);
         }
