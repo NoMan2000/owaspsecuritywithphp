@@ -31,8 +31,8 @@ if (isset($_POST['submitUsers'])) {
         $query = "SELECT username FROM customers WHERE username = '$usersSearch'";
         $res = $mysqli->query($query);
         if (!$res) {
-            $errors[] = "On Query: [$query] <p>An Error Type of [{$mysqli->errno}] was generated.</p>
-            With a Message of: $mysqli->error on PHP line " . __LINE__ . " in file " . __FILE__;
+            $errors[] = "On Query:<br/> [$query] <p>An Error Type of [{$mysqli->errno}] was generated.</p>
+            <p>With a Message of: $mysqli->error on PHP line " . __LINE__ . " in file " . __FILE__ . "</p>";
         }
         if ($res) {
             foreach ($res as $row) {
@@ -103,7 +103,7 @@ if (!empty($usersExist['users'])) {
     $usersIterator = new RecursiveArrayIterator($usersExist['users']);
     foreach (new RecursiveIteratorIterator($usersIterator) as $users) {
         $userList .= "<div class='alert alert-danger' role='alert'>
-            <div>$users is already taken.</div></div>";
+            $users is already taken.</div>";
     }
 }
 if (!empty($usersSearch) && empty($usersExist['users'])) {
