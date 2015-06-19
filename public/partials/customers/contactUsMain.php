@@ -17,7 +17,6 @@ use \security\Models\FileUploader\FileUploader;
         </div>
         <?=$errorList;?>
         <h1 class="form-signin-heading text-center">Contact Widget Corp Form</h1>
-        <h4 class='textContent'>Contact Us:</h4>
         <form class="form-signin form-horizontal" id='checkUsersForm'
             name='checkUsersForm'
             role="form" method='POST'
