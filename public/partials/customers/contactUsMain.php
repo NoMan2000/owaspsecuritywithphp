@@ -103,7 +103,7 @@ use \security\Models\FileUploader\FileUploader;
                     <div class='col-sm-7'></div>
                 </div>
                 <button class="btn btn-lg btn-primary center-block"
-                id='submit' name='submit' type="submit">Create new Customer</button>
+                id='submit' name='submit' type="submit">Contact Us</button>
                 <p>&nbsp;</p>
             </fieldset>
         </form>
