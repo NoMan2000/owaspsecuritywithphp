@@ -8,6 +8,7 @@ use \PDO;
 use \Redis;
 use \security\Controllers\Customers\BaseCustomerController;
 use \security\Models\Authenticator\Authenticate;
+use \security\Models\Authenticator\BlackLister;
 use \security\Models\Authenticator\CheckAuth;
 use \security\Models\Customers\AddNewCustomer;
 use \security\Models\ErrorRunner;
@@ -25,7 +26,6 @@ class AddNewCustomerController extends BaseCustomerController
 
     public function __construct(stdClass $models, stdClass $customer)
     {
-        $this->customerData = $customerData;
         $this->newCustomer = new AddNewCustomer($models, $customer);
     }
     public function addNewCustomer()
@@ -45,6 +45,7 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $logger->serverData();
     $checkAuth = new CheckAuth($logger);
     $redis = new RedisSingleton();
+    $blackList = new BlackLister($redis);
     $error = error_get_last();
     $errors = [];
 
@@ -95,6 +96,7 @@ if (isset($_POST['submit']) || isset($_GET['submit'])) {
     $models->redis = $redis;
     $models->errorRunner = $errorRunner;
     $models->logger = $logger;
+    $models->blackList = $blackList;
 
     $customer = new stdClass();
 

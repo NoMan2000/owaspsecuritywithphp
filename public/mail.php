@@ -2,7 +2,7 @@
 
 require_once 'partials/header.php';
 
-use \Rhumsaa\Uuid\Uuid;
+use \Ramsey\Uuid\Uuid;
 use \security\Models\Login\EmailConfirmAccount;
 
 $uniqueID = Uuid::uuid4();

@@ -5,8 +5,9 @@ namespace security\Models\Customers;
 require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'public/init.php';
 
 use \PDO;
+use \Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+use \Ramsey\Uuid\Uuid;
 use \Redis;
-use \Rhumsaa\Uuid\Uuid;
 use \security\Exceptions\FolderException;
 use \security\Interfaces\Seconds;
 use \security\Models\Customers\BaseCustomer;
@@ -55,7 +56,7 @@ class AddNewCustomer extends BaseCustomer implements Seconds
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $errors[] = "This username, email, phone, or address already exists.";
-            $sleep = $this->blacklist->setSleeper("username:{$username}");
+            $sleep = $this->blackList->setSleeper("username:{$username}");
             $logInfo = [];
             $row['username'] === $username ? $logInfo[] = "This username is already in use." : null;
             $row['email'] === $email ? $logInfo[] = "This email is already in use." : null;
@@ -93,11 +94,17 @@ class AddNewCustomer extends BaseCustomer implements Seconds
                     $this->setUploads();
                 }
                 $id = $pdo->lastInsertId();
-                $uniqueID = Uuid::uuid4();
+                try {
+                    $uniqueID = Uuid::uuid4();
+                } catch (UnsatisfiedDependencyException $e) {
+                    $errors[] = 'Caught exception: ' . $e->getMessage() . "\n";
+                } catch (Exception $e) {
+                    $errors[] = $e->getMessage();
+                }
 
                 $redis->set($uniqueID, $id);
                 $redis->expire($uniqueID, Seconds::DAY);
-                $this->blacklist->removeSleeper("username:$username");
+                $this->blackList->removeSleeper("username:$username");
                 // Adding a class directly in a method is a bad practice, so mark this as a refactor.
                 $emailAccount = new EmailConfirmAccount($email, $uniqueID);
                 $this->data["s"] = [

@@ -14,7 +14,7 @@ class EmailConfirmAccount
     {
         $subject = "Your new account.";
         $this->fullPath();
-        $website = "{$this->rootPath}public/goodsite/verifyregistration.php?uniq={$uniqueID}";
+        $website = "{$this->rootPath}goodsite/verifyregistration.php?uniq={$uniqueID}";
         // $transport = Swift_MailTransport::newInstance();
         // $mailer = Swift_Mailer::newInstance($transport);
         $body = "Your new account has been activated at:<a href='$website'>$website</a>
