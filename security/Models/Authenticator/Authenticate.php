@@ -12,13 +12,28 @@ class Authenticate
 {
     public function vEmail($email)
     {
-        $isValid = filter_var($email, FILTER_VALIDATE_EMAIL);
+        // The filter_var regex for email is dangerous.
+        $isValid = filter_var($email, FILTER_VALIDATE_EMAIL) && $this->checkRecord($email);
+
         $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
         $isValidTest = strlen($sanitizedEmail) === strlen($email);
         if ($isValidTest && $isValid) {
             return $email;
         }
         return false;
+    }
+    protected function checkRecord($email)
+    {
+        $host = substr($email, strpos($email, '@') + 1);
+        return $this->checkHost($host);
+    }
+    protected function checkHost($host)
+    {
+        return $this->checkMX($host) || (checkdnsrr($host, 'A') || checkdnsrr($host, 'AAAA'));
+    }
+    protected function checkMX($host)
+    {
+        return checkdnsrr($host, 'MX');
     }
     public function cleanString($string)
     {

@@ -140,6 +140,7 @@ class AddNewCustomer extends BaseCustomer implements Seconds
             $upload->upload();
             $result = $upload->getMessages();
             $result = implode($result);
+            $this->logger->addInfo($result);
             $this->data['r'] = ['uploadResults' => $result];
         } catch (FolderException $e) {
             $this->errors[] = $e->getMessage();
