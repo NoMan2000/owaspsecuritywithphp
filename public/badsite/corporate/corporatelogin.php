@@ -2,10 +2,10 @@
 
 require_once "../../partials/header.php";
 
-use \Guzzle\Http\Client;
+use \GuzzleHttp\Client;
 
-$ipsumGenerator = new Client('http://www.schmipsum.com');
-$shakespeare = $ipsumGenerator->get('/ipsum/shakespeare/40')->send();
+$ipsumGenerator = new Client(['base_uri' => 'http://www.schmipsum.com']);
+$shakespeare = $ipsumGenerator->get('/ipsum/shakespeare/40');
 $shakespeare = json_decode($shakespeare->getBody());
 
 $userName = isset($_POST['inputUserName']) ? $_POST['inputUserName'] : null;

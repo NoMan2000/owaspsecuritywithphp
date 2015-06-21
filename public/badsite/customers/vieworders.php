@@ -29,7 +29,7 @@ $models->pdo = $pdo;
 $models->errorRunner = $errorRunner;
 $models->logger = $logger;
 $orderData = new stdClass();
-$orderData->customerID = $_GET['id'];
+$orderData->customerID = $customerID;
 
 $controller = new ViewOrdersController($models, $orderData);
 $controller->viewOrders();
@@ -69,10 +69,10 @@ if ($orders) {
 
     }
 }
-$customer = new stdClass();
-$customer->session = $_SESSION;
-
-$controller = new InitCustomerController($models, $customer);
+// Demo purposes only to showcase an attack.
+$orderData->session = $_SESSION;
+$orderData->session['customerid'] = $customerID;
+$controller = new InitCustomerController($models, $orderData);
 $controller->setCustomerValues();
 $customerInfo = $controller->getCustomerValues();
 
