@@ -12,13 +12,13 @@ class MailCatcher
 
     public function __construct()
     {
-        $this->mailcatcher = new Client('http://127.0.0.1:1080');
+        $this->mailcatcher = new Client(['base_uri' => 'http://127.0.0.1:1080']);
     }
 
     // api calls
     public function cleanMessages()
     {
-        $this->mailcatcher->delete('/messages')->send();
+        $this->mailcatcher->delete('/messages');
     }
 
     public function getLastMessage()
@@ -37,17 +37,17 @@ class MailCatcher
 
     public function getMessages()
     {
-        $jsonResponse = $this->mailcatcher->get('/messages')->send();
+        $jsonResponse = $this->mailcatcher->get('/messages');
         return json_decode($jsonResponse->getBody());
     }
     public function getJSONONLY()
     {
-        $jsonResponse = $this->mailcatcher->get('/messages')->send();
+        $jsonResponse = $this->mailcatcher->get('/messages');
     }
     public function getHTMLMessage($id)
     {
         try {
-            $jsonResponse = $this->mailcatcher->get("/messages/{$id}.source")->send();
+            $jsonResponse = $this->mailcatcher->get("/messages/{$id}.source");
             return $jsonResponse->getBody();
         } catch (Exception $e) {
             return "No message for id: $id";
