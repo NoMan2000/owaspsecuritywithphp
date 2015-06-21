@@ -51,11 +51,12 @@ if (isset($_POST['submit']) || isset($_GET)) {
     $errors = [];
 
     $isCustomer = $checkAuth->isCustomer();
+
     $csrf = !empty($csrf) ? $csrf : null;
     $session = isset($_SESSION) ? $_SESSION : null;
 
     $csrf || $errors[] = "There is no token for this account.  You have most likely timed out.";
-    ($isCustomer || $isCorporate) || $errors[] = "You are not authenticated as a customer.";
+    $isCustomer || $errors[] = "You are not authenticated as a customer.";
     $session || $errors[] = "You do not have a session identifier.";
 
     if (!isset($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $csrf) {

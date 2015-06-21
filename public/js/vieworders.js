@@ -164,12 +164,12 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                         window.location.href = CookieFunctions.rootPath + 'goodsite/index.php';
                     }, 1500);
                 }
-                console.log(data);
-                console.log(textStatus);
-                console.log(jqXHR);
+
             }).fail(function(data) {
-                console.log(data);
                 setErrorMessage(data.responseText);
+                setTimeout(function() {
+                    window.location.href = CookieFunctions.rootPath + 'goodsite/index.php';
+                }, 1500);
             });
         };
 
