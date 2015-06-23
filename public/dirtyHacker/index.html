@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' ;">
+
+    <title>Dirty Hacker</title>
+</head>
+<body>
+<form action="#" method="POST" id='dirtyForm'>
+<label>Dirty HTML Injection Attack</label>
+    <input type='text' name='injectionOne' id='injectionOne' />
+    <input type='submit'>
+</form>
+<div id='dirtyHTML'>
+
+</div>
+
+<blockquote>
+    <code>
+        &#x3C;div onclick=&#x27;window.alert(&#x22;Got you!&#x22;);&#x27;&#x3E;The Dirty Hacker Strikes&#x3C;/div&#x3E;
+    </code>
+</blockquote>
+<script type="text/javascript">
+(function dirtyHackerIndex(global, doc) {
+    "use strict";
+    var dirtyHTML = function (e) {
+        e.preventDefault();
+        var HTMLInjection = doc.getElementById("dirtyHTML"),
+            injection = doc.getElementById("injectionOne").value;
+        HTMLInjection.innerHTML = injection;
+    },
+        dirtyForm = doc.getElementById("dirtyForm");
+    dirtyForm.addEventListener("submit", dirtyHTML);
+}(window, document));
+</script>
+</body>
+</html>

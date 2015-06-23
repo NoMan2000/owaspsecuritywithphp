@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dirty Hacker</title>
+</head>
+<body>
+<form action="#" method="POST" id='dirtyForm'>
+<label>Mixed Content</label>
+    <input type='text' name='injectionOne' id='injectionOne' />
+    <input type='submit'>
+</form>
+<div id='dirtyHTML'>
+
+</div>
+
+<blockquote>
+    <code>
+        &#x3C;div onclick=&#x27;window.alert(&#x22;Got you!&#x22;);&#x27;&#x3E;The Dirty Hacker Strikes&#x3C;/div&#x3E;
+    </code>
+</blockquote>
+
+<script type="text/javascript">
+(function dirtyHackerIndex(global, doc) {
+    "use strict";
+    var dirtyHTML = function (e) {
+        e.preventDefault();
+        var injectionHTML = doc.getElementById("dirtyHTML"),
+            injection = doc.getElementById("injectionOne").value,
+            unsafe = doc.createTextNode(injection),
+            safe = doc.createElement("B");
+        safe.innerHTML = "<i>Some HTML</i> added by the developer.";
+        safe.appendChild(unsafe);
+        injectionHTML.appendChild(safe);
+    },
+        dirtyForm = doc.getElementById("dirtyForm");
+    dirtyForm.addEventListener("submit", dirtyHTML);
+}(window, document));
+</script>
+</body>
+</html>
