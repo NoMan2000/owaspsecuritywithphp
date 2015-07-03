@@ -25,6 +25,8 @@ class RedisSessionHandler implements SessionHandlerInterface, Seconds
         //ini_set('session.entropy_file', '/dev/urandom');
         // In php 5.4 and onwards, it will find the default random generator for you.
         ini_set('session.entropy_length', 128);
+        // In php 5.5.2 and later, this will prevent unauthorized sessions.
+        ini_set('session.use_strict_mode', 1);
         $this->db = $redis;
         $this->prefix = $prefix;
         $encryptor = (isset($encryptor) && $encryptor instanceof CookieEncrypt) ?
