@@ -66,14 +66,14 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                             break;
                         case 'id':
                             var $removeID = $("#" + v);
-                            $($removeID).fadeOut(2000, function() {
+                            $($removeID).fadeOut(2000, function () {
                                 ($removeID).remove();
                             });
                             break;
                         }
                     });
                 }
-            }).fail(function(data) {
+            }).fail(function (data) {
                 setErrorMessage(data.responseText);
             });
         };
@@ -127,7 +127,7 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                     $("#customerBody").prepend(html);
                     $('.animateHidden').fadeIn(1500);
                 }
-            }).fail(function(jqXHR) {
+            }).fail(function (jqXHR) {
                 setErrorMessage(jqXHR.responseText);
             });
 
@@ -145,22 +145,25 @@ setErrorMessage, BeginSweetAlert, isValidJSON*/
                     action: "destroySession",
                     submit: true
                 }
-            }).done(function(data, textStatus, jqXHR) {
+            }).done(function (data, textStatus, jqXHR) {
                 var jsonResponse = isValidJSON(data);
                 if (jsonResponse) {
-                    JSON.parse(data, function(k, v) {
+                    JSON.parse(data, function (k, v) {
                         switch (k) {
                             case 'loggedout':
                                 setSuccessMessage("You have logged out the system");
                                 break;
                         }
                     });
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.location.href = CookieFunctions.rootPath + 'goodsite/corporate/corporatelogin.php';
                     }, 1500);
                 }
-            }).fail(function(data) {
+            }).fail(function (data) {
                 setErrorMessage(data.responseText);
+                setTimeout(function () {
+                    window.location.href = CookieFunctions.rootPath + 'goodsite/';
+                }, 1500);
             });
         };
 

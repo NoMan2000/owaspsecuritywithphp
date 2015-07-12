@@ -28,7 +28,7 @@ class Inits
     {
         // This is used to compress output, but it can cause errors during debugging
         // if output is sent before compression.
-        // ini_set("zlib.output_compression", "On");
+        ini_set("zlib.output_compression", "On");
         ob_start();
         date_default_timezone_set('America/Chicago');
         mb_internal_encoding('UTF-8');
