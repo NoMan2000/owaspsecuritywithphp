@@ -7,11 +7,14 @@ use \Redis;
 use \security\Interfaces\Seconds;
 use \security\Models\CookieEncrypt;
 use \security\Traits\SessionState;
+use \security\Traits\AbsolutePaths;
 use \SessionHandlerInterface;
+
 
 class RedisSessionHandler implements SessionHandlerInterface, Seconds
 {
     use SessionState;
+    use AbsolutePaths;
     private $db;
     private $savePath;
     private $restartTimer = SECONDS::HOUR;
@@ -20,13 +23,19 @@ class RedisSessionHandler implements SessionHandlerInterface, Seconds
 
     public function __construct(Redis $redis, $prefix = 'PHPSESSID:', $encryptor = null)
     {
+        $this->fullPath();
         ini_set('session.hash_function', 'sha512');
         ini_set('session.hash_bits_per_character', 6);
         //ini_set('session.entropy_file', '/dev/urandom');
         // In php 5.4 and onwards, it will find the default random generator for you.
         ini_set('session.entropy_length', 128);
         // In php 5.5.2 and later, this will prevent unauthorized sessions.
+        // By checking a session has been started before accepting a cookie, so an
+        // unitialized session cannot be used.  The second check looks at the referer
+        // tag from the browser can compares it against a string.  In this case, our server.
         ini_set('session.use_strict_mode', 1);
+        ini_set("session.referer_check", $this->rootPath);
+
         $this->db = $redis;
         $this->prefix = $prefix;
         $encryptor = (isset($encryptor) && $encryptor instanceof CookieEncrypt) ?

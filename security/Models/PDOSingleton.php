@@ -29,7 +29,9 @@ class PDOSingleton extends PDO implements DBPrivileges
         $this->charset = 'utf8mb4';
         $this->socket = ini_get('mysqli.default_socket') ? ini_get('mysqli.default_socket') : null;
         if (PHP_OS === "LINUX") {
-            $this->socket = '/home/ubuntu/lib/mysql/socket/mysql.sock';
+            // Use the query in MySQL > SHOW VARIABLES LIKE 'socket'
+            // To find the correct socket to use.
+            // $this->socket = '/home/ubuntu/lib/mysql/socket/mysql.sock';
         }
         $dns = "{$this->engine}:unix_socket={$this->socket};
                 dbname={$this->database};host={$this->host};charset={$this->charset}";

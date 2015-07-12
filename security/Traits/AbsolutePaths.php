@@ -51,6 +51,10 @@ trait AbsolutePaths
     {
         $this->rootPath = $path;
     }
+    public function getRootPath()
+    {
+        return $this->rootPath;
+    }
     protected function longCreationFromServer()
     {
         $http_serverName = $_SERVER['SERVER_NAME'];

@@ -12,7 +12,7 @@ require_once(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'public/init.php'
 class CookieEncrypt
 {
     // Obviously, use a different encryption key than this, as once this is publically known, it is useless.
-    const ENCRYPTION = 'abc234098979asjaa234232355';
+    const ENCRYPTION = 'abc234098979asjaa234232355ikiko1';
 
     public function __construct()
     {
