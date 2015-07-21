@@ -12,6 +12,15 @@ use \security\Exceptions\FolderException;
 
 class FileUploader
 {
+    const UPLOAD_ERR_OK = 0;
+    const UPLOAD_ERR_INI_SIZE = 1;
+    const UPLOAD_ERR_FORM_SIZE = 2;
+    const UPLOAD_ERR_PARTIAL = 3;
+    const UPLOAD_ERR_NO_FILE = 4;
+    const UPLOAD_ERR_NO_TMP_DIR = 6;
+    const UPLOAD_ERR_CANT_WRITE = 7;
+    const UPLOAD_ERR_EXTENSION = 8;
+
     protected $destination;
     protected $messages = [];
     protected $maxSize = 51200;
@@ -186,19 +195,29 @@ class FileUploader
     protected function getErrorMessage($file)
     {
         switch ($file['error']) {
-            case 1:
-            case 2:
-                $this->messages[] = $file['name'] . ' is too big: (max: ' .
+            case self::UPLOAD_ERR_INI_SIZE:
+            case self::UPLOAD_ERR_FORM_SIZE:
+                $this->messages[] = htmlentities($file['name']) . ' is too big: (max: ' .
                 self::convertFromBytes($this->maxSize) . ').';
                 break;
-            case 3:
-                $this->messages[] = $file['name'] . ' was only partially uploaded.';
+            case self::UPLOAD_ERR_PARTIAL:
+                $this->messages[] = htmlentities($file['name']) . ' was only partially uploaded.';
                 break;
-            case 4:
+            case self::UPLOAD_ERR_NO_FILE:
                 $this->messages[] = 'No file submitted.';
                 break;
+            case self::UPLOAD_ERR_NO_TMP_DIR:
+                $this->messages[] = "The server is temporarily down.";
+                break;
+            case self::UPLOAD_ERR_CANT_WRITE:
+                $this->messages[] = "Unable to write this file to disk.";
+                break;
+            case self::UPLOAD_ERR_EXTENSION:
+                $this->messages[] = "An extension interferred with the upload.";
+                break;
             default:
-                $this->messages[] = 'Sorry, there was a problem uploading ' . $file['name'];
+                // This is the full list of PHP errors as of 5.6, but more error codes may be added in the future.
+                $this->messages[] = 'Sorry, there was a problem uploading ' . htmlentities($file['name']);
                 break;
         }
     }
