@@ -146,7 +146,7 @@ echo "You only have to do this on c9, the default user is ubuntu with group of u
 
 sudo chown -R ubuntu:ubuntu /var/lib/phpmyadmin
 sudo chown -R ubuntu:ubuntu /etc/phpmyadmin/
-
+sudo chown -R ubuntu:ubuntu /home/ubuntu/workspace
 echo 'export PATH="$PATH:~/.composer/vendor/bin"' >> ~/.bashrc
 export PATH="$PATH:~/.composer/vendor/bin"
 echo "All Done!"
