@@ -1,6 +1,6 @@
 <?php
 
-namespace cellControl\Traits;
+namespace security\Traits;
 
 trait StatusCodeTraits
 {
@@ -81,6 +81,6 @@ trait StatusCodeTraits
 
     public function isBadStatusCode()
     {
-        return http_response_code() >= 400 ? true : false;
+        return http_response_code() >= 400;
     }
 }
